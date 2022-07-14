@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      nodeSelector:
+          kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
+      containers:
+      - name: prometheus
+        image: prom/prometheus
+        args:
+          - '--storage.tsdb.retention=6h'
+          - '--storage.tsdb.path=/prometheus'
+          - '--config.file=/etc/prometheus/prometheus.yml'
+        ports:
+        - name: http-prometheus
+          containerPort: 9090
+        volumeMounts:
+        - name: prometheus-config-volume
+          mountPath: /etc/prometheus
+        - name: prometheus-storage-volume
+          mountPath: /prometheus
+      restartPolicy: Always
+
+      volumes:
+      - name: prometheus-config-volume
+        configMap:
+            defaultMode: 420
+            name: prometheus-config
+
+      - name: prometheus-storage-volume
+        persistentVolumeClaim:
+            claimName: prometheus-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-service
+  
+spec:
+  ports:
+    - port: 9090
+      protocol: TCP
+      targetPort: http-prometheus
+  selector:
+    app: prometheus
+  sessionAffinity: None
+  type: LoadBalancer
+
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-blackbox-exporter-service
+  labels:
+    app: prometheus
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 9115
+      protocol: TCP
+  selector:
+    app: prometheus-blackbox-exporter

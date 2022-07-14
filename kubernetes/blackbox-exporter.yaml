@@ -1,0 +1,134 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-blackbox-exporter-deployment
+  labels:
+    app: prometheus-blackbox-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-blackbox-exporter
+  template:
+    metadata:
+      labels:
+        app: prometheus-blackbox-exporter
+    spec:
+      restartPolicy: Always
+      nodeSelector:
+          kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
+      securityContext:
+        sysctls:
+          - name: net.ipv4.ping_group_range
+            value: "0 2147483647"
+      containers:
+        - name: blackbox-exporter
+          image: "prom/blackbox-exporter:v0.18.0"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            readOnlyRootFilesystem: true
+            privileged: true
+          args:
+            - "--config.file=/config/blackbox.yaml"
+          resources:
+            {}
+          ports:
+            - containerPort: 9115
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /etc/siterm-cert.pem
+              name: siterm-cert
+              readOnly: true
+              subPath: siterm-cert.pem
+            - mountPath: /etc/siterm-privkey.pem
+              name: siterm-key
+              readOnly: true
+              subPath: siterm-key.pem
+            - mountPath: /etc/networkrm-cert.pem
+              name: networkrm-cert
+              readOnly: true
+              subPath: networkrm-cert.pem
+            - mountPath: /etc/networkrm-privkey.pem
+              name: networkrm-key
+              readOnly: true
+              subPath: networkrm-key.pem
+          resources:
+            limits:
+              cpu: ".5"
+              memory: "200Mi"
+            requests:
+              cpu: ".5"
+              memory: "200Mi"
+        - name: configmap-reload
+          image: "jimmidyson/configmap-reload:v0.2.2"
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+          args:
+            - --volume-dir=/etc/config
+            - --webhook-url=http://localhost:9115/-/reload
+          resources:
+            {}
+          volumeMounts:
+            - mountPath: /etc/config
+              name: config
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-blackbox-exporter-config-map
+        - name: siterm-cert
+          secret:
+            secretName: autogole-monitoring
+            items:
+            - key: siterm-cert
+              path: siterm-cert.pem
+            defaultMode: 0644
+        - name: siterm-key
+          secret:
+            secretName: autogole-monitoring
+            items:
+            - key: siterm-key
+              path: siterm-key.pem
+            defaultMode: 0644
+        - name: networkrm-cert
+          secret:
+            secretName: autogole-monitoring
+            items:
+            - key: networkrm-cert
+              path: networkrm-cert.pem
+            defaultMode: 0644
+        - name: networkrm-key
+          secret:
+            secretName: autogole-monitoring
+            items:
+            - key: networkrm-key
+              path: networkrm-key.pem
+            defaultMode: 0644
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-blackbox-exporter-service
+  labels:
+    app: prometheus-blackbox-exporter
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 9115
+      protocol: TCP
+  selector:
+    app: prometheus-blackbox-exporter

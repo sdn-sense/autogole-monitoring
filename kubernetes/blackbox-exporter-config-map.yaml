@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-blackbox-exporter-config-map
+  labels:
+    app: prometheus-blackbox-exporter
+data:
+  blackbox.yaml: |
+    modules:
+      https_v4_siterm_2xx:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          tls_config:
+            insecure_skip_verify: true
+            cert_file: /etc/siterm-cert.pem
+            key_file: /etc/siterm-privkey.pem
+      https_v6_siterm_2xx:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          tls_config:
+            insecure_skip_verify: true
+            cert_file: /etc/siterm-cert.pem
+            key_file: /etc/siterm-privkey.pem
+      https_v4_network_2xx:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          tls_config:
+            insecure_skip_verify: true
+            cert_file: /etc/networkrm-cert.pem
+            key_file: /etc/networkrm-privkey.pem
+      https_v6_network_2xx:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          tls_config:
+            insecure_skip_verify: true
+            cert_file: /etc/networkrm-cert.pem
+            key_file: /etc/networkrm-privkey.pem
+      http_v4_network_2xx:
+        prober: http
+        http:
+          fail_if_ssl: true
+          fail_if_not_ssl: false
+          preferred_ip_protocol: "ip4"
+      http_v6_network_2xx:
+        prober: http
+        http:
+          fail_if_ssl: true
+          fail_if_not_ssl: false
+          preferred_ip_protocol: "ip6"
+      icmp_v4:
+        prober: icmp
+        icmp:
+          preferred_ip_protocol: "ip4"
+      icmp_v6:
+        prober: icmp
+        icmp:
+          preferred_ip_protocol: "ip6"
