@@ -1,0 +1,21 @@
+Commands:
+
+kubectl create secret generic autogole-monitoring \
+        --from-file=siterm-cert=secrets/siterm-cert.pem \
+        --from-file=siterm-key=secrets/siterm-privkey.pem \
+        --from-file=networkrm-cert=secrets/networkrm-cert.pem \
+        --from-file=networkrm-key=secrets/networkrm-privkey.pem \
+        --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+
+
+
+If making any change to any of yaml files:
+kubectl apply -f blackbox-exporter.yaml --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+kubectl apply -f prometheus-config-map.yaml --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+...
+
+Now all runs on local, to forward port to localhost:
+
+kubectl port-forward svc/prometheus-blackbox-exporter-service 9115:9115 --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+kubectl port-forward service/grafana 3000:3000 --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+kubectl port-forward service/prometheus 9090:9090 --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
