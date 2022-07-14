@@ -1,0 +1,256 @@
+NortWestern:
+  endpoints:
+  - name: NortWestern
+    software: OpenNSA
+    hostname: opennsa.northwestern.edu
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+Ampath:
+  endpoints:
+  - name: Ampath
+    software: OpenNSA
+    hostname: nsi.ampath.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+Surfnet:
+  endpoints:
+  - name: Ampath
+    software: OpenNSA
+    hostname: opennsa.automation.surf.net
+    port: 443
+    url: /NSI/discovery.xml
+    secure: true
+Kreonet:
+  endpoints:
+  - name: Kreonet
+    software: OpenNSA
+    hostname: daej-nsi.kreonet.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+Southernlight:
+  endpoints:
+  - name: Kreonet
+    software: OpenNSA
+    hostname: southernlight.net.br
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+Canarie:
+  endpoints:
+  - name: Canarie
+    software: OpenNSA
+    hostname: opennsa.canarie.ca
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+UHnet:
+  endpoints:
+  - name: UHNet
+    software: OpenNSA
+    hostname: nsi0.uhnet.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+PacificWave:
+  endpoints:
+  - name: Los Angeles
+    software: OpenNSA
+    hostname: nsi0.lsanca.pacificwave.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+  - name: Tokyo
+    software: OpenNSA
+    hostname: nsi0.tokyjp.pacificwave.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+  - name: Snvaca
+    software: OpenNSA
+    hostname: nsi0.snvaca.pacificwave.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+  - name: Seattle
+    software: OpenNSA
+    hostname: nsi0.sttlwa.pacificwave.net
+    port: 9443
+    url: /NSI/discovery.xml
+    secure: true
+nii.ac.jp:
+  endpoints:
+  - name: SinetNSA
+    software: SinetNSA
+    hostname: 150.100.12.192
+    port: 28443
+    url: /
+    secure: true
+  - name: SinetNSA Provider
+    software: SinetNSA
+    hostname: aggr.nsi.nii.ac.jp
+    port: 28443
+    url: /sinet_upa/services/connectionprovider?wsdl
+    secure: true
+  - name: SinetNSA Discovery
+    software: SinetNSA
+    hostname: aggr.nsi.nii.ac.jp
+    port: 28443
+    url: /NSI/sinet.ac.jp:2013:nsa.xml
+    secure: true
+  - name: SinetNSA Requester
+    software: SinetNSA
+    hostname: aggr.nsi.nii.ac.jp
+    port: 28090
+    url: /nsi2/services/ConnectionServiceRequester?wsdl
+Netherlight:
+  endpoints:
+  - name: Requester
+    software: nsi-safnari
+    hostname: agg.netherlight.net
+    port: 443
+    url: /nsi-v2/ConnectionServiceRequester?wsdl
+    secure: true
+  - name: DDS Ping
+    software: nsi-safnari
+    hostname: agg.netherlight.net
+    port: 443
+    url: /dds/ping
+    secure: true
+  - name: Provider
+    software: nsi-safnari
+    hostname: agg.netherlight.net
+    port: 443
+    url: /nsi-v2/ConnectionServiceProvider?wsdl
+    secure: true
+  - name: Discovery
+    software: nsi-safnari
+    hostname: agg.netherlight.net
+    port: 443
+    url: /nsa-discovery
+    secure: true
+Nautilus:
+  endpoints:
+  - name: Requester
+    software: nsi-safnari
+    hostname: safnari.nsi.nrp-nautilus.io
+    port: 443
+    url: /nsi-v2/ConnectionServiceRequester?wsdl
+    secure: true
+  - name: DDS Ping
+    software: nsi-safnari
+    hostname: safnari.nsi.nrp-nautilus.io
+    port: 443
+    url: /dds/ping
+    secure: true
+  - name: Provider
+    software: nsi-safnari
+    hostname: safnari.nsi.nrp-nautilus.io
+    port: 443
+    url: /nsi-v2/ConnectionServiceProvider?wsdl
+    secure: true
+  - name: Discovery
+    software: nsi-safnari
+    hostname: safnari.nsi.nrp-nautilus.io
+    port: 443
+    url: /nsa-discovery
+    secure: true
+RNP-Brazil:
+  endpoints:
+  - name: Requester
+    software: nsi-safnari
+    hostname: agg.cipo.rnp.br
+    port: 443
+    url: /nsi-v2/ConnectionServiceRequester?wsdl
+    secure: true
+  - name: DDS Ping
+    software: nsi-safnari
+    hostname: agg.cipo.rnp.br
+    port: 443
+    url: /dds/ping
+    secure: true
+  - name: Provider
+    software: nsi-safnari
+    hostname: agg.cipo.rnp.br
+    port: 443
+    url: /nsi-v2/ConnectionServiceProvider?wsdl
+    secure: true
+  - name: Discovery
+    software: nsi-safnari
+    hostname: agg.cipo.rnp.br
+    port: 443
+    url: /nsa-discovery
+    secure: true
+  - name: Provider
+    software: oscars
+    hostname: idc.cipo.rnp.br
+    port: 8500
+    url: /nsi-v2/ConnectionServiceProvider?wsdl
+    secure: true
+  - name: Discovery
+    software: oscars
+    hostname: idc.cipo.rnp.br
+    port: 80
+    url: /rnp-nsa.xml
+ESNet:
+  endpoints:
+  - name: ESNet West Requester HTTPS
+    software: nsi-safnari
+    hostname: nsi-aggr-west.es.net
+    port: 443
+    url: /nsi-v2/ConnectionServiceRequester?wsdl
+    secure: true
+  - name: ESNet West Requester
+    software: nsi-safnari
+    hostname: nsi-aggr-west.es.net
+    port: 80
+    url: /nsi-v2/ConnectionServiceRequester?wsdl
+  - name: ESNet West DDS Ping
+    software: nsi-safnari
+    hostname: nsi-aggr-west.es.net
+    port: 443
+    url: /dds/ping
+    secure: true
+  - name: ESNet West Provider HTTPS
+    software: nsi-safnari
+    hostname: nsi-aggr-west.es.net
+    port: 443
+    url: /nsi-v2/ConnectionServiceProvider?wsdl
+    secure: true
+  - name: ESNet West Provider
+    software: nsi-safnari
+    hostname: nsi-aggr-west.es.net
+    port: 80
+    url: /nsi-v2/ConnectionServiceProvider?wsdl
+  - name: ESNet West Discovery
+    software: nsi-safnari
+    hostname: nsi-aggr-west.es.net
+    port: 443
+    url: /nsa-discovery
+    secure: true
+  - name: ESNet Provider
+    software: oscars
+    hostname: oscars-web.es.net
+    port: 443
+    url: /services/provider?wsdl
+    secure: true
+  - name: ESNet Discovery
+    software: oscars
+    hostname: oscars-web.es.net
+    url: /api/nsa/discovery
+    port: 443
+    secure: true
+  - name: ESNet Testbed Provider
+    software: oscars
+    hostname: oscars-testbed.es.net
+    port: 443
+    url: /services/provider?wsdl
+    secure: true
+  - name: ESNet Testbed Discovery
+    software: oscars
+    hostname: oscars-testbed.es.net
+    url: /api/nsa/discovery
+    port: 443
+    secure: true
