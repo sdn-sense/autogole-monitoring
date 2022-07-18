@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: prometheus-config
 data:
-  prometheus.yml: |    
+  prometheus.yml: |
     global:
       evaluation_interval: 60s
       scrape_interval: 60s
@@ -84,7 +84,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -237,7 +237,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -543,7 +543,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -766,7 +766,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -779,7 +779,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -792,7 +792,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -1085,7 +1085,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -1098,7 +1098,7 @@ data:
         source_labels:
         - __address__
         target_label: sitename
-      - replacement: WILLBEREPLACEDBYCODE
+      - replacement: SiteRM-Agent
         source_labels:
         - __address__
         target_label: software
@@ -1203,7 +1203,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://opennsa.northwestern.edu:9443//NSI/discovery.xml
+        - https://opennsa.northwestern.edu:9443/NSI/discovery.xml
     - job_name: NortWestern_NortWestern_ICMP
       metrics_path: /probe
       params:
@@ -1261,7 +1261,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi.ampath.net:9443//NSI/discovery.xml
+        - https://nsi.ampath.net:9443/NSI/discovery.xml
     - job_name: Ampath_Ampath_ICMP
       metrics_path: /probe
       params:
@@ -1319,7 +1319,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://opennsa.automation.surf.net:443//NSI/discovery.xml
+        - https://opennsa.automation.surf.net:443/NSI/discovery.xml
     - job_name: Surfnet_Ampath_ICMP
       metrics_path: /probe
       params:
@@ -1377,7 +1377,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://daej-nsi.kreonet.net:9443//NSI/discovery.xml
+        - https://daej-nsi.kreonet.net:9443/NSI/discovery.xml
     - job_name: Kreonet_Kreonet_ICMP
       metrics_path: /probe
       params:
@@ -1435,7 +1435,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://southernlight.net.br:9443//NSI/discovery.xml
+        - https://southernlight.net.br:9443/NSI/discovery.xml
     - job_name: Southernlight_Kreonet_ICMP
       metrics_path: /probe
       params:
@@ -1493,7 +1493,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://opennsa.canarie.ca:9443//NSI/discovery.xml
+        - https://opennsa.canarie.ca:9443/NSI/discovery.xml
     - job_name: Canarie_Canarie_ICMP
       metrics_path: /probe
       params:
@@ -1551,7 +1551,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi0.uhnet.net:9443//NSI/discovery.xml
+        - https://nsi0.uhnet.net:9443/NSI/discovery.xml
     - job_name: UHnet_UHNet_ICMP
       metrics_path: /probe
       params:
@@ -1609,7 +1609,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi0.lsanca.pacificwave.net:9443//NSI/discovery.xml
+        - https://nsi0.lsanca.pacificwave.net:9443/NSI/discovery.xml
     - job_name: PacificWave_Los_Angeles_ICMP
       metrics_path: /probe
       params:
@@ -1667,7 +1667,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi0.tokyjp.pacificwave.net:9443//NSI/discovery.xml
+        - https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml
     - job_name: PacificWave_Tokyo_ICMP
       metrics_path: /probe
       params:
@@ -1725,7 +1725,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi0.snvaca.pacificwave.net:9443//NSI/discovery.xml
+        - https://nsi0.snvaca.pacificwave.net:9443/NSI/discovery.xml
     - job_name: PacificWave_Snvaca_ICMP
       metrics_path: /probe
       params:
@@ -1783,7 +1783,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi0.sttlwa.pacificwave.net:9443//NSI/discovery.xml
+        - https://nsi0.sttlwa.pacificwave.net:9443/NSI/discovery.xml
     - job_name: PacificWave_Seattle_ICMP
       metrics_path: /probe
       params:
@@ -1841,7 +1841,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://150.100.12.192:28443//
+        - https://150.100.12.192:28443/
     - job_name: nii.ac.jp_SinetNSA_ICMP
       metrics_path: /probe
       params:
@@ -1899,7 +1899,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://aggr.nsi.nii.ac.jp:28443//sinet_upa/services/connectionprovider?wsdl
+        - https://aggr.nsi.nii.ac.jp:28443/sinet_upa/services/connectionprovider?wsdl
     - job_name: nii.ac.jp_SinetNSA_Provider_ICMP
       metrics_path: /probe
       params:
@@ -1957,7 +1957,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://aggr.nsi.nii.ac.jp:28443//NSI/sinet.ac.jp:2013:nsa.xml
+        - https://aggr.nsi.nii.ac.jp:28443/NSI/sinet.ac.jp:2013:nsa.xml
     - job_name: nii.ac.jp_SinetNSA_Discovery_ICMP
       metrics_path: /probe
       params:
@@ -2015,7 +2015,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - http://aggr.nsi.nii.ac.jp:28090//nsi2/services/ConnectionServiceRequester?wsdl
+        - http://aggr.nsi.nii.ac.jp:28090/nsi2/services/ConnectionServiceRequester?wsdl
     - job_name: nii.ac.jp_SinetNSA_Requester_ICMP
       metrics_path: /probe
       params:
@@ -2073,7 +2073,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.netherlight.net:443//nsi-v2/ConnectionServiceRequester?wsdl
+        - https://agg.netherlight.net:443/nsi-v2/ConnectionServiceRequester?wsdl
     - job_name: Netherlight_Requester_ICMP
       metrics_path: /probe
       params:
@@ -2131,7 +2131,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.netherlight.net:443//dds/ping
+        - https://agg.netherlight.net:443/dds/ping
     - job_name: Netherlight_DDS_Ping_ICMP
       metrics_path: /probe
       params:
@@ -2189,7 +2189,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.netherlight.net:443//nsi-v2/ConnectionServiceProvider?wsdl
+        - https://agg.netherlight.net:443/nsi-v2/ConnectionServiceProvider?wsdl
     - job_name: Netherlight_Provider_ICMP
       metrics_path: /probe
       params:
@@ -2247,7 +2247,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.netherlight.net:443//nsa-discovery
+        - https://agg.netherlight.net:443/nsa-discovery
     - job_name: Netherlight_Discovery_ICMP
       metrics_path: /probe
       params:
@@ -2305,7 +2305,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://safnari.nsi.nrp-nautilus.io:443//nsi-v2/ConnectionServiceRequester?wsdl
+        - https://safnari.nsi.nrp-nautilus.io:443/nsi-v2/ConnectionServiceRequester?wsdl
     - job_name: Nautilus_Requester_ICMP
       metrics_path: /probe
       params:
@@ -2363,7 +2363,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://safnari.nsi.nrp-nautilus.io:443//dds/ping
+        - https://safnari.nsi.nrp-nautilus.io:443/dds/ping
     - job_name: Nautilus_DDS_Ping_ICMP
       metrics_path: /probe
       params:
@@ -2421,7 +2421,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://safnari.nsi.nrp-nautilus.io:443//nsi-v2/ConnectionServiceProvider?wsdl
+        - https://safnari.nsi.nrp-nautilus.io:443/nsi-v2/ConnectionServiceProvider?wsdl
     - job_name: Nautilus_Provider_ICMP
       metrics_path: /probe
       params:
@@ -2479,7 +2479,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://safnari.nsi.nrp-nautilus.io:443//nsa-discovery
+        - https://safnari.nsi.nrp-nautilus.io:443/nsa-discovery
     - job_name: Nautilus_Discovery_ICMP
       metrics_path: /probe
       params:
@@ -2537,7 +2537,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.cipo.rnp.br:443//nsi-v2/ConnectionServiceRequester?wsdl
+        - https://agg.cipo.rnp.br:443/nsi-v2/ConnectionServiceRequester?wsdl
     - job_name: RNP-Brazil_Requester_ICMP
       metrics_path: /probe
       params:
@@ -2595,7 +2595,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.cipo.rnp.br:443//dds/ping
+        - https://agg.cipo.rnp.br:443/dds/ping
     - job_name: RNP-Brazil_DDS_Ping_ICMP
       metrics_path: /probe
       params:
@@ -2653,7 +2653,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.cipo.rnp.br:443//nsi-v2/ConnectionServiceProvider?wsdl
+        - https://agg.cipo.rnp.br:443/nsi-v2/ConnectionServiceProvider?wsdl
     - job_name: RNP-Brazil_Provider_ICMP
       metrics_path: /probe
       params:
@@ -2711,7 +2711,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://agg.cipo.rnp.br:443//nsa-discovery
+        - https://agg.cipo.rnp.br:443/nsa-discovery
     - job_name: RNP-Brazil_Discovery_ICMP
       metrics_path: /probe
       params:
@@ -2769,7 +2769,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://idc.cipo.rnp.br:8500//nsi-v2/ConnectionServiceProvider?wsdl
+        - https://idc.cipo.rnp.br:8500/nsi-v2/ConnectionServiceProvider?wsdl
     - job_name: RNP-Brazil_Provider_ICMP_0
       metrics_path: /probe
       params:
@@ -2827,7 +2827,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - http://idc.cipo.rnp.br:80//rnp-nsa.xml
+        - http://idc.cipo.rnp.br:80/rnp-nsa.xml
     - job_name: RNP-Brazil_Discovery_ICMP_0
       metrics_path: /probe
       params:
@@ -2885,7 +2885,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi-aggr-west.es.net:443//nsi-v2/ConnectionServiceRequester?wsdl
+        - https://nsi-aggr-west.es.net:443/nsi-v2/ConnectionServiceRequester?wsdl
     - job_name: ESNet_ESNet_West_Requester_HTTPS_ICMP
       metrics_path: /probe
       params:
@@ -2943,7 +2943,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - http://nsi-aggr-west.es.net:80//nsi-v2/ConnectionServiceRequester?wsdl
+        - http://nsi-aggr-west.es.net:80/nsi-v2/ConnectionServiceRequester?wsdl
     - job_name: ESNet_ESNet_West_Requester_ICMP
       metrics_path: /probe
       params:
@@ -3001,7 +3001,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi-aggr-west.es.net:443//dds/ping
+        - https://nsi-aggr-west.es.net:443/dds/ping
     - job_name: ESNet_ESNet_West_DDS_Ping_ICMP
       metrics_path: /probe
       params:
@@ -3059,7 +3059,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi-aggr-west.es.net:443//nsi-v2/ConnectionServiceProvider?wsdl
+        - https://nsi-aggr-west.es.net:443/nsi-v2/ConnectionServiceProvider?wsdl
     - job_name: ESNet_ESNet_West_Provider_HTTPS_ICMP
       metrics_path: /probe
       params:
@@ -3117,7 +3117,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - http://nsi-aggr-west.es.net:80//nsi-v2/ConnectionServiceProvider?wsdl
+        - http://nsi-aggr-west.es.net:80/nsi-v2/ConnectionServiceProvider?wsdl
     - job_name: ESNet_ESNet_West_Provider_ICMP
       metrics_path: /probe
       params:
@@ -3175,7 +3175,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://nsi-aggr-west.es.net:443//nsa-discovery
+        - https://nsi-aggr-west.es.net:443/safnari/nsa-discovery
     - job_name: ESNet_ESNet_West_Discovery_ICMP
       metrics_path: /probe
       params:
@@ -3233,7 +3233,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://oscars-web.es.net:443//services/provider?wsdl
+        - https://oscars-web.es.net:443/services/provider?wsdl
     - job_name: ESNet_ESNet_Provider_ICMP
       metrics_path: /probe
       params:
@@ -3291,7 +3291,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://oscars-web.es.net:443//api/nsa/discovery
+        - https://oscars-web.es.net:443/api/nsa/discovery
     - job_name: ESNet_ESNet_Discovery_ICMP
       metrics_path: /probe
       params:
@@ -3349,7 +3349,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://oscars-testbed.es.net:443//services/provider?wsdl
+        - https://oscars-testbed.es.net:443/services/provider?wsdl
     - job_name: ESNet_ESNet_Testbed_Provider_ICMP
       metrics_path: /probe
       params:
@@ -3407,7 +3407,7 @@ data:
         target_label: __address__
       static_configs:
       - targets:
-        - https://oscars-testbed.es.net:443//api/nsa/discovery
+        - https://oscars-testbed.es.net:443/api/nsa/discovery
     - job_name: ESNet_ESNet_Testbed_Discovery_ICMP
       metrics_path: /probe
       params:

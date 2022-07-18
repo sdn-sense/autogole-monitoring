@@ -228,7 +228,7 @@ ESNet:
     software: nsi-safnari
     hostname: nsi-aggr-west.es.net
     port: 443
-    url: /nsa-discovery
+    url: /safnari/nsa-discovery
     secure: true
   - name: ESNet Provider
     software: oscars

@@ -107,6 +107,21 @@ HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                                       {'target_label': '__address__',
                                        'replacement': 'prometheus-blackbox-exporter-service:9115'}]}
 
+# Seems OpenNSA requires renegotiation - which should be already unsupported.
+# Comment from: https://security.stackexchange.com/questions/24554/should-i-use-ssl-tls-renegotiation
+# As of 2020, TLS renegotiation is no more because it was insecure.
+#    Renegotiation is removed from TLS 1.3 onward, year 2018.
+#    All major software disabled renegotiation by default since as far as 2009 (nginx, haproxy, etc...). See Apache SSLInsecureRenegotiation notes for example.
+#    Renegotiation has a variety of vulnerabilities by design, forcing clients to downgrade connections to less secure settings than they would normally do.
+#    Verifying the client certificate for mutual authentication is handled separately than a renegotiation. See SSL_verify_client_post_handshake() in OpenSSL
+#    CVE-2009-3555 all implementations, CVE-2011-5094 in Mozilla, CVE-2011-1473 in OpenSSL, CVE-2014-1771 in Windows SSL.
+#
+#
+# Because of this, we have several endpoints:
+# 1. prometheus-blackbox-exporter-service:9115 - which cant query OpenNSA with renegotiation on
+# 2. prometheus-ssl-exporter-service:9219 - which has renegotiation flag freely on. (This is insecure.)
+#       But ssl exporter is very limited on providing output. Best approach is to migrate all OpenNSA's with renegotiation off.
+
 
 # ICMP - Will ping FE endpoint and get RTT
 ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
@@ -228,6 +243,7 @@ class PromModel():
             tmpEntry['job_name'] = self._genName('%s_NODE' % site)
             tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
             tmpEntry['relabel_configs'][0]['replacement'] = site
+            tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
             self.default['scrape_configs'].append(tmpEntry)
         return
 
@@ -250,14 +266,21 @@ class PromModel():
                 # 1. Add HTTPS/HTTP Scan
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
                 fullUrl = ""
+                if not endpoint['url'].startswith('/'):
+                    endpoint['url'] = "/%s" % endpoint['url']
                 if 'secure' in endpoint and endpoint['secure']:
                     tmpEntry['job_name'] = self._genName('%s_%s_HTTPS' % (name, endpoint['name']))
                     tmpEntry['params']['module'][0] = 'https_v4_network_2xx'
-                    fullUrl = "https://%(hostname)s:%(port)s/%(url)s" % endpoint
+                    fullUrl = "https://%(hostname)s:%(port)s%(url)s" % endpoint
+                    # Renegotiation insecure - SEE COMMENT ABOVE
+                    # We could use the ssl exporter - but ... it is insecure.
+                    tmpEntry['relabel_configs'][5]['replacement'] = "prometheus-blackbox-exporter-service:9115"
                 else:
                     tmpEntry['job_name'] = self._genName('%s_%s_HTTP' % (name, endpoint['name']))
                     tmpEntry['params']['module'][0] = 'http_v4_network_2xx'
-                    fullUrl = "http://%(hostname)s:%(port)s/%(url)s" % endpoint
+                    fullUrl = "http://%(hostname)s:%(port)s%(url)s" % endpoint
+                    # Renegotiation not needed for http - using blackbox exporter.
+                    tmpEntry['relabel_configs'][5]['replacement'] = "prometheus-blackbox-exporter-service:9115"
                 tmpEntry['static_configs'][0]['targets'].append(fullUrl)
                 tmpEntry['relabel_configs'][0]['replacement'] = name
                 tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
