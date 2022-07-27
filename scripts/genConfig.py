@@ -14,8 +14,8 @@ STATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                 'static_configs': [{'targets': []}],
                 'scheme': 'https',
                 'metrics_path': 'WILLBEREPLACEDBYCODE',
-                'tls_config': {'cert_file': '/etc/prometheus/cert.pem',
-                               'key_file': '/etc/prometheus/privkey.pem',
+                'tls_config': {'cert_file': '/etc/siterm-cert.pem',
+                               'key_file': '/etc/siterm-privkey.pem',
                                'insecure_skip_verify': True},
                 'relabel_configs': [{'source_labels': ['__address__'],
                                      'target_label': 'sitename',
@@ -117,11 +117,6 @@ HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
 #    CVE-2009-3555 all implementations, CVE-2011-5094 in Mozilla, CVE-2011-1473 in OpenSSL, CVE-2014-1771 in Windows SSL.
 #
 #
-# Because of this, we have several endpoints:
-# 1. prometheus-blackbox-exporter-service:9115 - which cant query OpenNSA with renegotiation on
-# 2. prometheus-ssl-exporter-service:9219 - which has renegotiation flag freely on. (This is insecure.)
-#       But ssl exporter is very limited on providing output. Best approach is to migrate all OpenNSA's with renegotiation off.
-
 
 # ICMP - Will ping FE endpoint and get RTT
 ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
@@ -258,6 +253,7 @@ class PromModel():
             return False
         if not os.path.isfile(fname):
             return
+        hosts = []
         nrmMapping = loadYamlFile(fname)
         for name, vals in nrmMapping.items():
             for endpoint in vals['endpoints']:
@@ -287,13 +283,15 @@ class PromModel():
                 tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
                 self.default['scrape_configs'].append(tmpEntry)
                 # 2. Add ICMP Check
-                tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
-                tmpEntry['job_name'] = self._genName('%s_%s_ICMP' % (name, endpoint['name']))
-                tmpEntry['static_configs'][0]['targets'].append(endpoint['hostname'])
-                tmpEntry['relabel_configs'][0]['replacement'] = name
-                tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
-                tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
-                self.default['scrape_configs'].append(tmpEntry)
+                if endpoint['hostname'] not in hosts:
+                    hosts.append(endpoint['hostname'])
+                    tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
+                    tmpEntry['job_name'] = self._genName('%s_%s_ICMP' % (name, endpoint['name']))
+                    tmpEntry['static_configs'][0]['targets'].append(endpoint['hostname'])
+                    tmpEntry['relabel_configs'][0]['replacement'] = name
+                    tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
+                    tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
+                    self.default['scrape_configs'].append(tmpEntry)
 
     def looper(self, dirname):
         """Loop via all SiteRM configs"""

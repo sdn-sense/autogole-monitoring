@@ -1,21 +1,29 @@
 Commands:
 
+KUBE_CONF=/Users/jbalcas/.kube/config-ucsd
+KUBE_NAMESPACE=opennsa
+
 kubectl create secret generic autogole-monitoring \
         --from-file=siterm-cert=secrets/siterm-cert.pem \
         --from-file=siterm-key=secrets/siterm-privkey.pem \
         --from-file=networkrm-cert=secrets/networkrm-cert.pem \
         --from-file=networkrm-key=secrets/networkrm-privkey.pem \
-        --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+        --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 
 
 
 If making any change to any of yaml files:
-kubectl apply -f blackbox-exporter.yaml --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
-kubectl apply -f prometheus-config-map.yaml --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+kubectl apply -f blackbox-exporter.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+kubectl apply -f prometheus-config-map.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 ...
 
 Now all runs on local, to forward port to localhost:
 
-kubectl port-forward svc/prometheus-blackbox-exporter-service 9115:9115 --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
-kubectl port-forward service/grafana 3000:3000 --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
-kubectl port-forward service/prometheus 9090:9090 --kubeconfig /Users/jbalcas/.kube/config-ucsd -n opennsa
+kubectl port-forward svc/prometheus-blackbox-exporter-service 9115:9115 --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+kubectl port-forward service/grafana 3000:3000 --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+kubectl port-forward service/prometheus 9090:9090 --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+
+
+
+# To Update prometheus config file:
+kubectl create configmap prometheus-config --from-file=prometheus.yml=prometheus.yml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
