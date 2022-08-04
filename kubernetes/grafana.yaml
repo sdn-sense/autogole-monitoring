@@ -33,7 +33,7 @@ spec:
           kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
       containers:
         - name: grafana
-          image: grafana/grafana:main
+          image: grafana/grafana:7.5.16
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

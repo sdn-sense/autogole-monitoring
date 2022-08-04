@@ -15,6 +15,7 @@ kubectl create secret generic autogole-monitoring \
 If making any change to any of yaml files:
 kubectl apply -f blackbox-exporter.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 kubectl apply -f prometheus-config-map.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+kubectl apply -f grafana.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 ...
 
 Now all runs on local, to forward port to localhost:

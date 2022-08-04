@@ -295,6 +295,19 @@ scrape_configs:
   static_configs:
   - targets:
     - autogole-sense-login.gridka.de
+- job_name: T3_DE_KIT_NODE
+  relabel_configs:
+  - replacement: T3_DE_KIT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - autogole-sense-login.gridka.de:9100
 - job_name: T2_CH_CERN_STATE
   metrics_path: /T2_CH_CERN/sitefe/json/frontend/metrics
   relabel_configs:
@@ -365,6 +378,19 @@ scrape_configs:
   static_configs:
   - targets:
     - cixp-surfnet-dtn.cern.ch
+- job_name: T2_CH_CERN_NODE
+  relabel_configs:
+  - replacement: T2_CH_CERN
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - cixp-surfnet-dtn.cern.ch:9100
 - job_name: T2_US_Caltech_STATE
   metrics_path: /T2_US_Caltech/sitefe/json/frontend/metrics
   relabel_configs:
@@ -601,6 +627,19 @@ scrape_configs:
   static_configs:
   - targets:
     - sprace02.redclara.net
+- job_name: T2_BR_SPRACE_NODE
+  relabel_configs:
+  - replacement: T2_BR_SPRACE
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sprace02.redclara.net:9100
 - job_name: T3_US_Starlight_STATE
   metrics_path: /T3_US_Starlight/sitefe/json/frontend/metrics
   relabel_configs:
