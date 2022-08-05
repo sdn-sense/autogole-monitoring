@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 9,
   "links": [],
   "panels": [
     {
@@ -76,7 +75,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_success{sitename=~\"Nautilus\"}",
+          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
           "interval": "",
           "legendFormat": "{{target}}",
           "refId": "A"
@@ -117,15 +116,15 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "message": "Failure to query Probe for REPLACEME",
-        "name": "Probe Success alert",
+        "message": "Failure to query Probe for REPLACEME_SITENAME",
+        "name": "Probe Success alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
         "notifications": [
           {
-            "uid": "jGyaPxk4k"
+            "uid": "REPLACEME_NOTIFICATION_ALL"
           },
           {
-            "uid": "hde2WakVk"
+            "uid": "REPLACEME_NOTIFICATION_SITE"
           }
         ]
       },
@@ -175,7 +174,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_success{sitename=~\"Nautilus\"}",
+          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
           "interval": "",
           "legendFormat": "{{job}}",
           "refId": "A"
@@ -280,7 +279,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"Nautilus\"}) by (Sitename, phase) > 0",
+          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"REPLACEME_SITENAME\"}) by (Sitename, phase) > 0",
           "interval": "",
           "legendFormat": "{{phase}}",
           "refId": "A"
@@ -381,7 +380,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"Nautilus\"}) by (job)",
+          "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"REPLACEME_SITENAME\"}) by (job)",
           "interval": "",
           "legendFormat": "{{job}}",
           "refId": "A"
@@ -424,15 +423,15 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "message": "Certificates expire in less than a week for REPLACEME",
-        "name": "SSL Expiry alert",
+        "message": "Certificates expire in less than a week for REPLACEME_SITENAME",
+        "name": "SSL Expiry alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
         "notifications": [
           {
-            "uid": "jGyaPxk4k"
+            "uid": "REPLACEME_NOTIFICATION_ALL"
           },
           {
-            "uid": "hde2WakVk"
+            "uid": "REPLACEME_NOTIFICATION_SITE"
           }
         ]
       },
@@ -486,7 +485,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"Nautilus\"} - time()",
+          "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"REPLACEME_SITENAME\"} - time()",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -599,15 +598,15 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "message": "HTTP Query Status code error for REPLACEME",
-        "name": "HTTP Status Code alert",
+        "message": "HTTP Query Status code error for REPLACEME_SITENAME",
+        "name": "HTTP Status Code alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
         "notifications": [
           {
-            "uid": "jGyaPxk4k"
+            "uid": "REPLACEME_NOTIFICATION_ALL"
           },
           {
-            "uid": "hde2WakVk"
+            "uid": "REPLACEME_NOTIFICATION_SITE"
           }
         ]
       },
@@ -659,7 +658,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_http_status_code{sitename=~\"Nautilus\"}",
+          "expr": "probe_http_status_code{sitename=~\"REPLACEME_SITENAME\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -766,7 +765,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_http_ssl{sitename=~\"Nautilus\"}",
+          "expr": "probe_http_ssl{sitename=~\"REPLACEME_SITENAME\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -824,7 +823,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(probe_duration_seconds{sitename=~\"Nautilus\"}) by (job)",
+          "expr": "avg(probe_duration_seconds{sitename=~\"REPLACEME_SITENAME\"}) by (job)",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -884,7 +883,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "probe_http_duration_seconds{sitename=~\"Nautilus\"}",
+          "expr": "probe_http_duration_seconds{sitename=~\"REPLACEME_SITENAME\"}",
           "interval": "",
           "legendFormat": "{{job}} {{ phase }}",
           "refId": "A"
@@ -938,8 +937,8 @@
   "schemaVersion": 27,
   "style": "dark",
   "tags": [
-    "Nautilus",
-    "nsi-safnari"
+    "REPLACEME_SITENAME",
+    "REPLACEME_SOFTWARE"
   ],
   "templating": {
     "list": []
@@ -950,7 +949,5 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Nautilus",
-  "uid": "B3GlEbkVk",
-  "version": 10
+  "title": "REPLACEME_SITENAME"
 }
