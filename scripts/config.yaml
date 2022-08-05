@@ -1,0 +1,23 @@
+---
+api_key: "API_KEY_FROM_GRAFANA"
+api_url: "API_URL_TO_GRAFANA"
+
+alert_channels:
+  SENSE-ALL-ALARMS:
+    type: "slack"
+    frequency: "12h"
+    sendReminder: "true"
+    url: "SLACK_HOOK_API_URL"
+    recipient: "#SLACK_CHANNEL"
+  UNCONFIGURED_WEBHOOK:
+    type: "slack"
+    frequency: "12h"
+    sendReminder: "true"
+    url: "SLACK_HOOK_API_URL"
+    recipient: "#SLACK_CHANNEL"
+  T2_US_Caltech_Test:
+    type: "slack"
+    frequency: "12h"
+    sendReminder: "true"
+    url: "SLACK_HOOK_API_URL"
+    recipient: "#SLACK_CHANNEL"
