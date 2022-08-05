@@ -160,7 +160,7 @@ def loadYamlFile(fname):
 class PromModel():
     """Class for generating Prometheus config file"""
     def __init__(self,):
-        self.default = loadYamlFile('default-config.yml')
+        self.default = loadYamlFile('default-prometheus-config.yml')
         self.jobs = []
 
     def _genName(self, tmpName):
@@ -321,7 +321,7 @@ def execute():
         siteConfDir = os.path.join(workdir, dirName)
         worker.looper(siteConfDir)
     removeDir(workdir)
-    worker.addNRM('../configs/nsa-endpoints')
+    worker.addNRM('../configs/nsi-endpoints')
     worker.dump()
 
 if __name__ == "__main__":
