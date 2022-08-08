@@ -22,7 +22,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-RdYlGr"
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
