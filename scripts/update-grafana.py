@@ -104,23 +104,44 @@ class GrafanaUpdate():
 
     def createAlerts(self):
         """Create Alerts in Grafana"""
-        self.getAlerts()
-        for key, vals in self.config['alert_channels'].items():
+        def createSlackAlert(key, vals):
             if 'url' not in vals or 'recipient' not in vals:
                 print('Alert channel wrongly configured for %s. missing url or recipient' % key)
-                continue
-            if key in self.alerts:
-                # This alert already in place. TODO: In future support update.
-                continue
-            out = {'type': '', 'frequency': '', 'sendReminder': True,
+                return {}
+            out = {'type': '', 'frequency': '', 'sendReminder': False,
                    'isDefault': False, 'settings': {'url': '', 'recipient': ''}}
             out['name'] = key
             out['type'] = vals.get('type', 'slack')
-            out['frequency'] = vals.get('frequency', 12)
-            out['sendReminder'] = bool(vals.get('sendReminder', 'True'))
+            out['frequency'] = vals.get('frequency', '')
+            out['sendReminder'] = bool(vals.get('sendReminder', 'False'))
             out['settings']['url'] = vals['url']
             out['settings']['recipient'] = vals['recipient']
-            self.grafanaapi.notifications.create_channel(out)
+            return out
+        def createEmailAlert(key, vals):
+            if 'addresses' not in vals:
+                print('Alert channel wrongly configured for %s. missing url or recipient' % key)
+                return {}
+            out = {'type': '', 'frequency': '', 'sendReminder': False,
+                   'isDefault': False, 'settings': {'singleEmail': '', 'addresses': ''}}
+            out['name'] = key
+            out['type'] = vals.get('type', 'email')
+            out['frequency'] = vals.get('frequency', '')
+            out['sendReminder'] = bool(vals.get('sendReminder', 'False'))
+            out['settings']['singleEmail'] = bool(vals.get('singleEmail', 'False'))
+            out['settings']['addresses'] = vals['addresses']
+            return out
+
+        self.getAlerts()
+        for key, vals in self.config['alert_channels'].items():
+            if key in self.alerts:
+                # This alert already in place. TODO: In future support update.
+                continue
+            if 'type' in vals and vals['type'] == 'slack':
+                out = createSlackAlert(key, vals)
+            elif 'type' in vals and vals['type'] == 'email':
+                out = createEmailAlert(key, vals)
+            if out:
+                self.grafanaapi.notifications.create_channel(out)
         self.getAlerts()
 
 def insertDashboardParams(sitename, software, dashbJson, worker):

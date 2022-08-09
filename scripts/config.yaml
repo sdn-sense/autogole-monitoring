@@ -21,3 +21,9 @@ alert_channels:
     sendReminder: "true"
     url: "SLACK_HOOK_API_URL"
     recipient: "#SLACK_CHANNEL"
+  Email_Example:
+    type: "email"
+    frequency: "12h"
+    sendReminder: "true"
+    singleEmail: "true"
+    addresses: "juztas@gmail.com

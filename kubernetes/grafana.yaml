@@ -71,10 +71,32 @@ metadata:
   name: grafana
 spec:
   ports:
-    - port: 3000
+    - port: 3000 
       protocol: TCP
-      targetPort: http-grafana
+      targetPort: 3000
   selector:
     app: grafana
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: autogole-grafana-ingress
+spec:
+  rules:
+  - host: autogole-grafana.nrp-nautilus.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: autogole-grafana-ingress-svc
+            port:
+              number: 3000
+  tls:
+  - hosts:
+    - autogole-grafana.nrp-nautilus.io
