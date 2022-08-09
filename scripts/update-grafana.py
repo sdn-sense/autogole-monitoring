@@ -117,7 +117,7 @@ class GrafanaUpdate():
             out['name'] = key
             out['type'] = vals.get('type', 'slack')
             out['frequency'] = vals.get('frequency', 12)
-            out['sendReminder'] = vals.get('sendReminder', 'True')
+            out['sendReminder'] = bool(vals.get('sendReminder', 'True'))
             out['settings']['url'] = vals['url']
             out['settings']['recipient'] = vals['recipient']
             self.grafanaapi.notifications.create_channel(out)

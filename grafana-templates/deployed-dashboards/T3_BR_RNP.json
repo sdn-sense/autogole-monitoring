@@ -16,7 +16,6 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 24,
     "links": [],
     "panels": [
       {
@@ -24,7 +23,7 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "continuous-RdYlGr"
+              "mode": "thresholds"
             },
             "mappings": [],
             "thresholds": {
@@ -123,10 +122,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -430,10 +429,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -605,10 +604,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -1033,10 +1032,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -1184,10 +1183,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             },
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             }
           ]
         },
@@ -1335,10 +1334,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -1486,10 +1485,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -1637,10 +1636,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             },
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             }
           ]
         },
@@ -1788,10 +1787,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             },
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             }
           ]
         },
@@ -1940,10 +1939,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "jGyaPxk4k"
+              "uid": "_c0dbii4k"
             },
             {
-              "uid": "W1ZCv8z4k"
+              "uid": "IYAdxmiVz"
             }
           ]
         },
@@ -2172,11 +2171,9 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T3_BR_RNP",
-    "uid": "xhPMbUzVk",
-    "version": 1
+    "title": "T3_BR_RNP"
   },
-  "folderId": 25,
-  "message": "Script changes made on 2022-08-05. See git for changes",
+  "folderId": 1,
+  "message": "Script changes made on 2022-08-08. See git for changes",
   "overwrite": true
 }
