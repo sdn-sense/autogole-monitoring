@@ -30,3 +30,7 @@ kubectl port-forward service/prometheus 9090:9090 --kubeconfig $KUBE_CONF -n $KU
 kubectl create configmap prometheus-config --from-file=prometheus.yml=prometheus.yml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
 # To Update Grafana ini config file:
 kubectl create configmap grafana-config --from-file=grafana.ini=configs/grafana.ini --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
+
+
+# For certificates:
+kubectl get secret autogole-grafana-secrets -o "jsonpath={.data['tls\.crt']}" --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE | base64 --decode

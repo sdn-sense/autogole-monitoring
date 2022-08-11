@@ -1,0 +1,35 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    email: juztas@gmail.com
+    preferredChain: ""
+    privateKeySecretRef:
+      name: issuer-account-key
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          class: haproxy
+          ingressTemplate:
+            metadata:
+              annotations:
+                ingress.kubernetes.io/ssl-redirect: "false"
+          serviceType: ClusterIP
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+  name: autogole-grafana-certificate
+spec:
+  commonName: autogole-grafana.nrp-nautilus.io
+  dnsNames:
+  - autogole-grafana.nrp-nautilus.io
+  issuerRef:
+    kind: Issuer
+    name: letsencrypt
+  secretName: autogole-grafana-secrets
