@@ -61,7 +61,7 @@
       "id": 3,
       "links": [],
       "options": {
-        "folderId": 25,
+        "folderId": 1,
         "maxItems": 30,
         "query": "",
         "showHeadings": false,
@@ -83,7 +83,7 @@
         "defaults": {},
         "overrides": []
       },
-      "folderId": 25,
+      "folderId": 1,
       "gridPos": {
         "h": 7,
         "w": 12,
@@ -124,7 +124,7 @@
       "id": 7,
       "links": [],
       "options": {
-        "folderId": 27,
+        "folderId": 2,
         "maxItems": 30,
         "query": "",
         "showHeadings": false,
@@ -146,7 +146,7 @@
         "defaults": {},
         "overrides": []
       },
-      "folderId": 27,
+      "folderId": 2,
       "gridPos": {
         "h": 7,
         "w": 12,
