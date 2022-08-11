@@ -52,6 +52,18 @@ class GrafanaUpdate():
         self.getAlerts()
         self.getFolders()
 
+    def getOrganizationConfig(self):
+        """Get organization config preferences"""
+        return self.grafanaapi.organizations.organization_preference_get()
+
+    def updateOrganizationConfig(self, newconfig):
+        """Update organization config"""
+        return self.grafanaapi.organizations.organization_preference_update(
+            theme=newconfig['theme'],
+            home_dashboard_id=newconfig['homeDashboardId'],
+            timezone=newconfig['timezone']
+        )
+
     def getDashboards(self):
         """Get dashboards from Grafana"""
         self.dashboards = {}
@@ -168,12 +180,18 @@ def insertDashboardParams(sitename, software, dashbJson, worker):
 
 def addDefaultDashboards(worker):
     """Add Default dashboards"""
+    orgConfig = worker.getOrganizationConfig()
     for dashbFile, dashName in {'general-all-status.json': 'All Status (Variable)',
                                'general-full-dtn-monitoring.json': 'Full DTN Monitoring (Variable)',
                                'general-home.json': 'Home'}.items():
         dashbJson = readFile('../grafana-templates/dashboards/%s' % dashbFile)
+        dashbJson = dashbJson.replace('REPLACEME_FOLDERID_SiteRM', str(worker.getFolderID('SiteRM')))
+        dashbJson = dashbJson.replace('REPLACEME_FOLDERID_NSI', str(worker.getFolderID('NSI')))
         dashbJson = insertDashboardParams(dashName, 'General', dashbJson, worker)
-        worker.addNewDashboard(dashbJson)
+        dashUpl = worker.addNewDashboard(dashbJson)
+        if dashName == 'Home' and orgConfig['homeDashboardId'] != dashUpl['id']:
+            orgConfig['homeDashboardId'] = dashUpl['id']
+            worker.updateOrganizationConfig(orgConfig)
 
 def addDashboard(sitename, software, worker):
     """Add SiteRM Dashboards to Grafana"""

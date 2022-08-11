@@ -725,7 +725,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - site-rm-dev.nrp-nautilus.io:8443
+    - sdn-login-1.ultralight.org:9443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -754,7 +754,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://site-rm-dev.nrp-nautilus.io:8443
+    - https://sdn-login-1.ultralight.org:9443
 - job_name: T2_US_SDSC_ICMP
   metrics_path: /probe
   params:
@@ -779,7 +779,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - site-rm-dev.nrp-nautilus.io
+    - sdn-login-1.ultralight.org
 - job_name: T2_US_SDSC_NODE
   relabel_configs:
   - replacement: T2_US_SDSC
