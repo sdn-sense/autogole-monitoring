@@ -16,6 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
+    "id": 7,
     "links": [],
     "panels": [
       {
@@ -122,10 +123,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -429,10 +430,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -604,10 +605,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -1032,10 +1033,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -1183,10 +1184,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             },
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             }
           ]
         },
@@ -1334,10 +1335,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -1485,10 +1486,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -1636,10 +1637,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             },
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             }
           ]
         },
@@ -1787,10 +1788,10 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             },
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             }
           ]
         },
@@ -1939,10 +1940,10 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "_c0dbii4k"
+              "uid": "hGko4Mm4z"
             },
             {
-              "uid": "IYAdxmiVz"
+              "uid": "55zTVMm4k"
             }
           ]
         },
@@ -2171,9 +2172,11 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T2_US_UCSD"
+    "title": "T2_US_UCSD",
+    "uid": "b7U9xiiVz",
+    "version": 1
   },
   "folderId": 1,
-  "message": "Script changes made on 2022-08-08. See git for changes",
+  "message": "Script changes made on 2022-08-11. See git for changes",
   "overwrite": true
 }
