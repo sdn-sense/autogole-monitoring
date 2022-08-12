@@ -151,11 +151,11 @@ class GrafanaUpdate():
             self.alerts[item['name']] = item
 
     def getAlertID(self, name):
-        """Get Alert ID by Name. Default is UNCONFIGURED_WEBHOOK"""
+        """Get Alert ID by Name. Default is UNCONFIGURED_WEBHOOKS"""
         if name in self.alerts:
             return self.alerts[name]['uid']
         print("Return unconfigured webhook for %s" % name)
-        return self.alerts['UNCONFIGURED_WEBHOOK']['uid']
+        return self.alerts['UNCONFIGURED_WEBHOOKS']['uid']
 
     def createAlerts(self):
         """Create Alerts in Grafana"""
@@ -242,7 +242,7 @@ def addDefaultDashboards(worker):
             orgConfig['homeDashboardId'] = dashUpl['id']
             worker.updateOrganizationConfig(orgConfig)
 
-def updateCreateChannels(sitename, software, dashbJson, worker):
+def updateCreateChannels(sitename, software, dashbJson, worker, purpose=""):
     """Update/Create Channels on Slack."""
     # 1 create channel
     # Remove space, dots and replace with _ and lower it
@@ -250,7 +250,8 @@ def updateCreateChannels(sitename, software, dashbJson, worker):
     channelInfo = worker.createChannel(siteNorm)
     # 2 Generate purpose
     monUrl = "%s%s" % (worker.config['api_url'], dashbJson['url'])
-    purpose = "Alert notifications for %s %s.\nMonitoring URL: <%s>" % (software, sitename, monUrl)
+    if not purpose:
+        purpose = "Alert notifications for %s %s.\nMonitoring URL: <%s>" % (software, sitename, monUrl)
     worker.setPurpose(channelInfo['id'], purpose)
     # 3 Upload new purpose
 
@@ -267,7 +268,7 @@ def addDashboard(sitename, software, worker):
     dashbJson = readFile(src)
     # 1. Get Alarm IDs and replace REPLACEME_SITENAME, REPLACEME_SOFTWARE,
     # REPLACEME_NOTIFICATION_ALL, REPLACEME_NOTIFICATION_SITE
-    notfAll = worker.getAlertID('SENSE-ALL-ALARMS')
+    notfAll = worker.getAlertID('ALL_%s_ENDPOINTS' % software)
     notfSite = worker.getAlertID(sitename)
     dashbJson = dashbJson.replace('REPLACEME_SITENAME', sitename)
     dashbJson = dashbJson.replace('REPLACEME_SOFTWARE', software)
@@ -313,7 +314,11 @@ def run():
     worker.createAlerts()
     worker.getDashboards()
     worker.createFolder('SiteRM')
+    updateCreateChannels('All SiteRM Endpoints', '', {'url': config['api_url']}, worker)
     worker.createFolder('NSI')
+    updateCreateChannels('All NSI Endpoints', '', {'url': config['api_url']}, worker)
+    updateCreateChannels('Unconfigured Webhooks', '', {'url': config['api_url']},
+                         worker, purpose="Alerts for Unconfigured Webhooks. If any alerts here - need admins to create a slack webhook for specific channel")
     addDefaultDashboards(worker)
     workdir = getSiteRMRepo()
     for dirName in os.listdir(workdir):
