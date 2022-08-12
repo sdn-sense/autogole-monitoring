@@ -1,6 +1,7 @@
 ---
 api_key: "API_KEY_FROM_GRAFANA"
 api_url: "API_URL_TO_GRAFANA"
+slack_token: "SLACK_TOKEN"
 
 alert_channels:
   SENSE-ALL-ALARMS:

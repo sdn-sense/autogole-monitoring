@@ -1,3 +1,4 @@
 gitpython
 pyyaml
 grafana-client
+slack_sdk

@@ -6,6 +6,7 @@ from datetime import date
 from yaml import safe_load as yload
 from git import Repo
 from grafana_client import GrafanaApi
+from slack_sdk import WebClient
 
 def getSiteRMRepo():
     """Get SiteRM Config Repo"""
@@ -33,6 +34,48 @@ def writeFile(fname, data):
     """Write data to file"""
     with open(fname, 'w', encoding='utf-8') as fd:
         fd.write(data)
+
+class SlackAPI():
+    """Slack API to create/update/get channels info"""
+    def __init__(self, config):
+        self.client = WebClient(token=config['slack_token'])
+        self.channels = {'ByName': {}, 'ByID': {}}
+        self.__testClient()
+        self.getChannels()
+
+    def __testClient(self):
+        self.client.api_test()
+
+    def getChannels(self):
+        """Get All Channels from Slack"""
+        self.channels = {'ByName': {}, 'ByID': {}}
+        channels = self.client.conversations_list()
+        for item in channels.data['channels']:
+            self.channels['ByName'].setdefault(item['name'], item)
+            self.channels['ByID'].setdefault(item['id'], item)
+
+    def getChannelByID(self, channel_id):
+        """Get Channel by ID"""
+        return self.channels['ByID'].get(channel_id, {})
+
+    def getChannelByName(self, name):
+        """Get Channel by Name"""
+        return self.channels['ByName'].get(name, {})
+
+    def createChannel(self, name):
+        """Create New Channel"""
+        if not self.getChannelByName(name):
+            self.client.conversations_create(name=name)
+            self.getChannels()
+        return self.getChannelByName(name)
+
+    def setPurpose(self, channel_id, purpose):
+        """Set Channel Purpose"""
+        channelConfig = self.getChannelByID(channel_id)
+        if channelConfig['purpose']['value'] != purpose:
+            self.client.conversations_setPurpose(channel=channel_id, purpose=purpose)
+            self.getChannels()
+
 
 class GrafanaUpdate():
     """Autogole SENSE Grafana Alerts/Folders/Dashboards auto updater"""
@@ -156,6 +199,12 @@ class GrafanaUpdate():
                 self.grafanaapi.notifications.create_channel(out)
         self.getAlerts()
 
+class Worker(GrafanaUpdate, SlackAPI):
+    """Inheritance Worker"""
+    def __init__(self, config):
+        GrafanaUpdate.__init__(self, config)
+        SlackAPI.__init__(self, config)
+
 def insertDashboardParams(sitename, software, dashbJson, worker):
     """Insert dashboard params, like UID, ID, Version, Folder"""
     dashbJson = json.loads(dashbJson)
@@ -193,6 +242,19 @@ def addDefaultDashboards(worker):
             orgConfig['homeDashboardId'] = dashUpl['id']
             worker.updateOrganizationConfig(orgConfig)
 
+def updateCreateChannels(sitename, software, dashbJson, worker):
+    """Update/Create Channels on Slack."""
+    # 1 create channel
+    # Remove space, dots and replace with _ and lower it
+    siteNorm = sitename.replace(' ', '_').replace('.', '_').lower()
+    channelInfo = worker.createChannel(siteNorm)
+    # 2 Generate purpose
+    monUrl = "%s%s" % (worker.config['api_url'], dashbJson['url'])
+    purpose = "Alert notifications for %s %s.\nMonitoring URL: <%s>" % (software, sitename, monUrl)
+    worker.setPurpose(channelInfo['id'], purpose)
+    # 3 Upload new purpose
+
+
 def addDashboard(sitename, software, worker):
     """Add SiteRM Dashboards to Grafana"""
     # 0. Get dashboard default template
@@ -214,7 +276,8 @@ def addDashboard(sitename, software, worker):
     # Insert dashboard params, like UID, ID, Version, Folder
     dashbJson = insertDashboardParams(sitename, software, dashbJson, worker)
     # Write New dashboard to Grafana
-    worker.addNewDashboard(dashbJson)
+    tmp = worker.addNewDashboard(dashbJson)
+    updateCreateChannels(sitename, software, tmp, worker)
     # Save dashboard changes to local file.
     writeFile(dst, json.dumps(dashbJson, sort_keys=True,
                               indent=2, separators=(',', ': ')))
@@ -240,14 +303,13 @@ def updateNSA(fname, worker):
     """Add All Network-RM Endpoints to Promeheus config file"""
     nrmMapping = loadYamlFile(fname)
     for name, vals in nrmMapping.items():
-        print(name, vals)
         addDashboard(name, 'NSI', worker)
 
 
 def run():
     """Main run"""
     config = loadYamlFile('config.yaml')
-    worker = GrafanaUpdate(config)
+    worker = Worker(config)
     worker.createAlerts()
     worker.getDashboards()
     worker.createFolder('SiteRM')
