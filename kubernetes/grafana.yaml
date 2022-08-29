@@ -47,6 +47,13 @@ spec:
             tcpSocket:
               port: 3000
             timeoutSeconds: 1
+          env:
+          - name: GF_RENDERING_SERVER_URL
+            value: "http://grafana-rend:8081/render"
+          - name: GF_RENDERING_CALLBACK_URL
+            value: "https://autogole-grafana.nrp-nautilus.io/"
+          - name: GF_LOG_FILTERS
+            value: "rendering:debug"
           resources:
             requests:
               cpu: 250m

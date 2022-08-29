@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grafana-rend
+  name: grafana-rend
+spec:
+  selector:
+    matchLabels:
+      app: grafana-rend
+  template:
+    metadata:
+      labels:
+        app: grafana-rend
+    spec:
+      securityContext:
+        fsGroup: 472
+        supplementalGroups:
+          - 0
+      nodeSelector:
+          kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
+      containers:
+        - name: grafana-rend
+          image: grafana/grafana-image-renderer:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+              name: grafana-rend
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 8081
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 250m
+              memory: 4G
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-rend
+spec:
+  ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    app: grafana-rend
+  sessionAffinity: None
+  type: ClusterIP
