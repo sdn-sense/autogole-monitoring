@@ -16,7 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 19,
+    "id": 12,
     "links": [],
     "panels": [
       {
@@ -77,7 +77,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_BR_RNP\"}",
+            "expr": "probe_success{sitename=~\"NRM_CENIC\"}",
             "interval": "",
             "legendFormat": "{{target}}",
             "refId": "A"
@@ -118,15 +118,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Failure to query Probe for T3_BR_RNP",
-          "name": "Probe Success alert for T3_BR_RNP",
+          "message": "Failure to query Probe for NRM_CENIC",
+          "name": "Probe Success alert for NRM_CENIC",
           "noDataState": "alerting",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -176,7 +176,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_BR_RNP\"}",
+            "expr": "probe_success{sitename=~\"NRM_CENIC\"}",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -281,7 +281,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_BR_RNP\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"NRM_CENIC\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -382,7 +382,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"T3_BR_RNP\"}) by (job)",
+            "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"NRM_CENIC\"}) by (job)",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -425,15 +425,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Certificates expire in less than a week for T3_BR_RNP",
-          "name": "SSL Expiry alert for T3_BR_RNP",
+          "message": "Certificates expire in less than a week for NRM_CENIC",
+          "name": "SSL Expiry alert for NRM_CENIC",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -487,7 +487,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_BR_RNP\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"NRM_CENIC\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -600,15 +600,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "HTTP Query Status code error for T3_BR_RNP",
-          "name": "HTTP Status Code alert for T3_BR_RNP",
+          "message": "HTTP Query Status code error for NRM_CENIC",
+          "name": "HTTP Status Code alert for NRM_CENIC",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -660,7 +660,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"T3_BR_RNP\"}",
+            "expr": "probe_http_status_code{sitename=~\"NRM_CENIC\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -767,7 +767,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_ssl{sitename=~\"T3_BR_RNP\"}",
+            "expr": "probe_http_ssl{sitename=~\"NRM_CENIC\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -825,7 +825,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "avg(probe_duration_seconds{sitename=~\"T3_BR_RNP\"}) by (job)",
+            "expr": "avg(probe_duration_seconds{sitename=~\"NRM_CENIC\"}) by (job)",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -885,7 +885,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T3_BR_RNP\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"NRM_CENIC\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -986,7 +986,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_BR_RNP\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"NRM_CENIC\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1029,14 +1029,14 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Agent Not OK for T3_BR_RNP",
+          "name": "SiteRM Agent Not OK for NRM_CENIC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1090,7 +1090,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1180,11 +1180,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Debugger Not OK for T3_BR_RNP",
+          "name": "SiteRM Debugger Not OK for NRM_CENIC",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1241,7 +1241,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1331,14 +1331,14 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T3_BR_RNP",
+          "name": "SiteRM LookUpService Not OK for NRM_CENIC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1392,7 +1392,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1482,11 +1482,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T3_BR_RNP",
+          "name": "SiteRM ProvisioningService Not OK for NRM_CENIC",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1543,7 +1543,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1633,11 +1633,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Ruler Not OK for T3_BR_RNP",
+          "name": "SiteRM Ruler Not OK for NRM_CENIC",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1694,7 +1694,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1784,15 +1784,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "One or more services failed for T3_BR_RNP",
-          "name": "SiteRM Component Status alert for T3_BR_RNP",
+          "message": "One or more services failed for NRM_CENIC",
+          "name": "SiteRM Component Status alert for NRM_CENIC",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "cJQWM5mVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1846,7 +1846,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state=\"OK\", sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state=\"OK\", sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1955,7 +1955,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{sitename=\"T3_BR_RNP\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{sitename=\"NRM_CENIC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -2009,7 +2009,7 @@
     "schemaVersion": 27,
     "style": "dark",
     "tags": [
-      "T3_BR_RNP",
+      "NRM_CENIC",
       "SiteRM"
     ],
     "templating": {
@@ -2021,8 +2021,8 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T3_BR_RNP",
-    "uid": "ja6rbim4z",
+    "title": "NRM_CENIC",
+    "uid": "zU_9xiiVz",
     "version": 1
   },
   "folderId": 1,

@@ -91,7 +91,7 @@
           {
             "evaluator": {
               "params": [
-                1
+                0.9
               ],
               "type": "lt"
             },
@@ -118,7 +118,7 @@
         "handler": 1,
         "message": "Failure to query Probe for REPLACEME_SITENAME",
         "name": "Probe Success alert for REPLACEME_SITENAME",
-        "noDataState": "no_data",
+        "noDataState": "alerting",
         "notifications": [
           {
             "uid": "REPLACEME_NOTIFICATION_ALL"
@@ -186,7 +186,7 @@
           "fill": true,
           "line": true,
           "op": "lt",
-          "value": 1,
+          "value": 0.9,
           "visible": true
         }
       ],
@@ -525,7 +525,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1027,7 +1027,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "SiteRM Agent Not OK for REPLACEME_SITENAME",
+        "name": "REPLACEME_SOFTWARE Agent Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
         "notifications": [
           {
@@ -1053,7 +1053,7 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
-        "w": 4,
+        "w": 5,
         "x": 0,
         "y": 57
       },
@@ -1107,7 +1107,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM Agent Not OK Status",
+      "title": "REPLACEME_SOFTWARE Agent Not OK Status",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1178,7 +1178,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "SiteRM Debugger Not OK for REPLACEME_SITENAME",
+        "name": "REPLACEME_SOFTWARE Debugger Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
         "notifications": [
           {
@@ -1204,8 +1204,8 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
-        "w": 4,
-        "x": 4,
+        "w": 5,
+        "x": 5,
         "y": 57
       },
       "hiddenSeries": false,
@@ -1258,7 +1258,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM Debugger Not OK Status",
+      "title": "REPLACEME_SOFTWARE Debugger Not OK Status",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1329,7 +1329,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "SiteRM LookUpService Not OK for REPLACEME_SITENAME",
+        "name": "REPLACEME_SOFTWARE LookUpService Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
         "notifications": [
           {
@@ -1355,8 +1355,8 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
-        "w": 4,
-        "x": 8,
+        "w": 5,
+        "x": 10,
         "y": 57
       },
       "hiddenSeries": false,
@@ -1409,7 +1409,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM LookUpService Not OK Status",
+      "title": "REPLACEME_SOFTWARE LookUpService Not OK Status",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1480,158 +1480,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "SiteRM PolicyService Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
-      },
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 5,
-        "w": 4,
-        "x": 12,
-        "y": 57
-      },
-      "hiddenSeries": false,
-      "id": 22,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": false,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.16",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"PolicyService\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 0,
-          "visible": true
-        }
-      ],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "SiteRM PolicyService Not OK Status",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:1595",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:1596",
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "SiteRM ProvisioningService Not OK for REPLACEME_SITENAME",
+        "name": "REPLACEME_SOFTWARE ProvisioningService Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
         "notifications": [
           {
@@ -1658,7 +1507,7 @@
       "gridPos": {
         "h": 5,
         "w": 4,
-        "x": 16,
+        "x": 15,
         "y": 57
       },
       "hiddenSeries": false,
@@ -1711,7 +1560,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM ProvisioningService Not OK Status",
+      "title": "REPLACEME_SOFTWARE ProvisioningService Not OK Status",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1782,7 +1631,7 @@
         "for": "5m",
         "frequency": "1m",
         "handler": 1,
-        "name": "SiteRM Ruler Not OK for REPLACEME_SITENAME",
+        "name": "REPLACEME_SOFTWARE Ruler Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
         "notifications": [
           {
@@ -1808,8 +1657,8 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
-        "w": 4,
-        "x": 20,
+        "w": 5,
+        "x": 19,
         "y": 57
       },
       "hiddenSeries": false,
@@ -1862,7 +1711,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM Ruler Not OK Status",
+      "title": "REPLACEME_SOFTWARE Ruler Not OK Status",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1934,7 +1783,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "One or more services failed for REPLACEME_SITENAME",
-        "name": "SiteRM Component Status alert for REPLACEME_SITENAME",
+        "name": "REPLACEME_SOFTWARE Component Status alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
         "notifications": [
           {
@@ -2014,7 +1863,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM Component Status",
+      "title": "REPLACEME_SOFTWARE Component Status",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2114,7 +1963,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SiteRM Component Status (Any Status)",
+      "title": "REPLACEME_SOFTWARE Component Status (Any Status)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2165,7 +2014,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
