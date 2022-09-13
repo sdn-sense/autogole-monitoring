@@ -391,6 +391,58 @@ scrape_configs:
   static_configs:
   - targets:
     - sdn-login-1.ultralight.org
+- job_name: T2_US_Caltech_Test_NODE
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-dtn-1-7.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_0
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-1.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_1
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-5.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_2
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-6.ultralight.org:9100
 - job_name: T2_BR_SPRACE_STATE
   metrics_path: /T2_BR_SPRACE/sitefe/json/frontend/metrics
   relabel_configs:
@@ -627,6 +679,45 @@ scrape_configs:
   static_configs:
   - targets:
     - sdn-login-1.ultralight.org
+- job_name: T2_US_SDSC_NODE
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-01.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_0
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-02.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_1
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - k8s-gen4-01.sdsc.optiputer.net:9100
 - job_name: T3_US_Kreonet_STATE
   metrics_path: /T3_US_Kreonet/sitefe/json/frontend/metrics
   relabel_configs:

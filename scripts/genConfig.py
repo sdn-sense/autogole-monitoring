@@ -232,14 +232,21 @@ class PromModel():
             return
         conf = loadYamlFile(confFile)
         nodeExporter = conf.get('general', {}).get('node_exporter', '')
+        # TODO: Change this part below one All SiteRMs move to 1.1.0 release
+        # This is mainly to support old release config params, while we move to new one
         site = conf.get('general', {}).get('siteName', '')
+        if not site:
+            site = conf.get('general', {}).get('sitename', '')
+        else:
+            site = [site]
         if site and nodeExporter:
-            tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
-            tmpEntry['job_name'] = self._genName('%s_NODE' % site)
-            tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
-            tmpEntry['relabel_configs'][0]['replacement'] = site
-            tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
-            self.default['scrape_configs'].append(tmpEntry)
+            for sitename in site:
+                tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
+                tmpEntry['job_name'] = self._genName('%s_NODE' % sitename)
+                tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
+                tmpEntry['relabel_configs'][0]['replacement'] = sitename
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
+                self.default['scrape_configs'].append(tmpEntry)
         return
 
     def addNRM(self, fname):
