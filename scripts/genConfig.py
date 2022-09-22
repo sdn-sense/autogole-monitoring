@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import socket
 import copy
 import tempfile
 import shutil
@@ -30,7 +31,7 @@ STATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # remote endpoints
 HTTPS_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                 'metrics_path': '/probe',
-                'params':{'module': ['https_v4_siterm_2xx']},
+                'params':{'module': ['WILLBEREPLACEDBYCODE']},
                 'static_configs':[{'targets': []}],
                 'relabel_configs':[{'source_labels': ['__address__'],
                                     'target_label': 'sitename',
@@ -47,9 +48,10 @@ HTTPS_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 
 
 # ICMP - Will ping FE endpoint and get RTT
+# v6 only if DNS Replies with v6 record
 ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                 'metrics_path': '/probe',
-                'params':{'module': ['icmp_v4']},
+                'params':{'module': ['WILLBEREPLACEDBYCODE']},
                 'static_configs':[{'targets': []}],
                 'relabel_configs':[{'source_labels': ['__address__'],
                                     'target_label': 'sitename',
@@ -85,8 +87,8 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # 2XX return code and also check certificate validity
 # This uses blackbox exporter and we need to relabel config and use localhost to query
 # remote endpoints
-# In case it is https, it will use https_v4_network_2xx module of blackbox
-# In case it is http, it will use http_v4_network_2xx module of blackbox
+# In case it is https, it will use https_v[46]_network_2xx module of blackbox (v6 only if DNS Replies with v6 record)
+# In case it is http, it will use http_v[46]_network_2xx module of blackbox (v6 only if DNS Replies with v6 record)
 HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                    'metrics_path': '/probe',
                    'params':{'module': ['WILLBEREPLACEDBYCODE']},
@@ -118,10 +120,11 @@ HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
 #
 #
 
-# ICMP - Will ping FE endpoint and get RTT
+# ICMP - Will ping NRM endpoint and get RTT
+# v6 only if DNS Replies with v6 record
 ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                    'metrics_path': '/probe',
-                   'params':{'module': ['icmp_v4']},
+                   'params':{'module': ['WILLBEREPLACEDBYCODE']},
                    'static_configs':[{'targets': []}],
                    'relabel_configs':[{'source_labels': ['__address__'],
                                        'target_label': 'sitename',
@@ -145,7 +148,6 @@ def getSiteRMRepo():
     dirPath = tempfile.mkdtemp()
 
     Repo.clone_from(gitUrl, dirPath)
-    print(dirPath)
     return dirPath
 
 def removeDir(dirPath):
@@ -156,6 +158,13 @@ def loadYamlFile(fname):
     """Load Yaml file"""
     with open(fname, 'r', encoding='utf-8') as fd:
         return yload(fd.read())
+
+def getIPv6Address(inHostname):
+    """Get IPv6 address. If not available, return ::ffff:"""
+    try:
+        return socket.getaddrinfo(inHostname, None, socket.AF_INET6)[0][4][0]
+    except socket.gaierror:
+        return "::ffff:"
 
 class PromModel():
     """Class for generating Prometheus config file"""
@@ -184,6 +193,8 @@ class PromModel():
         conf = loadYamlFile(confFile)
         webdomain = conf.get('general', {}).get('webdomain', '')
         origwebdomain = webdomain
+        probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
+                                                        'icmp_v4', 'icmp_v6'])
         if webdomain.startswith('https://'):
             webdomain = webdomain[8:]
         if not webdomain:
@@ -193,6 +204,7 @@ class PromModel():
         sites = conf.get('general', {}).get('sites', [])
         if not sites:
             return
+        ipv6_addr = getIPv6Address(webdomain.split(':')[0])
         for site in sites:
             # 1. Query for State of all Services registered to FE
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
@@ -203,19 +215,40 @@ class PromModel():
             tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
             self.default['scrape_configs'].append(tmpEntry)
             # 2. Query Endpoint and get TLS/Certificate information of Service
-            tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
-            tmpEntry['job_name'] = self._genName('%s_HTTPS' % site)
-            tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
-            tmpEntry['relabel_configs'][0]['replacement'] = site
-            tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
-            self.default['scrape_configs'].append(tmpEntry)
+            if 'https_v4_siterm_2xx' in probes:
+                tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
+                tmpEntry['job_name'] = self._genName('%s_HTTPS_V4' % site)
+                tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
+                self.default['scrape_configs'].append(tmpEntry)
+            if 'https_v6_siterm_2xx' in probes and not ipv6_addr.startswith('::ffff'):
+                # Check that it has IPv6
+                tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
+                tmpEntry['job_name'] = self._genName('%s_HTTPS_V6' % site)
+                tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
+                self.default['scrape_configs'].append(tmpEntry)
             # 3. Add ICMP Check for FE
-            tmpEntry = copy.deepcopy(ICMP_SCRAPE)
-            tmpEntry['job_name'] = self._genName('%s_ICMP' % site)
-            tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
-            tmpEntry['relabel_configs'][0]['replacement'] = site
-            tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
-            self.default['scrape_configs'].append(tmpEntry)
+            if 'icmp_v4' in probes:
+                tmpEntry = copy.deepcopy(ICMP_SCRAPE)
+                tmpEntry['job_name'] = self._genName('%s_ICMP_V4' % site)
+                tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['params']['module'][0] = 'icmp_v4'
+                self.default['scrape_configs'].append(tmpEntry)
+            if 'icmp_v6' in probes and not ipv6_addr.startswith('::ffff'):
+                tmpEntry = copy.deepcopy(ICMP_SCRAPE)
+                tmpEntry['job_name'] = self._genName('%s_ICMP_V6' % site)
+                tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['params']['module'][0] = 'icmp_v4'
+                self.default['scrape_configs'].append(tmpEntry)
             # 4. Check if agent config has node_exporter defined
             if conf.get('general', {}).get('node_exporter', ''):
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
@@ -232,13 +265,7 @@ class PromModel():
             return
         conf = loadYamlFile(confFile)
         nodeExporter = conf.get('general', {}).get('node_exporter', '')
-        # TODO: Change this part below one All SiteRMs move to 1.1.0 release
-        # This is mainly to support old release config params, while we move to new one
-        site = conf.get('general', {}).get('siteName', '')
-        if not site:
-            site = conf.get('general', {}).get('sitename', '')
-        else:
-            site = [site]
+        site = conf.get('general', {}).get('sitename', '')
         if site and nodeExporter:
             for sitename in site:
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
@@ -266,39 +293,63 @@ class PromModel():
             for endpoint in vals['endpoints']:
                 if checkIfParamMissing(endpoint):
                     continue
-                # 1. Add HTTPS/HTTP Scan
-                tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
                 fullUrl = ""
+                probes = endpoint.get('probes', ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6'])
                 if not endpoint['url'].startswith('/'):
                     endpoint['url'] = "/%s" % endpoint['url']
-                if 'secure' in endpoint and endpoint['secure']:
-                    tmpEntry['job_name'] = self._genName('%s_%s_HTTPS' % (name, endpoint['name']))
-                    tmpEntry['params']['module'][0] = 'https_v4_network_2xx'
-                    fullUrl = "https://%(hostname)s:%(port)s%(url)s" % endpoint
-                    # Renegotiation insecure - SEE COMMENT ABOVE
-                    # We could use the ssl exporter - but ... it is insecure.
-                    tmpEntry['relabel_configs'][5]['replacement'] = "prometheus-blackbox-exporter-service:9115"
-                else:
-                    tmpEntry['job_name'] = self._genName('%s_%s_HTTP' % (name, endpoint['name']))
-                    tmpEntry['params']['module'][0] = 'http_v4_network_2xx'
+                # HTTPS PROBES
+                ipv6_addr = getIPv6Address(endpoint['url'])
+                for probe in ['https_v4_network_2xx', 'https_v6_network_2xx']:
+                    if probe not in probes:
+                        continue
+                    if 'secure' in endpoint and endpoint['secure']:
+                        vtype = probe[6:8].upper()
+                        if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
+                            # There is no ipv6 address on host. continue
+                            continue
+                        tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
+                        tmpEntry['job_name'] = self._genName('%s_%s_HTTPS_%s' % (name, endpoint['name'], vtype))
+                        tmpEntry['params']['module'][0] = probe
+                        fullUrl = "https://%(hostname)s:%(port)s%(url)s" % endpoint
+                        tmpEntry['static_configs'][0]['targets'].append(fullUrl)
+                        tmpEntry['relabel_configs'][0]['replacement'] = name
+                        tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
+                        tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
+                        self.default['scrape_configs'].append(tmpEntry)
+                # HTTP Probes
+                for probe in ['http_v4_network_2xx', 'http_v6_network_2xx']:
+                    if probe not in probes:
+                        continue
+                    vtype = probe[5:7].upper()
+                    if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
+                        # There is no ipv6 address on host. continue
+                        continue
+                    tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
+                    tmpEntry['job_name'] = self._genName('%s_%s_HTTP_%s' % (name, endpoint['name'], vtype))
+                    tmpEntry['params']['module'][0] = probe
                     fullUrl = "http://%(hostname)s:%(port)s%(url)s" % endpoint
-                    # Renegotiation not needed for http - using blackbox exporter.
-                    tmpEntry['relabel_configs'][5]['replacement'] = "prometheus-blackbox-exporter-service:9115"
-                tmpEntry['static_configs'][0]['targets'].append(fullUrl)
-                tmpEntry['relabel_configs'][0]['replacement'] = name
-                tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
-                tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
-                self.default['scrape_configs'].append(tmpEntry)
-                # 2. Add ICMP Check
-                if endpoint['hostname'] not in hosts:
-                    hosts.append(endpoint['hostname'])
-                    tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
-                    tmpEntry['job_name'] = self._genName('%s_%s_ICMP' % (name, endpoint['name']))
-                    tmpEntry['static_configs'][0]['targets'].append(endpoint['hostname'])
+                    tmpEntry['static_configs'][0]['targets'].append(fullUrl)
                     tmpEntry['relabel_configs'][0]['replacement'] = name
                     tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
                     tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
                     self.default['scrape_configs'].append(tmpEntry)
+                # 2. Add ICMP Check
+                for probe in  ['icmp_v4', 'icmp_v6']:
+                    if probe not in probes:
+                        continue
+                    if endpoint['hostname'] not in hosts:
+                        vtype = probe[5:].upper()
+                        if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
+                            # There is no ipv6 address on host. continue
+                            continue
+                        hosts.append(endpoint['hostname'])
+                        tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
+                        tmpEntry['job_name'] = self._genName('%s_%s_ICMP_%s' % (name, endpoint['name'], vtype))
+                        tmpEntry['static_configs'][0]['targets'].append(endpoint['hostname'])
+                        tmpEntry['relabel_configs'][0]['replacement'] = name
+                        tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
+                        tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
+                        self.default['scrape_configs'].append(tmpEntry)
 
     def looper(self, dirname):
         """Loop via all SiteRM configs"""

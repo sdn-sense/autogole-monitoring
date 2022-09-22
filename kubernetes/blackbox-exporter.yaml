@@ -15,6 +15,7 @@ spec:
       labels:
         app: prometheus-blackbox-exporter
     spec:
+      hostNetwork: true
       restartPolicy: Always
       nodeSelector:
           kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net

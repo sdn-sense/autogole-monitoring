@@ -22,7 +22,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T3_US_FIU_HTTPS
+- job_name: T3_US_FIU_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -47,7 +47,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://67.17.206.195:8443
-- job_name: T3_US_FIU_ICMP
+- job_name: T3_US_FIU_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -105,7 +105,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_UCSD_HTTPS
+- job_name: T2_US_UCSD_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -130,31 +130,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-fe.nrp-nautilus.io:8443
-- job_name: T2_US_UCSD_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T2_US_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-fe.nrp-nautilus.io
 - job_name: T3_DE_KIT_STATE
   metrics_path: /T3_DE_KIT/sitefe/json/frontend/metrics
   relabel_configs:
@@ -175,7 +150,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T3_DE_KIT_HTTPS
+- job_name: T3_DE_KIT_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -200,7 +175,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://autogole-sense-login.gridka.de:8443
-- job_name: T3_DE_KIT_ICMP
+- job_name: T3_DE_KIT_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -258,7 +233,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_CH_CERN_HTTPS
+- job_name: T2_CH_CERN_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -283,7 +258,57 @@ scrape_configs:
   static_configs:
   - targets:
     - https://cixp-surfnet-dtn.cern.ch:8443
-- job_name: T2_CH_CERN_ICMP
+- job_name: T2_CH_CERN_HTTPS_V6
+  metrics_path: /probe
+  params:
+    module:
+    - https_v6_siterm_2xx
+  relabel_configs:
+  - replacement: T2_CH_CERN
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://cixp-surfnet-dtn.cern.ch:8443
+- job_name: T2_CH_CERN_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_CH_CERN
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - cixp-surfnet-dtn.cern.ch
+- job_name: T2_CH_CERN_ICMP_V6
   metrics_path: /probe
   params:
     module:
@@ -341,7 +366,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_Caltech_Test_HTTPS
+- job_name: T2_US_Caltech_Test_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -366,7 +391,57 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sdn-login-1.ultralight.org:8443
-- job_name: T2_US_Caltech_Test_ICMP
+- job_name: T2_US_Caltech_Test_HTTPS_V6
+  metrics_path: /probe
+  params:
+    module:
+    - https_v6_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sdn-login-1.ultralight.org:8443
+- job_name: T2_US_Caltech_Test_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - sdn-login-1.ultralight.org
+- job_name: T2_US_Caltech_Test_ICMP_V6
   metrics_path: /probe
   params:
     module:
@@ -463,7 +538,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_BR_SPRACE_HTTPS
+- job_name: T2_BR_SPRACE_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -488,7 +563,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sprace02.redclara.net:8443
-- job_name: T2_BR_SPRACE_ICMP
+- job_name: T2_BR_SPRACE_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -546,7 +621,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T3_US_Starlight_HTTPS
+- job_name: T3_US_Starlight_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -571,7 +646,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://dtn110.sl.startap.net:8443
-- job_name: T3_US_Starlight_ICMP
+- job_name: T3_US_Starlight_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -629,7 +704,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_SDSC_HTTPS
+- job_name: T2_US_SDSC_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -654,7 +729,57 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sdn-login-1.ultralight.org:9443
-- job_name: T2_US_SDSC_ICMP
+- job_name: T2_US_SDSC_HTTPS_V6
+  metrics_path: /probe
+  params:
+    module:
+    - https_v6_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sdn-login-1.ultralight.org:9443
+- job_name: T2_US_SDSC_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - sdn-login-1.ultralight.org
+- job_name: T2_US_SDSC_ICMP_V6
   metrics_path: /probe
   params:
     module:
@@ -738,7 +863,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T3_US_Kreonet_HTTPS
+- job_name: T3_US_Kreonet_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -763,7 +888,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://150.183.100.47:8443
-- job_name: T3_US_Kreonet_ICMP
+- job_name: T3_US_Kreonet_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -808,7 +933,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T3_US_Kreonet_HTTPS_0
+- job_name: T3_US_Kreonet_HTTPS_V4_0
   metrics_path: /probe
   params:
     module:
@@ -833,7 +958,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://134.75.254.12:8443
-- job_name: T3_US_Kreonet_ICMP_0
+- job_name: T3_US_Kreonet_ICMP_V4_0
   metrics_path: /probe
   params:
     module:
@@ -878,7 +1003,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: NRM_CENIC_HTTPS
+- job_name: NRM_CENIC_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -903,7 +1028,57 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sdn-login-1.ultralight.org:10443
-- job_name: NRM_CENIC_ICMP
+- job_name: NRM_CENIC_HTTPS_V6
+  metrics_path: /probe
+  params:
+    module:
+    - https_v6_siterm_2xx
+  relabel_configs:
+  - replacement: NRM_CENIC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sdn-login-1.ultralight.org:10443
+- job_name: NRM_CENIC_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NRM_CENIC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - sdn-login-1.ultralight.org
+- job_name: NRM_CENIC_ICMP_V6
   metrics_path: /probe
   params:
     module:
@@ -948,7 +1123,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_UH_GOREX_HTTPS
+- job_name: T2_US_UH_GOREX_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -973,31 +1148,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-fe.uhnet.net:8443
-- job_name: T2_US_UH_GOREX_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T2_US_UH_GOREX
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-fe.uhnet.net
 - job_name: T2_US_UMD_STATE
   metrics_path: /T2_US_UMD/sitefe/json/frontend/metrics
   relabel_configs:
@@ -1013,12 +1163,12 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - 180-131.research.maxgigapop.net:8443
+    - ptxn-sense-v1.maxgigapop.net:8443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_UMD_HTTPS
+- job_name: T2_US_UMD_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1042,8 +1192,8 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://180-131.research.maxgigapop.net:8443
-- job_name: T2_US_UMD_ICMP
+    - https://ptxn-sense-v1.maxgigapop.net:8443
+- job_name: T2_US_UMD_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -1067,7 +1217,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - 180-131.research.maxgigapop.net
+    - ptxn-sense-v1.maxgigapop.net
 - job_name: T2_US_UMD_NODE
   relabel_configs:
   - replacement: T2_US_UMD
@@ -1080,20 +1230,7 @@ scrape_configs:
     target_label: software
   static_configs:
   - targets:
-    - 180-132.research.maxgigapop.net:9100
-- job_name: T2_US_UMD_NODE_0
-  relabel_configs:
-  - replacement: T2_US_UMD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - 180-134.research.maxgigapop.net:9100
+    - ptxn-sense-v1.maxgigapop.net:9100
 - job_name: T3_BR_RNP_STATE
   metrics_path: /T3_BR_RNP/sitefe/json/frontend/metrics
   relabel_configs:
@@ -1114,7 +1251,7 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T3_BR_RNP_HTTPS
+- job_name: T3_BR_RNP_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1139,7 +1276,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://200.159.252.130:8443
-- job_name: T3_BR_RNP_ICMP
+- job_name: T3_BR_RNP_ICMP_V4
   metrics_path: /probe
   params:
     module:
@@ -1164,7 +1301,7 @@ scrape_configs:
   static_configs:
   - targets:
     - 200.159.252.130
-- job_name: NortWestern_NortWestern_HTTPS
+- job_name: NortWestern_NortWestern_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1193,11 +1330,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.northwestern.edu:9443/NSI/discovery.xml
-- job_name: NortWestern_NortWestern_ICMP
+- job_name: NortWestern_NortWestern_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: NortWestern
     source_labels:
@@ -1222,7 +1359,7 @@ scrape_configs:
   static_configs:
   - targets:
     - opennsa.northwestern.edu
-- job_name: Ampath_Ampath_HTTPS
+- job_name: Ampath_Ampath_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1251,11 +1388,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi.ampath.net:9443/NSI/discovery.xml
-- job_name: Ampath_Ampath_ICMP
+- job_name: Ampath_Ampath_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Ampath
     source_labels:
@@ -1280,7 +1417,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi.ampath.net
-- job_name: Surfnet_Ampath_HTTPS
+- job_name: Surfnet_Surfnet_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1294,7 +1431,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: Ampath
+  - replacement: Surfnet
     source_labels:
     - __address__
     target_label: service
@@ -1309,11 +1446,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.automation.surf.net:443/NSI/discovery.xml
-- job_name: Surfnet_Ampath_ICMP
+- job_name: Surfnet_Surfnet_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Surfnet
     source_labels:
@@ -1323,7 +1460,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: Ampath
+  - replacement: Surfnet
     source_labels:
     - __address__
     target_label: service
@@ -1338,7 +1475,7 @@ scrape_configs:
   static_configs:
   - targets:
     - opennsa.automation.surf.net
-- job_name: Kreonet_Kreonet_HTTPS
+- job_name: Kreonet_Kreonet_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1367,11 +1504,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://daej-nsi.kreonet.net:9443/NSI/discovery.xml
-- job_name: Kreonet_Kreonet_ICMP
+- job_name: Kreonet_Kreonet_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Kreonet
     source_labels:
@@ -1396,7 +1533,7 @@ scrape_configs:
   static_configs:
   - targets:
     - daej-nsi.kreonet.net
-- job_name: Southernlight_Kreonet_HTTPS
+- job_name: Southernlight_Kreonet_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1425,11 +1562,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://southernlight.net.br:9443/NSI/discovery.xml
-- job_name: Southernlight_Kreonet_ICMP
+- job_name: Southernlight_Kreonet_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Southernlight
     source_labels:
@@ -1454,7 +1591,7 @@ scrape_configs:
   static_configs:
   - targets:
     - southernlight.net.br
-- job_name: Canarie_Canarie_HTTPS
+- job_name: Canarie_Canarie_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1483,11 +1620,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.canarie.ca:9443/NSI/discovery.xml
-- job_name: Canarie_Canarie_ICMP
+- job_name: Canarie_Canarie_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Canarie
     source_labels:
@@ -1512,7 +1649,7 @@ scrape_configs:
   static_configs:
   - targets:
     - opennsa.canarie.ca
-- job_name: UHnet_UHNet_HTTPS
+- job_name: UHnet_UHNet_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1541,11 +1678,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.uhnet.net:9443/NSI/discovery.xml
-- job_name: UHnet_UHNet_ICMP
+- job_name: UHnet_UHNet_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: UHnet
     source_labels:
@@ -1570,7 +1707,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.uhnet.net
-- job_name: PacificWave_Los_Angeles_HTTPS
+- job_name: PacificWave_Los_Angeles_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1599,11 +1736,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.lsanca.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_Los_Angeles_ICMP
+- job_name: PacificWave_Los_Angeles_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1628,7 +1765,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.lsanca.pacificwave.net
-- job_name: PacificWave_Tokyo_HTTPS
+- job_name: PacificWave_Tokyo_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1657,11 +1794,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_Tokyo_ICMP
+- job_name: PacificWave_Tokyo_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1686,7 +1823,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.tokyjp.pacificwave.net
-- job_name: PacificWave_Snvaca_HTTPS
+- job_name: PacificWave_Snvaca_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1715,11 +1852,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.snvaca.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_Snvaca_ICMP
+- job_name: PacificWave_Snvaca_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1744,7 +1881,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.snvaca.pacificwave.net
-- job_name: PacificWave_Seattle_HTTPS
+- job_name: PacificWave_Seattle_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1773,11 +1910,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.sttlwa.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_Seattle_ICMP
+- job_name: PacificWave_Seattle_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1802,7 +1939,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.sttlwa.pacificwave.net
-- job_name: nii.ac.jp_SinetNSA_HTTPS
+- job_name: nii.ac.jp_SinetNSA_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1831,11 +1968,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://150.100.12.192:28443/
-- job_name: nii.ac.jp_SinetNSA_ICMP
+- job_name: nii.ac.jp_SinetNSA_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: nii.ac.jp
     source_labels:
@@ -1860,7 +1997,7 @@ scrape_configs:
   static_configs:
   - targets:
     - 150.100.12.192
-- job_name: nii.ac.jp_SinetNSA_Provider_HTTPS
+- job_name: nii.ac.jp_SinetNSA_Provider_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1889,11 +2026,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://aggr.nsi.nii.ac.jp:28443/sinet_upa/services/connectionprovider?wsdl
-- job_name: nii.ac.jp_SinetNSA_Provider_ICMP
+- job_name: nii.ac.jp_SinetNSA_Provider_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: nii.ac.jp
     source_labels:
@@ -1918,7 +2055,7 @@ scrape_configs:
   static_configs:
   - targets:
     - aggr.nsi.nii.ac.jp
-- job_name: nii.ac.jp_SinetNSA_Discovery_HTTPS
+- job_name: nii.ac.jp_SinetNSA_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -1947,7 +2084,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://aggr.nsi.nii.ac.jp:28443/NSI/sinet.ac.jp:2013:nsa.xml
-- job_name: nii.ac.jp_SinetNSA_Requester_HTTP
+- job_name: nii.ac.jp_SinetNSA_Requester_HTTP_V4
   metrics_path: /probe
   params:
     module:
@@ -1976,7 +2113,7 @@ scrape_configs:
   static_configs:
   - targets:
     - http://aggr.nsi.nii.ac.jp:28090/nsi2/services/ConnectionServiceRequester?wsdl
-- job_name: Netherlight_Requester_HTTPS
+- job_name: Netherlight_Requester_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2005,11 +2142,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.netherlight.net:443/nsi-v2/ConnectionServiceRequester?wsdl
-- job_name: Netherlight_Requester_ICMP
+- job_name: Netherlight_Requester_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Netherlight
     source_labels:
@@ -2034,7 +2171,7 @@ scrape_configs:
   static_configs:
   - targets:
     - agg.netherlight.net
-- job_name: Netherlight_DDS_Ping_HTTPS
+- job_name: Netherlight_DDS_Ping_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2063,7 +2200,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.netherlight.net:443/dds/ping
-- job_name: Netherlight_Provider_HTTPS
+- job_name: Netherlight_Provider_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2092,7 +2229,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.netherlight.net:443/nsi-v2/ConnectionServiceProvider?wsdl
-- job_name: Netherlight_Discovery_HTTPS
+- job_name: Netherlight_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2121,7 +2258,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.netherlight.net:443/nsa-discovery
-- job_name: Nautilus_Requester_HTTPS
+- job_name: Nautilus_Requester_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2150,11 +2287,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://safnari.nsi.nrp-nautilus.io:443/nsi-v2/ConnectionServiceRequester?wsdl
-- job_name: Nautilus_Requester_ICMP
+- job_name: Nautilus_Requester_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: Nautilus
     source_labels:
@@ -2179,7 +2316,7 @@ scrape_configs:
   static_configs:
   - targets:
     - safnari.nsi.nrp-nautilus.io
-- job_name: Nautilus_DDS_Ping_HTTPS
+- job_name: Nautilus_DDS_Ping_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2208,7 +2345,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://safnari.nsi.nrp-nautilus.io:443/dds/ping
-- job_name: Nautilus_Provider_HTTPS
+- job_name: Nautilus_Provider_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2237,7 +2374,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://safnari.nsi.nrp-nautilus.io:443/nsi-v2/ConnectionServiceProvider?wsdl
-- job_name: Nautilus_Discovery_HTTPS
+- job_name: Nautilus_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2266,7 +2403,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://safnari.nsi.nrp-nautilus.io:443/nsa-discovery
-- job_name: RNP-Brazil_Requester_HTTPS
+- job_name: RNP-Brazil_Requester_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2295,11 +2432,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.cipo.rnp.br:443/nsi-v2/ConnectionServiceRequester?wsdl
-- job_name: RNP-Brazil_Requester_ICMP
+- job_name: RNP-Brazil_Requester_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: RNP-Brazil
     source_labels:
@@ -2324,7 +2461,7 @@ scrape_configs:
   static_configs:
   - targets:
     - agg.cipo.rnp.br
-- job_name: RNP-Brazil_DDS_Ping_HTTPS
+- job_name: RNP-Brazil_DDS_Ping_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2353,7 +2490,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.cipo.rnp.br:443/dds/ping
-- job_name: RNP-Brazil_Provider_HTTPS
+- job_name: RNP-Brazil_Provider_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2382,7 +2519,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.cipo.rnp.br:443/nsi-v2/ConnectionServiceProvider?wsdl
-- job_name: RNP-Brazil_Discovery_HTTPS
+- job_name: RNP-Brazil_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2411,7 +2548,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.cipo.rnp.br:443/nsa-discovery
-- job_name: RNP-Brazil_Provider_HTTPS_0
+- job_name: RNP-Brazil_Provider_HTTPS_V4_0
   metrics_path: /probe
   params:
     module:
@@ -2440,11 +2577,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://idc.cipo.rnp.br:8500/nsi-v2/ConnectionServiceProvider?wsdl
-- job_name: RNP-Brazil_Provider_ICMP
+- job_name: RNP-Brazil_Provider_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: RNP-Brazil
     source_labels:
@@ -2469,7 +2606,7 @@ scrape_configs:
   static_configs:
   - targets:
     - idc.cipo.rnp.br
-- job_name: RNP-Brazil_Discovery_HTTP
+- job_name: RNP-Brazil_Discovery_HTTP_V4
   metrics_path: /probe
   params:
     module:
@@ -2498,7 +2635,7 @@ scrape_configs:
   static_configs:
   - targets:
     - http://idc.cipo.rnp.br:80/rnp-nsa.xml
-- job_name: ESNet_ESNet_West_Requester_HTTPS_HTTPS
+- job_name: ESNet_ESNet_West_Requester_HTTPS_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2527,11 +2664,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi-aggr-west.es.net:443/nsi-v2/ConnectionServiceRequester?wsdl
-- job_name: ESNet_ESNet_West_Requester_HTTPS_ICMP
+- job_name: ESNet_ESNet_West_Requester_HTTPS_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: ESNet
     source_labels:
@@ -2556,7 +2693,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-aggr-west.es.net
-- job_name: ESNet_ESNet_West_Requester_HTTP
+- job_name: ESNet_ESNet_West_Requester_HTTP_V4
   metrics_path: /probe
   params:
     module:
@@ -2585,7 +2722,7 @@ scrape_configs:
   static_configs:
   - targets:
     - http://nsi-aggr-west.es.net:80/nsi-v2/ConnectionServiceRequester?wsdl
-- job_name: ESNet_ESNet_West_DDS_Ping_HTTPS
+- job_name: ESNet_ESNet_West_DDS_Ping_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2614,7 +2751,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi-aggr-west.es.net:443/dds/ping
-- job_name: ESNet_ESNet_West_Provider_HTTPS_HTTPS
+- job_name: ESNet_ESNet_West_Provider_HTTPS_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2643,7 +2780,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi-aggr-west.es.net:443/nsi-v2/ConnectionServiceProvider?wsdl
-- job_name: ESNet_ESNet_West_Provider_HTTP
+- job_name: ESNet_ESNet_West_Provider_HTTP_V4
   metrics_path: /probe
   params:
     module:
@@ -2672,7 +2809,7 @@ scrape_configs:
   static_configs:
   - targets:
     - http://nsi-aggr-west.es.net:80/nsi-v2/ConnectionServiceProvider?wsdl
-- job_name: ESNet_ESNet_West_Discovery_HTTPS
+- job_name: ESNet_ESNet_West_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2701,7 +2838,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi-aggr-west.es.net:443/safnari/nsa-discovery
-- job_name: ESNet_ESNet_Provider_HTTPS
+- job_name: ESNet_ESNet_Provider_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2730,11 +2867,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://oscars-web.es.net:443/services/provider?wsdl
-- job_name: ESNet_ESNet_Provider_ICMP
+- job_name: ESNet_ESNet_Provider_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: ESNet
     source_labels:
@@ -2759,7 +2896,7 @@ scrape_configs:
   static_configs:
   - targets:
     - oscars-web.es.net
-- job_name: ESNet_ESNet_Discovery_HTTPS
+- job_name: ESNet_ESNet_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2788,7 +2925,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://oscars-web.es.net:443/api/nsa/discovery
-- job_name: ESNet_ESNet_Testbed_Provider_HTTPS
+- job_name: ESNet_ESNet_Testbed_Provider_HTTPS_V4
   metrics_path: /probe
   params:
     module:
@@ -2817,11 +2954,11 @@ scrape_configs:
   static_configs:
   - targets:
     - https://oscars-testbed.es.net:443/services/provider?wsdl
-- job_name: ESNet_ESNet_Testbed_Provider_ICMP
+- job_name: ESNet_ESNet_Testbed_Provider_ICMP_V4
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - WILLBEREPLACEDBYCODE
   relabel_configs:
   - replacement: ESNet
     source_labels:
@@ -2846,7 +2983,7 @@ scrape_configs:
   static_configs:
   - targets:
     - oscars-testbed.es.net
-- job_name: ESNet_ESNet_Testbed_Discovery_HTTPS
+- job_name: ESNet_ESNet_Testbed_Discovery_HTTPS_V4
   metrics_path: /probe
   params:
     module:

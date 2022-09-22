@@ -6,6 +6,7 @@ NortWestern:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Ampath:
   endpoints:
   - name: Ampath
@@ -14,14 +15,16 @@ Ampath:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Surfnet:
   endpoints:
-  - name: Ampath
+  - name: Surfnet
     software: OpenNSA
     hostname: opennsa.automation.surf.net
     port: 443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Kreonet:
   endpoints:
   - name: Kreonet
@@ -30,6 +33,7 @@ Kreonet:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Southernlight:
   endpoints:
   - name: Kreonet
@@ -38,6 +42,7 @@ Southernlight:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Canarie:
   endpoints:
   - name: Canarie
@@ -46,6 +51,7 @@ Canarie:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 UHnet:
   endpoints:
   - name: UHNet
@@ -54,6 +60,7 @@ UHnet:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 PacificWave:
   endpoints:
   - name: Los Angeles
@@ -62,24 +69,28 @@ PacificWave:
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Tokyo
     software: OpenNSA
     hostname: nsi0.tokyjp.pacificwave.net
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Snvaca
     software: OpenNSA
     hostname: nsi0.snvaca.pacificwave.net
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Seattle
     software: OpenNSA
     hostname: nsi0.sttlwa.pacificwave.net
     port: 9443
     url: /NSI/discovery.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 nii.ac.jp:
   endpoints:
   - name: SinetNSA
@@ -88,23 +99,27 @@ nii.ac.jp:
     port: 28443
     url: /
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: SinetNSA Provider
     software: SinetNSA
     hostname: aggr.nsi.nii.ac.jp
     port: 28443
     url: /sinet_upa/services/connectionprovider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: SinetNSA Discovery
     software: SinetNSA
     hostname: aggr.nsi.nii.ac.jp
     port: 28443
     url: /NSI/sinet.ac.jp:2013:nsa.xml
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: SinetNSA Requester
     software: SinetNSA
     hostname: aggr.nsi.nii.ac.jp
     port: 28090
     url: /nsi2/services/ConnectionServiceRequester?wsdl
+    probes: ['http_v4_network_2xx', 'http_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Netherlight:
   endpoints:
   - name: Requester
@@ -113,24 +128,28 @@ Netherlight:
     port: 443
     url: /nsi-v2/ConnectionServiceRequester?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: DDS Ping
     software: nsi-safnari
     hostname: agg.netherlight.net
     port: 443
     url: /dds/ping
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Provider
     software: nsi-safnari
     hostname: agg.netherlight.net
     port: 443
     url: /nsi-v2/ConnectionServiceProvider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Discovery
     software: nsi-safnari
     hostname: agg.netherlight.net
     port: 443
     url: /nsa-discovery
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 Nautilus:
   endpoints:
   - name: Requester
@@ -139,24 +158,28 @@ Nautilus:
     port: 443
     url: /nsi-v2/ConnectionServiceRequester?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: DDS Ping
     software: nsi-safnari
     hostname: safnari.nsi.nrp-nautilus.io
     port: 443
     url: /dds/ping
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Provider
     software: nsi-safnari
     hostname: safnari.nsi.nrp-nautilus.io
     port: 443
     url: /nsi-v2/ConnectionServiceProvider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Discovery
     software: nsi-safnari
     hostname: safnari.nsi.nrp-nautilus.io
     port: 443
     url: /nsa-discovery
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 RNP-Brazil:
   endpoints:
   - name: Requester
@@ -165,35 +188,41 @@ RNP-Brazil:
     port: 443
     url: /nsi-v2/ConnectionServiceRequester?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: DDS Ping
     software: nsi-safnari
     hostname: agg.cipo.rnp.br
     port: 443
     url: /dds/ping
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Provider
     software: nsi-safnari
     hostname: agg.cipo.rnp.br
     port: 443
     url: /nsi-v2/ConnectionServiceProvider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Discovery
     software: nsi-safnari
     hostname: agg.cipo.rnp.br
     port: 443
     url: /nsa-discovery
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Provider
     software: oscars
     hostname: idc.cipo.rnp.br
     port: 8500
     url: /nsi-v2/ConnectionServiceProvider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: Discovery
     software: oscars
     hostname: idc.cipo.rnp.br
     port: 80
     url: /rnp-nsa.xml
+    probes: ['http_v4_network_2xx', 'http_v6_network_2xx', 'icmp_v4', 'icmp_v6']
 ESNet:
   endpoints:
   - name: ESNet West Requester HTTPS
@@ -202,55 +231,65 @@ ESNet:
     port: 443
     url: /nsi-v2/ConnectionServiceRequester?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet West Requester
     software: nsi-safnari
     hostname: nsi-aggr-west.es.net
     port: 80
     url: /nsi-v2/ConnectionServiceRequester?wsdl
+    probes: ['http_v4_network_2xx', 'http_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet West DDS Ping
     software: nsi-safnari
     hostname: nsi-aggr-west.es.net
     port: 443
     url: /dds/ping
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet West Provider HTTPS
     software: nsi-safnari
     hostname: nsi-aggr-west.es.net
     port: 443
     url: /nsi-v2/ConnectionServiceProvider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet West Provider
     software: nsi-safnari
     hostname: nsi-aggr-west.es.net
     port: 80
     url: /nsi-v2/ConnectionServiceProvider?wsdl
+    probes: ['http_v4_network_2xx', 'http_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet West Discovery
     software: nsi-safnari
     hostname: nsi-aggr-west.es.net
     port: 443
     url: /safnari/nsa-discovery
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet Provider
     software: oscars
     hostname: oscars-web.es.net
     port: 443
     url: /services/provider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet Discovery
     software: oscars
     hostname: oscars-web.es.net
     url: /api/nsa/discovery
     port: 443
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet Testbed Provider
     software: oscars
     hostname: oscars-testbed.es.net
     port: 443
     url: /services/provider?wsdl
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
   - name: ESNet Testbed Discovery
     software: oscars
     hostname: oscars-testbed.es.net
     url: /api/nsa/discovery
     port: 443
     secure: true
+    probes: ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6']
