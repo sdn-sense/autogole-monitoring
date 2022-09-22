@@ -193,7 +193,7 @@ class PromModel():
         conf = loadYamlFile(confFile)
         webdomain = conf.get('general', {}).get('webdomain', '')
         origwebdomain = webdomain
-        probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
+        probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx',
                                                         'icmp_v4', 'icmp_v6'])
         if webdomain.startswith('https://'):
             webdomain = webdomain[8:]
@@ -247,7 +247,7 @@ class PromModel():
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
-                tmpEntry['params']['module'][0] = 'icmp_v4'
+                tmpEntry['params']['module'][0] = 'icmp_v6'
                 self.default['scrape_configs'].append(tmpEntry)
             # 4. Check if agent config has node_exporter defined
             if conf.get('general', {}).get('node_exporter', ''):
@@ -294,7 +294,7 @@ class PromModel():
                 if checkIfParamMissing(endpoint):
                     continue
                 fullUrl = ""
-                probes = endpoint.get('probes', ['https_v4_network_2xx', 'https_v6_network_2xx', 'icmp_v4', 'icmp_v6'])
+                probes = endpoint.get('probes', ['https_v4_network_2xx', 'icmp_v4', 'icmp_v6'])
                 if not endpoint['url'].startswith('/'):
                     endpoint['url'] = "/%s" % endpoint['url']
                 # HTTPS PROBES
@@ -345,6 +345,7 @@ class PromModel():
                         hosts.append(endpoint['hostname'])
                         tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
                         tmpEntry['job_name'] = self._genName('%s_%s_ICMP_%s' % (name, endpoint['name'], vtype))
+                        tmpEntry['params']['module'][0] = probe
                         tmpEntry['static_configs'][0]['targets'].append(endpoint['hostname'])
                         tmpEntry['relabel_configs'][0]['replacement'] = name
                         tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']

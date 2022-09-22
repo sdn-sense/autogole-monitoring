@@ -258,31 +258,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://cixp-surfnet-dtn.cern.ch:8443
-- job_name: T2_CH_CERN_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T2_CH_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://cixp-surfnet-dtn.cern.ch:8443
 - job_name: T2_CH_CERN_ICMP_V4
   metrics_path: /probe
   params:
@@ -312,7 +287,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - icmp_v6
   relabel_configs:
   - replacement: T2_CH_CERN
     source_labels:
@@ -391,31 +366,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sdn-login-1.ultralight.org:8443
-- job_name: T2_US_Caltech_Test_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sdn-login-1.ultralight.org:8443
 - job_name: T2_US_Caltech_Test_ICMP_V4
   metrics_path: /probe
   params:
@@ -445,7 +395,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - icmp_v6
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -729,31 +679,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sdn-login-1.ultralight.org:9443
-- job_name: T2_US_SDSC_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sdn-login-1.ultralight.org:9443
 - job_name: T2_US_SDSC_ICMP_V4
   metrics_path: /probe
   params:
@@ -783,7 +708,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - icmp_v6
   relabel_configs:
   - replacement: T2_US_SDSC
     source_labels:
@@ -1028,31 +953,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sdn-login-1.ultralight.org:10443
-- job_name: NRM_CENIC_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: NRM_CENIC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sdn-login-1.ultralight.org:10443
 - job_name: NRM_CENIC_ICMP_V4
   metrics_path: /probe
   params:
@@ -1082,7 +982,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - icmp_v4
+    - icmp_v6
   relabel_configs:
   - replacement: NRM_CENIC
     source_labels:
@@ -1334,7 +1234,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: NortWestern
     source_labels:
@@ -1392,7 +1292,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Ampath
     source_labels:
@@ -1450,7 +1350,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Surfnet
     source_labels:
@@ -1508,7 +1408,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Kreonet
     source_labels:
@@ -1566,7 +1466,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Southernlight
     source_labels:
@@ -1624,7 +1524,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Canarie
     source_labels:
@@ -1682,7 +1582,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: UHnet
     source_labels:
@@ -1740,7 +1640,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1798,7 +1698,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1856,7 +1756,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1914,7 +1814,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: PacificWave
     source_labels:
@@ -1972,7 +1872,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: nii.ac.jp
     source_labels:
@@ -2030,7 +1930,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: nii.ac.jp
     source_labels:
@@ -2146,7 +2046,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Netherlight
     source_labels:
@@ -2291,7 +2191,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: Nautilus
     source_labels:
@@ -2436,7 +2336,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: RNP-Brazil
     source_labels:
@@ -2581,7 +2481,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: RNP-Brazil
     source_labels:
@@ -2668,7 +2568,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: ESNet
     source_labels:
@@ -2871,7 +2771,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: ESNet
     source_labels:
@@ -2958,7 +2858,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - WILLBEREPLACEDBYCODE
+    - icmp_v4
   relabel_configs:
   - replacement: ESNet
     source_labels:
