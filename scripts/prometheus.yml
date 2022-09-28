@@ -283,31 +283,6 @@ scrape_configs:
   static_configs:
   - targets:
     - cixp-surfnet-dtn.cern.ch
-- job_name: T2_CH_CERN_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T2_CH_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - cixp-surfnet-dtn.cern.ch
 - job_name: T2_CH_CERN_NODE
   relabel_configs:
   - replacement: T2_CH_CERN
@@ -371,31 +346,6 @@ scrape_configs:
   params:
     module:
     - icmp_v4
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sdn-login-1.ultralight.org
-- job_name: T2_US_Caltech_Test_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -704,31 +654,6 @@ scrape_configs:
   static_configs:
   - targets:
     - sdn-login-1.ultralight.org
-- job_name: T2_US_SDSC_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sdn-login-1.ultralight.org
 - job_name: T2_US_SDSC_NODE
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -958,31 +883,6 @@ scrape_configs:
   params:
     module:
     - icmp_v4
-  relabel_configs:
-  - replacement: NRM_CENIC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sdn-login-1.ultralight.org
-- job_name: NRM_CENIC_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
   relabel_configs:
   - replacement: NRM_CENIC
     source_labels:

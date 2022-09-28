@@ -16,6 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
+    "id": 33,
     "links": [],
     "panels": [
       {
@@ -1845,9 +1846,9 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state=\"OK\", sitename=\"T2_US_Caltech_Test\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T2_US_Caltech_Test\"}) > 0",
             "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
+            "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
           }
         ],
@@ -1954,9 +1955,9 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{sitename=\"T2_US_Caltech_Test\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T2_US_Caltech_Test\"}) > 0",
             "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
+            "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
           }
         ],
@@ -2020,9 +2021,11 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T2_US_Caltech_Test"
+    "title": "T2_US_Caltech_Test",
+    "uid": "UJcQ-9G4z",
+    "version": 1
   },
   "folderId": 1,
-  "message": "Script changes made on 2022-09-12. See git for changes",
+  "message": "Script changes made on 2022-09-28. See git for changes",
   "overwrite": true
 }

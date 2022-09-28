@@ -1844,9 +1844,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state=\"OK\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"REPLACEME_SITENAME\"}) > 0",
           "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
+          "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
           "refId": "A"
         }
       ],
@@ -1953,9 +1953,9 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"REPLACEME_SITENAME\"}) > 0",
           "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
+          "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
           "refId": "A"
         }
       ],
