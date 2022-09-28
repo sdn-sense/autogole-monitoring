@@ -1,36 +1,60 @@
 Commands:
-
+Environment (This depends on your saved location of config, and namespace)
+```
 KUBE_CONF=/Users/jbalcas/.kube/config-ucsd
 KUBE_NAMESPACE=opennsa
-
+```
+Create new secrets (put siterm and networkrm cert/key):
+```
 kubectl create secret generic autogole-monitoring \
         --from-file=siterm-cert=secrets/siterm-cert.pem \
         --from-file=siterm-key=secrets/siterm-privkey.pem \
         --from-file=networkrm-cert=secrets/networkrm-cert.pem \
         --from-file=networkrm-key=secrets/networkrm-privkey.pem \
         --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
-
+```
 
 
 If making any change to any of yaml files:
+```
 kubectl apply -f blackbox-exporter.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 kubectl apply -f prometheus-config-map.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 kubectl apply -f grafana.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 ...
+```
 
-Now all runs on local, to forward port to localhost:
-
+Port forwarding (if needed):
+```
 kubectl port-forward svc/prometheus-blackbox-exporter-service 9115:9115 --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 kubectl port-forward service/grafana 3000:3000 --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 kubectl port-forward service/prometheus 9090:9090 --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
-
-
-
-# To Update prometheus config file:
+```
+To Update prometheus config file:
+```
 kubectl create configmap prometheus-config --from-file=prometheus.yml=prometheus.yml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
-# To Update Grafana ini config file:
+```
+To Update Grafana ini config file:
+```
 kubectl create configmap grafana-config --from-file=grafana.ini=configs/grafana.ini --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
+```
+
+# Grafana template updates (for default - all):
+
+In case of SiteRM:
+Download json template from grafana and save it as (new-default-SiteRM.json); Remove version, id, uid keys inside the new json;
+Do vimdiff Snd compare default SiteRM dashboard json with new one. Identify variables for:
+```
+     REPLACEME_SITENAME
+     REPLACEME_NOTIFICATION_ALL
+     REPLACEME_NOTIFICATION_SITE
+     REPLACEME_SOFTWARE
+```
+Once identified, issued sed and replace all to KEY, like:
+```
+sed -i '' 's/T2_US_Caltech_Test/REPLACEME_SITENAME/' new-default-SiteRM.json
+sed -i '' 's/puAWMcmVk/REPLACEME_NOTIFICATION_ALL/' new-default-SiteRM.json
+sed -i '' 's/MysWMcmVk/REPLACEME_NOTIFICATION_SITE/' new-default-SiteRM.json
+sed -i '' 's/SiteRM/REPLACEME_SOFTWARE/' new-default-SiteRM.json
+```
 
 
-# For certificates:
-kubectl get secret autogole-grafana-secrets -o "jsonpath={.data['tls\.crt']}" --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE | base64 --decode
