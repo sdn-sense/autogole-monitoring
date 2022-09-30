@@ -16,7 +16,6 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 29,
     "links": [],
     "panels": [
       {
@@ -77,7 +76,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"Netherlight\"}",
+            "expr": "probe_success{sitename=~\"OptIPuter\"}",
             "interval": "",
             "legendFormat": "{{target}}",
             "refId": "A"
@@ -118,15 +117,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Failure to query Probe for Netherlight",
-          "name": "Probe Success alert for Netherlight",
+          "message": "Failure to query Probe for OptIPuter",
+          "name": "Probe Success alert for OptIPuter",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "Jt1ZMcmVz"
             },
             {
-              "uid": "yAfZM5i4k"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -176,7 +175,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"Netherlight\"}",
+            "expr": "probe_success{sitename=~\"OptIPuter\"}",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -281,7 +280,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"Netherlight\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"OptIPuter\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -382,7 +381,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"Netherlight\"}) by (job)",
+            "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"OptIPuter\"}) by (job)",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -425,15 +424,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Certificates expire in less than a week for Netherlight",
-          "name": "SSL Expiry alert for Netherlight",
+          "message": "Certificates expire in less than a week for OptIPuter",
+          "name": "SSL Expiry alert for OptIPuter",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "Jt1ZMcmVz"
             },
             {
-              "uid": "yAfZM5i4k"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -487,7 +486,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"Netherlight\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"OptIPuter\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -600,15 +599,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "HTTP Query Status code error for Netherlight",
-          "name": "HTTP Status Code alert for Netherlight",
+          "message": "HTTP Query Status code error for OptIPuter",
+          "name": "HTTP Status Code alert for OptIPuter",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "Jt1ZMcmVz"
             },
             {
-              "uid": "yAfZM5i4k"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -660,7 +659,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"Netherlight\"}",
+            "expr": "probe_http_status_code{sitename=~\"OptIPuter\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -767,7 +766,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_ssl{sitename=~\"Netherlight\"}",
+            "expr": "probe_http_ssl{sitename=~\"OptIPuter\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -825,7 +824,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "avg(probe_duration_seconds{sitename=~\"Netherlight\"}) by (job)",
+            "expr": "avg(probe_duration_seconds{sitename=~\"OptIPuter\"}) by (job)",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -885,7 +884,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"Netherlight\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"OptIPuter\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -939,7 +938,7 @@
     "schemaVersion": 27,
     "style": "dark",
     "tags": [
-      "Netherlight",
+      "OptIPuter",
       "NSI"
     ],
     "templating": {
@@ -951,9 +950,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Netherlight",
-    "uid": "lnnCxiiVz",
-    "version": 1
+    "title": "OptIPuter"
   },
   "folderId": 2,
   "message": "Script changes made on 2022-09-30. See git for changes",
