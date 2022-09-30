@@ -303,8 +303,9 @@ def updateSiteRM(dirname, worker):
 def updateNSA(fname, worker):
     """Add All Network-RM Endpoints to Promeheus config file"""
     nrmMapping = loadYamlFile(fname)
-    for name, vals in nrmMapping.items():
-        addDashboard(name, 'NSI', worker)
+    for name, vals in nrmMapping['discovery'].items():
+        if 'sitename' in vals:
+            addDashboard(vals['sitename'], 'NSI', worker)
 
 
 def run():

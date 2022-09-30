@@ -7,6 +7,8 @@ import shutil
 from yaml import safe_load as yload
 from yaml import safe_dump as ydump
 from git import Repo
+from urllib.parse import urlparse
+from nrm import allNSIEndpoints 
 
 # STATE - Will Query FE (/<SITENAME>/sitefe/json/frontend/metrics)
 # and get all services states of that FE and Agent's registered to it.
@@ -100,28 +102,13 @@ HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                                        'target_label': 'software',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
-                                       'target_label': 'service',
-                                       'replacement': 'WILLBEREPLACEDBYCODE'},
-                                      {'source_labels': ['__address__'],
                                        'target_label': '__param_target'},
                                       {'source_labels': ['__param_target'],
                                        'target_label': 'instance'},
                                       {'target_label': '__address__',
                                        'replacement': 'prometheus-blackbox-exporter-service:9115'}]}
 
-# Seems OpenNSA requires renegotiation - which should be already unsupported.
-# Comment from: https://security.stackexchange.com/questions/24554/should-i-use-ssl-tls-renegotiation
-# As of 2020, TLS renegotiation is no more because it was insecure.
-#    Renegotiation is removed from TLS 1.3 onward, year 2018.
-#    All major software disabled renegotiation by default since as far as 2009 (nginx, haproxy, etc...). See Apache SSLInsecureRenegotiation notes for example.
-#    Renegotiation has a variety of vulnerabilities by design, forcing clients to downgrade connections to less secure settings than they would normally do.
-#    Verifying the client certificate for mutual authentication is handled separately than a renegotiation. See SSL_verify_client_post_handshake() in OpenSSL
-#    CVE-2009-3555 all implementations, CVE-2011-5094 in Mozilla, CVE-2011-1473 in OpenSSL, CVE-2014-1771 in Windows SSL.
-#
-#
-
 # ICMP - Will ping NRM endpoint and get RTT
-# v6 only if DNS Replies with v6 record
 ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                    'metrics_path': '/probe',
                    'params':{'module': ['WILLBEREPLACEDBYCODE']},
@@ -131,9 +118,6 @@ ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
                                        'target_label': 'software',
-                                       'replacement': 'WILLBEREPLACEDBYCODE'},
-                                      {'source_labels': ['__address__'],
-                                       'target_label': 'service',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
                                        'target_label': '__param_target'},
@@ -287,70 +271,50 @@ class PromModel():
             return False
         if not os.path.isfile(fname):
             return
-        hosts = []
-        nrmMapping = loadYamlFile(fname)
-        for name, vals in nrmMapping.items():
-            for endpoint in vals['endpoints']:
-                if checkIfParamMissing(endpoint):
-                    continue
-                fullUrl = ""
-                probes = endpoint.get('probes', ['https_v4_network_2xx', 'icmp_v4', 'icmp_v6'])
-                if not endpoint['url'].startswith('/'):
-                    endpoint['url'] = "/%s" % endpoint['url']
-                # HTTPS PROBES
-                ipv6_addr = getIPv6Address(endpoint['url'])
-                for probe in ['https_v4_network_2xx', 'https_v6_network_2xx']:
-                    if probe not in probes:
-                        continue
-                    if 'secure' in endpoint and endpoint['secure']:
-                        vtype = probe[6:8].upper()
-                        if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
-                            # There is no ipv6 address on host. continue
-                            continue
-                        tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
-                        tmpEntry['job_name'] = self._genName('%s_%s_HTTPS_%s' % (name, endpoint['name'], vtype))
-                        tmpEntry['params']['module'][0] = probe
-                        fullUrl = "https://%(hostname)s:%(port)s%(url)s" % endpoint
-                        tmpEntry['static_configs'][0]['targets'].append(fullUrl)
-                        tmpEntry['relabel_configs'][0]['replacement'] = name
-                        tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
-                        tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
-                        self.default['scrape_configs'].append(tmpEntry)
-                # HTTP Probes
-                for probe in ['http_v4_network_2xx', 'http_v6_network_2xx']:
-                    if probe not in probes:
-                        continue
-                    vtype = probe[5:7].upper()
-                    if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
-                        # There is no ipv6 address on host. continue
-                        continue
+        hosts = {}
+        nsiendpoints = allNSIEndpoints()
+        nsiendpoints.execute()
+        nrmconfig = loadYamlFile(fname)
+        for name, vals in nsiendpoints.out.items():
+            hosts.setdefault(name, [])
+            if 'url' not in vals:
+                continue
+            if not nrmconfig.get('discovery', {}).get(name, {}).get('sitename', ''):
+                print(name, vals)
+                print('SITENAME NOT DEFINED. IGNORE ENTRIES ABOVE!')
+                continue
+            for url in vals['url']:
+                parsedurl = urlparse(url)
+                if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in nrmconfig['probes']:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
-                    tmpEntry['job_name'] = self._genName('%s_%s_HTTP_%s' % (name, endpoint['name'], vtype))
-                    tmpEntry['params']['module'][0] = probe
-                    fullUrl = "http://%(hostname)s:%(port)s%(url)s" % endpoint
-                    tmpEntry['static_configs'][0]['targets'].append(fullUrl)
-                    tmpEntry['relabel_configs'][0]['replacement'] = name
-                    tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
-                    tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
+                    tmpEntry['job_name'] = self._genName('%s_HTTPS' % (nrmconfig['discovery'][name]['sitename']))
+                    tmpEntry['params']['module'][0] = 'https_v4_network_2xx'
+                    tmpEntry['static_configs'][0]['targets'].append(url)
+                    tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename'] 
+                    tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
                     self.default['scrape_configs'].append(tmpEntry)
-                # 2. Add ICMP Check
-                for probe in  ['icmp_v4', 'icmp_v6']:
-                    if probe not in probes:
-                        continue
-                    if endpoint['hostname'] not in hosts:
-                        vtype = probe[5:].upper()
-                        if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
-                            # There is no ipv6 address on host. continue
-                            continue
-                        hosts.append(endpoint['hostname'])
-                        tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
-                        tmpEntry['job_name'] = self._genName('%s_%s_ICMP_%s' % (name, endpoint['name'], vtype))
-                        tmpEntry['params']['module'][0] = probe
-                        tmpEntry['static_configs'][0]['targets'].append(endpoint['hostname'])
-                        tmpEntry['relabel_configs'][0]['replacement'] = name
-                        tmpEntry['relabel_configs'][1]['replacement'] = endpoint['software']
-                        tmpEntry['relabel_configs'][2]['replacement'] = endpoint['name']
-                        self.default['scrape_configs'].append(tmpEntry)
+                elif parsedurl.scheme == 'http' and 'https_v4_network_2xx' in nrmconfig['probes']:
+                    tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
+                    tmpEntry['job_name'] = self._genName('%s_HTTPS' % (nrmconfig['discovery'][name]['sitename']))
+                    tmpEntry['params']['module'][0] = 'http_v4_network_2xx'
+                    tmpEntry['static_configs'][0]['targets'].append(url)
+                    tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
+                    tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
+                    self.default['scrape_configs'].append(tmpEntry)
+                if parsedurl.hostname not in hosts[name]:
+                    hosts[name].append(parsedurl.hostname)
+                    tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
+                    tmpEntry['job_name'] = self._genName('%s_ICMP' % (nrmconfig['discovery'][name]['sitename']))
+                    tmpEntry['params']['module'][0] = 'icmp_v4'
+                    tmpEntry['static_configs'][0]['targets'].append(parsedurl.hostname)
+                    tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
+                    tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
+                    self.default['scrape_configs'].append(tmpEntry)
+
+                #ipv6_addr = getIPv6Address(endpoint['url'])
+                #if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
+                # There is no ipv6 address on host. continue
+                #    continue
 
     def looper(self, dirname):
         """Loop via all SiteRM configs"""
