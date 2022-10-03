@@ -19,10 +19,6 @@ spec:
       restartPolicy: Always
       nodeSelector:
           kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
-      securityContext:
-        sysctls:
-          - name: net.ipv4.ping_group_range
-            value: "0 2147483647"
       containers:
         - name: blackbox-exporter
           image: "prom/blackbox-exporter:v0.18.0"
@@ -64,6 +60,10 @@ spec:
               name: networkrm-key
               readOnly: true
               subPath: networkrm-key.pem
+            - mountPath: /etc/bundle-ca.pem
+              name: bundle-ca
+              readOnly: true
+              subPath: bundle-ca.pem
           resources:
             limits:
               cpu: ".5"
@@ -117,6 +117,13 @@ spec:
             items:
             - key: networkrm-key
               path: networkrm-key.pem
+            defaultMode: 0644
+        - name: bundle-ca
+          secret:
+            secretName: autogole-monitoring
+            items:
+            - key: bundle-ca
+              path: bundle-ca.pem
             defaultMode: 0644
 ---
 kind: Service

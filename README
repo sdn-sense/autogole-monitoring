@@ -4,6 +4,34 @@ Environment (This depends on your saved location of config, and namespace)
 KUBE_CONF=/Users/jbalcas/.kube/config-ucsd
 KUBE_NAMESPACE=opennsa
 ```
+How to create bundle CA:
+```
+# Clean up all old dirs
+cd /tmp/
+rm -rf /tmp/all-rm-cas/
+rm -rf /tmp/sense-rm
+rm -rf /tmp/rm-configs
+rm -f /tmp/bundle-ca.pem
+mkdir -p /tmp/all-rm-cas/
+
+# Get ALL CAs from ESNet SENSE RM
+git clone https://github.com/esnet/sense-rm
+cp sense-rm/certificates/*.pem /tmp/all-rm-cas/
+
+# Get ALL CAs from SiteRM
+git clone https://github.com/sdn-sense/rm-configs
+cp rm-configs/CAs/*pem /tmp/all-rm-cas/
+
+# Cat all CAs together
+cat /tmp/all-rm-cas/*.pem > /tmp/bundle-ca.pem
+
+# Check with openssl command and grep all subjects
+openssl crl2pkcs7 -nocrl -certfile /tmp/bundle-ca.pem | openssl pkcs7 -print_certs -text -noout | grep 'Subject:'
+rm -rf /tmp/sense-rm
+rm -rf /tmp/rm-configs
+```
+
+
 Create new secrets (put siterm and networkrm cert/key):
 ```
 kubectl create secret generic autogole-monitoring \
@@ -11,6 +39,7 @@ kubectl create secret generic autogole-monitoring \
         --from-file=siterm-key=secrets/siterm-privkey.pem \
         --from-file=networkrm-cert=secrets/networkrm-cert.pem \
         --from-file=networkrm-key=secrets/networkrm-privkey.pem \
+        --from-file=bundle-ca=secrets/bundle-ca.pem \
         --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 ```
 
