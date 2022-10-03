@@ -1108,7 +1108,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - dtn110.sl.startap.net:8443
+    - dtn110.it.northwestern.edu:8443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -1137,7 +1137,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://dtn110.sl.startap.net:8443
+    - https://dtn110.it.northwestern.edu:8443
 - job_name: T3_US_Starlight_ICMP_V4
   metrics_path: /probe
   params:
@@ -1162,7 +1162,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - dtn110.sl.startap.net
+    - dtn110.it.northwestern.edu
 - job_name: T3_US_Starlight_NODE
   relabel_configs:
   - replacement: T3_US_Starlight
@@ -1175,7 +1175,7 @@ scrape_configs:
     target_label: software
   static_configs:
   - targets:
-    - dtn110.sl.startap.net:9200
+    - dtn110.it.northwestern.edu:9200
 - job_name: JGN_HTTPS
   metrics_path: /probe
   params:
