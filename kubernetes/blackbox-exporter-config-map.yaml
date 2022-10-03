@@ -14,6 +14,7 @@ data:
           fail_if_not_ssl: true
           preferred_ip_protocol: "ip4"
           tls_config:
+            insecure_skip_verify: true
             cert_file: /etc/siterm-cert.pem
             key_file: /etc/siterm-privkey.pem
             ca_file: /etc/bundle-ca.pem
@@ -24,6 +25,7 @@ data:
           fail_if_not_ssl: true
           preferred_ip_protocol: "ip6"
           tls_config:
+            insecure_skip_verify: true
             cert_file: /etc/siterm-cert.pem
             key_file: /etc/siterm-privkey.pem
             ca_file: /etc/bundle-ca.pem
@@ -34,6 +36,7 @@ data:
           fail_if_not_ssl: true
           preferred_ip_protocol: "ip4"
           tls_config:
+            insecure_skip_verify: true
             cert_file: /etc/networkrm-cert.pem
             key_file: /etc/networkrm-privkey.pem
             ca_file: /etc/bundle-ca.pem
@@ -44,6 +47,7 @@ data:
           fail_if_not_ssl: true
           preferred_ip_protocol: "ip6"
           tls_config:
+            insecure_skip_verify: true
             cert_file: /etc/networkrm-cert.pem
             key_file: /etc/networkrm-privkey.pem
             ca_file: /etc/bundle-ca.pem
