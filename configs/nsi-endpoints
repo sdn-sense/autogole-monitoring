@@ -42,9 +42,6 @@ discovery:
  "urn:ogf:network:cipo.rnp.br:2014:nsa:safnari":
    sitename: RNP-Brazil
    urls: ["https://agg.cipo.rnp.br/nsa-discovery"]
- "urn:ogf:network:southernlight.net.br:2013:nsa":
-   sitename: Southernlight
-   urls: ["https://southernlight.net.br:9443/NSI/discovery.xml"]
  "urn:ogf:network:canarie.ca:2017:nsa":
    sitename: Canarie
    urls: ["https://opennsa.canarie.ca:9443/NSI/discovery.xml"]
