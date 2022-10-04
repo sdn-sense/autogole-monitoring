@@ -8,6 +8,7 @@ import requests
 from yaml import safe_load as yload
 
 cert = ('/root/cert.pem', '/root/key.pem')
+bundle = '/root/bundle-ca.pem'
 
 def xml_to_json(msgIn):
     """Xml to Json"""
@@ -32,11 +33,16 @@ def loadYamlFile(fname):
 def getData(url):
     """Get data from url"""
     try:
+        response = requests.get(url, cert=cert, verify=bundle, timeout=5)
+        return response
+    except requests.exceptions.ConnectionError as ex:
+        print(ex)
+    try:
         response = requests.get(url, cert=cert, verify=False, timeout=5)
         return response
     except requests.exceptions.ConnectionError as ex:
         print(ex)
-        return {}
+    return {}
 
 class allNSIEndpoints():
     """All NSI Endpoints Class"""

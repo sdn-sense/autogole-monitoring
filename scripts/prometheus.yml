@@ -1108,7 +1108,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - dtn110.it.northwestern.edu:8443
+    - dtn110.it.northwestern.edu:9443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -1137,7 +1137,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://dtn110.it.northwestern.edu:8443
+    - https://dtn110.it.northwestern.edu:9443
 - job_name: T3_US_Starlight_ICMP_V4
   metrics_path: /probe
   params:
@@ -1176,6 +1176,19 @@ scrape_configs:
   static_configs:
   - targets:
     - dtn110.it.northwestern.edu:9200
+- job_name: T3_US_Starlight_NODE_0
+  relabel_configs:
+  - replacement: T3_US_Starlight
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - r740xd4.it.northwestern.edu:9200
 - job_name: JGN_HTTPS
   metrics_path: /probe
   params:
@@ -2201,13 +2214,13 @@ scrape_configs:
   static_configs:
   - targets:
     - opennsa.nsi.nrp-nautilus.io
-- job_name: Southernlight_HTTPS
+- job_name: Nautilus_HTTPS_1
   metrics_path: /probe
   params:
     module:
     - https_v4_network_2xx
   relabel_configs:
-  - replacement: Southernlight
+  - replacement: Nautilus
     source_labels:
     - __address__
     target_label: sitename
@@ -2225,39 +2238,14 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://southernlight.net.br:9443/NSI/southernlight.net.br:2013:topology.nml.xml
-- job_name: Southernlight_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: Southernlight
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - southernlight.net.br
-- job_name: Southernlight_HTTPS_0
+    - https://opennsa.nsi.nrp-nautilus.io/connections
+- job_name: Nautilus_HTTPS_2
   metrics_path: /probe
   params:
     module:
     - https_v4_network_2xx
   relabel_configs:
-  - replacement: Southernlight
+  - replacement: Nautilus
     source_labels:
     - __address__
     target_label: sitename
@@ -2275,7 +2263,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://southernlight.net.br:9443/NSI/discovery.xml
+    - https://opennsa.nsi.nrp-nautilus.io/NSI/calit2.optiputer.net:2020:prism-core.nml.xml
 - job_name: Surf_HTTPS
   metrics_path: /probe
   params:
