@@ -1108,7 +1108,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - dtn110.it.northwestern.edu:9443
+    - dtn110.it.northwestern.edu:10443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -1137,7 +1137,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://dtn110.it.northwestern.edu:9443
+    - https://dtn110.it.northwestern.edu:10443
 - job_name: T3_US_Starlight_ICMP_V4
   metrics_path: /probe
   params:
