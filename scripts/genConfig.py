@@ -248,6 +248,8 @@ class PromModel():
         if not os.path.isfile(confFile):
             return
         conf = loadYamlFile(confFile)
+        if not conf:
+            return
         nodeExporter = conf.get('general', {}).get('node_exporter', '')
         site = conf.get('general', {}).get('sitename', '')
         if site and nodeExporter:
@@ -283,6 +285,9 @@ class PromModel():
                 print(name, vals)
                 print('SITENAME NOT DEFINED. IGNORE ENTRIES ABOVE!')
                 continue
+            probes = nrmconfig['probes']
+            if 'probes' in nrmconfig.get('discovery', {}).get(name, {}):
+                probes = nrmconfig['discovery'][name]['probes']
             for url in vals['url']:
                 parsedurl = urlparse(url)
                 if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in nrmconfig['probes']:

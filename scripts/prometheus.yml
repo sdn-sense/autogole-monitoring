@@ -885,7 +885,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - 67.17.206.195:8443
+    - ox.amlight.net:8443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -914,7 +914,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://67.17.206.195:8443
+    - https://ox.amlight.net:8443
 - job_name: T3_US_FIU_ICMP_V4
   metrics_path: /probe
   params:
@@ -939,7 +939,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - 67.17.206.195
+    - ox.amlight.net
 - job_name: T3_US_FIU_NODE
   relabel_configs:
   - replacement: T3_US_FIU
@@ -952,7 +952,7 @@ scrape_configs:
     target_label: software
   static_configs:
   - targets:
-    - 67.17.206.195:9100
+    - ox.amlight.net:9100
 - job_name: T3_US_Kreonet_STATE
   metrics_path: /T3_US_Kreonet/sitefe/json/frontend/metrics
   relabel_configs:
@@ -1176,56 +1176,6 @@ scrape_configs:
   static_configs:
   - targets:
     - r740xd4.it.northwestern.edu:9200
-- job_name: JGN_HTTPS
-  metrics_path: /probe
-  params:
-    module:
-    - http_v4_network_2xx
-  relabel_configs:
-  - replacement: JGN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - http://ns.ps.jgn-x.jp/NSI/jgn-x_jp_2013_nml.xml
-- job_name: JGN_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: JGN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - ns.ps.jgn-x.jp
 - job_name: ESNet_HTTPS
   metrics_path: /probe
   params:
@@ -1626,156 +1576,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.lsanca.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/connections
-- job_name: PacificWave_HTTPS_7
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:losa2-pw-sw-1.nml.xml
-- job_name: PacificWave_HTTPS_8
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:losa2-pw-sdn-1.nml.xml
-- job_name: PacificWave_HTTPS_9
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:pw-losa2-1.nml.xml
-- job_name: PacificWave_HTTPS_10
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:lax-agg10.nml.xml
-- job_name: PacificWave_HTTPS_11
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:mx204-2.nml.xml
 - job_name: HEAnet_HTTPS
   metrics_path: /probe
   params:
@@ -2051,56 +1851,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.uhnet.net:9443/NSI/discovery.xml
-- job_name: UHnet_HTTPS_2
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: UHnet
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.uhnet.net:9443/NSI/uhnet.net:2021:hawaii-scidmz.nml.xml
-- job_name: UHnet_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: UHnet
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.uhnet.net:9443/NSI/uhnet.net:2021:guam-gorex.nml.xml
 - job_name: Nautilus_HTTPS
   metrics_path: /probe
   params:
@@ -2326,31 +2076,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.automation.surf.net/NSI/discovery.xml
-- job_name: Surf_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Surf
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.automation.surf.net/NSI/surf.nl:2020:production.nml.xml
 - job_name: GEANT_HTTPS
   metrics_path: /probe
   params:
@@ -2501,56 +2226,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.northwestern.edu:9443/NSI/discovery.xml
-- job_name: iCAIR_HTTPS_2
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: iCAIR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.northwestern.edu:9443/connections
-- job_name: iCAIR_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: iCAIR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.northwestern.edu:9443/NSI/icair.org:2013:mren8700.nml.xml
 - job_name: RNP-Brazil_HTTPS
   metrics_path: /probe
   params:
@@ -2626,7 +2301,7 @@ scrape_configs:
   static_configs:
   - targets:
     - http://idc.cipo.rnp.br/rnp-topology.xml
-- job_name: PacificWave_HTTPS_12
+- job_name: PacificWave_HTTPS_6
   metrics_path: /probe
   params:
     module:
@@ -2676,7 +2351,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.tokyjp.pacificwave.net
-- job_name: PacificWave_HTTPS_13
+- job_name: PacificWave_HTTPS_7
   metrics_path: /probe
   params:
     module:
@@ -2701,31 +2376,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_14
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/tokyjp.pacificwave.net:2018:icas-tkjp2-1.nml.xml
 - job_name: ESNet_HTTPS_2
   metrics_path: /probe
   params:
@@ -2776,31 +2426,6 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-aggr-west.es.net
-- job_name: ESNet_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: ESNet
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi-aggr-west.es.net/nsa-discovery
 - job_name: GEANT_HTTPS_0
   metrics_path: /probe
   params:
@@ -3051,7 +2676,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.canarie.ca:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_15
+- job_name: PacificWave_HTTPS_8
   metrics_path: /probe
   params:
     module:
@@ -3101,7 +2726,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.snvaca.pacificwave.net
-- job_name: PacificWave_HTTPS_16
+- job_name: PacificWave_HTTPS_9
   metrics_path: /probe
   params:
     module:
@@ -3126,7 +2751,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:snvl2-pw-sdn-1.nml.xml
-- job_name: PacificWave_HTTPS_17
+- job_name: PacificWave_HTTPS_10
   metrics_path: /probe
   params:
     module:
@@ -3151,7 +2776,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:pw-snvl2-1.nml.xml
-- job_name: PacificWave_HTTPS_18
+- job_name: PacificWave_HTTPS_11
   metrics_path: /probe
   params:
     module:
@@ -3176,81 +2801,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.snvaca.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_19
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:snvl2-pw-sw-1.nml.xml
-- job_name: PacificWave_HTTPS_20
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:snvl2-pw-sdn-1.nml.xml
-- job_name: PacificWave_HTTPS_21
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:pw-snvl2-1.nml.xml
 - job_name: OptIPuter_HTTPS
   metrics_path: /probe
   params:
@@ -3451,32 +3001,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.cipo.rnp.br/nsa-discovery
-- job_name: RNP-Brazil_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: RNP-Brazil
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://agg.cipo.rnp.br/dds
-- job_name: PacificWave_HTTPS_22
+- job_name: PacificWave_HTTPS_12
   metrics_path: /probe
   params:
     module:
@@ -3526,7 +3051,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.sttlwa.pacificwave.net
-- job_name: PacificWave_HTTPS_23
+- job_name: PacificWave_HTTPS_13
   metrics_path: /probe
   params:
     module:
@@ -3551,31 +3076,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi0.sttlwa.pacificwave.net:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_24
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.sttlwa.pacificwave.net:9443/NSI/sttlwa.pacificwave.net:2016:pw-sttl1-1.nml.xml
 - job_name: Netherlight_HTTPS
   metrics_path: /probe
   params:
@@ -3676,31 +3176,6 @@ scrape_configs:
   static_configs:
   - targets:
     - agg.netherlight.net
-- job_name: Netherlight_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Netherlight
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://dds.netherlight.net/dds
 - job_name: Ampath_HTTPS
   metrics_path: /probe
   params:
@@ -3776,31 +3251,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://nsi.ampath.net:9443/NSI/discovery.xml
-- job_name: Ampath_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Ampath
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi.ampath.net:9443/NSI/ampath.net:2013:topology.nml.xml
 - job_name: TWAREN_HTTPS
   metrics_path: /probe
   params:
@@ -3851,7 +3301,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi.twaren.net
-- job_name: ESNet_HTTPS_4
+- job_name: ESNet_HTTPS_3
   metrics_path: /probe
   params:
     module:
@@ -3901,7 +3351,7 @@ scrape_configs:
   static_configs:
   - targets:
     - oscars-web.es.net
-- job_name: ESNet_HTTPS_5
+- job_name: ESNet_HTTPS_4
   metrics_path: /probe
   params:
     module:

@@ -1,4 +1,4 @@
-ddsUrl: "https://dds.netherlight.net/dds"
+ddsUrl: ["https://dds.netherlight.net/dds", "https://nsi-aggr-west.es.net/discovery"]
 
 probes: ['https_v4_network_2xx', 'icmp_v4']
 # Probes can be configured individually for each discovery entry
@@ -11,7 +11,7 @@ discovery:
    urls: ["https://oscars-web.es.net/api/nsa/discovery"]
  "urn:ogf:network:es.net:2013:nsa:nsi-aggr-west":
    sitename: "ESNet"
-   urls: ["https://nsi-aggr-west.es.net/nsa-discovery"]
+   urls: ["https://nsi-aggr-west.es.net/discovery"]
  "urn:ogf:network:uhnet.net:2021:nsa":
    sitename: "UHnet"
    urls: ["https://nsi0.uhnet.net:9443/NSI/discovery.xml"]
@@ -47,7 +47,8 @@ discovery:
    urls: ["https://opennsa.canarie.ca:9443/NSI/discovery.xml"]
  "urn:ogf:network:netherlight.net:2013:nsa:safnari":
    sitename: Netherlight
-   urls: ["https://agg.netherlight.net/nsa-discovery"]
+   urls: ["https://agg.netherlight.net/nsa-discovery", "https://dds.netherlight.net/dds"]
+   probes: ['https_v4_network_2xx']
  "urn:ogf:network:ampath.net:2013:nsa":
    sitename: Ampath
    urls: ["https://nsi.ampath.net:9443/NSI/discovery.xml"]
@@ -60,11 +61,10 @@ discovery:
  "urn:ogf:network:surf.nl:2020:nsa":
    sitename: Surf
    urls: ["https://opennsa.automation.surf.net/NSI/discovery.xml"]
+   probes: ['https_v4_network_2xx']
  "urn:ogf:network:sttlwa.pacificwave.net:2016:nsa":
    sitename: PacificWave
    urls: ["https://nsi0.sttlwa.pacificwave.net:9443/NSI/discovery.xml"]
- "urn:ogf:network:jgn-x.jp:2013:nsa":
-   sitename: JGN
  "urn:ogf:network:heanet.ie:2021:nsa":
    sitename: HEAnet
  "urn:ogf:network:test.es.net:2013:nsa":

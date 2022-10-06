@@ -61,9 +61,9 @@ class allNSIEndpoints():
                 if url and utype:
                     if utype.endswith('soap'):
                         if url not in self.out[nsa]['soap']:
-                            self.out[nsa]['soap'].append(item['href'])
-                    else:
-                        self.out[nsa]['url'].append(item['href'])
+                            self.out[nsa]['soap'].append(url)
+                    elif url not in self.out[nsa]['url']:
+                        self.out[nsa]['url'].append(url)
 
     def parseDDS(self, ddsurl):
         """Parse DDS and get all URLs from it"""
@@ -85,7 +85,8 @@ class allNSIEndpoints():
     def execute(self):
         """Main execute - query all NSI Endpoints and get URLS"""
         config = loadYamlFile('../configs/nsi-endpoints')
-        self.parseDDS(config['ddsUrl'])
+        for ddsurl in config['ddsUrl']:
+            self.parseDDS(ddsurl)
         for key, val in config['discovery'].items():
             if val and val.get('urls', []):
                 self.out.setdefault(key, {'soap': [], 'url': []})
