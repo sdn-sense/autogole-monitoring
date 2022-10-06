@@ -2026,31 +2026,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.automation.surf.net/NSI/surf.nl:2020:production.nml.xml
-- job_name: Surf_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: Surf
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - opennsa.automation.surf.net
 - job_name: Surf_HTTPS_0
   metrics_path: /probe
   params:
@@ -3101,31 +3076,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://dds.netherlight.net/dds
-- job_name: Netherlight_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: Netherlight
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - dds.netherlight.net
 - job_name: Netherlight_HTTPS_0
   metrics_path: /probe
   params:
@@ -3151,31 +3101,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.netherlight.net/nsa-discovery
-- job_name: Netherlight_ICMP_0
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: Netherlight
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - agg.netherlight.net
 - job_name: Ampath_HTTPS
   metrics_path: /probe
   params:

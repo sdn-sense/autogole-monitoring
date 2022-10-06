@@ -290,7 +290,7 @@ class PromModel():
                 probes = nrmconfig['discovery'][name]['probes']
             for url in vals['url']:
                 parsedurl = urlparse(url)
-                if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in nrmconfig['probes']:
+                if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in probes:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
                     tmpEntry['job_name'] = self._genName('%s_HTTPS' % (nrmconfig['discovery'][name]['sitename']))
                     tmpEntry['params']['module'][0] = 'https_v4_network_2xx'
@@ -306,7 +306,7 @@ class PromModel():
                     tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
                     self.default['scrape_configs'].append(tmpEntry)
-                if parsedurl.hostname not in hosts[name]:
+                if parsedurl.hostname not in hosts[name] and 'icmp_v4' in probes:
                     hosts[name].append(parsedurl.hostname)
                     tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
                     tmpEntry['job_name'] = self._genName('%s_ICMP' % (nrmconfig['discovery'][name]['sitename']))
