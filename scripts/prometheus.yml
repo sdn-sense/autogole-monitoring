@@ -13,6 +13,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -36,6 +44,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -61,6 +77,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -86,6 +110,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -108,6 +140,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: -23.511344
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -46.66769
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -131,6 +171,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: -23.511344
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -46.66769
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -156,6 +204,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: -23.511344
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -46.66769
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -191,6 +247,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 46.1403
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 6.0245
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -214,6 +278,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 46.1403
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 6.0245
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -239,6 +311,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 46.1403
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 6.0245
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -274,6 +354,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -297,6 +385,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -322,6 +418,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -347,6 +451,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -421,6 +533,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -444,6 +564,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -469,6 +597,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -494,6 +630,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -544,6 +688,19 @@ scrape_configs:
   static_configs:
   - targets:
     - k8s-gen4-01.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_NODE_2
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - k8s-gen4-01.sdsc.optiputer.net:9100
 - job_name: T2_US_UCSD_STATE
   metrics_path: /T2_US_UCSD/sitefe/json/frontend/metrics
   relabel_configs:
@@ -555,6 +712,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -578,6 +743,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -600,6 +773,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 21.2971
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -157.8171
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -623,6 +804,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 21.2971
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -157.8171
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -645,6 +834,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 38.9869
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 76.9426
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -668,6 +865,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 38.9869
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 76.9426
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -693,6 +898,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 38.9869
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 76.9426
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -728,6 +941,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: -22.9542068
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -43.1766169
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -751,6 +972,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: -22.9542068
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -43.1766169
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -776,6 +1005,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: -22.9542068
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -43.1766169
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -798,6 +1035,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -821,6 +1066,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -846,6 +1099,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -881,6 +1142,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 25.7574
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -80.3733
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -904,6 +1173,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 25.7574
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -80.3733
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -929,6 +1206,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 25.7574
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -80.3733
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -964,6 +1249,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 35.9
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 127.76
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -987,6 +1280,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 35.9
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 127.76
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1012,6 +1313,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 35.9
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 127.76
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1034,6 +1343,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 35.9
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 127.76
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -1057,6 +1374,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 35.9
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 127.76
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1082,6 +1407,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 35.9
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 127.76
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1104,6 +1437,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   scheme: https
   scrape_interval: 30s
   static_configs:
@@ -1127,6 +1468,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1152,6 +1501,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1190,6 +1547,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1215,6 +1580,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1240,6 +1613,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1265,6 +1646,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1290,6 +1679,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1315,6 +1712,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1340,6 +1745,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1365,6 +1778,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1390,6 +1811,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1415,6 +1844,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1440,6 +1877,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1465,6 +1910,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1490,6 +1943,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1515,6 +1976,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1525,7 +1994,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:lax-agg10.nml.xml
+    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:mx204-2.nml.xml
 - job_name: PacificWave_HTTPS_4
   metrics_path: /probe
   params:
@@ -1540,31 +2009,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.lsanca.pacificwave.net:9443/NSI/lsanca.pacificwave.net:2016:mx204-2.nml.xml
-- job_name: PacificWave_HTTPS_5
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
+  - replacement: '0.00'
     source_labels:
     - __address__
-    target_label: sitename
-  - replacement: NetworkRM
+    target_label: latitude
+  - replacement: '0.00'
     source_labels:
     - __address__
-    target_label: software
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1590,6 +2042,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1615,6 +2075,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1640,6 +2108,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '35.693'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.758'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1665,6 +2141,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '35.693'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.758'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1690,6 +2174,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '35.693'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.758'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1715,6 +2207,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1740,6 +2240,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1765,6 +2273,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1790,6 +2306,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1815,6 +2339,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1840,6 +2372,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1865,6 +2405,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1890,6 +2438,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1915,6 +2471,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1940,6 +2504,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1965,6 +2537,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -1990,6 +2570,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2015,6 +2603,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2040,6 +2636,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2065,6 +2669,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '51.509865'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2090,6 +2702,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '51.509865'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2115,6 +2735,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2140,6 +2768,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2165,6 +2801,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2190,6 +2834,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2215,6 +2867,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '-22.955130'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-43.177483'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2240,6 +2900,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '-22.955130'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-43.177483'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2265,6 +2933,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '-22.955130'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-43.177483'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2276,7 +2952,7 @@ scrape_configs:
   static_configs:
   - targets:
     - http://idc.cipo.rnp.br/rnp-topology.xml
-- job_name: PacificWave_HTTPS_6
+- job_name: PacificWave_HTTPS_5
   metrics_path: /probe
   params:
     module:
@@ -2290,6 +2966,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2315,6 +2999,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2326,7 +3018,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.tokyjp.pacificwave.net
-- job_name: PacificWave_HTTPS_7
+- job_name: PacificWave_HTTPS_6
   metrics_path: /probe
   params:
     module:
@@ -2340,6 +3032,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2365,6 +3065,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.87692'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.25023'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2390,6 +3098,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.87692'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.25023'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2415,6 +3131,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2440,6 +3164,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2465,6 +3197,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2490,6 +3230,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2515,6 +3263,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2540,6 +3296,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2565,6 +3329,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2590,6 +3362,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2615,6 +3395,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2640,6 +3428,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2651,7 +3447,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.canarie.ca:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_8
+- job_name: PacificWave_HTTPS_7
   metrics_path: /probe
   params:
     module:
@@ -2665,6 +3461,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2690,6 +3494,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2701,6 +3513,39 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.snvaca.pacificwave.net
+- job_name: PacificWave_HTTPS_8
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:snvl2-pw-sdn-1.nml.xml
 - job_name: PacificWave_HTTPS_9
   metrics_path: /probe
   params:
@@ -2715,6 +3560,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2725,7 +3578,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:snvl2-pw-sdn-1.nml.xml
+    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:pw-snvl2-1.nml.xml
 - job_name: PacificWave_HTTPS_10
   metrics_path: /probe
   params:
@@ -2740,31 +3593,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.snvaca.pacificwave.net:9443/NSI/snvaca.pacificwave.net:2016:pw-snvl2-1.nml.xml
-- job_name: PacificWave_HTTPS_11
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
+  - replacement: '0.00'
     source_labels:
     - __address__
-    target_label: sitename
-  - replacement: NetworkRM
+    target_label: latitude
+  - replacement: '0.00'
     source_labels:
     - __address__
-    target_label: software
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2790,6 +3626,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2815,6 +3659,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2840,6 +3692,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2865,6 +3725,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '35.693'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.758'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2890,6 +3758,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '35.693'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.758'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2915,6 +3791,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '-22.862126'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-43.229734'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2940,6 +3824,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '-22.862126'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-43.229734'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2965,6 +3857,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '-22.862126'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-43.229734'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -2976,7 +3876,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.cipo.rnp.br/nsa-discovery
-- job_name: PacificWave_HTTPS_12
+- job_name: PacificWave_HTTPS_11
   metrics_path: /probe
   params:
     module:
@@ -2990,6 +3890,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3015,6 +3923,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3026,7 +3942,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi0.sttlwa.pacificwave.net
-- job_name: PacificWave_HTTPS_13
+- job_name: PacificWave_HTTPS_12
   metrics_path: /probe
   params:
     module:
@@ -3040,6 +3956,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3065,6 +3989,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3090,6 +4022,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.954585'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3115,6 +4055,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3140,6 +4088,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3165,6 +4121,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3190,6 +4154,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3215,6 +4187,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3240,6 +4220,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3265,6 +4253,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target
@@ -3290,6 +4286,14 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: '37.876'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.253'
+    source_labels:
+    - __address__
+    target_label: longitude
   - source_labels:
     - __address__
     target_label: __param_target

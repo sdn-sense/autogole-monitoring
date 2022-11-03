@@ -25,6 +25,12 @@ STATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                      'replacement': 'WILLBEREPLACEDBYCODE'},
                                     {'source_labels': ['__address__'],
                                      'target_label': 'software',
+                                     'replacement': 'WILLBEREPLACEDBYCODE'},
+                                    {'source_labels': ['__address__'],
+                                     'target_label': 'latitude',
+                                     'replacement': 'WILLBEREPLACEDBYCODE'},
+                                    {'source_labels': ['__address__'],
+                                     'target_label': 'longitude',
                                      'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 # HTTPS - Will query https endpoint of FE and will check that it returns
@@ -40,6 +46,12 @@ HTTPS_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                     'replacement': 'WILLBEREPLACEDBYCODE'},
                                    {'source_labels': ['__address__'],
                                     'target_label': 'software',
+                                    'replacement': 'WILLBEREPLACEDBYCODE'},
+                                   {'source_labels': ['__address__'],
+                                    'target_label': 'latitude',
+                                    'replacement': 'WILLBEREPLACEDBYCODE'},
+                                   {'source_labels': ['__address__'],
+                                    'target_label': 'longitude',
                                     'replacement': 'WILLBEREPLACEDBYCODE'},
                                    {'source_labels': ['__address__'],
                                     'target_label': '__param_target'},
@@ -62,6 +74,12 @@ ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                     'target_label': 'software',
                                     'replacement': 'WILLBEREPLACEDBYCODE'},
                                    {'source_labels': ['__address__'],
+                                    'target_label': 'latitude',
+                                    'replacement': 'WILLBEREPLACEDBYCODE'},
+                                   {'source_labels': ['__address__'],
+                                    'target_label': 'longitude',
+                                    'replacement': 'WILLBEREPLACEDBYCODE'},
+                                   {'source_labels': ['__address__'],
                                     'target_label': '__param_target'},
                                    {'source_labels': ['__param_target'],
                                     'target_label': 'instance'},
@@ -75,11 +93,11 @@ ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                         'static_configs': [{'targets': []}],
                         'relabel_configs': [{'source_labels': ['__address__'],
-                                            'target_label': 'sitename',
-                                            'replacement': 'WILLBEREPLACEDBYCODE'},
+                                             'target_label': 'sitename',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'},
                                             {'source_labels': ['__address__'],
-                                            'target_label': 'software',
-                                            'replacement': 'WILLBEREPLACEDBYCODE'}]}
+                                             'target_label': 'software',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 
 # ===================================================================================
@@ -102,6 +120,12 @@ HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                                        'target_label': 'software',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
+                                       'target_label': 'latitude',
+                                       'replacement': 'WILLBEREPLACEDBYCODE'},
+                                      {'source_labels': ['__address__'],
+                                       'target_label': 'longitude',
+                                       'replacement': 'WILLBEREPLACEDBYCODE'},
+                                      {'source_labels': ['__address__'],
                                        'target_label': '__param_target'},
                                       {'source_labels': ['__param_target'],
                                        'target_label': 'instance'},
@@ -118,6 +142,12 @@ ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
                                        'target_label': 'software',
+                                       'replacement': 'WILLBEREPLACEDBYCODE'},
+                                      {'source_labels': ['__address__'],
+                                       'target_label': 'latitude',
+                                       'replacement': 'WILLBEREPLACEDBYCODE'},
+                                      {'source_labels': ['__address__'],
+                                       'target_label': 'longitude',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
                                        'target_label': '__param_target'},
@@ -190,6 +220,7 @@ class PromModel():
             return
         ipv6_addr = getIPv6Address(webdomain.split(':')[0])
         for site in sites:
+            lat, lng = conf.get(site, {}).get('latitude', '0.00'), conf.get(site, {}).get('longitude', '0.00')
             # 1. Query for State of all Services registered to FE
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
             tmpEntry['job_name'] = self._genName('%s_STATE' % site)
@@ -197,6 +228,8 @@ class PromModel():
             tmpEntry['metrics_path'] = "/%s/sitefe/json/frontend/metrics" % site
             tmpEntry['relabel_configs'][0]['replacement'] = site
             tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+            tmpEntry['relabel_configs'][2]['replacement'] = lat
+            tmpEntry['relabel_configs'][3]['replacement'] = lng
             self.default['scrape_configs'].append(tmpEntry)
             # 2. Query Endpoint and get TLS/Certificate information of Service
             if 'https_v4_siterm_2xx' in probes:
@@ -205,6 +238,8 @@ class PromModel():
                 tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
                 self.default['scrape_configs'].append(tmpEntry)
             if 'https_v6_siterm_2xx' in probes and not ipv6_addr.startswith('::ffff'):
@@ -214,6 +249,8 @@ class PromModel():
                 tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
                 self.default['scrape_configs'].append(tmpEntry)
             # 3. Add ICMP Check for FE
@@ -223,6 +260,8 @@ class PromModel():
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'icmp_v4'
                 self.default['scrape_configs'].append(tmpEntry)
             if 'icmp_v6' in probes and not ipv6_addr.startswith('::ffff'):
@@ -231,9 +270,11 @@ class PromModel():
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'icmp_v6'
                 self.default['scrape_configs'].append(tmpEntry)
-            # 4. Check if agent config has node_exporter defined
+            # 4. Check if fe config has node_exporter defined
             if conf.get('general', {}).get('node_exporter', ''):
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
                 tmpEntry['job_name'] = self._genName('%s_NODE' % site)
@@ -288,6 +329,7 @@ class PromModel():
             probes = nrmconfig['probes']
             if 'probes' in nrmconfig.get('discovery', {}).get(name, {}):
                 probes = nrmconfig['discovery'][name]['probes']
+            lat, lng = vals.get('location', {}).get('latitude', '0.00'), vals.get('location', {}).get('longitude', '0.00')
             for url in vals['url']:
                 parsedurl = urlparse(url)
                 if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in probes:
@@ -297,6 +339,8 @@ class PromModel():
                     tmpEntry['static_configs'][0]['targets'].append(url)
                     tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename'] 
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
+                    tmpEntry['relabel_configs'][2]['replacement'] = lat
+                    tmpEntry['relabel_configs'][3]['replacement'] = lng
                     self.default['scrape_configs'].append(tmpEntry)
                 elif parsedurl.scheme == 'http' and 'https_v4_network_2xx' in nrmconfig['probes']:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
@@ -305,6 +349,8 @@ class PromModel():
                     tmpEntry['static_configs'][0]['targets'].append(url)
                     tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
+                    tmpEntry['relabel_configs'][2]['replacement'] = lat
+                    tmpEntry['relabel_configs'][3]['replacement'] = lng
                     self.default['scrape_configs'].append(tmpEntry)
                 if parsedurl.hostname not in hosts[name] and 'icmp_v4' in probes:
                     hosts[name].append(parsedurl.hostname)
@@ -314,6 +360,8 @@ class PromModel():
                     tmpEntry['static_configs'][0]['targets'].append(parsedurl.hostname)
                     tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
+                    tmpEntry['relabel_configs'][2]['replacement'] = lat
+                    tmpEntry['relabel_configs'][3]['replacement'] = lng
                     self.default['scrape_configs'].append(tmpEntry)
 
                 #ipv6_addr = getIPv6Address(endpoint['url'])

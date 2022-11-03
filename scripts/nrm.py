@@ -51,10 +51,13 @@ class allNSIEndpoints():
 
     def parseIndividualData(self, dataIn, nsa):
         """Parse individual data of entry"""
-        self.out.setdefault(nsa, {'soap': [], 'url': []})
+        self.out.setdefault(nsa, {'soap': [], 'url': [], 'location': {}})
         for _, val in dataIn.items():
             if 'interface' not in val:
                 continue
+            if 'location' in val:
+                print(nsa, val['location'])
+                self.out[nsa]['location'] = val['location']
             for item in val.get('interface', []):
                 url = item.get('href', '')
                 utype = item.get('type', '')
