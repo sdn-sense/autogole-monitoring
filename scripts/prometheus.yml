@@ -700,7 +700,7 @@ scrape_configs:
     target_label: software
   static_configs:
   - targets:
-    - k8s-gen4-01.sdsc.optiputer.net:9100
+    - k8s-gen4-02.sdsc.optiputer.net:9100
 - job_name: T2_US_UCSD_STATE
   metrics_path: /T2_US_UCSD/sitefe/json/frontend/metrics
   relabel_configs:
