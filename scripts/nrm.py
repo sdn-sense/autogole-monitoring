@@ -7,7 +7,7 @@ import xmltodict
 import requests
 from yaml import safe_load as yload
 
-cert = ('/root/cert.pem', '/root/key.pem')
+cert = ('/root/networkrm-cert.pem', '/root/networkrm-key.pem')
 bundle = '/root/bundle-ca.pem'
 
 def xml_to_json(msgIn):
