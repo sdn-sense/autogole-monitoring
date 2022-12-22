@@ -1,0 +1,2 @@
+KUBE_CONF=/Users/jbalcas/.kube/config-ucsd
+KUBE_NAMESPACE=opennsa

@@ -174,11 +174,18 @@ def loadYamlFile(fname):
         return yload(fd.read())
 
 def getIPv6Address(inHostname):
-    """Get IPv6 address. If not available, return ::ffff:"""
+    """Get IPv6 address. If not available, return None"""
     try:
         return socket.getaddrinfo(inHostname, None, socket.AF_INET6)[0][4][0]
     except socket.gaierror:
-        return "::ffff:"
+        return None
+
+def getIPv4Address(inHostname):
+    """Get IPv4 address. If not available, return None"""
+    try:
+        return socket.getaddrinfo(inHostname, None, socket.AF_INET)[0][4][0]
+    except socket.gaierror:
+        return None
 
 class PromModel():
     """Class for generating Prometheus config file"""
@@ -207,7 +214,7 @@ class PromModel():
         conf = loadYamlFile(confFile)
         webdomain = conf.get('general', {}).get('webdomain', '')
         origwebdomain = webdomain
-        probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx',
+        probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
                                                         'icmp_v4', 'icmp_v6'])
         if webdomain.startswith('https://'):
             webdomain = webdomain[8:]
@@ -219,6 +226,7 @@ class PromModel():
         if not sites:
             return
         ipv6_addr = getIPv6Address(webdomain.split(':')[0])
+        ipv4_addr = getIPv4Address(webdomain.split(':')[0])
         for site in sites:
             lat, lng = conf.get(site, {}).get('latitude', '0.00'), conf.get(site, {}).get('longitude', '0.00')
             # 1. Query for State of all Services registered to FE
@@ -232,7 +240,7 @@ class PromModel():
             tmpEntry['relabel_configs'][3]['replacement'] = lng
             self.default['scrape_configs'].append(tmpEntry)
             # 2. Query Endpoint and get TLS/Certificate information of Service
-            if 'https_v4_siterm_2xx' in probes:
+            if 'https_v4_siterm_2xx' in probes and ipv4_addr:
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName('%s_HTTPS_V4' % site)
                 tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
@@ -242,7 +250,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
                 self.default['scrape_configs'].append(tmpEntry)
-            if 'https_v6_siterm_2xx' in probes and not ipv6_addr.startswith('::ffff'):
+            if 'https_v6_siterm_2xx' in probes and ipv6_addr:
                 # Check that it has IPv6
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName('%s_HTTPS_V6' % site)
@@ -254,7 +262,7 @@ class PromModel():
                 tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
                 self.default['scrape_configs'].append(tmpEntry)
             # 3. Add ICMP Check for FE
-            if 'icmp_v4' in probes:
+            if 'icmp_v4' in probes and ipv4_addr:
                 tmpEntry = copy.deepcopy(ICMP_SCRAPE)
                 tmpEntry['job_name'] = self._genName('%s_ICMP_V4' % site)
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
@@ -264,7 +272,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'icmp_v4'
                 self.default['scrape_configs'].append(tmpEntry)
-            if 'icmp_v6' in probes and not ipv6_addr.startswith('::ffff'):
+            if 'icmp_v6' in probes and ipv6_addr:
                 tmpEntry = copy.deepcopy(ICMP_SCRAPE)
                 tmpEntry['job_name'] = self._genName('%s_ICMP_V6' % site)
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
@@ -363,11 +371,6 @@ class PromModel():
                     tmpEntry['relabel_configs'][2]['replacement'] = lat
                     tmpEntry['relabel_configs'][3]['replacement'] = lng
                     self.default['scrape_configs'].append(tmpEntry)
-
-                #ipv6_addr = getIPv6Address(endpoint['url'])
-                #if vtype == 'V6' and ipv6_addr.startswith('::ffff'):
-                # There is no ipv6 address on host. continue
-                #    continue
 
     def looper(self, dirname):
         """Loop via all SiteRM configs"""

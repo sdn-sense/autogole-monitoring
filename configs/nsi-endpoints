@@ -15,6 +15,9 @@ discovery:
  "urn:ogf:network:uhnet.net:2021:nsa":
    sitename: "UHnet"
    urls: ["https://nsi0.uhnet.net:9443/NSI/discovery.xml"]
+   location:
+     latitude: "21.3069"
+     longitude: "-157.8583"
  "urn:ogf:network:sinet.ac.jp:2013:nsa":
    sitename: SinetNSA
    urls: ["https://aggr.nsi.nii.ac.jp:28443/NSI/sinet.ac.jp:2013:nsa.xml"]
@@ -24,6 +27,9 @@ discovery:
  "urn:ogf:network:snvaca.pacificwave.net:2016:nsa":
    sitename: PacificWave
    urls: ["https://nsi0.snvaca.pacificwave.net:9443/NSI/discovery.xml"]
+   location:
+     latitude: "37.3734"
+     longitude: "-121.99"
  "urn:ogf:network:tb.es.net:2013:nsa":
    sitename: "ESNet"
    urls: ["https://oscars-testbed.es.net/api/nsa/discovery"]
@@ -33,18 +39,30 @@ discovery:
  "urn:ogf:network:daej-nsi.kreonet.net:2020:nsa":
    sitename: Kreonet
    urls: ["https://daej-nsi.kreonet.net:9443/NSI/discovery.xml"]
+   location:
+     latitude: "36.3635"
+     longitude: "127.349"
  "urn:ogf:network:icair.org:2013:nsa":
    sitename: iCAIR
    urls: ["https://opennsa.northwestern.edu:9443/NSI/discovery.xml"]
+   location:
+     latitude: "41.8952"
+     longitude: "-87.6168"
  "urn:ogf:network:tokyjp.pacificwave.net:2018:nsa":
    sitename: PacificWave
    urls: ["https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml"]
+   location:
+     latitude: "35.672855"
+     longitude: "139.817413"
  "urn:ogf:network:cipo.rnp.br:2014:nsa:safnari":
    sitename: RNP-Brazil
    urls: ["https://agg.cipo.rnp.br/nsa-discovery"]
  "urn:ogf:network:canarie.ca:2017:nsa":
    sitename: Canarie
    urls: ["https://opennsa.canarie.ca:9443/NSI/discovery.xml"]
+   location:
+     latitude: "45.5026"
+     longitude: "-73.5694"
  "urn:ogf:network:netherlight.net:2013:nsa:safnari":
    sitename: Netherlight
    urls: ["https://agg.netherlight.net/nsa-discovery", "https://dds.netherlight.net/dds"]
@@ -52,9 +70,15 @@ discovery:
  "urn:ogf:network:ampath.net:2013:nsa":
    sitename: Ampath
    urls: ["https://nsi.ampath.net:9443/NSI/discovery.xml"]
+   location:
+     latitude: "25.7581"
+     longitude: "-80.3762"
  "urn:ogf:network:lsanca.pacificwave.net:2016:nsa":
    sitename: PacificWave
    urls: ["https://nsi0.lsanca.pacificwave.net:9443/NSI/discovery.xml"]
+   location:
+     latitude: "34.0488"
+     longitude: "-118.262"
  "urn:ogf:network:cipo.rnp.br:2014:nsa":
    sitename: RNP-Brazil
    urls: ["http://idc.cipo.rnp.br/rnp-nsa.xml"]
@@ -62,18 +86,36 @@ discovery:
    sitename: Surf
    urls: ["https://opennsa.automation.surf.net/NSI/discovery.xml"]
    probes: ['https_v4_network_2xx']
+   location:
+     latitude: "52.3567"
+     longitude: "4.95459"
  "urn:ogf:network:sttlwa.pacificwave.net:2016:nsa":
    sitename: PacificWave
+   location:
+     latitude: "47.6137"
+     longitude: "-122.34"
    urls: ["https://nsi0.sttlwa.pacificwave.net:9443/NSI/discovery.xml"]
  "urn:ogf:network:heanet.ie:2021:nsa":
    sitename: HEAnet
+   location:
+     latitude: "53.3493"
+     longitude: "-6.38773"
  "urn:ogf:network:test.es.net:2013:nsa":
    sitename: ESNet
  "urn:ogf:network:nsi.geant.net:2021:nsa:safnari":
    sitename: GEANT
  "urn:ogf:network:nsi.geant.net:2021:nsa":
    sitename: GEANT
+   location:
+     latitude: "51.5099"
+     longitude: "-0.118092"
  "urn:ogf:network:calit2.optiputer.net:2020:nsa":
    sitename: OptIPuter
+   location:
+     latitude: "32.8826"
+     longitude: "-117.237"
  "urn:ogf:network:twaren.nchc.org:2014:nsa":
    sitename: TWAREN
+   location:
+     latitude: "23.1005"
+     longitude: "120.2820"

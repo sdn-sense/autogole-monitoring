@@ -1,0 +1,82 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: autogole-monitoring-config-preparer
+    labels:
+        app: autogole-monitoring-config-preparer
+spec:
+      hostNetwork: true
+      terminationGracePeriodSeconds: 30
+      containers:
+      - image: sdnsense/site-agent-sense:dev
+        imagePullPolicy: "Always"
+        name: siterm-agent
+        resources: {}
+        command: ["/bin/sh"]
+        args: ["-c", "cd /root; git clone https://github.com/sdn-sense/autogole-monitoring; cd autogole-monitoring/; pip3 install -r requirements-config-prepare.txt; cd scripts/; python3 genConfig.py; cp prometheus.yml /root; while true; do echo done; sleep 10;done"]
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        volumeMounts:
+        - mountPath: /root/siterm-cert.pem
+          name: siterm-cert
+          readOnly: true
+          subPath: cert.pem
+        - mountPath: /root/siterm-key.pem
+          name: siterm-key
+          readOnly: true
+          subPath: key.pem
+        - mountPath: /root/networkrm-cert.pem
+          name: networkrm-cert
+          readOnly: true
+          subPath: cert.pem
+        - mountPath: /root/networkrm-key.pem
+          name: networkrm-key
+          readOnly: true
+          subPath: key.pem
+        - mountPath: /root/bundle-ca.pem
+          name: bundle-ca
+          readOnly: true
+          subPath: bundle-ca.pem
+      nodeSelector:
+          kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: siterm-cert
+        secret:
+          secretName: autogole-monitoring
+          items:
+          - key: siterm-cert
+            path: cert.pem
+          defaultMode: 0644
+      - name: siterm-key
+        secret:
+          secretName: autogole-monitoring
+          items:
+          - key: siterm-key
+            path: key.pem
+          defaultMode: 0644
+      - name: networkrm-cert
+        secret:
+          secretName: autogole-monitoring
+          items:
+          - key: networkrm-cert
+            path: cert.pem
+          defaultMode: 0644
+      - name: networkrm-key
+        secret:
+          secretName: autogole-monitoring
+          items:
+          - key: networkrm-key
+            path: key.pem
+          defaultMode: 0644
+      - name: bundle-ca
+        secret:
+          secretName: autogole-monitoring
+          items:
+          - key: bundle-ca
+            path: bundle-ca.pem
+          defaultMode: 0644
