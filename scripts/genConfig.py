@@ -338,6 +338,10 @@ class PromModel():
             if 'probes' in nrmconfig.get('discovery', {}).get(name, {}):
                 probes = nrmconfig['discovery'][name]['probes']
             lat, lng = vals.get('location', {}).get('latitude', '0.00'), vals.get('location', {}).get('longitude', '0.00')
+            if lat == '0.00':
+                lat = nrmconfig.get('discovery', {}).get(name, {}).get('location', {}).get('latitude', '0.00')
+            if lng == '0.00':
+                lng = nrmconfig.get('discovery', {}).get(name, {}).get('location', {}).get('longitude', '0.00')
             for url in vals['url']:
                 parsedurl = urlparse(url)
                 if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in probes:
