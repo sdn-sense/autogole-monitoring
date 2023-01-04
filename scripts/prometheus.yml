@@ -25,16 +25,16 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sdn-login-1.ultralight.org:10443
+    - sense-ladowntown-fe.ultralight.org:443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: NRM_CENIC_HTTPS_V4
+- job_name: NRM_CENIC_HTTPS_V6
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - https_v6_siterm_2xx
   relabel_configs:
   - replacement: NRM_CENIC
     source_labels:
@@ -62,40 +62,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sdn-login-1.ultralight.org:10443
-- job_name: NRM_CENIC_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: NRM_CENIC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 33.9416
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -118.4085
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sdn-login-1.ultralight.org
+    - https://sense-ladowntown-fe.ultralight.org:443
 - job_name: NRM_CENIC_ICMP_V6
   metrics_path: /probe
   params:
@@ -128,7 +95,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - sdn-login-1.ultralight.org
+    - sense-ladowntown-fe.ultralight.org
 - job_name: T2_BR_SPRACE_STATE
   metrics_path: /T2_BR_SPRACE/sitefe/json/frontend/metrics
   relabel_configs:
@@ -366,16 +333,16 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sdn-login-1.ultralight.org:8443
+    - sense-caltech-fe.ultralight.org:443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_Caltech_Test_HTTPS_V4
+- job_name: T2_US_Caltech_Test_HTTPS_V6
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - https_v6_siterm_2xx
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -403,40 +370,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sdn-login-1.ultralight.org:8443
-- job_name: T2_US_Caltech_Test_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 34.1377
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 118.1253
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sdn-login-1.ultralight.org
+    - https://sense-caltech-fe.ultralight.org:443
 - job_name: T2_US_Caltech_Test_ICMP_V6
   metrics_path: /probe
   params:
@@ -469,7 +403,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - sdn-login-1.ultralight.org
+    - sense-caltech-fe.ultralight.org
 - job_name: T2_US_Caltech_Test_NODE
   relabel_configs:
   - replacement: T2_US_Caltech_Test
@@ -522,6 +456,19 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-6.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_3
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-3.ultralight.org:9100
 - job_name: T2_US_SDSC_STATE
   metrics_path: /T2_US_SDSC/sitefe/json/frontend/metrics
   relabel_configs:
@@ -545,16 +492,16 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sdn-login-1.ultralight.org:9443
+    - sense-ucsd-fe.ultralight.org:443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
-- job_name: T2_US_SDSC_HTTPS_V4
+- job_name: T2_US_SDSC_HTTPS_V6
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - https_v6_siterm_2xx
   relabel_configs:
   - replacement: T2_US_SDSC
     source_labels:
@@ -582,40 +529,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sdn-login-1.ultralight.org:9443
-- job_name: T2_US_SDSC_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sdn-login-1.ultralight.org
+    - https://sense-ucsd-fe.ultralight.org:443
 - job_name: T2_US_SDSC_ICMP_V6
   metrics_path: /probe
   params:
@@ -648,7 +562,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - sdn-login-1.ultralight.org
+    - sense-ucsd-fe.ultralight.org
 - job_name: T2_US_SDSC_NODE
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -701,6 +615,97 @@ scrape_configs:
   static_configs:
   - targets:
     - k8s-gen4-02.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_NODE_3
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - dtn-pas.nrp.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_4
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - node-2-12.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_NODE_5
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-03.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_6
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-04.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_7
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-05.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_8
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-06.nrp-nautilus.io:9100
+- job_name: T2_US_SDSC_NODE_9
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - nrp-07.nrp-nautilus.io:9100
 - job_name: T2_US_UCSD_STATE
   metrics_path: /T2_US_UCSD/sitefe/json/frontend/metrics
   relabel_configs:
@@ -1646,11 +1651,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '36.3635'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '127.349'
     source_labels:
     - __address__
     target_label: longitude
@@ -1679,11 +1684,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '36.3635'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '127.349'
     source_labels:
     - __address__
     target_label: longitude
@@ -1712,11 +1717,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '36.3635'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '127.349'
     source_labels:
     - __address__
     target_label: longitude
@@ -1745,11 +1750,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '36.3635'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '127.349'
     source_labels:
     - __address__
     target_label: longitude
@@ -1778,11 +1783,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '36.3635'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '127.349'
     source_labels:
     - __address__
     target_label: longitude
@@ -1811,11 +1816,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -1844,11 +1849,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -1877,11 +1882,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -1910,11 +1915,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -1943,11 +1948,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -1976,11 +1981,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -2009,11 +2014,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '34.0488'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-118.262'
     source_labels:
     - __address__
     target_label: longitude
@@ -2042,11 +2047,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '53.3493'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-6.38773'
     source_labels:
     - __address__
     target_label: longitude
@@ -2075,11 +2080,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '53.3493'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-6.38773'
     source_labels:
     - __address__
     target_label: longitude
@@ -2273,11 +2278,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '21.3069'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-157.8583'
     source_labels:
     - __address__
     target_label: longitude
@@ -2306,11 +2311,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '21.3069'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-157.8583'
     source_labels:
     - __address__
     target_label: longitude
@@ -2339,11 +2344,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '21.3069'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-157.8583'
     source_labels:
     - __address__
     target_label: longitude
@@ -2372,11 +2377,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '21.3069'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-157.8583'
     source_labels:
     - __address__
     target_label: longitude
@@ -2603,11 +2608,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '52.3567'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '4.95459'
     source_labels:
     - __address__
     target_label: longitude
@@ -2636,11 +2641,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '52.3567'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '4.95459'
     source_labels:
     - __address__
     target_label: longitude
@@ -2656,6 +2661,336 @@ scrape_configs:
   - targets:
     - https://opennsa.automation.surf.net/NSI/discovery.xml
 - job_name: GEANT_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-ams-nl.nml.xml
+- job_name: GEANT_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - prod-nsi.geant.org
+- job_name: GEANT_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-lon-uk.nml.xml
+- job_name: GEANT_HTTPS_1
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-dub-ie.nml.xml
+- job_name: GEANT_HTTPS_2
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-dub2-ie.nml.xml
+- job_name: GEANT_HTTPS_3
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-2-lis-pt.nml.xml
+- job_name: GEANT_HTTPS_4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-pra-cz.nml.xml
+- job_name: GEANT_HTTPS_5
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-poz-pl.nml.xml
+- job_name: GEANT_HTTPS_6
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-fra-de.nml.xml
+- job_name: GEANT_HTTPS_7
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-bud-hu.nml.xml
+- job_name: GEANT_HTTPS_8
   metrics_path: /probe
   params:
     module:
@@ -2688,7 +3023,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://prod-nsi.geant.org/dds
-- job_name: GEANT_ICMP
+- job_name: GEANT_ICMP_0
   metrics_path: /probe
   params:
     module:
@@ -2735,11 +3070,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '41.8952'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-87.6168'
     source_labels:
     - __address__
     target_label: longitude
@@ -2768,11 +3103,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '41.8952'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-87.6168'
     source_labels:
     - __address__
     target_label: longitude
@@ -2801,11 +3136,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '41.8952'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-87.6168'
     source_labels:
     - __address__
     target_label: longitude
@@ -2834,11 +3169,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '41.8952'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-87.6168'
     source_labels:
     - __address__
     target_label: longitude
@@ -2966,11 +3301,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '35.672855'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '139.817413'
     source_labels:
     - __address__
     target_label: longitude
@@ -2999,11 +3334,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '35.672855'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '139.817413'
     source_labels:
     - __address__
     target_label: longitude
@@ -3032,11 +3367,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '35.672855'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '139.817413'
     source_labels:
     - __address__
     target_label: longitude
@@ -3117,237 +3452,6 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-aggr-west.es.net
-- job_name: GEANT_HTTPS_0
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-ams-nl.nml.xml
-- job_name: GEANT_ICMP_0
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - prod-nsi.geant.org
-- job_name: GEANT_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-lon-uk.nml.xml
-- job_name: GEANT_HTTPS_2
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-dub-ie.nml.xml
-- job_name: GEANT_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-dub2-ie.nml.xml
-- job_name: GEANT_HTTPS_4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-2-lis-pt.nml.xml
-- job_name: GEANT_HTTPS_5
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '0.00'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-pra-cz.nml.xml
 - job_name: Canarie_HTTPS
   metrics_path: /probe
   params:
@@ -3362,11 +3466,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '45.5026'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-73.5694'
     source_labels:
     - __address__
     target_label: longitude
@@ -3395,11 +3499,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '45.5026'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-73.5694'
     source_labels:
     - __address__
     target_label: longitude
@@ -3428,11 +3532,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '45.5026'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-73.5694'
     source_labels:
     - __address__
     target_label: longitude
@@ -3461,11 +3565,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '37.3734'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-121.99'
     source_labels:
     - __address__
     target_label: longitude
@@ -3494,11 +3598,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '37.3734'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-121.99'
     source_labels:
     - __address__
     target_label: longitude
@@ -3527,11 +3631,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '37.3734'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-121.99'
     source_labels:
     - __address__
     target_label: longitude
@@ -3560,11 +3664,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '37.3734'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-121.99'
     source_labels:
     - __address__
     target_label: longitude
@@ -3593,11 +3697,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '37.3734'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-121.99'
     source_labels:
     - __address__
     target_label: longitude
@@ -3626,11 +3730,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '32.8826'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-117.237'
     source_labels:
     - __address__
     target_label: longitude
@@ -3659,11 +3763,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '32.8826'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-117.237'
     source_labels:
     - __address__
     target_label: longitude
@@ -3692,11 +3796,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '32.8826'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-117.237'
     source_labels:
     - __address__
     target_label: longitude
@@ -3890,11 +3994,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '47.6137'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-122.34'
     source_labels:
     - __address__
     target_label: longitude
@@ -3923,11 +4027,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '47.6137'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-122.34'
     source_labels:
     - __address__
     target_label: longitude
@@ -3956,11 +4060,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '47.6137'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-122.34'
     source_labels:
     - __address__
     target_label: longitude
@@ -4055,11 +4159,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '25.7581'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-80.3762'
     source_labels:
     - __address__
     target_label: longitude
@@ -4088,11 +4192,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '25.7581'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-80.3762'
     source_labels:
     - __address__
     target_label: longitude
@@ -4121,11 +4225,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '25.7581'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '-80.3762'
     source_labels:
     - __address__
     target_label: longitude
@@ -4154,11 +4258,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '23.1005'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '120.2820'
     source_labels:
     - __address__
     target_label: longitude
@@ -4187,11 +4291,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: '0.00'
+  - replacement: '23.1005'
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: '0.00'
+  - replacement: '120.2820'
     source_labels:
     - __address__
     target_label: longitude
