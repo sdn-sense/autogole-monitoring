@@ -80,6 +80,9 @@ ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                     'target_label': 'longitude',
                                     'replacement': 'WILLBEREPLACEDBYCODE'},
                                    {'source_labels': ['__address__'],
+                                    'target_label': 'ipversion',
+                                    'replacement': 'WILLBEREPLACEDBYCODE'},
+                                   {'source_labels': ['__address__'],
                                     'target_label': '__param_target'},
                                    {'source_labels': ['__param_target'],
                                     'target_label': 'instance'},
@@ -148,6 +151,9 @@ ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
                                        'target_label': 'longitude',
+                                       'replacement': 'WILLBEREPLACEDBYCODE'},
+                                      {'source_labels': ['__address__'],
+                                       'target_label': 'ipversion',
                                        'replacement': 'WILLBEREPLACEDBYCODE'},
                                       {'source_labels': ['__address__'],
                                        'target_label': '__param_target'},
@@ -270,6 +276,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
+                tmpEntry['relabel_configs'][4]['replacement'] = 'v4'
                 tmpEntry['params']['module'][0] = 'icmp_v4'
                 self.default['scrape_configs'].append(tmpEntry)
             if 'icmp_v6' in probes and ipv6_addr:
@@ -280,6 +287,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
+                tmpEntry['relabel_configs'][4]['replacement'] = 'v6'
                 tmpEntry['params']['module'][0] = 'icmp_v6'
                 self.default['scrape_configs'].append(tmpEntry)
             # 4. Check if fe config has node_exporter defined
@@ -374,6 +382,7 @@ class PromModel():
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
                     tmpEntry['relabel_configs'][2]['replacement'] = lat
                     tmpEntry['relabel_configs'][3]['replacement'] = lng
+                    tmpEntry['relabel_configs'][4]['replacement'] = 'v4'
                     self.default['scrape_configs'].append(tmpEntry)
 
     def looper(self, dirname):
