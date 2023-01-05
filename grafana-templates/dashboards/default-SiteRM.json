@@ -140,8 +140,8 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 6,
+        "w": 24,
         "x": 0,
         "y": 8
       },
@@ -247,8 +247,8 @@
       "gridPos": {
         "h": 9,
         "w": 12,
-        "x": 12,
-        "y": 8
+        "x": 0,
+        "y": 14
       },
       "hiddenSeries": false,
       "id": 2,
@@ -279,7 +279,103 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"REPLACEME_SITENAME\"}) by (Sitename, phase) > 0",
+          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"REPLACEME_SITENAME\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+          "interval": "",
+          "legendFormat": "{{phase}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ICMP round trip time (V4)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:760",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:761",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "id": 45,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.16",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"REPLACEME_SITENAME\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
           "interval": "",
           "legendFormat": "{{phase}}",
           "refId": "A"
@@ -358,7 +454,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 23
       },
       "id": 6,
       "options": {
@@ -452,7 +548,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 31
       },
       "hiddenSeries": false,
       "id": 12,
@@ -635,7 +731,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 33
+        "y": 39
       },
       "hiddenSeries": false,
       "id": 10,
@@ -748,7 +844,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 33
+        "y": 39
       },
       "id": 13,
       "options": {
@@ -806,7 +902,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 41
+        "y": 47
       },
       "id": 15,
       "options": {
@@ -858,7 +954,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 41
+        "y": 47
       },
       "hiddenSeries": false,
       "id": 14,
@@ -970,7 +1066,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 55
       },
       "id": 16,
       "options": {
@@ -1002,6 +1098,106 @@
       "timeShift": null,
       "title": "Service Status",
       "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "hiddenSeries": false,
+      "id": 44,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.16",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "service_runtime{sitename=\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{hostname}} {{servicename}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "REPLACEME_SOFTWARE Threads Runtime",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1595",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1596",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "alert": {
@@ -1063,7 +1259,7 @@
         "h": 5,
         "w": 5,
         "x": 0,
-        "y": 57
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 19,
@@ -1214,7 +1410,7 @@
         "h": 5,
         "w": 5,
         "x": 5,
-        "y": 57
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 20,
@@ -1365,7 +1561,7 @@
         "h": 5,
         "w": 5,
         "x": 10,
-        "y": 57
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 21,
@@ -1516,7 +1712,7 @@
         "h": 5,
         "w": 4,
         "x": 15,
-        "y": 57
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 23,
@@ -1667,7 +1863,7 @@
         "h": 5,
         "w": 5,
         "x": 19,
-        "y": 57
+        "y": 71
       },
       "hiddenSeries": false,
       "id": 24,
@@ -1819,7 +2015,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 76
       },
       "hiddenSeries": false,
       "id": 17,
@@ -1928,7 +2124,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 70
+        "y": 84
       },
       "hiddenSeries": false,
       "id": 18,
@@ -2017,7 +2213,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 78
+        "y": 92
       },
       "id": 33,
       "panels": [],
@@ -2048,7 +2244,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 79
+        "y": 93
       },
       "hiddenSeries": false,
       "id": 25,
@@ -2155,7 +2351,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 79
+        "y": 93
       },
       "hiddenSeries": false,
       "id": 35,
@@ -2262,7 +2458,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 79
+        "y": 93
       },
       "hiddenSeries": false,
       "id": 36,
@@ -2369,7 +2565,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 87
+        "y": 101
       },
       "hiddenSeries": false,
       "id": 37,
@@ -2476,7 +2672,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 87
+        "y": 101
       },
       "hiddenSeries": false,
       "id": 27,
@@ -2583,7 +2779,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 95
+        "y": 109
       },
       "hiddenSeries": false,
       "id": 29,
@@ -2690,7 +2886,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 95
+        "y": 109
       },
       "hiddenSeries": false,
       "id": 28,
@@ -2797,7 +2993,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 103
+        "y": 117
       },
       "hiddenSeries": false,
       "id": 30,
@@ -2904,7 +3100,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 103
+        "y": 117
       },
       "hiddenSeries": false,
       "id": 31,
@@ -3011,7 +3207,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 111
+        "y": 125
       },
       "hiddenSeries": false,
       "id": 38,
@@ -3118,7 +3314,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 111
+        "y": 125
       },
       "hiddenSeries": false,
       "id": 39,
@@ -3225,7 +3421,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 119
+        "y": 133
       },
       "hiddenSeries": false,
       "id": 40,
@@ -3332,7 +3528,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 119
+        "y": 133
       },
       "hiddenSeries": false,
       "id": 41,
@@ -3439,7 +3635,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 127
+        "y": 141
       },
       "hiddenSeries": false,
       "id": 42,
@@ -3546,7 +3742,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 127
+        "y": 141
       },
       "hiddenSeries": false,
       "id": 43,
@@ -3660,7 +3856,7 @@
         },
         "datasource": null,
         "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"REPLACEME_SITENAME\"}, hostname)",
-        "description": "Switch Interface Statistics",
+        "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
         "error": null,
         "hide": 2,
         "includeAll": true,
