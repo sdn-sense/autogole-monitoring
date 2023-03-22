@@ -16,6 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
+    "id": 34,
     "links": [],
     "panels": [
       {
@@ -125,7 +126,7 @@
               "uid": "Jt1ZMcmVz"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "Mcngr9J4z"
             }
           ]
         },
@@ -432,7 +433,7 @@
               "uid": "Jt1ZMcmVz"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "Mcngr9J4z"
             }
           ]
         },
@@ -607,7 +608,7 @@
               "uid": "Jt1ZMcmVz"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "Mcngr9J4z"
             }
           ]
         },
@@ -950,9 +951,11 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "SinetNSA"
+    "title": "SinetNSA",
+    "uid": "dmhI6O44k",
+    "version": 1
   },
   "folderId": 2,
-  "message": "Script changes made on 2022-09-30. See git for changes",
+  "message": "Script changes made on 2023-02-21. See git for changes",
   "overwrite": true
 }
