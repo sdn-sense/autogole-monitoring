@@ -43,6 +43,7 @@ spec:
           - '--storage.tsdb.retention=30d'
           - '--storage.tsdb.path=/prometheus'
           - '--config.file=/etc/prometheus/prometheus.yml'
+          - '--web.config.file=/etc/web.yml'
         ports:
         - name: http-prometheus
           containerPort: 9090
@@ -71,6 +72,10 @@ spec:
           name: bundle-ca
           readOnly: true
           subPath: bundle-ca.pem
+        - mountPath: /etc/web.yml
+          name: prometheus-web-yml
+          readOnly: true
+          subPath: web.yml
       restartPolicy: Always
       volumes:
       - name: prometheus-config-volume
@@ -112,6 +117,13 @@ spec:
           - key: bundle-ca
             path: bundle-ca.pem
           defaultMode: 0644
+      - name: prometheus-web-yml
+        secret:
+          secretName: autogole-monitoring
+          items:
+          - key: prometheus-web-yml
+            path: web.yml
+          defaultMode: 0644
       - name: prometheus-storage-volume
         persistentVolumeClaim:
             claimName: prometheus-pvc
@@ -129,3 +141,22 @@ spec:
     app: prometheus
   sessionAffinity: None
   type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: autogole-prometheus-ingress
+spec:
+  rules:
+  - host: autogole-prometheus.nrp-nautilus.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-service
+            port:
+              number: 9090
