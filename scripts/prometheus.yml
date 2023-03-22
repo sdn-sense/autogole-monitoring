@@ -63,39 +63,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-ladowntown-fe.sdn-lb.ultralight.org:443
-- job_name: NRM_CENIC_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: NRM_CENIC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 33.9416
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -118.4085
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-ladowntown-fe.sdn-lb.ultralight.org:443
 - job_name: NRM_CENIC_ICMP_V4
   metrics_path: /probe
   params:
@@ -119,43 +86,6 @@ scrape_configs:
     - __address__
     target_label: longitude
   - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-ladowntown-fe.sdn-lb.ultralight.org
-- job_name: NRM_CENIC_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: NRM_CENIC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 33.9416
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -118.4085
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
     source_labels:
     - __address__
     target_label: ipversion
@@ -453,39 +383,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-caltech-fe.sdn-lb.ultralight.org:443
-- job_name: T2_US_Caltech_Test_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 34.1377
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 118.1253
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-caltech-fe.sdn-lb.ultralight.org:443
 - job_name: T2_US_Caltech_Test_ICMP_V4
   metrics_path: /probe
   params:
@@ -509,43 +406,6 @@ scrape_configs:
     - __address__
     target_label: longitude
   - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-caltech-fe.sdn-lb.ultralight.org
-- job_name: T2_US_Caltech_Test_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 34.1377
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 118.1253
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
     source_labels:
     - __address__
     target_label: ipversion
@@ -625,6 +485,110 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-3.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_4
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-dtn-2-09.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_5
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-dtn-2-11.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_6
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-9.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_7
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - neu-sc-01.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_8
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-sc-03.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_9
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-sc-06.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_10
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-sc-04.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_11
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-sc-05.ultralight.org:9100
 - job_name: T2_US_SDSC_STATE
   metrics_path: /T2_US_SDSC/sitefe/json/frontend/metrics
   relabel_configs:
@@ -686,39 +650,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-prpdev-fe.sdn-lb.ultralight.org:443
-- job_name: T2_US_SDSC_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-prpdev-fe.sdn-lb.ultralight.org:443
 - job_name: T2_US_SDSC_ICMP_V4
   metrics_path: /probe
   params:
@@ -742,43 +673,6 @@ scrape_configs:
     - __address__
     target_label: longitude
   - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-prpdev-fe.sdn-lb.ultralight.org
-- job_name: T2_US_SDSC_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
     source_labels:
     - __address__
     target_label: ipversion

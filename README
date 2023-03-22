@@ -34,12 +34,14 @@ rm -rf /tmp/rm-configs
 
 Create new secrets (put siterm and networkrm cert/key):
 ```
+cd kubernetes/
 kubectl create secret generic autogole-monitoring \
         --from-file=siterm-cert=secrets/siterm-cert.pem \
         --from-file=siterm-key=secrets/siterm-privkey.pem \
         --from-file=networkrm-cert=secrets/networkrm-cert.pem \
         --from-file=networkrm-key=secrets/networkrm-privkey.pem \
         --from-file=bundle-ca=secrets/bundle-ca.pem \
+        --from-file=prometheus-web-yml=secrets/web.yml \
         --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 ```
 
@@ -84,6 +86,8 @@ sed -i '' 's/T2_US_Caltech_Test/REPLACEME_SITENAME/' new-default-SiteRM.json
 sed -i '' 's/puAWMcmVk/REPLACEME_NOTIFICATION_ALL/' new-default-SiteRM.json
 sed -i '' 's/MysWMcmVk/REPLACEME_NOTIFICATION_SITE/' new-default-SiteRM.json
 sed -i '' 's/SiteRM/REPLACEME_SOFTWARE/' new-default-SiteRM.json
+sed -i '' 's/dellos9_s0/$switch/' new-default-SiteRM.json
+sed -i '' 's/dellos9_s1/$switch/' new-default-SiteRM.json
 ```
 
 
