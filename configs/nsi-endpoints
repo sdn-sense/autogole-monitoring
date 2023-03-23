@@ -82,9 +82,9 @@ discovery:
  "urn:ogf:network:cipo.rnp.br:2014:nsa":
    sitename: RNP-Brazil
    urls: ["http://idc.cipo.rnp.br/rnp-nsa.xml"]
- "urn:ogf:network:surf.nl:2020:nsa":
+ "urn:ogf:network:surf.nl:2020:nsa:supa":
    sitename: Surf
-   urls: ["https://opennsa.automation.surf.net/NSI/discovery.xml"]
+   urls: ["https://supa.netherlight.net:443/topology"]
    probes: ['https_v4_network_2xx']
    location:
      latitude: "52.3567"
