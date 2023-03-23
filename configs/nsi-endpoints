@@ -102,6 +102,7 @@ discovery:
      longitude: "-6.38773"
  "urn:ogf:network:test.es.net:2013:nsa":
    sitename: ESNet
+   urls: ["https://sense-rm.es.net:8000/dds"]
  "urn:ogf:network:nsi.geant.net:2021:nsa:safnari":
    sitename: GEANT
  "urn:ogf:network:nsi.geant.net:2021:nsa":
