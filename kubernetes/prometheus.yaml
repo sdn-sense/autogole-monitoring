@@ -35,7 +35,7 @@ spec:
         prometheus.io/port: "9090"
     spec:
       nodeSelector:
-          kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
+          kubernetes.io/hostname: k8s-igrok-04.calit2.optiputer.net
       containers:
       - name: prometheus
         image: prom/prometheus
@@ -44,6 +44,13 @@ spec:
           - '--storage.tsdb.path=/prometheus'
           - '--config.file=/etc/prometheus/prometheus.yml'
           - '--web.config.file=/etc/web.yml'
+        resources:
+          limits:
+            cpu: 4
+            memory: 2Gi
+          requests:
+            cpu: 2
+            memory: 2Gi
         ports:
         - name: http-prometheus
           containerPort: 9090

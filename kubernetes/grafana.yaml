@@ -30,7 +30,7 @@ spec:
         supplementalGroups:
           - 0
       nodeSelector:
-          kubernetes.io/hostname: k8s-igrok-02.calit2.optiputer.net
+          kubernetes.io/hostname: k8s-igrok-01.calit2.optiputer.net
       containers:
         - name: grafana
           image: grafana/grafana:7.5.16
@@ -58,6 +58,9 @@ spec:
             requests:
               cpu: 250m
               memory: 750Mi
+            limits:
+              cpu: 2
+              memory: 2Gi
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-pv
