@@ -16,6 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
+    "id": 45,
     "links": [],
     "panels": [
       {
@@ -192,7 +193,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             }
           ]
         },
@@ -535,7 +536,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             }
           ]
         },
@@ -719,7 +720,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             }
           ]
         },
@@ -1135,7 +1136,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             }
           ]
         },
@@ -1284,7 +1285,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             },
             {
               "uid": "puAWMcmVk"
@@ -1540,7 +1541,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             }
           ]
         },
@@ -1689,7 +1690,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             },
             {
               "uid": "puAWMcmVk"
@@ -1841,7 +1842,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             },
             {
               "uid": "puAWMcmVk"
@@ -1997,7 +1998,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "SgbZMci4k"
+              "uid": "yjZpJBs4z"
             }
           ]
         },
@@ -5728,7 +5729,9 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T1_US_FNAL"
+    "title": "T1_US_FNAL",
+    "uid": "EdRuABsVk",
+    "version": 1
   },
   "folderId": 1,
   "message": "Script changes made on 2023-05-03. See git for changes",
