@@ -161,39 +161,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://cmssense1.fnal.gov:8443
-- job_name: T1_US_FNAL_HTTPS_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T1_US_FNAL
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 41.8384
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 88.2616
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://cmssense1.fnal.gov:8443
 - job_name: T1_US_FNAL_ICMP_V4
   metrics_path: /probe
   params:
@@ -217,43 +184,6 @@ scrape_configs:
     - __address__
     target_label: longitude
   - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - cmssense1.fnal.gov
-- job_name: T1_US_FNAL_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T1_US_FNAL
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 41.8384
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 88.2616
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
     source_labels:
     - __address__
     target_label: ipversion
@@ -757,6 +687,19 @@ scrape_configs:
   static_configs:
   - targets:
     - sdn-sc-05.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_12
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-10.ultralight.org:9100
 - job_name: T2_US_SDSC_STATE
   metrics_path: /T2_US_SDSC/sitefe/json/frontend/metrics
   relabel_configs:
@@ -3799,76 +3742,6 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-rm.es.net
-- job_name: ESNet_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: ESNet
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '37.87692'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-122.25023'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi-aggr-west.es.net/discovery
-- job_name: ESNet_ICMP_2
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: ESNet
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '37.87692'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-122.25023'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - nsi-aggr-west.es.net
 - job_name: Canarie_HTTPS
   metrics_path: /probe
   params:
@@ -4759,7 +4632,7 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi.twaren.net
-- job_name: ESNet_HTTPS_4
+- job_name: ESNet_HTTPS_3
   metrics_path: /probe
   params:
     module:
@@ -4792,7 +4665,7 @@ scrape_configs:
   static_configs:
   - targets:
     - https://oscars-web.es.net/api/topo/nml
-- job_name: ESNet_ICMP_3
+- job_name: ESNet_ICMP_2
   metrics_path: /probe
   params:
     module:
@@ -4829,7 +4702,7 @@ scrape_configs:
   static_configs:
   - targets:
     - oscars-web.es.net
-- job_name: ESNet_HTTPS_5
+- job_name: ESNet_HTTPS_4
   metrics_path: /probe
   params:
     module:
@@ -4862,3 +4735,73 @@ scrape_configs:
   static_configs:
   - targets:
     - https://oscars-web.es.net/api/nsa/discovery
+- job_name: ESNet_HTTPS_5
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://nsi-aggr-west.es.net/discovery
+- job_name: ESNet_ICMP_3
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - nsi-aggr-west.es.net
