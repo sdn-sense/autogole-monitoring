@@ -17,8 +17,20 @@ spec:
     spec:
       hostNetwork: true
       restartPolicy: Always
-      nodeSelector:
-          kubernetes.io/hostname: k8s-igrok-04.calit2.optiputer.net
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - k8s-igrok-01.calit2.optiputer.net
+                - k8s-igrok-02.calit2.optiputer.net
+                - k8s-igrok-03.calit2.optiputer.net
+                - k8s-igrok-04.calit2.optiputer.net
+                - k8s-igrok-05.calit2.optiputer.net
+                - k8s-igrok-06.calit2.optiputer.net
       containers:
         - name: blackbox-exporter
           image: "prom/blackbox-exporter:v0.18.0"
