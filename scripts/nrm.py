@@ -32,6 +32,7 @@ def loadYamlFile(fname):
 
 def getData(url):
     """Get data from url"""
+    print('GETDATA-------', url)
     try:
         response = requests.get(url, cert=cert, verify=bundle, timeout=5)
         return response
@@ -64,8 +65,10 @@ class allNSIEndpoints():
                 if url and utype:
                     if utype.endswith('soap'):
                         if url not in self.out[nsa]['soap']:
+                            print('SOAP', url)
                             self.out[nsa]['soap'].append(url)
                     elif url not in self.out[nsa]['url']:
+                        print('URL', url)
                         self.out[nsa]['url'].append(url)
 
     def parseDDS(self, ddsurl):
@@ -92,9 +95,10 @@ class allNSIEndpoints():
             self.parseDDS(ddsurl)
         for key, val in config['discovery'].items():
             if val and val.get('urls', []):
-                self.out.setdefault(key, {'soap': [], 'url': []})
+                self.out.setdefault(key, {'soap': [], 'url': [], 'location': {}})
                 for url in val['urls']:
                     if url not in self.out[key]['url']:
+                        print('CONFIG', url)
                         self.out[key]['url'].append(url)
         for key, vals in self.out.items():
             print(key, vals)

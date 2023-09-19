@@ -105,8 +105,10 @@ discovery:
    urls: ["https://sense-rm.es.net:8000/dds"]
  "urn:ogf:network:nsi.geant.net:2021:nsa:safnari":
    sitename: GEANT
+   urls: ["https://prod-nsi.geant.org:8401/dds"]
  "urn:ogf:network:nsi.geant.net:2021:nsa":
    sitename: GEANT
+   urls: ["https://prod-nsi.geant.org:8401/dds"]
    location:
      latitude: "51.5099"
      longitude: "-0.118092"
