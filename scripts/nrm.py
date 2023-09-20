@@ -67,9 +67,13 @@ class allNSIEndpoints():
                         if url not in self.out[nsa]['soap']:
                             print('SOAP', url)
                             self.out[nsa]['soap'].append(url)
+                        else:
+                            print('SOAP_DEFINED_ALREADY', url)
                     elif url not in self.out[nsa]['url']:
                         print('URL', url)
                         self.out[nsa]['url'].append(url)
+                    else:
+                        print('URL_DEFINED_ALREADY', url)
 
     def parseDDS(self, ddsurl):
         """Parse DDS and get all URLs from it"""
