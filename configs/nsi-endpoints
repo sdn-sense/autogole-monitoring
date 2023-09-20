@@ -89,6 +89,12 @@ discovery:
    location:
      latitude: "52.3567"
      longitude: "4.95459"
+ "urn:ogf:network:surf.nl:2020:nsa":
+   sitename: Surf
+   probes: ['https_v4_network_2xx']
+   location:
+     latitude: "52.3567"
+     longitude: "4.95459"
  "urn:ogf:network:sttlwa.pacificwave.net:2016:nsa":
    sitename: PacificWave
    location:
