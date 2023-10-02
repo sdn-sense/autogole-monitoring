@@ -99,7 +99,7 @@ class allNSIEndpoints():
                 continue
             decodedmsg = decode_msg(base64msg)
             decodedjson = xml_to_json(decodedmsg)
-            self.parseIndividualData(decodedjson, nsa. respType)
+            self.parseIndividualData(decodedjson, nsa)
 
     def execute(self):
         """Main execute - query all NSI Endpoints and get URLS"""
@@ -125,7 +125,7 @@ class allNSIEndpoints():
                 data = xml_to_json(response.text)
                 if not data:
                     continue
-                self.parseIndividualData(data, key, respType)
+                self.parseIndividualData(data, key)
 
 if __name__ == "__main__":
     nsiclass = allNSIEndpoints()
