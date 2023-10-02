@@ -35,15 +35,20 @@ def getData(url):
     print('GETDATA-------', url)
     try:
         response = requests.get(url, cert=cert, verify=bundle, timeout=5)
-        return response
+        return response, 0
     except requests.exceptions.ConnectionError as ex:
         print('Getdata-error-verify-bundle', ex)
     try:
         response = requests.get(url, cert=cert, verify=False, timeout=5)
-        return response
+        return response, 1
     except requests.exceptions.ConnectionError as ex:
         print('Getdata-error-verify-false', ex)
-    return {}
+    try:
+        response = requests.get(url, timeout=5)
+        return response, 2
+    except requests.exceptions.ConnectionError as ex:
+        print('Getdata-error-nocert-key', ex)
+    return {}, -1
 
 class allNSIEndpoints():
     """All NSI Endpoints Class"""
@@ -77,10 +82,14 @@ class allNSIEndpoints():
 
     def parseDDS(self, ddsurl):
         """Parse DDS and get all URLs from it"""
-        response = getData(ddsurl)
+        response, respType = getData(ddsurl)
         if not response:
             return
         data = xml_to_json(response.text)
+        print('Debug DDS Output START')
+        print(response.text)
+        print(data)
+        print('Debug DDS Output End')
         # TODO: It should not depend on ns2 as it can change.
         for entry in data.get('ns2:collection', {}).get('ns2:documents', {}).get('ns2:document', []):
             nsa = entry.get('nsa', '')
@@ -90,7 +99,7 @@ class allNSIEndpoints():
                 continue
             decodedmsg = decode_msg(base64msg)
             decodedjson = xml_to_json(decodedmsg)
-            self.parseIndividualData(decodedjson, nsa)
+            self.parseIndividualData(decodedjson, nsa. respType)
 
     def execute(self):
         """Main execute - query all NSI Endpoints and get URLS"""
@@ -110,13 +119,13 @@ class allNSIEndpoints():
                 print('MISSING SITENAME!!! %s' % key)
                 print('='*50)
             for url in vals.get('url'):
-                response = getData(url)
+                response, respType = getData(url)
                 if not response:
                     continue
                 data = xml_to_json(response.text)
                 if not data:
                     continue
-                self.parseIndividualData(data, key)
+                self.parseIndividualData(data, key, respType)
 
 if __name__ == "__main__":
     nsiclass = allNSIEndpoints()
