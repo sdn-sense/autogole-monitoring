@@ -37,12 +37,12 @@ def getData(url):
         response = requests.get(url, cert=cert, verify=bundle, timeout=5)
         return response
     except requests.exceptions.ConnectionError as ex:
-        print(ex)
+        print('Getdata-error-verify-bundle', ex)
     try:
         response = requests.get(url, cert=cert, verify=False, timeout=5)
         return response
     except requests.exceptions.ConnectionError as ex:
-        print(ex)
+        print('Getdata-error-verify-false', ex)
     return {}
 
 class allNSIEndpoints():
