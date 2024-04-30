@@ -16,7 +16,6 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 14,
     "iteration": 1711217230383,
     "links": [],
     "panels": [
@@ -93,7 +92,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_US_Starlight\"}",
+            "expr": "probe_success{sitename=~\"T2_US_UCSD_OASIS\"}",
             "interval": "",
             "legendFormat": "{{target}}",
             "refId": "A"
@@ -155,7 +154,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T3_US_Starlight\"}) ",
+            "expr": " sum by (version) (running_version_info{sitename=\"T2_US_UCSD_OASIS\"}) ",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -200,15 +199,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Failure to query Probe for T3_US_Starlight",
-          "name": "Probe Success alert for T3_US_Starlight",
+          "message": "Failure to query Probe for T2_US_UCSD_OASIS",
+          "name": "Probe Success alert for T2_US_UCSD_OASIS",
           "noDataState": "alerting",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -259,7 +258,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_US_Starlight\"}",
+            "expr": "probe_success{sitename=~\"T2_US_UCSD_OASIS\"}",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -365,7 +364,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_Starlight\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_UCSD_OASIS\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -462,7 +461,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_Starlight\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_UCSD_OASIS\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -543,15 +542,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Certificates expire in less than a week for T3_US_Starlight",
-          "name": "SSL Expiry alert for T3_US_Starlight",
+          "message": "Certificates expire in less than a week for T2_US_UCSD_OASIS",
+          "name": "SSL Expiry alert for T2_US_UCSD_OASIS",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -606,14 +605,14 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_US_Starlight\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T2_US_UCSD_OASIS\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
           },
           {
             "exemplar": true,
-            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T3_US_Starlight\"} - time()",
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T2_US_UCSD_OASIS\"} - time()",
             "hide": false,
             "interval": "",
             "legendFormat": "{{hostname}}",
@@ -724,7 +723,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T3_US_Starlight\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"T2_US_UCSD_OASIS\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -828,15 +827,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "HTTP Query Status code error for T3_US_Starlight",
-          "name": "HTTP Status Code alert for T3_US_Starlight",
+          "message": "HTTP Query Status code error for T2_US_UCSD_OASIS",
+          "name": "HTTP Status Code alert for T2_US_UCSD_OASIS",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -889,7 +888,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"T3_US_Starlight\"}",
+            "expr": "probe_http_status_code{sitename=~\"T2_US_UCSD_OASIS\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -1000,7 +999,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_US_Starlight\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T2_US_UCSD_OASIS\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1063,7 +1062,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "service_runtime{sitename=\"T3_US_Starlight\"}",
+            "expr": "service_runtime{sitename=\"T2_US_UCSD_OASIS\"}",
             "interval": "",
             "legendFormat": "{{hostname}} {{servicename}}",
             "refId": "A"
@@ -1144,14 +1143,14 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T3_US_Starlight",
+          "name": "SiteRM LookUpService Not OK for T2_US_UCSD_OASIS",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1206,7 +1205,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1296,11 +1295,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T3_US_Starlight",
+          "name": "SiteRM ProvisioningService Not OK for T2_US_UCSD_OASIS",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1358,7 +1357,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1468,7 +1467,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1549,14 +1548,14 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Agent Not OK for T3_US_Starlight",
+          "name": "SiteRM Agent Not OK for T2_US_UCSD_OASIS",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1611,7 +1610,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1701,11 +1700,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Debugger Not OK for T3_US_Starlight",
+          "name": "SiteRM Debugger Not OK for T2_US_UCSD_OASIS",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1763,7 +1762,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1853,11 +1852,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Ruler Not OK for T3_US_Starlight",
+          "name": "SiteRM Ruler Not OK for T2_US_UCSD_OASIS",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1915,7 +1914,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -2005,15 +2004,15 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "One or more services failed for T3_US_Starlight",
-          "name": "SiteRM Component Status alert for T3_US_Starlight",
+          "message": "One or more services failed for T2_US_UCSD_OASIS",
+          "name": "SiteRM Component Status alert for T2_US_UCSD_OASIS",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "qIuZMciVk"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -2068,7 +2067,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T3_US_Starlight\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
@@ -2178,7 +2177,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T3_US_Starlight\", service_state!=\"OK\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T2_US_UCSD_OASIS\", service_state!=\"OK\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
@@ -2279,7 +2278,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T3_US_Starlight\", key=\"vms\"}",
+            "expr": "memory_usage{sitename=\"T2_US_UCSD_OASIS\", key=\"vms\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "VMS {{servicename}}",
@@ -2381,7 +2380,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T3_US_Starlight\", key=~\"rss\"}",
+            "expr": "memory_usage{sitename=\"T2_US_UCSD_OASIS\", key=~\"rss\"}",
             "interval": "",
             "legendFormat": "RSS {{servicename}}",
             "refId": "A"
@@ -2472,7 +2471,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T3_US_Starlight\"}) ",
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T2_US_UCSD_OASIS\"}) ",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2546,7 +2545,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_Starlight\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_UCSD_OASIS\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
@@ -2556,7 +2555,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Network Status VSW (ALL for T3_US_Starlight)",
+        "title": "Network Status VSW (ALL for T2_US_UCSD_OASIS)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -2640,7 +2639,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_Starlight\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
@@ -2650,7 +2649,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Network Status RST (ALL for T3_US_Starlight)",
+        "title": "Network Status RST (ALL for T2_US_UCSD_OASIS)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -2734,7 +2733,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_Starlight\", network_status!=\"activated\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"activated\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
@@ -2744,7 +2743,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Network Status VSW (Not activated for T3_US_Starlight)",
+        "title": "Network Status VSW (Not activated for T2_US_UCSD_OASIS)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -2828,7 +2827,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_Starlight\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
@@ -2838,7 +2837,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Network Status VSW (Not activated for T3_US_Starlight)",
+        "title": "Network Status VSW (Not activated for T2_US_UCSD_OASIS)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -2944,7 +2943,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}",
+                "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3051,7 +3050,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}",
+                "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3158,7 +3157,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}",
+                "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3265,7 +3264,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_US_Starlight\"}",
+                "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_UCSD_OASIS\"}",
                 "interval": "",
                 "legendFormat": "{{vlan}} {{key1}} {{key2}}",
                 "refId": "A"
@@ -3372,7 +3371,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3479,7 +3478,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3586,7 +3585,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3693,7 +3692,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3800,7 +3799,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -3907,7 +3906,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4014,7 +4013,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4121,7 +4120,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4228,7 +4227,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4335,7 +4334,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4442,7 +4441,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4549,7 +4548,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4682,7 +4681,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}",
+                "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4792,7 +4791,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}",
+                "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -4902,7 +4901,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}",
+                "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5012,7 +5011,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_US_Starlight\"}",
+                "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_UCSD_OASIS\"}",
                 "interval": "",
                 "legendFormat": "{{vlan}} {{key1}} {{key2}}",
                 "refId": "A"
@@ -5122,7 +5121,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5232,7 +5231,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5342,7 +5341,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5452,7 +5451,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5562,7 +5561,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5672,7 +5671,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5782,7 +5781,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -5892,7 +5891,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -6002,7 +6001,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -6112,7 +6111,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -6222,7 +6221,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -6332,7 +6331,7 @@
             "targets": [
               {
                 "exemplar": true,
-                "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_US_Starlight\", hostname=\"$switch\"}[5m])*8",
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
                 "interval": "",
                 "legendFormat": "{{ifDescr}} ({{ifAlias}})",
                 "refId": "A"
@@ -6399,7 +6398,7 @@
     "schemaVersion": 27,
     "style": "dark",
     "tags": [
-      "T3_US_Starlight",
+      "T2_US_UCSD_OASIS",
       "SiteRM"
     ],
     "templating": {
@@ -6416,7 +6415,7 @@
             ]
           },
           "datasource": null,
-          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Starlight\"}, hostname)",
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\"}, hostname)",
           "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
           "error": null,
           "hide": 2,
@@ -6426,7 +6425,7 @@
           "name": "switch",
           "options": [],
           "query": {
-            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Starlight\"}, hostname)",
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\"}, hostname)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 1,
@@ -6447,9 +6446,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T3_US_Starlight",
-    "uid": "29XrbmiVz",
-    "version": 1
+    "title": "T2_US_UCSD_OASIS"
   },
   "folderId": 1,
   "message": "Script changes made on 2024-03-23. See git for changes",

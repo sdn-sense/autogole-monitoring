@@ -16,11 +16,27 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 11,
+    "id": 33,
+    "iteration": 1711217230383,
     "links": [],
     "panels": [
       {
+        "collapsed": false,
         "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 84,
+        "panels": [],
+        "title": "SiteRM Status",
+        "type": "row"
+      },
+      {
+        "datasource": null,
+        "description": "List of endpoints that are queried by Prometheus.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -50,9 +66,9 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 24,
+          "w": 16,
           "x": 0,
-          "y": 0
+          "y": 1
         },
         "id": 8,
         "options": {
@@ -87,13 +103,79 @@
         "type": "stat"
       },
       {
+        "datasource": null,
+        "description": "Running SiteRM Versions at Site.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 16,
+          "y": 1
+        },
+        "id": 48,
+        "options": {
+          "displayLabels": [],
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "values": []
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {}
+        },
+        "pluginVersion": "7.5.16",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": " sum by (version) (running_version_info{sitename=\"T2_US_Caltech\"}) ",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{version}}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Running Versions",
+        "type": "piechart"
+      },
+      {
         "alert": {
           "alertRuleTags": {},
           "conditions": [
             {
               "evaluator": {
                 "params": [
-                  1
+                  0.9
                 ],
                 "type": "lt"
               },
@@ -120,13 +202,13 @@
           "handler": 1,
           "message": "Failure to query Probe for T2_US_Caltech",
           "name": "Probe Success alert for T2_US_Caltech",
-          "noDataState": "no_data",
+          "noDataState": "alerting",
           "notifications": [
             {
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -135,6 +217,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "Probe query success, failure. \n1 - OK, Below 1 - Failure, see for more details below.",
         "fieldConfig": {
           "defaults": {},
           "overrides": []
@@ -142,10 +225,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 9,
-          "w": 12,
+          "h": 7,
+          "w": 8,
           "x": 0,
-          "y": 8
+          "y": 9
         },
         "hiddenSeries": false,
         "id": 4,
@@ -188,7 +271,7 @@
             "fill": true,
             "line": true,
             "op": "lt",
-            "value": 1,
+            "value": 0.9,
             "visible": true
           }
         ],
@@ -240,6 +323,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "ICMP V4 Round Trip time from Prometheus hosts to SiteRM Frontend.",
         "fieldConfig": {
           "defaults": {},
           "overrides": []
@@ -247,10 +331,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 9,
-          "w": 12,
-          "x": 12,
-          "y": 8
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 9
         },
         "hiddenSeries": false,
         "id": 2,
@@ -281,7 +365,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_Caltech\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_Caltech\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -291,7 +375,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "ICMP round trip time",
+        "title": "ICMP round trip time (V4)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -331,67 +415,101 @@
         }
       },
       {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
         "datasource": null,
+        "description": "ICMP V6 Round Trip time from Prometheus hosts to SiteRM Frontend.",
         "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "decimals": 2,
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "s"
-          },
+          "defaults": {},
           "overrides": []
         },
+        "fill": 1,
+        "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 17
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 9
         },
-        "id": 6,
+        "hiddenSeries": false,
+        "id": 45,
+        "legend": {
+          "avg": true,
+          "current": true,
+          "max": true,
+          "min": true,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
         "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {},
-          "textMode": "auto"
+          "alertThreshold": true
         },
+        "percentage": false,
         "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
         "targets": [
           {
             "exemplar": true,
-            "expr": "avg(probe_dns_lookup_time_seconds{sitename=~\"T2_US_Caltech\"}) by (job)",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_Caltech\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
-            "legendFormat": "{{job}}",
+            "legendFormat": "{{phase}}",
             "refId": "A"
           }
         ],
+        "thresholds": [],
         "timeFrom": null,
+        "timeRegions": [],
         "timeShift": null,
-        "title": "Average DNS Lookup",
-        "type": "stat"
+        "title": "ICMP round trip time (V6)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:760",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:761",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
       },
       {
         "alert": {
@@ -433,7 +551,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -442,6 +560,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "Left lifetime for SSL Certificate validity. It will raise an alarm once less than a week is left.",
         "fieldConfig": {
           "defaults": {
             "unit": "dtdurations"
@@ -451,10 +570,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 24,
+          "h": 7,
+          "w": 8,
           "x": 0,
-          "y": 25
+          "y": 16
         },
         "hiddenSeries": false,
         "id": 12,
@@ -491,6 +610,14 @@
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
+          },
+          {
+            "exemplar": true,
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T2_US_Caltech\"} - time()",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{hostname}}",
+            "refId": "B"
           }
         ],
         "thresholds": [
@@ -507,6 +634,107 @@
         "timeRegions": [],
         "timeShift": null,
         "title": "SSL Expiry",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "dtdurations",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "HTTP Connection timeline.",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "dtdurations"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 8,
+          "x": 8,
+          "y": 16
+        },
+        "hiddenSeries": false,
+        "id": 14,
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "probe_http_duration_seconds{sitename=~\"T2_US_Caltech\"}",
+            "interval": "",
+            "legendFormat": "{{job}} {{ phase }}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "HTTP Duration",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -608,7 +836,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -617,6 +845,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "HTTP Return Code. 200 OK, Anything else - failure. In case of failure - it will alert.",
         "fieldConfig": {
           "defaults": {
             "unit": "short"
@@ -626,10 +855,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 33
+          "h": 7,
+          "w": 8,
+          "x": 16,
+          "y": 16
         },
         "hiddenSeries": false,
         "id": 10,
@@ -720,222 +949,7 @@
       },
       {
         "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "fixed"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "orange",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 33
-        },
-        "id": 13,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "titleSize": 12,
-            "valueSize": 12
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "7.5.16",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "probe_http_ssl{sitename=~\"T2_US_Caltech\"}",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SSL",
-        "type": "stat"
-      },
-      {
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "fixed"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "orange",
-                  "value": null
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 41
-        },
-        "id": 15,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "titleSize": 12,
-            "valueSize": 12
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "7.5.16",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "avg(probe_duration_seconds{sitename=~\"T2_US_Caltech\"}) by (job)",
-            "interval": "",
-            "legendFormat": "{{instance}}",
-            "refId": "A"
-          }
-        ],
-        "title": "Average Probe Duration",
-        "type": "stat"
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "unit": "dtdurations"
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 41
-        },
-        "hiddenSeries": false,
-        "id": 14,
-        "legend": {
-          "alignAsTable": true,
-          "avg": false,
-          "current": true,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.5.16",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T2_US_Caltech\"}",
-            "interval": "",
-            "legendFormat": "{{job}} {{ phase }}",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "HTTP Duration",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:1595",
-            "format": "dtdurations",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "$$hashKey": "object:1596",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "datasource": null,
+        "description": "Individual Service Status for Site Frontend and all Agents.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -956,7 +970,7 @@
                 }
               ]
             },
-            "unit": "s"
+            "unit": "short"
           },
           "overrides": []
         },
@@ -964,7 +978,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 49
+          "y": 23
         },
         "id": 16,
         "options": {
@@ -996,6 +1010,512 @@
         "timeShift": null,
         "title": "Service Status",
         "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "Individual SiteRM Thread Runtime. Only for debugging purposes of stuck processes. ",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 31
+        },
+        "hiddenSeries": false,
+        "id": 44,
+        "legend": {
+          "alignAsTable": true,
+          "avg": true,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "service_runtime{sitename=\"T2_US_Caltech\"}",
+            "interval": "",
+            "legendFormat": "{{hostname}} {{servicename}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "SiteRM Threads Runtime",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "A",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "SiteRM LookUpService Not OK for T2_US_Caltech",
+          "noDataState": "ok",
+          "notifications": [
+            {
+              "uid": "puAWMcmVk"
+            },
+            {
+              "uid": "SgbZMci4k"
+            }
+          ]
+        },
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "SiteRM LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 0,
+          "y": 39
+        },
+        "hiddenSeries": false,
+        "id": 21,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": false,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T2_US_Caltech\"}) > 0",
+            "interval": "",
+            "legendFormat": "{{servicename}} - {{service_state}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "fill": true,
+            "line": true,
+            "op": "gt",
+            "value": 0,
+            "visible": true
+          }
+        ],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "SiteRM LookUpService Not OK Status",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "A",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "SiteRM ProvisioningService Not OK for T2_US_Caltech",
+          "noDataState": "ok",
+          "notifications": [
+            {
+              "uid": "SgbZMci4k"
+            },
+            {
+              "uid": "puAWMcmVk"
+            }
+          ]
+        },
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "SiteRM ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 8,
+          "y": 39
+        },
+        "hiddenSeries": false,
+        "id": 23,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": false,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T2_US_Caltech\"}) > 0",
+            "interval": "",
+            "legendFormat": "{{servicename}} - {{service_state}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "fill": true,
+            "line": true,
+            "op": "gt",
+            "value": 0,
+            "visible": true
+          }
+        ],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "SiteRM ProvisioningService Not OK Status",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "SiteRM SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 5,
+          "w": 8,
+          "x": 16,
+          "y": 39
+        },
+        "hiddenSeries": false,
+        "id": 46,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": false,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T2_US_Caltech\"}) > 0",
+            "interval": "",
+            "legendFormat": "{{servicename}} - {{service_state}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "SiteRM SNMPMonitoring Not OK Status",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
       },
       {
         "alert": {
@@ -1036,7 +1556,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1045,6 +1565,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "All SiteRM Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
         "fieldConfig": {
           "defaults": {
             "unit": "short"
@@ -1055,9 +1576,9 @@
         "fillGradient": 0,
         "gridPos": {
           "h": 5,
-          "w": 4,
+          "w": 8,
           "x": 0,
-          "y": 57
+          "y": 44
         },
         "hiddenSeries": false,
         "id": 19,
@@ -1184,7 +1705,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1196,6 +1717,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "All SiteRM Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
         "fieldConfig": {
           "defaults": {
             "unit": "short"
@@ -1206,9 +1728,9 @@
         "fillGradient": 0,
         "gridPos": {
           "h": 5,
-          "w": 4,
-          "x": 4,
-          "y": 57
+          "w": 8,
+          "x": 8,
+          "y": 44
         },
         "hiddenSeries": false,
         "id": 20,
@@ -1331,464 +1853,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T2_US_Caltech",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "MHyWGci4z"
-            }
-          ]
-        },
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 8,
-          "y": 57
-        },
-        "hiddenSeries": false,
-        "id": 21,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": true,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": false,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.5.16",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T2_US_Caltech\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [
-          {
-            "colorMode": "critical",
-            "fill": true,
-            "line": true,
-            "op": "gt",
-            "value": 0,
-            "visible": true
-          }
-        ],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "SiteRM LookUpService Not OK Status",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:1595",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "$$hashKey": "object:1596",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM PolicyService Not OK for T2_US_Caltech",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "MHyWGci4z"
-            }
-          ]
-        },
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 12,
-          "y": 57
-        },
-        "hiddenSeries": false,
-        "id": 22,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": true,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": false,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.5.16",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"PolicyService\", sitename=\"T2_US_Caltech\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [
-          {
-            "colorMode": "critical",
-            "fill": true,
-            "line": true,
-            "op": "gt",
-            "value": 0,
-            "visible": true
-          }
-        ],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "SiteRM PolicyService Not OK Status",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:1595",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "$$hashKey": "object:1596",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T2_US_Caltech",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "MHyWGci4z"
-            },
-            {
-              "uid": "puAWMcmVk"
-            }
-          ]
-        },
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": null,
-        "fieldConfig": {
-          "defaults": {
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 5,
-          "w": 4,
-          "x": 16,
-          "y": 57
-        },
-        "hiddenSeries": false,
-        "id": 23,
-        "legend": {
-          "alignAsTable": false,
-          "avg": false,
-          "current": true,
-          "max": false,
-          "min": false,
-          "rightSide": false,
-          "show": false,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.5.16",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T2_US_Caltech\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "thresholds": [
-          {
-            "colorMode": "critical",
-            "fill": true,
-            "line": true,
-            "op": "gt",
-            "value": 0,
-            "visible": true
-          }
-        ],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "SiteRM ProvisioningService Not OK Status",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "$$hashKey": "object:1595",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "$$hashKey": "object:1596",
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
           "name": "SiteRM Ruler Not OK for T2_US_Caltech",
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             },
             {
               "uid": "puAWMcmVk"
@@ -1800,6 +1869,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "All SiteRM Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
         "fieldConfig": {
           "defaults": {
             "unit": "short"
@@ -1810,9 +1880,9 @@
         "fillGradient": 0,
         "gridPos": {
           "h": 5,
-          "w": 4,
-          "x": 20,
-          "y": 57
+          "w": 8,
+          "x": 16,
+          "y": 44
         },
         "hiddenSeries": false,
         "id": 24,
@@ -1943,7 +2013,7 @@
               "uid": "puAWMcmVk"
             },
             {
-              "uid": "MHyWGci4z"
+              "uid": "SgbZMci4k"
             }
           ]
         },
@@ -1952,6 +2022,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "All SiteRM Component's statuses are grouped by hostname and service state (only Running correctly) over time. 1 - service runs normally. Below 1 - Service has failed for some reason. If failure - it will alert.",
         "fieldConfig": {
           "defaults": {
             "unit": "short"
@@ -1961,10 +2032,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 24,
+          "h": 7,
+          "w": 12,
           "x": 0,
-          "y": 62
+          "y": 49
         },
         "hiddenSeries": false,
         "id": 17,
@@ -1997,9 +2068,9 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state=\"OK\", sitename=\"T2_US_Caltech\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T2_US_Caltech\"}) > 0",
             "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
+            "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
           }
         ],
@@ -2061,6 +2132,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": null,
+        "description": "All SiteRM Component's statuses are grouped by hostname and service state over time. 1+OK - service runs normally. Below 1 or not OK - Service has failed for some reason.",
         "fieldConfig": {
           "defaults": {
             "unit": "short"
@@ -2070,10 +2142,10 @@
         "fill": 1,
         "fillGradient": 0,
         "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 70
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 49
         },
         "hiddenSeries": false,
         "id": 18,
@@ -2106,9 +2178,9 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{sitename=\"T2_US_Caltech\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T2_US_Caltech\", service_state!=\"OK\"}) > 0",
             "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
+            "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
           }
         ],
@@ -2116,7 +2188,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "SiteRM Component Status (Any Status)",
+        "title": "SiteRM Component Status (NOT OK)",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -2154,6 +2226,4173 @@
           "align": false,
           "alignLevel": null
         }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "SiteRM Frontend Memory statistics for all processes. Only for debugging purposes.",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 56
+        },
+        "hiddenSeries": false,
+        "id": 47,
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "sort": "current",
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "memory_usage{sitename=\"T2_US_Caltech\", key=\"vms\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "VMS {{servicename}}",
+            "refId": "B"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "SiteRM FE Thread Memory Monitoring (VMS)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "bytes",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "description": "SiteRM Frontend Memory statistics for all processes. Only for debugging purposes.",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 56
+        },
+        "hiddenSeries": false,
+        "id": 66,
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": true,
+          "max": false,
+          "min": false,
+          "rightSide": true,
+          "show": true,
+          "sort": "current",
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "memory_usage{sitename=\"T2_US_Caltech\", key=~\"rss\"}",
+            "interval": "",
+            "legendFormat": "RSS {{servicename}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "SiteRM FE Thread Memory Monitoring (RSS)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1595",
+            "format": "bytes",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1596",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": null,
+              "filterable": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 24,
+          "x": 0,
+          "y": 63
+        },
+        "id": 49,
+        "options": {
+          "showHeader": true
+        },
+        "pluginVersion": "7.5.16",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T2_US_Caltech\"}) ",
+            "format": "table",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{version}}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Running Versions grouped by Service,Hostname,Version",
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 69
+        },
+        "id": 102,
+        "panels": [],
+        "title": "SENSE Request States",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 70
+        },
+        "hiddenSeries": false,
+        "id": 104,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_Caltech\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Network Status VSW (ALL for T2_US_Caltech)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 70
+        },
+        "hiddenSeries": false,
+        "id": 105,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_Caltech\", network_status!=\"unknown\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Network Status RST (ALL for T2_US_Caltech)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 78
+        },
+        "hiddenSeries": false,
+        "id": 106,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_Caltech\", network_status!=\"activated\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Network Status VSW (Not activated for T2_US_Caltech)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 78
+        },
+        "hiddenSeries": false,
+        "id": 107,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.5.16",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_Caltech\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "refId": "A"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Network Status VSW (Not activated for T2_US_Caltech)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": true,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 86
+        },
+        "id": 33,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 8,
+              "x": 0,
+              "y": 3
+            },
+            "hiddenSeries": false,
+            "id": 25,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface MTU",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 8,
+              "x": 8,
+              "y": 3
+            },
+            "hiddenSeries": false,
+            "id": 35,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface ADMIN Status",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 8,
+              "x": 16,
+              "y": 3
+            },
+            "hiddenSeries": false,
+            "id": 36,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Operation Status",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 11
+            },
+            "hiddenSeries": false,
+            "id": 124,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_Caltech\"}",
+                "interval": "",
+                "legendFormat": "{{vlan}} {{key1}} {{key2}}",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "QoS Requests from SENSE",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 19
+            },
+            "hiddenSeries": false,
+            "id": 37,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Octets In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 19
+            },
+            "hiddenSeries": false,
+            "id": 27,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Octets Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 27
+            },
+            "hiddenSeries": false,
+            "id": 29,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Discards In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 27
+            },
+            "hiddenSeries": false,
+            "id": 28,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Discards Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 35
+            },
+            "hiddenSeries": false,
+            "id": 30,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Errors In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 35
+            },
+            "hiddenSeries": false,
+            "id": 31,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Errors Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 43
+            },
+            "hiddenSeries": false,
+            "id": 38,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Unicast In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 43
+            },
+            "hiddenSeries": false,
+            "id": 39,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Unicast Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 51
+            },
+            "hiddenSeries": false,
+            "id": 40,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Multicast In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 51
+            },
+            "hiddenSeries": false,
+            "id": 41,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Multicast Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 59
+            },
+            "hiddenSeries": false,
+            "id": 42,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Broadcast In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 59
+            },
+            "hiddenSeries": false,
+            "id": 43,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Broadcast Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          }
+        ],
+        "repeat": "switch",
+        "scopedVars": {
+          "switch": {
+            "selected": false,
+            "text": "$switch",
+            "value": "$switch"
+          }
+        },
+        "title": "$switch",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 87
+        },
+        "id": 125,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 8,
+              "x": 0,
+              "y": 88
+            },
+            "hiddenSeries": false,
+            "id": 126,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 25,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface MTU",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 8,
+              "x": 8,
+              "y": 88
+            },
+            "hiddenSeries": false,
+            "id": 127,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 35,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface ADMIN Status",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 8,
+              "x": 16,
+              "y": 88
+            },
+            "hiddenSeries": false,
+            "id": 128,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 36,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Operation Status",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 24,
+              "x": 0,
+              "y": 96
+            },
+            "hiddenSeries": false,
+            "id": 129,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 124,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_Caltech\"}",
+                "interval": "",
+                "legendFormat": "{{vlan}} {{key1}} {{key2}}",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "QoS Requests from SENSE",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 104
+            },
+            "hiddenSeries": false,
+            "id": 130,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 37,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Octets In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 104
+            },
+            "hiddenSeries": false,
+            "id": 131,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 27,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Octets Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 112
+            },
+            "hiddenSeries": false,
+            "id": 132,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 29,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Discards In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 112
+            },
+            "hiddenSeries": false,
+            "id": 133,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 28,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Discards Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 120
+            },
+            "hiddenSeries": false,
+            "id": 134,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 30,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Errors In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 120
+            },
+            "hiddenSeries": false,
+            "id": 135,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 31,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Errors Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 128
+            },
+            "hiddenSeries": false,
+            "id": 136,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 38,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Unicast In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 128
+            },
+            "hiddenSeries": false,
+            "id": 137,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 39,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Unicast Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 136
+            },
+            "hiddenSeries": false,
+            "id": 138,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 40,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Multicast In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 136
+            },
+            "hiddenSeries": false,
+            "id": 139,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 41,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Multicast Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 144
+            },
+            "hiddenSeries": false,
+            "id": 140,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 42,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Broadcast In)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 144
+            },
+            "hiddenSeries": false,
+            "id": 141,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.5.16",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatIteration": 1711217230383,
+            "repeatPanelId": 43,
+            "repeatedByRow": true,
+            "scopedVars": {
+              "switch": {
+                "selected": false,
+                "text": "$switch",
+                "value": "$switch"
+              }
+            },
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "exemplar": true,
+                "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_Caltech\", hostname=\"$switch\"}[5m])*8",
+                "interval": "",
+                "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+                "refId": "A"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Interface Status (Broadcast Out)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "$$hashKey": "object:1595",
+                "format": "pps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "$$hashKey": "object:1596",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          }
+        ],
+        "repeatIteration": 1711217230383,
+        "repeatPanelId": 33,
+        "scopedVars": {
+          "switch": {
+            "selected": false,
+            "text": "$switch",
+            "value": "$switch"
+          }
+        },
+        "title": "$switch",
+        "type": "row"
       }
     ],
     "refresh": "1m",
@@ -2164,19 +6403,55 @@
       "SiteRM"
     ],
     "templating": {
-      "list": []
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": null,
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_Caltech\"}, hostname)",
+          "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
+          "error": null,
+          "hide": 2,
+          "includeAll": true,
+          "label": "Switches",
+          "multi": true,
+          "name": "switch",
+          "options": [],
+          "query": {
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_Caltech\"}, hostname)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
     },
     "time": {
-      "from": "now-6h",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "T2_US_Caltech",
-    "uid": "eDlrbmiVz",
+    "uid": "UJcQ-9G4z",
     "version": 1
   },
   "folderId": 1,
-  "message": "Script changes made on 2022-08-12. See git for changes",
+  "message": "Script changes made on 2024-03-23. See git for changes",
   "overwrite": true
 }
