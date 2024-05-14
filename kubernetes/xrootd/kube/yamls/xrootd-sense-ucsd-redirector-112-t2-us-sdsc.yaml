@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+  namespace: opennsa
+  labels:
+    k8s-app: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+spec:
+  selector:
+    matchLabels:
+      k8s-app: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+  template:
+    metadata:
+      labels:
+        k8s-app: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+    spec:
+      nodeSelector:
+        nautilus.io/ipv6: "true"
+      containers:
+      - env:
+        - name: XRD_ENDPOINT
+          value: xrootd-sense-ucsd-redirector-112.sdsc.optiputer.net:1094
+        - name: X509_USER_PROXY
+          value: /etc/xcache-proxy/x509-proxy
+        - name: XRD_PROTOCOLS
+          value: davs,https
+        - name: XRD_MODES
+          value: read,write
+        - name: XRD_WORKDIR
+          value: /srv/
+        - name: XRD_PATH
+          value: /store/temp/user/sense/kube-xrootd-test
+        - name: XRD_UNIQ_NAME
+          value: xrootd-sense-ucsd-redirector-112.sdsc.optiputer.net
+        - name: XRD_UNIQ_WRITE
+          value: 'True'
+        image: sdnsense/xrootd-mon:latest
+        imagePullPolicy: Always
+        name: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /etc/xcache-proxy
+          name: xcache-proxy
+      volumes:
+      - name: xcache-proxy
+        secret:
+          defaultMode: 384
+          secretName: xcache-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: opennsa
+  labels:
+    k8s-app: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+  name: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    k8s-app: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: opennsa
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+spec:
+  rules:
+  - host: xrootd-sense-ucsd-redirector-112-t2-us-sdsc.nrp-nautilus.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: xrootd-sense-ucsd-redirector-112-t2-us-sdsc
+            port:
+              number: 8000
