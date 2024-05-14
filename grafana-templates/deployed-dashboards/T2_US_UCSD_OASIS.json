@@ -16,6 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
+    "id": 51,
     "iteration": 1711217230383,
     "links": [],
     "panels": [
@@ -204,10 +205,7 @@
           "noDataState": "alerting",
           "notifications": [
             {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "SgbZMci4k"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -547,10 +545,7 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "SgbZMci4k"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -832,10 +827,7 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "SgbZMci4k"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -1147,10 +1139,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "SgbZMci4k"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -1299,10 +1288,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "SgbZMci4k"
-            },
-            {
-              "uid": "puAWMcmVk"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -1552,10 +1538,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "SgbZMci4k"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -1704,10 +1687,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "SgbZMci4k"
-            },
-            {
-              "uid": "puAWMcmVk"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -1856,10 +1836,7 @@
           "noDataState": "ok",
           "notifications": [
             {
-              "uid": "SgbZMci4k"
-            },
-            {
-              "uid": "puAWMcmVk"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -2009,10 +1986,7 @@
           "noDataState": "no_data",
           "notifications": [
             {
-              "uid": "puAWMcmVk"
-            },
-            {
-              "uid": "SgbZMci4k"
+              "uid": "_2apKeLIz"
             }
           ]
         },
@@ -6446,9 +6420,11 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T2_US_UCSD_OASIS"
+    "title": "T2_US_UCSD_OASIS",
+    "uid": "uTqHkwJIk",
+    "version": 1
   },
   "folderId": 1,
-  "message": "Script changes made on 2024-03-23. See git for changes",
+  "message": "Script changes made on 2024-05-14. See git for changes",
   "overwrite": true
 }

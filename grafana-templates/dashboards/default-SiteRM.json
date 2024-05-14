@@ -201,14 +201,7 @@
         "message": "Failure to query Probe for REPLACEME_SITENAME",
         "name": "Probe Success alert for REPLACEME_SITENAME",
         "noDataState": "alerting",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -544,14 +537,7 @@
         "message": "Certificates expire in less than a week for REPLACEME_SITENAME",
         "name": "SSL Expiry alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -829,14 +815,7 @@
         "message": "HTTP Query Status code error for REPLACEME_SITENAME",
         "name": "HTTP Status Code alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -1144,14 +1123,7 @@
         "handler": 1,
         "name": "REPLACEME_SOFTWARE LookUpService Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -1296,14 +1268,7 @@
         "handler": 1,
         "name": "REPLACEME_SOFTWARE ProvisioningService Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -1549,14 +1514,7 @@
         "handler": 1,
         "name": "REPLACEME_SOFTWARE Agent Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -1701,14 +1659,7 @@
         "handler": 1,
         "name": "REPLACEME_SOFTWARE Debugger Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -1853,14 +1804,7 @@
         "handler": 1,
         "name": "REPLACEME_SOFTWARE Ruler Not OK for REPLACEME_SITENAME",
         "noDataState": "ok",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
@@ -2006,14 +1950,7 @@
         "message": "One or more services failed for REPLACEME_SITENAME",
         "name": "REPLACEME_SOFTWARE Component Status alert for REPLACEME_SITENAME",
         "noDataState": "no_data",
-        "notifications": [
-          {
-            "uid": "REPLACEME_NOTIFICATION_ALL"
-          },
-          {
-            "uid": "REPLACEME_NOTIFICATION_SITE"
-          }
-        ]
+        "notifications": REPLACEME_NOTIFICATIONS
       },
       "aliasColors": {},
       "bars": false,
