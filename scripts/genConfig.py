@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
+"""Generate Prometheus Config file from SiteRM Configs and Network-RM Configs"""
 import os
 import socket
 import copy
 import tempfile
 import shutil
+from urllib.parse import urlparse
 from yaml import safe_load as yload
 from yaml import safe_dump as ydump
 from git import Repo
-from urllib.parse import urlparse
-from nrm import allNSIEndpoints 
+from nrm import allNSIEndpoints
 
 # STATE - Will Query FE (/<SITENAME>/sitefe/json/frontend/metrics)
 # and get all services states of that FE and Agent's registered to it.
@@ -101,6 +102,19 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                             {'source_labels': ['__address__'],
                                              'target_label': 'software',
                                              'replacement': 'WILLBEREPLACEDBYCODE'}]}
+
+# XrootD Metadata scrape template
+XROOTD_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                 'static_configs': [{'targets': []}],
+                 'relabel_configs': [{'source_labels': ['__address__'],
+                                      'target_label': 'sitename',
+                                      'replacement': 'WILLBEREPLACEDBYCODE'},
+                                     {'source_labels': ['__address__'],
+                                      'target_label': 'endpoint',
+                                      'replacement': 'WILLBEREPLACEDBYCODE'},
+                                     {'source_labels': ['__address__'],
+                                      'target_label': 'software',
+                                      'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 
 # ===================================================================================
@@ -198,6 +212,7 @@ class PromModel():
     def __init__(self,):
         self.default = loadYamlFile('default-prometheus-config.yml')
         self.jobs = []
+        self.xrootdPresent = []
 
     def _genName(self, tmpName):
         tmpName = tmpName.replace(' ', '_')
@@ -206,11 +221,34 @@ class PromModel():
             return tmpName
         for i in range(0,100):
             # Can we have more than 100 DTNs/FEs for single site?
-            nName = "%s_%s" % (tmpName, i)
+            nName = f"{tmpName}_{i}"
             if nName not in self.jobs:
                 self.jobs.append(nName)
                 return nName
         return tmpName
+
+    def _addXrootD(self, dirname):
+        """Add XrootD Metadata to Prometheus config"""
+        confFile = os.path.join(dirname, 'main.yaml')
+        if not os.path.isfile(confFile):
+            return
+        conf = loadYamlFile(confFile)
+        sites = conf.get('general', {}).get('sites', [])
+        for site in sites:
+            # Get XrootD Metadata information
+            xdata = conf.get(site, {}).get('metadata', {}).get('xrootd', {})
+            for _iprange, redir in xdata.items():
+                if redir in self.xrootdPresent:
+                    continue
+                self.xrootdPresent.append(redir)
+                url = f"{redir.split('.')[0]}-{site.replace('_', '-').lower()}.nrp-nautilus.io/metrics"
+                tmpEntry = copy.deepcopy(XROOTD_SCRAPE)
+                tmpEntry['job_name'] = self._genName(f'{site}_XROOTD')
+                tmpEntry['static_configs'][0]['targets'].append(url)
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = redir.split('.')[0]
+                tmpEntry['relabel_configs'][2]['replacement'] = 'XRootD'
+                self.default['scrape_configs'].append(tmpEntry)
 
 
     def _addFE(self, dirname):
@@ -237,9 +275,9 @@ class PromModel():
             lat, lng = conf.get(site, {}).get('latitude', '0.00'), conf.get(site, {}).get('longitude', '0.00')
             # 1. Query for State of all Services registered to FE
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
-            tmpEntry['job_name'] = self._genName('%s_STATE' % site)
+            tmpEntry['job_name'] = self._genName(f'{site}_STATE')
             tmpEntry['static_configs'][0]['targets'].append(webdomain)
-            tmpEntry['metrics_path'] = "/%s/sitefe/json/frontend/metrics" % site
+            tmpEntry['metrics_path'] = f"/{site}/sitefe/json/frontend/metrics"
             tmpEntry['relabel_configs'][0]['replacement'] = site
             tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
             tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -248,7 +286,7 @@ class PromModel():
             # 2. Query Endpoint and get TLS/Certificate information of Service
             if 'https_v4_siterm_2xx' in probes and ipv4_addr:
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
-                tmpEntry['job_name'] = self._genName('%s_HTTPS_V4' % site)
+                tmpEntry['job_name'] = self._genName(f'{site}_HTTPS_V4')
                 tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
@@ -259,7 +297,7 @@ class PromModel():
             if 'https_v6_siterm_2xx' in probes and ipv6_addr:
                 # Check that it has IPv6
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
-                tmpEntry['job_name'] = self._genName('%s_HTTPS_V6' % site)
+                tmpEntry['job_name'] = self._genName(f'{site}_HTTPS_V6')
                 tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
@@ -270,7 +308,7 @@ class PromModel():
             # 3. Add ICMP Check for FE
             if 'icmp_v4' in probes and ipv4_addr:
                 tmpEntry = copy.deepcopy(ICMP_SCRAPE)
-                tmpEntry['job_name'] = self._genName('%s_ICMP_V4' % site)
+                tmpEntry['job_name'] = self._genName(f'{site}_ICMP_V4')
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
@@ -281,7 +319,7 @@ class PromModel():
                 self.default['scrape_configs'].append(tmpEntry)
             if 'icmp_v6' in probes and ipv6_addr:
                 tmpEntry = copy.deepcopy(ICMP_SCRAPE)
-                tmpEntry['job_name'] = self._genName('%s_ICMP_V6' % site)
+                tmpEntry['job_name'] = self._genName(f'{site}_ICMP_V6')
                 tmpEntry['static_configs'][0]['targets'].append(webdomain.split(':')[0])
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
@@ -293,7 +331,7 @@ class PromModel():
             # 4. Check if fe config has node_exporter defined
             if conf.get('general', {}).get('node_exporter', ''):
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
-                tmpEntry['job_name'] = self._genName('%s_NODE' % site)
+                tmpEntry['job_name'] = self._genName(f'{site}_NODE')
                 tmpEntry['static_configs'][0]['targets'].append(conf['general']['node_exporter'])
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
@@ -312,7 +350,7 @@ class PromModel():
         if site and nodeExporter:
             for sitename in site:
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
-                tmpEntry['job_name'] = self._genName('%s_NODE' % sitename)
+                tmpEntry['job_name'] = self._genName(f'{sitename}_NODE')
                 tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
@@ -324,7 +362,7 @@ class PromModel():
         def checkIfParamMissing(endpoint):
             for key in ['hostname', 'port', 'url', 'name', 'software']:
                 if key not in endpoint:
-                    print('Endpoint definition does not have required param "%s". Will not add to prometheus' % key)
+                    print(f'Endpoint definition does not have required param "{key}". Will not add to prometheus')
                     print(endpoint)
                     return True
             return False
@@ -352,22 +390,23 @@ class PromModel():
                 lng = nrmconfig.get('discovery', {}).get(name, {}).get('location', {}).get('longitude', '0.00')
             for url in vals['url']:
                 parsedurl = urlparse(url)
+                site = nrmconfig['discovery'][name]['sitename']
                 if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in probes:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
-                    tmpEntry['job_name'] = self._genName('%s_HTTPS' % (nrmconfig['discovery'][name]['sitename']))
+                    tmpEntry['job_name'] = self._genName(f'{site}_HTTPS')
                     tmpEntry['params']['module'][0] = 'https_v4_network_2xx'
                     tmpEntry['static_configs'][0]['targets'].append(url)
-                    tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename'] 
+                    tmpEntry['relabel_configs'][0]['replacement'] = site
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
                     tmpEntry['relabel_configs'][2]['replacement'] = lat
                     tmpEntry['relabel_configs'][3]['replacement'] = lng
                     self.default['scrape_configs'].append(tmpEntry)
                 elif parsedurl.scheme == 'http' and 'https_v4_network_2xx' in nrmconfig['probes']:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
-                    tmpEntry['job_name'] = self._genName('%s_HTTPS' % (nrmconfig['discovery'][name]['sitename']))
+                    tmpEntry['job_name'] = self._genName(f'{site}_HTTPS')
                     tmpEntry['params']['module'][0] = 'http_v4_network_2xx'
                     tmpEntry['static_configs'][0]['targets'].append(url)
-                    tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
+                    tmpEntry['relabel_configs'][0]['replacement'] = site
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
                     tmpEntry['relabel_configs'][2]['replacement'] = lat
                     tmpEntry['relabel_configs'][3]['replacement'] = lng
@@ -375,10 +414,10 @@ class PromModel():
                 if parsedurl.hostname not in hosts[name] and 'icmp_v4' in probes:
                     hosts[name].append(parsedurl.hostname)
                     tmpEntry = copy.deepcopy(ICMP_SCRAPE_NRM)
-                    tmpEntry['job_name'] = self._genName('%s_ICMP' % (nrmconfig['discovery'][name]['sitename']))
+                    tmpEntry['job_name'] = self._genName(f'{site}_ICMP')
                     tmpEntry['params']['module'][0] = 'icmp_v4'
                     tmpEntry['static_configs'][0]['targets'].append(parsedurl.hostname)
-                    tmpEntry['relabel_configs'][0]['replacement'] = nrmconfig['discovery'][name]['sitename']
+                    tmpEntry['relabel_configs'][0]['replacement'] = site
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
                     tmpEntry['relabel_configs'][2]['replacement'] = lat
                     tmpEntry['relabel_configs'][3]['replacement'] = lng
@@ -398,7 +437,7 @@ class PromModel():
             elif val.get('type', '') == 'FE' and val.get('config', ''):
                 tmpD = os.path.join(dirname, val.get('config'))
                 self._addFE(tmpD)
-        return
+                self._addXrootD(tmpD)
 
     def dump(self):
         """Dump New prometheus yaml file from generated output"""
