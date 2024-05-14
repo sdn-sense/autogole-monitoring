@@ -105,16 +105,19 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 
 # XrootD Metadata scrape template
 XROOTD_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
-                 'static_configs': [{'targets': []}],
-                 'relabel_configs': [{'source_labels': ['__address__'],
-                                      'target_label': 'sitename',
-                                      'replacement': 'WILLBEREPLACEDBYCODE'},
-                                     {'source_labels': ['__address__'],
-                                      'target_label': 'endpoint',
-                                      'replacement': 'WILLBEREPLACEDBYCODE'},
-                                     {'source_labels': ['__address__'],
-                                      'target_label': 'software',
-                                      'replacement': 'WILLBEREPLACEDBYCODE'}]}
+                'scrape_interval': '60s',
+                'static_configs': [{'targets': []}],
+                'scheme': 'http',
+                'metrics_path': 'WILLBEREPLACEDBYCODE',
+                'relabel_configs': [{'source_labels': ['__address__'],
+                                     'target_label': 'sitename',
+                                     'replacement': 'WILLBEREPLACEDBYCODE'},
+                                    {'source_labels': ['__address__'],
+                                     'target_label': 'endpoint',
+                                     'replacement': 'WILLBEREPLACEDBYCODE'},
+                                    {'source_labels': ['__address__'],
+                                     'target_label': 'software',
+                                     'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 
 # ===================================================================================
@@ -241,9 +244,10 @@ class PromModel():
                 if redir in self.xrootdPresent:
                     continue
                 self.xrootdPresent.append(redir)
-                url = f"{redir.split('.')[0]}-{site.replace('_', '-').lower()}.nrp-nautilus.io/metrics"
+                url = f"{redir.split('.')[0]}-{site.replace('_', '-').lower()}.nrp-nautilus.io"
                 tmpEntry = copy.deepcopy(XROOTD_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_XROOTD')
+                tmpEntry['metrics_path'] = f"/metrics"
                 tmpEntry['static_configs'][0]['targets'].append(url)
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = redir.split('.')[0]
