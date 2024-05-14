@@ -198,6 +198,66 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov
+- job_name: T1_US_FNAL_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T1_US_FNAL
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: cmssense4-origin-2841-1
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - cmssense4-origin-2841-1-t1-us-fnal.nrp-nautilus.io
+- job_name: T1_US_FNAL_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T1_US_FNAL
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: cmssense4-origin-2842-1
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - cmssense4-origin-2842-1-t1-us-fnal.nrp-nautilus.io
+- job_name: T1_US_FNAL_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T1_US_FNAL
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: cmssense4-origin-2843-1
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - cmssense4-origin-2843-1-t1-us-fnal.nrp-nautilus.io
 - job_name: T1_US_FNAL_NODE
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -210,8 +270,21 @@ scrape_configs:
     target_label: software
   static_configs:
   - targets:
-    - cmssense3.fnal.gov:15000
+    - cmssense2.fnal.gov:15000
 - job_name: T1_US_FNAL_NODE_0
+  relabel_configs:
+  - replacement: T1_US_FNAL
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - cmssense3.fnal.gov:15000
+- job_name: T1_US_FNAL_NODE_1
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -433,6 +506,326 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-caltech-fe.tier2-lb.ultralight.org
+- job_name: T2_US_Caltech_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-01
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-01-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-02
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-02-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-03
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-03-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_2
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-04
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-04-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_3
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-05
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-05-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_4
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-06
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-06-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_5
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-07
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-07-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_6
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-08
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-08-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_7
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-09
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-09-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_8
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-10
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-10-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_9
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-11
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-11-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_10
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-12
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-12-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_11
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-13
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-13-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_12
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-14
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-14-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_13
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-15
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-15-t2-us-caltech.nrp-nautilus.io
+- job_name: T2_US_Caltech_XROOTD_14
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-16
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-16-t2-us-caltech.nrp-nautilus.io
 - job_name: T2_US_Caltech_NODE
   relabel_configs:
   - replacement: T2_US_Caltech
@@ -635,6 +1028,106 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-caltech-fe.sdn-lb.ultralight.org
+- job_name: T2_US_Caltech_Test_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-01
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-01-t2-us-caltech-test.nrp-nautilus.io
+- job_name: T2_US_Caltech_Test_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-02
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-02-t2-us-caltech-test.nrp-nautilus.io
+- job_name: T2_US_Caltech_Test_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-03
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-03-t2-us-caltech-test.nrp-nautilus.io
+- job_name: T2_US_Caltech_Test_XROOTD_2
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-04
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-04-t2-us-caltech-test.nrp-nautilus.io
+- job_name: T2_US_Caltech_Test_XROOTD_3
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-05
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-05-t2-us-caltech-test.nrp-nautilus.io
 - job_name: T2_US_Caltech_Test_NODE
   relabel_configs:
   - replacement: T2_US_Caltech_Test
@@ -801,7 +1294,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - red-sense-rm.unl.edu:8443
+    - red-sense-rm.unl.edu:443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -838,7 +1331,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://red-sense-rm.unl.edu:8443
+    - https://red-sense-rm.unl.edu:443
 - job_name: T2_US_Nebraska_Test_ICMP_V4
   metrics_path: /probe
   params:
@@ -876,6 +1369,26 @@ scrape_configs:
   static_configs:
   - targets:
     - red-sense-rm.unl.edu
+- job_name: T2_US_Nebraska_Test_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Nebraska_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: red-sense-dtn2
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - red-sense-dtn2-t2-us-nebraska-test.nrp-nautilus.io
 - job_name: T2_US_Nebraska_Test_NODE
   relabel_configs:
   - replacement: T2_US_Nebraska_Test
@@ -1000,6 +1513,86 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-prpdev-fe.sdn-lb.ultralight.org
+- job_name: T2_US_SDSC_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-sense-ucsd-redirector-111
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-redirector-111-t2-us-sdsc.nrp-nautilus.io
+- job_name: T2_US_SDSC_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-sense-ucsd-redirector-112
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-redirector-112-t2-us-sdsc.nrp-nautilus.io
+- job_name: T2_US_SDSC_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-sense-ucsd-redirector-113
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-redirector-113-t2-us-sdsc.nrp-nautilus.io
+- job_name: T2_US_SDSC_XROOTD_2
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-sense-ucsd-redirector-114
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-redirector-114-t2-us-sdsc.nrp-nautilus.io
 - job_name: T2_US_SDSC_NODE
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -1731,6 +2324,66 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-caltech-dev.sdn-lb.ultralight.org
+- job_name: T3_US_Caltech_Dev_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_US_Caltech_Dev
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-01
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-01-t3-us-caltech-dev.nrp-nautilus.io
+- job_name: T3_US_Caltech_Dev_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_US_Caltech_Dev
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-02
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-02-t3-us-caltech-dev.nrp-nautilus.io
+- job_name: T3_US_Caltech_Dev_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_US_Caltech_Dev
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: redir-03
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - redir-03-t3-us-caltech-dev.nrp-nautilus.io
 - job_name: T3_US_Caltech_Dev_NODE
   relabel_configs:
   - replacement: T3_US_Caltech_Dev
@@ -3347,72 +4000,6 @@ scrape_configs:
   static_configs:
   - targets:
     - opennsa.nsi.nrp-nautilus.io
-- job_name: Nautilus_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/connections
-- job_name: Nautilus_HTTPS_2
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/NSI/calit2.optiputer.net:2020:prism-core.nml.xml
 - job_name: Ampath_HTTPS
   metrics_path: /probe
   params:
@@ -4159,109 +4746,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://opennsa.northwestern.edu:9443/NSI/discovery.xml
-- job_name: PacificWave_HTTPS_11
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '35.672855'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '139.817413'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/tokyjp.pacificwave.net:2018:icas-tkjp2-1.nml.xml
-- job_name: PacificWave_ICMP_2
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '35.672855'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '139.817413'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - nsi0.tokyjp.pacificwave.net
-- job_name: PacificWave_HTTPS_12
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: PacificWave
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '35.672855'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '139.817413'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml
 - job_name: OptIPuter_HTTPS
   metrics_path: /probe
   params:
@@ -5061,6 +5545,109 @@ scrape_configs:
   static_configs:
   - targets:
     - daej-nsi.kreonet.net
+- job_name: PacificWave_HTTPS_11
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '35.672855'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.817413'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml
+- job_name: PacificWave_ICMP_2
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '35.672855'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.817413'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - nsi0.tokyjp.pacificwave.net
+- job_name: PacificWave_HTTPS_12
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '35.672855'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.817413'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/tokyjp.pacificwave.net:2018:icas-tkjp2-1.nml.xml
 - job_name: ESNet_HTTPS_3
   metrics_path: /probe
   params:
