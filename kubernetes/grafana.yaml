@@ -66,6 +66,8 @@ spec:
             value: "https://autogole-grafana.nrp-nautilus.io/"
           - name: GF_LOG_FILTERS
             value: "rendering:debug"
+          - name: GF_INSTALL_PLUGINS
+            value: "jdbranham-diagram-panel"
           resources:
             requests:
               cpu: 250m
