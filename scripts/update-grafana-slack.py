@@ -148,14 +148,14 @@ class GrafanaUpdate():
         """Get all alerts"""
         self.alerts = {}
         for item in self.grafanaapi.notifications.get_channels():
-            self.alerts[item['name']] = item
+            self.alerts.setdefault(item['name'], [])
+            self.alerts[item['name']].append(item)
 
     def getAlertID(self, name):
         """Get Alert ID by Name. Default is UNCONFIGURED_WEBHOOKS"""
         if name in self.alerts:
-            return self.alerts[name]['uid']
-        print("Return unconfigured webhook for %s" % name)
-        return self.alerts['UNCONFIGURED_WEBHOOKS']['uid']
+            return self.alerts[name]
+        return []
 
     def createAlerts(self):
         """Create Alerts in Grafana"""
@@ -167,36 +167,58 @@ class GrafanaUpdate():
                    'isDefault': False, 'settings': {'url': '', 'recipient': ''}}
             out['name'] = key
             out['type'] = vals.get('type', 'slack')
-            out['frequency'] = vals.get('frequency', '')
-            out['sendReminder'] = bool(vals.get('sendReminder', 'False'))
+            out['frequency'] = vals.get('frequency', '24h')
+            out['sendReminder'] = bool(vals.get('sendReminder', False))
             out['settings']['url'] = vals['url']
             out['settings']['recipient'] = vals['recipient']
             return out
         def createEmailAlert(key, vals):
             if 'addresses' not in vals:
-                print('Alert channel wrongly configured for %s. missing url or recipient' % key)
+                print('Alert channel wrongly configured for %s. missing addresses key' % key)
                 return {}
             out = {'type': '', 'frequency': '', 'sendReminder': False,
                    'isDefault': False, 'settings': {'singleEmail': '', 'addresses': ''}}
             out['name'] = key
             out['type'] = vals.get('type', 'email')
-            out['frequency'] = vals.get('frequency', '')
-            out['sendReminder'] = bool(vals.get('sendReminder', 'False'))
-            out['settings']['singleEmail'] = bool(vals.get('singleEmail', 'False'))
+            out['frequency'] = vals.get('frequency', '24h')
+            out['sendReminder'] = bool(vals.get('sendReminder', False))
+            out['disableResolveMessage'] = bool(vals.get('disableResolveMessage', False))
+            out['isDefault'] = bool(vals.get('isDefault', False))
+            out['secureFields'] = {}
+            out['settings']['autoResolve'] = bool(vals.get('autoResolve', True))
+            out['settings']['httpMethod'] = vals.get('httpMethod', 'POST')
+            out['settings']['severity'] = vals.get('severity', 'critical')
+            out['settings']['uploadImage'] = bool(vals.get('uploadImage', True))
+            out['settings']['singleEmail'] = bool(vals.get('singleEmail', False))
             out['settings']['addresses'] = vals['addresses']
             return out
 
+        def alertPresent(confAlert, grafanaAlert):
+            """Check if alert is already present"""
+            retType = False
+            if 'type' in confAlert and confAlert['type'] in ['slack', 'email']:
+                for item in grafanaAlert:
+                    if item['type']  == confAlert['type']:
+                        retType = True
+            return retType
+
         self.getAlerts()
         for key, vals in self.config['alert_channels'].items():
-            if key in self.alerts:
-                # This alert already in place. TODO: In future support update.
-                continue
-            if 'type' in vals and vals['type'] == 'slack':
-                out = createSlackAlert(key, vals)
-            elif 'type' in vals and vals['type'] == 'email':
-                out = createEmailAlert(key, vals)
-            if out:
-                self.grafanaapi.notifications.create_channel(out)
+            if isinstance(vals, dict):
+                vals = [vals]
+            for val in vals:
+                nkey = f"{key}-{val['type']}"
+                if alertPresent(val, self.alerts.get(nkey, [])):
+                    print(f"Alert {nkey} already present")
+                    continue
+                out = {}
+                if 'type' in val and val['type'] == 'slack':
+                    out = createSlackAlert(nkey, val)
+                elif 'type' in val and val['type'] == 'email':
+                    out = createEmailAlert(nkey, val)
+                if out:
+                    print(out)
+                    self.grafanaapi.notifications.create_channel(out)
         self.getAlerts()
 
 class Worker(GrafanaUpdate, SlackAPI):
@@ -268,12 +290,19 @@ def addDashboard(sitename, software, worker):
     dashbJson = readFile(src)
     # 1. Get Alarm IDs and replace REPLACEME_SITENAME, REPLACEME_SOFTWARE,
     # REPLACEME_NOTIFICATION_ALL, REPLACEME_NOTIFICATION_SITE
-    notfAll = worker.getAlertID('ALL_%s_ENDPOINTS' % software)
-    notfSite = worker.getAlertID(sitename)
+    notifications = []
+    alertPresent = False
+    for notif in ['ALL_%s_ENDPOINTS' % software, sitename]:
+        for key in ["slack", "email"]:
+            notfAll = worker.getAlertID(f"{notif}-{key}")
+            for notfOut in notfAll:
+                notifications.append({'uid': notfOut['uid']})
+                alertPresent = True
+    if not alertPresent:
+        print('Alerts not present for %s. Need to configure Webhook.' % sitename)
     dashbJson = dashbJson.replace('REPLACEME_SITENAME', sitename)
     dashbJson = dashbJson.replace('REPLACEME_SOFTWARE', software)
-    dashbJson = dashbJson.replace('REPLACEME_NOTIFICATION_ALL', notfAll)
-    dashbJson = dashbJson.replace('REPLACEME_NOTIFICATION_SITE', notfSite)
+    dashbJson = dashbJson.replace('REPLACEME_NOTIFICATIONS', json.dumps(notifications))
     # Insert dashboard params, like UID, ID, Version, Folder
     dashbJson = insertDashboardParams(sitename, software, dashbJson, worker)
     # Write New dashboard to Grafana
@@ -303,7 +332,7 @@ def updateSiteRM(dirname, worker):
 def updateNSA(fname, worker):
     """Add All Network-RM Endpoints to Promeheus config file"""
     nrmMapping = loadYamlFile(fname)
-    for name, vals in nrmMapping['discovery'].items():
+    for _, vals in nrmMapping['discovery'].items():
         if 'sitename' in vals:
             addDashboard(vals['sitename'], 'NSI', worker)
 
