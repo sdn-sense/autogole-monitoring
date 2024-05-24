@@ -344,7 +344,7 @@ class PromModel():
             devices = conf.get(site, {}).get('switch', [])
             for device in devices:
                 # Get Switch config
-                externalsnmp = conf.get(site, {}).get('switch', {}).get(device, {}).get('external_snmp', '')
+                externalsnmp = conf.get(device, {}).get('external_snmp', '')
                 if not externalsnmp:
                     continue
                 tmpEntry = copy.deepcopy(STATE_SCRAPE)
