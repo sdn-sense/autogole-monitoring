@@ -247,7 +247,7 @@ class PromModel():
                 url = f"{redir.split('.')[0]}-{site.replace('_', '-').lower()}.nrp-nautilus.io"
                 tmpEntry = copy.deepcopy(XROOTD_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_XROOTD')
-                tmpEntry['metrics_path'] = f"/metrics"
+                tmpEntry['metrics_path'] = "/metrics"
                 tmpEntry['static_configs'][0]['targets'].append(url)
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = redir.split('.')[0]
@@ -340,6 +340,24 @@ class PromModel():
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 self.default['scrape_configs'].append(tmpEntry)
+            # Add external snmp for all network devices;
+            devices = conf.get(site, {}).get('switch', [])
+            for device in devices:
+                # Get Switch config
+                externalsnmp = conf.get(site, {}).get('switch', {}).get(device, {}).get('external_snmp', '')
+                if not externalsnmp:
+                    continue
+                tmpEntry = copy.deepcopy(STATE_SCRAPE)
+                parsedUrl = urlparse(externalsnmp)
+                tmpEntry['job_name'] = self._genName(f'{site}_NSISNMPMon')
+                tmpEntry['static_configs'][0]['targets'].append(f"{parsedUrl.scheme}://{parsedUrl.netloc}")
+                tmpEntry['metrics_path'] = parsedUrl.path
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'NSI-SNMPMon'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
+                self.default['scrape_configs'].append(tmpEntry)
+
         return
 
     def _addAgent(self, dirname):
@@ -363,13 +381,13 @@ class PromModel():
 
     def addNRM(self, fname):
         """Add All Network-RM Endpoints to Promeheus config file"""
-        def checkIfParamMissing(endpoint):
-            for key in ['hostname', 'port', 'url', 'name', 'software']:
-                if key not in endpoint:
-                    print(f'Endpoint definition does not have required param "{key}". Will not add to prometheus')
-                    print(endpoint)
-                    return True
-            return False
+        #def checkIfParamMissing(endpoint):
+        #    for key in ['hostname', 'port', 'url', 'name', 'software']:
+        #        if key not in endpoint:
+        #            print(f'Endpoint definition does not have required param "{key}". Will not add to prometheus')
+        #            print(endpoint)
+        #            return True
+        #    return False
         if not os.path.isfile(fname):
             return
         hosts = {}
