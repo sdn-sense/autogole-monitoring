@@ -350,7 +350,7 @@ class PromModel():
                 tmpEntry = copy.deepcopy(STATE_SCRAPE)
                 parsedUrl = urlparse(externalsnmp)
                 tmpEntry['job_name'] = self._genName(f'{site}_NSISNMPMon')
-                tmpEntry['static_configs'][0]['targets'].append(f"{parsedUrl.scheme}://{parsedUrl.netloc}")
+                tmpEntry['static_configs'][0]['targets'].append(parsedUrl.netloc)
                 tmpEntry['metrics_path'] = parsedUrl.path
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'NSI-SNMPMon'
