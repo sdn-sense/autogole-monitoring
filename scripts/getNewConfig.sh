@@ -8,6 +8,7 @@ while true; do
   fi
   sleep 10
   kubectl cp autogole-monitoring-config-preparer:/root/prometheus.yml prometheus.yml-new --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+  kubectl cp autogole-monitoring-config-preparer:/root/prometheus-rt.yml prometheus-rt.yml-new --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
   kubectl cp autogole-monitoring-config-preparer:/root/getConflog.log getConflog.log-new --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 done
 
@@ -17,4 +18,6 @@ kubectl delete pod autogole-monitoring-config-preparer --kubeconfig $KUBE_CONF -
 echo "To apply new config, please execute the following:"
 echo "mv prometheus.yml-new prometheus.yml"
 echo "kubectl create configmap prometheus-config --from-file=prometheus.yml=prometheus.yml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -"
+echo "mv prometheus-rt.yml-new prometheus-rt.yml"
+echo "kubectl create configmap prometheus-rt-config --from-file=prometheus.yml=prometheus-rt.yml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -"
 echo "# And finally restart the prometheus pod."

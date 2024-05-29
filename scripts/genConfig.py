@@ -465,6 +465,13 @@ class PromModel():
         """Dump New prometheus yaml file from generated output"""
         with open('prometheus.yml', 'w', encoding='utf-8') as fd:
             ydump(self.default, fd)
+        # Also need to dump file for rt mon (with 10s interval)
+        prometheus_config = copy.deepcopy(self.default)
+        prometheus_config['global']['scrape_interval'] = '10s'
+        for job in prometheus_config['scrape_configs']:
+            job['scrape_interval'] = '10s'
+        with open('prometheus-rt.yml', 'w', encoding='utf-8') as fd:
+            ydump(prometheus_config, fd)
 
 def execute():
     """Main execute"""
