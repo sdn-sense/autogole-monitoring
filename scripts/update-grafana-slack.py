@@ -271,7 +271,7 @@ def updateCreateChannels(sitename, software, dashbJson, worker, purpose=""):
     siteNorm = sitename.replace(' ', '_').replace('.', '_').lower()
     channelInfo = worker.createChannel(siteNorm)
     # 2 Generate purpose
-    monUrl = "%s%s" % (worker.config['api_url'], dashbJson['url'])
+    monUrl = "%s%s" % (worker.config['mon_url'], dashbJson['url'])
     if not purpose:
         purpose = "Alert notifications for %s %s.\nMonitoring URL: <%s>" % (software, sitename, monUrl)
     worker.setPurpose(channelInfo['id'], purpose)
@@ -349,7 +349,7 @@ def run():
     updateCreateChannels('All NSI Endpoints', '', {'url': config['api_url']}, worker)
     updateCreateChannels('Unconfigured Webhooks', '', {'url': config['api_url']},
                          worker, purpose="Alerts for Unconfigured Webhooks. If any alerts here - need admins to create a slack webhook for specific channel")
-    addDefaultDashboards(worker)
+    #addDefaultDashboards(worker)
     workdir = getSiteRMRepo()
     for dirName in os.listdir(workdir):
         siteConfDir = os.path.join(workdir, dirName)
