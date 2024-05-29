@@ -45,7 +45,7 @@ spec:
                 - k8s-igrok-06.calit2.optiputer.net
       containers:
         - name: grafana
-          image: grafana/grafana:7.5.16
+          image: grafana/grafana:9.5.19
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
