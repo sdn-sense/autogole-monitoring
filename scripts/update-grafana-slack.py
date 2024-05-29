@@ -305,12 +305,12 @@ def addDashboard(sitename, software, worker):
     dashbJson = dashbJson.replace('REPLACEME_NOTIFICATIONS', json.dumps(notifications))
     # Insert dashboard params, like UID, ID, Version, Folder
     dashbJson = insertDashboardParams(sitename, software, dashbJson, worker)
-    # Write New dashboard to Grafana
-    tmp = worker.addNewDashboard(dashbJson)
-    updateCreateChannels(sitename, software, tmp, worker)
     # Save dashboard changes to local file.
     writeFile(dst, json.dumps(dashbJson, sort_keys=True,
                               indent=2, separators=(',', ': ')))
+    # Write New dashboard to Grafana
+    tmp = worker.addNewDashboard(dashbJson)
+    updateCreateChannels(sitename, software, tmp, worker)
 
 def updateSiteRM(dirname, worker):
     """Loop via all SiteRM configs"""
