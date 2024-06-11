@@ -261,7 +261,7 @@ class PromModel():
             return
         conf = loadYamlFile(confFile)
         webdomain = conf.get('general', {}).get('webdomain', '')
-        origwebdomain = webdomain
+        origwebdomain = webdomain.strip('/')
         probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
                                                         'icmp_v4', 'icmp_v6'])
         if webdomain.startswith('https://'):
@@ -298,11 +298,31 @@ class PromModel():
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
                 self.default['scrape_configs'].append(tmpEntry)
+                # Query models api and get model and timing (output ignored)
+                tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
+                tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V4')
+                tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
+                tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
+                self.default['scrape_configs'].append(tmpEntry)
             if 'https_v6_siterm_2xx' in probes and ipv6_addr:
                 # Check that it has IPv6
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_HTTPS_V6')
                 tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
+                tmpEntry['relabel_configs'][0]['replacement'] = site
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
+                tmpEntry['relabel_configs'][2]['replacement'] = lat
+                tmpEntry['relabel_configs'][3]['replacement'] = lng
+                tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
+                self.default['scrape_configs'].append(tmpEntry)
+                # Query models api and get model and timing (output ignored)
+                tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
+                tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V6')
+                tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
