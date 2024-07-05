@@ -72,7 +72,7 @@ kubectl create configmap prometheus-config --from-file=prometheus.yml=prometheus
 ```
 To Update Grafana ini config file:
 ```
-kubectl create configmap grafana-config --from-file=grafana.ini=configs/grafana.ini --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
+kubectl create configmap grafana-config --from-file=grafana.ini=configs/grafana.ini --from-file=grafana.ini-default=configs/grafana.ini-default --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE --dry-run=client -o yaml | kubectl apply --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE -f -
 ```
 
 # Grafana template updates (for default - all):

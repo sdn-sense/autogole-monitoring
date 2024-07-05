@@ -14,34 +14,242 @@ global:
 
 # A scrape configuration containing exactly one endpoint to scrape
 scrape_configs:
-  - job_name: ESnet_SNMPMon
-    metrics_path: /metrics
-    relabel_configs:
-      - replacement: ESnet
-        source_labels:
-          - __address__
-        target_label: sitename
-      - replacement: NSI-SNMPMon
-        source_labels:
-          - __address__
-        target_label: software
-      - replacement: 37.876
-        source_labels:
-          - __address__
-        target_label: latitude
-      - replacement: -122.253
-        source_labels:
-          - __address__
-        target_label: longitude
-    scheme: https
-    scrape_interval: 30s
-    static_configs:
-      - targets:
-          - nsi-snmpmon-esnet.nrp-nautilus.io
-    tls_config:
-      cert_file: /etc/siterm-cert.pem
-      insecure_skip_verify: true
-      key_file: /etc/siterm-privkey.pem
+- job_name: ESnet_SNMPMon
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: ESnet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NSI-SNMPMon
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 37.876
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -122.253
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi-snmpmon-esnet.nrp-nautilus.io
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: T2_US_SDSC_POD_0
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-01-111.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_1
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-02-111.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_2
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-03-111.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_3
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-04-111.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_4
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-01-112.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_5
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-02-112.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_6
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-03-112.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_7
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-04-112.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_8
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-01-113.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_9
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-02-113.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_10
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-03-113.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_11
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-04-113.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_12
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-01-114.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_13
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-02-114.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_14
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-03-114.sdsc.optiputer.net:9100
+- job_name: T2_US_SDSC_POD_15
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - xrootd-sense-ucsd-04-114.sdsc.optiputer.net:9100
 # Any manual added scrap configs will remain;
 # This is what SENSE will add into scrape configuration for FE Prometheus:
 #  - job_name: <SITENAME>_<TYPE>

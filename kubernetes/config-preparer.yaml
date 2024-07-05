@@ -14,7 +14,7 @@ spec:
         name: siterm-agent
         resources: {}
         command: ["/bin/sh"]
-        args: ["-c", "cd /root; git clone https://github.com/sdn-sense/autogole-monitoring; cd autogole-monitoring/; pip3 install -r requirements-config-prepare.txt; cd scripts/; python3 genConfig.py &> getConflog.log; cp getConflog.log /root; cp prometheus.yml /root; while true; do echo done; sleep 10;done"]
+        args: ["-c", "cd /root; git clone https://github.com/sdn-sense/autogole-monitoring; cd autogole-monitoring/; pip3 install -r requirements-config-prepare.txt; cd scripts/; python3 genConfig.py &> getConflog.log; cp getConflog.log /root; cp prometheus.yml /root; cp prometheus-rt.yml /root; while true; do echo done; sleep 10;done"]
         securityContext:
           capabilities:
             add:
