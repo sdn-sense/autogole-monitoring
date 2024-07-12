@@ -109,7 +109,7 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 #   prometheus_query: '{instance="k8s-gen4-07.ultralight.org", service="node-exporter"}'
 # Which in that case it will use that to scrape metrics
 PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
-                              'honour_labels': 'true',
+                              'honor_labels': True,
                               'metrics_path': '/federate', # Default path (might be replaced if url diff https://url/federatenew)
                               'scheme': 'http', # Default scheme (might be replaced if url diff, e.g. https://...)
                               'static_configs': [{'targets': []}],
