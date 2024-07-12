@@ -424,7 +424,7 @@ class PromModel():
                 tmpEntry['job_name'] = self._genName(f'{sitename}_PROMFED')
                 tmpEntry['metrics_path'] = parsedurl.path
                 tmpEntry['scheme'] = parsedurl.scheme
-                tmpEntry['params']['match[]'] = ['{instance=~".+"}']
+                tmpEntry['params']['match[]'] = [promQuery]
                 tmpEntry['static_configs'][0]['targets'].append(parsedurl.netloc)
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
