@@ -103,6 +103,24 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                              'target_label': 'software',
                                              'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
+# Agent might also have prometheus_federate defined in general section
+# general:
+#   prometheus_federate:
+#   prometheus_query: '{instance="k8s-gen4-07.ultralight.org", service="node-exporter"}'
+# Which in that case it will use that to scrape metrics
+PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                              'honour_labels': 'true',
+                              'metrics_path': '/federate', # Default path (might be replaced if url diff https://url/federatenew)
+                              'scheme': 'http', # Default scheme (might be replaced if url diff, e.g. https://...)
+                              'static_configs': [{'targets': []}],
+                              'params': {'match[]': []},  # Match will be added based on instance
+                              'relabel_configs': [{'source_labels': ['__address__'],
+                                             'target_label': 'sitename',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'},
+                                            {'source_labels': ['__address__'],
+                                             'target_label': 'software',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'}]}
+
 # XrootD Metadata scrape template
 XROOTD_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                 'scrape_interval': '60s',
@@ -388,6 +406,8 @@ class PromModel():
         if not conf:
             return
         nodeExporter = conf.get('general', {}).get('node_exporter', '')
+        promFederate = conf.get('general', {}).get('prometheus_federate', '')
+        promQuery = conf.get('general', {}).get('prometheus_query', '')
         site = conf.get('general', {}).get('sitename', '')
         if site and nodeExporter:
             for sitename in site:
@@ -397,6 +417,20 @@ class PromModel():
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
                 self.default['scrape_configs'].append(tmpEntry)
+        elif site and promFederate and promQuery:
+            for sitename in site:
+                parsedurl = urlparse(promFederate)
+                tmpEntry = copy.deepcopy(PROMETHEUS_FEDERATE_SCRAPE)
+                tmpEntry['job_name'] = self._genName(f'{sitename}_PROMFED')
+                tmpEntry['metrics_path'] = parsedurl.path
+                tmpEntry['scheme'] = parsedurl.scheme
+                tmpEntry['params']['match[]'] = ['{instance=~".+"}']
+                tmpEntry['static_configs'][0]['targets'].append(parsedurl.netloc)
+                tmpEntry['relabel_configs'][0]['replacement'] = sitename
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
+                self.default['scrape_configs'].append(tmpEntry)
+        else:
+            print('No Node Exporter or Prometheus Federate defined in Agent Config')
         return
 
     def addNRM(self, fname):
