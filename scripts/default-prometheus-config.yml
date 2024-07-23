@@ -42,6 +42,34 @@ scrape_configs:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
     key_file: /etc/siterm-privkey.pem
+- job_name: Internet2_SNMPMon
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NSI-SNMPMon
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 37.876
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -122.253
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi-snmpmon-internet2.nrp-nautilus.io
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
 - job_name: T2_US_SDSC_POD_0
   relabel_configs:
   - replacement: T2_US_SDSC
