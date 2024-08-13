@@ -81,6 +81,9 @@ spec:
             - name: grafana-config-vol
               mountPath: /etc/grafana/grafana.ini
               subPath: grafana.ini
+            - name: grafana-config-vol
+              mountPath: /usr/share/grafana/conf/defaults.ini
+              subPath: grafana.ini-default
             - mountPath: /etc/grid-security/hostcert.pem
               name: hostcert
               readOnly: true
