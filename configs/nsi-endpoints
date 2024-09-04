@@ -60,9 +60,6 @@ discovery:
    location:
      latitude: "35.672855"
      longitude: "139.817413"
- "urn:ogf:network:cipo.rnp.br:2014:nsa:safnari":
-   sitename: RNP-Brazil
-   urls: ["https://agg.cipo.rnp.br/nsa-discovery"]
  "urn:ogf:network:canarie.ca:2017:nsa":
    sitename: Canarie
    urls: ["https://opennsa.canarie.ca:9443/NSI/discovery.xml"]

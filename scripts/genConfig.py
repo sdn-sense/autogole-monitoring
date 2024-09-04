@@ -430,18 +430,11 @@ class PromModel():
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
                 self.default['scrape_configs'].append(tmpEntry)
         else:
-            print('No Node Exporter or Prometheus Federate defined in Agent Config')
+            print(f'No Node Exporter or Prometheus Federate defined in Agent Config. {confFile} {site}')
         return
 
     def addNRM(self, fname):
         """Add All Network-RM Endpoints to Promeheus config file"""
-        #def checkIfParamMissing(endpoint):
-        #    for key in ['hostname', 'port', 'url', 'name', 'software']:
-        #        if key not in endpoint:
-        #            print(f'Endpoint definition does not have required param "{key}". Will not add to prometheus')
-        #            print(endpoint)
-        #            return True
-        #    return False
         if not os.path.isfile(fname):
             return
         hosts = {}

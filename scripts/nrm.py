@@ -82,6 +82,8 @@ class allNSIEndpoints():
 
     def parseDDS(self, ddsurl):
         """Parse DDS and get all URLs from it"""
+        print('DDSURL', ddsurl)
+        print('-'*50)
         response, respType = getData(ddsurl)
         if not response:
             return
@@ -100,6 +102,7 @@ class allNSIEndpoints():
             decodedmsg = decode_msg(base64msg)
             decodedjson = xml_to_json(decodedmsg)
             self.parseIndividualData(decodedjson, nsa)
+        print('-'*50)
 
     def execute(self):
         """Main execute - query all NSI Endpoints and get URLS"""
