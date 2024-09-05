@@ -25,7 +25,7 @@ spec:
         - name: XRD_PROTOCOLS
           value: davs,https
         - name: XRD_MODES
-          value: read,write
+          value: read,write,delete
         - name: XRD_WORKDIR
           value: /srv/
         - name: XRD_PATH
