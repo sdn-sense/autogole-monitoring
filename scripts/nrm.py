@@ -38,16 +38,22 @@ def getData(url):
         return response, 0
     except requests.exceptions.ConnectionError as ex:
         print('Getdata-error-verify-bundle', ex)
+    except requests.exceptions.ReadTimeout as ex:
+        print('Getdata-error-verify-bundle-timeout', ex)
     try:
         response = requests.get(url, cert=cert, verify=False, timeout=5)
         return response, 1
     except requests.exceptions.ConnectionError as ex:
         print('Getdata-error-verify-false', ex)
+    except requests.exceptions.ReadTimeout as ex:
+        print('Getdata-error-verify-false-timeout', ex)
     try:
         response = requests.get(url, timeout=5)
         return response, 2
     except requests.exceptions.ConnectionError as ex:
         print('Getdata-error-nocert-key', ex)
+    except requests.exceptions.ReadTimeout as ex:
+        print('Getdata-error-nocert-key-timeout', ex)
     return {}, -1
 
 class allNSIEndpoints():
