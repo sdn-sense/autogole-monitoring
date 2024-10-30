@@ -306,6 +306,25 @@ scrape_configs:
   static_configs:
   - targets:
     - xrootd-sense-ucsd-04-114.sdsc.optiputer.net:9100
+- job_name: vpp
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_CERN
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: FRR_VPP
+    source_labels:
+    - __address__
+    target_label: software
+  - source_labels:
+    - __param_target
+    target_label: instance
+  static_configs:
+  - targets:
+    - "[2602:fcfb:1d:fff0::2]:1234"
+
+
 # Any manual added scrap configs will remain;
 # This is what SENSE will add into scrape configuration for FE Prometheus:
 #  - job_name: <SITENAME>_<TYPE>
