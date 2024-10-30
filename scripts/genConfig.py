@@ -400,10 +400,13 @@ class PromModel():
 
     def _addAgent(self, dirname):
         confFile = os.path.join(dirname, 'main.yaml')
+        print(f'Load {confFile}')
         if not os.path.isfile(confFile):
+            print('File does not exist. Continue')
             return
         conf = loadYamlFile(confFile)
         if not conf:
+            print(f'Failed to load {confFile}. Empty return')
             return
         nodeExporter = conf.get('general', {}).get('node_exporter', '')
         promFederate = conf.get('general', {}).get('prometheus_federate', '')
