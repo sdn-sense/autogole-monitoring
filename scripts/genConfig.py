@@ -137,6 +137,20 @@ XROOTD_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                      'target_label': 'software',
                                      'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
+# VPP Exporter - Will query VPP Exporter endpoint and get VPP Metrics
+VPP_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                       'scrape_interval': '60s',
+                       'static_configs': [{'targets': []}],
+                       'metrics_path': 'WILLBEREPLACEDBYCODE',
+                       'relabel_configs': [{'source_labels': ['__address__'],
+                                            'target_label': 'sitename',
+                                            'replacement': 'WILLBEREPLACEDBYCODE'},
+                                           {'source_labels': ['__address__'],
+                                            'target_label': 'endpoint',
+                                            'replacement': 'WILLBEREPLACEDBYCODE'},
+                                           {'source_labels': ['__address__'],
+                                             'target_label': 'software',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 # ===================================================================================
 #                   NETWORK_RM CONFIGS
@@ -271,6 +285,29 @@ class PromModel():
                 tmpEntry['relabel_configs'][1]['replacement'] = redir.split('.')[0]
                 tmpEntry['relabel_configs'][2]['replacement'] = 'XRootD'
                 self.default['scrape_configs'].append(tmpEntry)
+
+    def _addVPP(self, dirname):
+        confFile = os.path.join(dirname, 'main.yaml')
+        if not os.path.isfile(confFile):
+            return
+        conf = loadYamlFile(confFile)
+        sites = conf.get('general', {}).get('sites', [])
+        for site in sites:
+            # Get XrootD Metadata information
+            vppurl = conf.get(site, {}).get('vpp_exporter', {})
+            if not vppurl:
+                continue
+            tmpEntry = copy.deepcopy(VPP_EXPORTER_SCRAPE)
+
+            tmpEntry['job_name'] = self._genName(f'{site}_VPP')
+            tmpEntry['metrics_path'] = "/metrics"
+            tmpEntry['static_configs'][0]['targets'].append(vppurl)
+            tmpEntry['relabel_configs'][0]['replacement'] = site
+            tmpEntry['relabel_configs'][1]['replacement'] = vppurl
+            tmpEntry['relabel_configs'][2]['replacement'] = 'VPP'
+            self.default['scrape_configs'].append(tmpEntry)
+
+
 
 
     def _addFE(self, dirname):
@@ -510,6 +547,7 @@ class PromModel():
                 tmpD = os.path.join(dirname, val.get('config'))
                 self._addFE(tmpD)
                 self._addXrootD(tmpD)
+                self._addVPP(tmpD)
 
     def dump(self):
         """Dump New prometheus yaml file from generated output"""
