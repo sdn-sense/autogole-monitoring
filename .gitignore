@@ -1,3 +1,11 @@
+# Ignore local files (real configurations)
+kubernetes/configs/grafana.ini
+kubernetes/secrets/networkrm-cert.pem
+kubernetes/secrets/networkrm-privkey.pem
+kubernetes/secrets/siterm-cert.pem
+kubernetes/secrets/siterm-privkey.pem
+kubernetes/secrets/web.yml
+scripts/config.yaml
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
