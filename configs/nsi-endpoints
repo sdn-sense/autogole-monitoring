@@ -24,12 +24,6 @@ discovery:
  "urn:ogf:network:sinet.ac.jp:2013:nsa:nsi-aggr":
    sitename: SinetNSA
    urls: ["https://aggr.nsi.nii.ac.jp:28443/NSI/sinet-nsi-aggr_2013-nsa.xml"]
- "urn:ogf:network:snvaca.pacificwave.net:2016:nsa":
-   sitename: PacificWave
-   urls: ["https://nsi0.snvaca.pacificwave.net:9443/NSI/discovery.xml"]
-   location:
-     latitude: "37.3734"
-     longitude: "-121.99"
  "urn:ogf:network:snvaca.pacificwave.net:2016:pw-snvl2-1":
    sitename: PacificWave
    urls: ["https://nsi1.snvaca.pacificwave.net:9443/NSI/discovery.xml"]
@@ -76,12 +70,6 @@ discovery:
    location:
      latitude: "25.7581"
      longitude: "-80.3762"
- "urn:ogf:network:lsanca.pacificwave.net:2016:nsa":
-   sitename: PacificWave
-   urls: ["https://nsi0.lsanca.pacificwave.net:9443/NSI/discovery.xml"]
-   location:
-     latitude: "34.0488"
-     longitude: "-118.262"
  "urn:ogf:network:cipo.rnp.br:2014:nsa":
    sitename: RNP-Brazil
    urls: ["http://idc.cipo.rnp.br/rnp-nsa.xml"]
