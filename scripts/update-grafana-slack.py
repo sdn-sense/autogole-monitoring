@@ -241,6 +241,10 @@ def insertDashboardParams(sitename, software, dashbJson, worker):
             dashbJson['version'] = str(int(dashboard['version']) + 1)
         else:
             dashbJson['version'] = 1
+    else:
+        # Dashboard not present, but we need to override id
+        dashbJson['id'] = None
+        dashbJson['uid'] = None
     dashbJson = {'dashboard': dashbJson, 'overwrite': True}
     folderID = worker.getFolderID(software)
     if folderID:
