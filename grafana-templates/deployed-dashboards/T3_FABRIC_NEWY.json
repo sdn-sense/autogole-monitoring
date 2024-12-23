@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 6,
+    "id": 4784,
     "iteration": 1716979852682,
     "links": [],
     "liveNow": false,
@@ -109,7 +109,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_US_FIU\"}",
+            "expr": "probe_success{sitename=~\"T3_FABRIC_NEWY\"}",
             "interval": "",
             "legendFormat": "{{target}}",
             "refId": "A"
@@ -172,7 +172,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T3_US_FIU\"}) ",
+            "expr": " sum by (version) (running_version_info{sitename=\"T3_FABRIC_NEWY\"}) ",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -215,15 +215,12 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Failure to query Probe for T3_US_FIU",
-          "name": "Probe Success alert for T3_US_FIU",
+          "message": "Failure to query Probe for T3_FABRIC_NEWY",
+          "name": "Probe Success alert for T3_FABRIC_NEWY",
           "noDataState": "alerting",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -305,7 +302,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_US_FIU\"}",
+            "expr": "probe_success{sitename=~\"T3_FABRIC_NEWY\"}",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -398,7 +395,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_FIU\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_FABRIC_NEWY\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -491,7 +488,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_FIU\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_FABRIC_NEWY\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -532,15 +529,12 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Certificates expire in less than a week for T3_US_FIU",
-          "name": "SSL Expiry alert for T3_US_FIU",
+          "message": "Certificates expire in less than a week for T3_FABRIC_NEWY",
+          "name": "SSL Expiry alert for T3_FABRIC_NEWY",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -625,14 +619,14 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_US_FIU\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_FABRIC_NEWY\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
           },
           {
             "exemplar": true,
-            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T3_US_FIU\"} - time()",
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T3_FABRIC_NEWY\"} - time()",
             "hide": false,
             "interval": "",
             "legendFormat": "{{hostname}}",
@@ -723,7 +717,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T3_US_FIU\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"T3_FABRIC_NEWY\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -787,15 +781,12 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "HTTP Query Status code error for T3_US_FIU",
-          "name": "HTTP Status Code alert for T3_US_FIU",
+          "message": "HTTP Query Status code error for T3_FABRIC_NEWY",
+          "name": "HTTP Status Code alert for T3_FABRIC_NEWY",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -877,7 +868,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"T3_US_FIU\"}",
+            "expr": "probe_http_status_code{sitename=~\"T3_FABRIC_NEWY\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -946,7 +937,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_US_FIU\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_FABRIC_NEWY\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1037,7 +1028,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "service_runtime{sitename=\"T3_US_FIU\"}",
+            "expr": "service_runtime{sitename=\"T3_FABRIC_NEWY\"}",
             "interval": "",
             "legendFormat": "{{hostname}} {{servicename}}",
             "refId": "A"
@@ -1078,14 +1069,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T3_US_FIU",
+          "name": "SiteRM LookUpService Not OK for T3_FABRIC_NEWY",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -1169,7 +1157,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1210,14 +1198,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T3_US_FIU",
+          "name": "SiteRM ProvisioningService Not OK for T3_FABRIC_NEWY",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -1301,7 +1286,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1391,7 +1376,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1432,14 +1417,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Agent Not OK for T3_US_FIU",
+          "name": "SiteRM Agent Not OK for T3_FABRIC_NEWY",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -1523,7 +1505,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1564,14 +1546,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Debugger Not OK for T3_US_FIU",
+          "name": "SiteRM Debugger Not OK for T3_FABRIC_NEWY",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -1655,7 +1634,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1696,14 +1675,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Ruler Not OK for T3_US_FIU",
+          "name": "SiteRM Ruler Not OK for T3_FABRIC_NEWY",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "GCUtKeLIk"
             }
           ]
         },
@@ -1787,7 +1763,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1875,7 +1851,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T3_US_FIU\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
@@ -1963,7 +1939,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T3_US_FIU\", service_state!=\"OK\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T3_FABRIC_NEWY\", service_state!=\"OK\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
@@ -2053,7 +2029,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T3_US_FIU\", key=\"vms\"}",
+            "expr": "memory_usage{sitename=\"T3_FABRIC_NEWY\", key=\"vms\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "VMS {{servicename}}",
@@ -2144,7 +2120,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T3_US_FIU\", key=~\"rss\"}",
+            "expr": "memory_usage{sitename=\"T3_FABRIC_NEWY\", key=~\"rss\"}",
             "interval": "",
             "legendFormat": "RSS {{servicename}}",
             "refId": "A"
@@ -2206,7 +2182,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T3_US_FIU\"}) ",
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T3_FABRIC_NEWY\"}) ",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2312,13 +2288,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_FIU\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T3_FABRIC_NEWY\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (ALL for T3_US_FIU)",
+        "title": "Network Status VSW (ALL for T3_FABRIC_NEWY)",
         "type": "timeseries"
       },
       {
@@ -2399,13 +2375,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_FIU\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T3_FABRIC_NEWY\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (ALL for T3_US_FIU)",
+        "title": "Network Status RST (ALL for T3_FABRIC_NEWY)",
         "type": "timeseries"
       },
       {
@@ -2486,13 +2462,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_FIU\", network_status!=\"activated\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T3_FABRIC_NEWY\", network_status!=\"activated\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T3_US_FIU)",
+        "title": "Network Status VSW (Not activated for T3_FABRIC_NEWY)",
         "type": "timeseries"
       },
       {
@@ -2573,13 +2549,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_FIU\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T3_FABRIC_NEWY\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T3_US_FIU)",
+        "title": "Network Status VSW (Not activated for T3_FABRIC_NEWY)",
         "type": "timeseries"
       },
       {
@@ -2680,7 +2656,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2769,7 +2745,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2858,7 +2834,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2949,7 +2925,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_US_FIU\"}",
+            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_FABRIC_NEWY\"}",
             "interval": "",
             "legendFormat": "{{vlan}} {{key1}} {{key2}}",
             "refId": "A"
@@ -3040,7 +3016,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3131,7 +3107,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3222,7 +3198,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3313,7 +3289,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3404,7 +3380,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3495,7 +3471,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3586,7 +3562,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3677,7 +3653,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3768,7 +3744,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3859,7 +3835,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3950,7 +3926,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4041,7 +4017,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_US_FIU\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_FABRIC_NEWY\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4055,7 +4031,7 @@
     "schemaVersion": 36,
     "style": "dark",
     "tags": [
-      "T3_US_FIU",
+      "T3_FABRIC_NEWY",
       "SiteRM"
     ],
     "templating": {
@@ -4074,7 +4050,7 @@
             "type": "prometheus",
             "uid": "qjScxmmVz"
           },
-          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_FIU\"}, hostname)",
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_NEWY\"}, hostname)",
           "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
           "hide": 2,
           "includeAll": true,
@@ -4083,7 +4059,7 @@
           "name": "switch",
           "options": [],
           "query": {
-            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_FIU\"}, hostname)",
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_NEWY\"}, hostname)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 1,
@@ -4103,8 +4079,8 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T3_US_FIU",
-    "uid": "6dy9bmmVz",
+    "title": "T3_FABRIC_NEWY",
+    "uid": "b8c869d1-8aad-4617-9498-7d27ed7f48ef",
     "version": 1,
     "weekStart": ""
   },

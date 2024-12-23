@@ -16,7 +16,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 41,
+    "id": 4549,
     "links": [],
     "panels": [
       {
@@ -952,10 +952,10 @@
     "timepicker": {},
     "timezone": "",
     "title": "TWAREN",
-    "uid": "4Gnved4Vz",
+    "uid": "c012cfd1-ba1a-4e4e-9cd7-347fde8731b4",
     "version": 1
   },
   "folderId": 2,
-  "message": "Script changes made on 2024-05-29. See git for changes",
+  "message": "Script changes made on 2024-12-23. See git for changes",
   "overwrite": true
 }
