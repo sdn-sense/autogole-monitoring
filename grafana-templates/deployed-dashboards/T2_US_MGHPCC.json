@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 15,
+    "id": null,
     "iteration": 1716979852682,
     "links": [],
     "liveNow": false,
@@ -109,7 +109,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T2_US_SDSC\"}",
+            "expr": "probe_success{sitename=~\"T2_US_MGHPCC\"}",
             "interval": "",
             "legendFormat": "{{target}}",
             "refId": "A"
@@ -172,7 +172,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T2_US_SDSC\"}) ",
+            "expr": " sum by (version) (running_version_info{sitename=\"T2_US_MGHPCC\"}) ",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -215,18 +215,12 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Failure to query Probe for T2_US_SDSC",
-          "name": "Probe Success alert for T2_US_SDSC",
+          "message": "Failure to query Probe for T2_US_MGHPCC",
+          "name": "Probe Success alert for T2_US_MGHPCC",
           "noDataState": "alerting",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -308,7 +302,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T2_US_SDSC\"}",
+            "expr": "probe_success{sitename=~\"T2_US_MGHPCC\"}",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -401,7 +395,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_SDSC\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_MGHPCC\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -494,7 +488,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_SDSC\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_MGHPCC\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -535,18 +529,12 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Certificates expire in less than a week for T2_US_SDSC",
-          "name": "SSL Expiry alert for T2_US_SDSC",
+          "message": "Certificates expire in less than a week for T2_US_MGHPCC",
+          "name": "SSL Expiry alert for T2_US_MGHPCC",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -631,14 +619,14 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T2_US_SDSC\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T2_US_MGHPCC\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
           },
           {
             "exemplar": true,
-            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T2_US_SDSC\"} - time()",
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T2_US_MGHPCC\"} - time()",
             "hide": false,
             "interval": "",
             "legendFormat": "{{hostname}}",
@@ -729,7 +717,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T2_US_SDSC\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"T2_US_MGHPCC\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -793,18 +781,12 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "HTTP Query Status code error for T2_US_SDSC",
-          "name": "HTTP Status Code alert for T2_US_SDSC",
+          "message": "HTTP Query Status code error for T2_US_MGHPCC",
+          "name": "HTTP Status Code alert for T2_US_MGHPCC",
           "noDataState": "no_data",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -886,7 +868,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"T2_US_SDSC\"}",
+            "expr": "probe_http_status_code{sitename=~\"T2_US_MGHPCC\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -955,7 +937,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T2_US_SDSC\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T2_US_MGHPCC\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1046,7 +1028,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "service_runtime{sitename=\"T2_US_SDSC\"}",
+            "expr": "service_runtime{sitename=\"T2_US_MGHPCC\"}",
             "interval": "",
             "legendFormat": "{{hostname}} {{servicename}}",
             "refId": "A"
@@ -1087,17 +1069,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T2_US_SDSC",
+          "name": "SiteRM LookUpService Not OK for T2_US_MGHPCC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -1181,7 +1157,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1222,17 +1198,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T2_US_SDSC",
+          "name": "SiteRM ProvisioningService Not OK for T2_US_MGHPCC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -1316,7 +1286,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1406,7 +1376,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1447,17 +1417,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Agent Not OK for T2_US_SDSC",
+          "name": "SiteRM Agent Not OK for T2_US_MGHPCC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -1541,7 +1505,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1582,17 +1546,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Debugger Not OK for T2_US_SDSC",
+          "name": "SiteRM Debugger Not OK for T2_US_MGHPCC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -1676,7 +1634,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1717,17 +1675,11 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Ruler Not OK for T2_US_SDSC",
+          "name": "SiteRM Ruler Not OK for T2_US_MGHPCC",
           "noDataState": "ok",
           "notifications": [
             {
               "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "MCvu06YSz"
-            },
-            {
-              "uid": "LWdX0eYIz"
             }
           ]
         },
@@ -1811,7 +1763,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1899,7 +1851,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T2_US_SDSC\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T2_US_MGHPCC\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
@@ -1987,7 +1939,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T2_US_SDSC\", service_state!=\"OK\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T2_US_MGHPCC\", service_state!=\"OK\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
@@ -2077,7 +2029,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T2_US_SDSC\", key=\"vms\"}",
+            "expr": "memory_usage{sitename=\"T2_US_MGHPCC\", key=\"vms\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "VMS {{servicename}}",
@@ -2168,7 +2120,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T2_US_SDSC\", key=~\"rss\"}",
+            "expr": "memory_usage{sitename=\"T2_US_MGHPCC\", key=~\"rss\"}",
             "interval": "",
             "legendFormat": "RSS {{servicename}}",
             "refId": "A"
@@ -2230,7 +2182,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T2_US_SDSC\"}) ",
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T2_US_MGHPCC\"}) ",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2336,13 +2288,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_SDSC\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_MGHPCC\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (ALL for T2_US_SDSC)",
+        "title": "Network Status VSW (ALL for T2_US_MGHPCC)",
         "type": "timeseries"
       },
       {
@@ -2423,13 +2375,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_SDSC\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_MGHPCC\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (ALL for T2_US_SDSC)",
+        "title": "Network Status RST (ALL for T2_US_MGHPCC)",
         "type": "timeseries"
       },
       {
@@ -2510,13 +2462,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_SDSC\", network_status!=\"activated\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_MGHPCC\", network_status!=\"activated\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T2_US_SDSC)",
+        "title": "Network Status VSW (Not activated for T2_US_MGHPCC)",
         "type": "timeseries"
       },
       {
@@ -2597,13 +2549,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_SDSC\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_MGHPCC\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T2_US_SDSC)",
+        "title": "Network Status VSW (Not activated for T2_US_MGHPCC)",
         "type": "timeseries"
       },
       {
@@ -2704,7 +2656,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2793,7 +2745,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2882,7 +2834,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2973,7 +2925,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_SDSC\"}",
+            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_MGHPCC\"}",
             "interval": "",
             "legendFormat": "{{vlan}} {{key1}} {{key2}}",
             "refId": "A"
@@ -3064,7 +3016,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3155,7 +3107,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3246,7 +3198,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3337,7 +3289,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3428,7 +3380,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3519,7 +3471,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3610,7 +3562,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3701,7 +3653,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3792,7 +3744,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3883,7 +3835,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3974,7 +3926,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4065,7 +4017,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_SDSC\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_MGHPCC\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4079,7 +4031,7 @@
     "schemaVersion": 36,
     "style": "dark",
     "tags": [
-      "T2_US_SDSC",
+      "T2_US_MGHPCC",
       "SiteRM"
     ],
     "templating": {
@@ -4098,7 +4050,7 @@
             "type": "prometheus",
             "uid": "qjScxmmVz"
           },
-          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_SDSC\"}, hostname)",
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_MGHPCC\"}, hostname)",
           "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
           "hide": 2,
           "includeAll": true,
@@ -4107,7 +4059,7 @@
           "name": "switch",
           "options": [],
           "query": {
-            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_SDSC\"}, hostname)",
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_MGHPCC\"}, hostname)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 1,
@@ -4127,9 +4079,9 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T2_US_SDSC",
-    "uid": "1s99biiVk",
-    "version": 1,
+    "title": "T2_US_MGHPCC",
+    "uid": null,
+    "version": 42,
     "weekStart": ""
   },
   "folderId": 1,
