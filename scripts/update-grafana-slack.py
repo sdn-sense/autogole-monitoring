@@ -141,7 +141,7 @@ class GrafanaUpdate():
             return self.folders[name]['id']
         if name != 'General':
             # General is default and not returned by Grafana API
-            print("Folder %s is not configured." % name)
+            print(f"Folder {name} is not configured.")
         return None
 
     def getAlerts(self):
@@ -161,7 +161,7 @@ class GrafanaUpdate():
         """Create Alerts in Grafana"""
         def createSlackAlert(key, vals):
             if 'url' not in vals or 'recipient' not in vals:
-                print('Alert channel wrongly configured for %s. missing url or recipient' % key)
+                print(f'Alert channel wrongly configured for {key}. missing url or recipient')
                 return {}
             out = {'type': '', 'frequency': '', 'sendReminder': False,
                    'isDefault': False, 'settings': {'url': '', 'recipient': ''}}
@@ -174,7 +174,7 @@ class GrafanaUpdate():
             return out
         def createEmailAlert(key, vals):
             if 'addresses' not in vals:
-                print('Alert channel wrongly configured for %s. missing addresses key' % key)
+                print(f'Alert channel wrongly configured for {key}. missing addresses key')
                 return {}
             out = {'type': '', 'frequency': '', 'sendReminder': False,
                    'isDefault': False, 'settings': {'singleEmail': '', 'addresses': ''}}
@@ -249,7 +249,7 @@ def insertDashboardParams(sitename, software, dashbJson, worker):
     folderID = worker.getFolderID(software)
     if folderID:
         dashbJson['folderId'] = folderID
-    dashbJson['message'] = "Script changes made on %s. See git for changes" % date.today()
+    dashbJson['message'] = f"Script changes made on {date.today()}. See git for changes"
     return dashbJson
 
 
@@ -259,7 +259,7 @@ def addDefaultDashboards(worker):
     for dashbFile, dashName in {'general-all-status.json': 'All Status (Variable)',
                                'general-full-dtn-monitoring.json': 'Full DTN Monitoring (Variable)',
                                'general-home.json': 'Home'}.items():
-        dashbJson = readFile('../grafana-templates/dashboards/%s' % dashbFile)
+        dashbJson = readFile(f'../grafana-templates/dashboards/{dashbFile}')
         dashbJson = dashbJson.replace('REPLACEME_FOLDERID_SiteRM', str(worker.getFolderID('SiteRM')))
         dashbJson = dashbJson.replace('REPLACEME_FOLDERID_NSI', str(worker.getFolderID('NSI')))
         dashbJson = insertDashboardParams(dashName, 'General', dashbJson, worker)
@@ -275,35 +275,37 @@ def updateCreateChannels(sitename, software, dashbJson, worker, purpose=""):
     siteNorm = sitename.replace(' ', '_').replace('.', '_').lower()
     channelInfo = worker.createChannel(siteNorm)
     # 2 Generate purpose
-    monUrl = "%s%s" % (worker.config['mon_url'], dashbJson['url'])
+    monUrl = f"{worker.config['mon_url']}{dashbJson['url']}"
     if not purpose:
-        purpose = "Alert notifications for %s %s.\nMonitoring URL: <%s>" % (software, sitename, monUrl)
+        purpose = f"Alert notifications for {software} {sitename}.\nMonitoring URL: <{monUrl}>"
     worker.setPurpose(channelInfo['id'], purpose)
     # 3 Upload new purpose
 
 
-def addDashboard(sitename, software, worker):
+def addDashboard(sitename, software, worker, **kwargs):
     """Add SiteRM Dashboards to Grafana"""
     # 0. Get dashboard default template
-    print("Update dashboard for %s" % sitename)
-    src = '../grafana-templates/dashboards/default-%s.json' % software
-    if os.path.isfile('../grafana-templates/dashboards/overwrite-%s.json' % sitename):
-        print('GRAFANA Template overwrite for %s' % sitename)
-        src = '../grafana-templates/dashboards/overwrite-%s.json' % sitename
-    dst = '../grafana-templates/deployed-dashboards/%s.json' % sitename
+    print(f"Update dashboard for {sitename}")
+    src = f'../grafana-templates/dashboards/default-{software}.json'
+    if 'vppurl' in kwargs and kwargs['vppurl']:
+        src = f'../grafana-templates/dashboards/default-{software}-vpp.json'
+    if os.path.isfile(f'../grafana-templates/dashboards/overwrite-{sitename}.json'):
+        print(f'GRAFANA Template overwrite for {sitename}')
+        src = f'../grafana-templates/dashboards/overwrite-{sitename}.json'
+    dst = f'../grafana-templates/deployed-dashboards/{sitename}.json'
     dashbJson = readFile(src)
     # 1. Get Alarm IDs and replace REPLACEME_SITENAME, REPLACEME_SOFTWARE,
     # REPLACEME_NOTIFICATION_ALL, REPLACEME_NOTIFICATION_SITE
     notifications = []
     alertPresent = False
-    for notif in ['ALL_%s_ENDPOINTS' % software, sitename]:
+    for notif in [f'ALL_{software}_ENDPOINTS', sitename]:
         for key in ["slack", "email"]:
             notfAll = worker.getAlertID(f"{notif}-{key}")
             for notfOut in notfAll:
                 notifications.append({'uid': notfOut['uid']})
                 alertPresent = True
     if not alertPresent:
-        print('Alerts not present for %s. Need to configure Webhook.' % sitename)
+        print(f'Alerts not present for {sitename}. Need to configure Webhook.')
     dashbJson = dashbJson.replace('REPLACEME_SITENAME', sitename)
     dashbJson = dashbJson.replace('REPLACEME_SOFTWARE', software)
     dashbJson = dashbJson.replace('REPLACEME_NOTIFICATIONS', json.dumps(notifications))
@@ -330,7 +332,8 @@ def updateSiteRM(dirname, worker):
                 return
             conf = loadYamlFile(confFile)
             for sitename in conf['general']['sites']:
-                addDashboard(sitename, 'SiteRM', worker)
+                vppurl = conf.get(sitename, {}).get('vpp_exporter', {})
+                addDashboard(sitename, 'SiteRM', worker, vppurl=vppurl)
     return
 
 def updateNSA(fname, worker):
@@ -338,7 +341,7 @@ def updateNSA(fname, worker):
     nrmMapping = loadYamlFile(fname)
     for _, vals in nrmMapping['discovery'].items():
         if 'sitename' in vals:
-            addDashboard(vals['sitename'], 'NSI', worker)
+            addDashboard(vals['sitename'], 'NSI', worker, vppurl=None)
 
 
 def run():

@@ -1,0 +1,4290 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 4786,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 84,
+      "panels": [],
+      "title": "REPLACEME_SOFTWARE Status",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "List of endpoints that are queried by Prometheus.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 0,
+        "y": 1
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 12,
+          "valueSize": 12
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{target}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Status of all endpoints",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Running REPLACEME_SOFTWARE Versions at Site.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 48,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": []
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.16",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (version) (running_version_info{sitename=\"REPLACEME_SITENAME\"}) ",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{version}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Running Versions",
+      "type": "piechart"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0.9
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Failure to query Probe for REPLACEME_SITENAME",
+        "name": "Probe Success alert for REPLACEME_SITENAME",
+        "noDataState": "alerting",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Probe query success, failure. \n1 - OK, Below 1 - Failure, see for more details below.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "transparent",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Probe Success",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "ICMP V4 Round Trip time from Prometheus hosts to REPLACEME_SOFTWARE Frontend.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 9
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"REPLACEME_SITENAME\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+          "interval": "",
+          "legendFormat": "{{phase}}",
+          "refId": "A"
+        }
+      ],
+      "title": "ICMP round trip time (V4)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "ICMP V6 Round Trip time from Prometheus hosts to REPLACEME_SOFTWARE Frontend.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 9
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(probe_icmp_duration_seconds{sitename=~\"REPLACEME_SITENAME\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+          "interval": "",
+          "legendFormat": "{{phase}}",
+          "refId": "A"
+        }
+      ],
+      "title": "ICMP round trip time (V6)",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                604800
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Certificates expire in less than a week for REPLACEME_SITENAME",
+        "name": "SSL Expiry alert for REPLACEME_SITENAME",
+        "noDataState": "no_data",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Left lifetime for SSL Certificate validity. It will raise an alarm once less than a week is left.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "transparent",
+                "value": 604800
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 16
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"REPLACEME_SITENAME\"} - time()",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"REPLACEME_SITENAME\"} - time()",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{hostname}}",
+          "refId": "B"
+        }
+      ],
+      "title": "SSL Expiry",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "HTTP Connection timeline.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 16
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "probe_http_duration_seconds{sitename=~\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{job}} {{ phase }}",
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Duration",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                200
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          },
+          {
+            "evaluator": {
+              "params": [
+                200
+              ],
+              "type": "lt"
+            },
+            "operator": {
+              "type": "or"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "HTTP Query Status code error for REPLACEME_SITENAME",
+        "name": "HTTP Status Code alert for REPLACEME_SITENAME",
+        "noDataState": "no_data",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "HTTP Return Code. 200 OK, Anything else - failure. In case of failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 16
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "probe_http_status_code{sitename=~\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Status Code",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Individual Service Status for Site Frontend and all Agents.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 16,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"REPLACEME_SITENAME\"}) ",
+          "interval": "",
+          "legendFormat": "{{servicename}} {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Service Status",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Individual REPLACEME_SOFTWARE Thread Runtime. Only for debugging purposes of stuck processes. ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 44,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "service_runtime{sitename=\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{hostname}} {{servicename}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE Threads Runtime",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "REPLACEME_SOFTWARE LookUpService Not OK for REPLACEME_SITENAME",
+        "noDataState": "ok",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "REPLACEME_SOFTWARE LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 39
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE LookUpService Not OK Status",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "REPLACEME_SOFTWARE ProvisioningService Not OK for REPLACEME_SITENAME",
+        "noDataState": "ok",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "REPLACEME_SOFTWARE ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 39
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE ProvisioningService Not OK Status",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "REPLACEME_SOFTWARE SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 39
+      },
+      "id": 46,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE SNMPMonitoring Not OK Status",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "REPLACEME_SOFTWARE Agent Not OK for REPLACEME_SITENAME",
+        "noDataState": "ok",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "All REPLACEME_SOFTWARE Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 44
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE Agent Not OK Status",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "REPLACEME_SOFTWARE Debugger Not OK for REPLACEME_SITENAME",
+        "noDataState": "ok",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "All REPLACEME_SOFTWARE Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 8,
+        "y": 44
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE Debugger Not OK Status",
+      "type": "timeseries"
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "REPLACEME_SOFTWARE Ruler Not OK for REPLACEME_SITENAME",
+        "noDataState": "ok",
+        "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "All REPLACEME_SOFTWARE Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 44
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE Ruler Not OK Status",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "All REPLACEME_SOFTWARE Component's statuses are grouped by hostname and service state (only Running correctly) over time. 1 - service runs normally. Below 1 - Service has failed for some reason. If failure - it will alert.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 49
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"REPLACEME_SITENAME\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE Component Status",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "All REPLACEME_SOFTWARE Component's statuses are grouped by hostname and service state over time. 1+OK - service runs normally. Below 1 or not OK - Service has failed for some reason.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 49
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"REPLACEME_SITENAME\", service_state!=\"OK\"}) > 0",
+          "interval": "",
+          "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE Component Status (NOT OK)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "REPLACEME_SOFTWARE Frontend Memory statistics for all processes. Only for debugging purposes.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 56
+      },
+      "id": 47,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "memory_usage{sitename=\"REPLACEME_SITENAME\", key=\"vms\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "VMS {{servicename}}",
+          "refId": "B"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE FE Thread Memory Monitoring (VMS)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "REPLACEME_SOFTWARE Frontend Memory statistics for all processes. Only for debugging purposes.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 56
+      },
+      "id": 66,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "memory_usage{sitename=\"REPLACEME_SITENAME\", key=~\"rss\"}",
+          "interval": "",
+          "legendFormat": "RSS {{servicename}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REPLACEME_SOFTWARE FE Thread Memory Monitoring (RSS)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 49,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"REPLACEME_SITENAME\"}) ",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{version}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Running Versions grouped by Service,Hostname,Version",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 69
+      },
+      "id": 102,
+      "panels": [],
+      "title": "SENSE Request States",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 70
+      },
+      "id": 104,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status VSW (ALL for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 70
+      },
+      "id": 105,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"unknown\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status RST (ALL for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 78
+      },
+      "id": 106,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status VSW (Not activated for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 78
+      },
+      "id": 107,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status VSW (Not activated for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 86
+      },
+      "id": 108,
+      "panels": [],
+      "title": "Software Router Monitoring (VPP)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "dtdurations"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 0,
+        "y": 87
+      },
+      "id": 109,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 30
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sys_uptime{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{instance}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "VPP Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": -4,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 2,
+        "x": 2,
+        "y": 87
+      },
+      "id": 111,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(count by (interface) (interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\",interface!~\".*\\\\..*\",software=\"VPP\"}))",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "interfaces",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "count(count by (interface) (interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\",interface=~\".*\\\\..*\",software=\"VPP\"}))",
+          "hide": false,
+          "legendFormat": "sub-ifaces",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"tap[0-9]+\",software=\"VPP\"}))",
+          "hide": false,
+          "legendFormat": "tap",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"vxlan_.*\",software=\"VPP\"}))",
+          "hide": false,
+          "legendFormat": "vxlan",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"geneve_.*\",software=\"VPP\"}))",
+          "hide": false,
+          "legendFormat": "geneve",
+          "range": true,
+          "refId": "E"
+        }
+      ],
+      "title": "Total (sub-)interfaces",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 4,
+        "y": 87
+      },
+      "id": 112,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (instance) (rate(interfaces_tx_bytes{interface!~\".*\\\\..*\",sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[5m])*8)",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "TX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum by (instance) (rate(interfaces_rx_bytes{interface!~\".*\\\\..*\",sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[5m])*8)",
+          "hide": false,
+          "legendFormat": "RX",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Total traffic (bits/sec)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 6,
+        "y": 87
+      },
+      "id": 114,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(irate(err{node=~\"(arp|bond|dpdk|virtio|ethernet|l2)-input$\", sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index, error)\n",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{node}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Input L2 packets/sec",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 10,
+        "y": 87
+      },
+      "id": 115,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(irate(err{node=~\"(ip4|ip6|mpls|vxlan4|vxlan6)-input(-.*)?$\", sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index, error)",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{node}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Input L3 packets/sec",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.4
+              },
+              {
+                "color": "orange",
+                "value": 0.6
+              },
+              {
+                "color": "red",
+                "value": 0.8
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 14,
+        "y": 87
+      },
+      "id": 116,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 7,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 8
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (index) (sys_vector_rate_per_worker{software=\"VPP\",thread=\"0\",sitename=\"REPLACEME_SITENAME\"})/256 ",
+          "legendFormat": "Thread {{index}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Worker CPU Utilization",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.6
+              },
+              {
+                "color": "orange",
+                "value": 0.8
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 19,
+        "y": 87
+      },
+      "id": 117,
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {
+          "valueSize": 16
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "mem_used{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"} / mem_total{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"} ",
+          "legendFormat": "{{heap}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "buffer_pools_used{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"} / (buffer_pools_used{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"} + buffer_pools_available{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"})",
+          "hide": false,
+          "legendFormat": "buffers {{pool}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Memory Utilization",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 0,
+        "y": 90
+      },
+      "id": 110,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (job) (rate(interfaces_rx_miss{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[2m])) / sum by (job) (rate(interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[2m]))",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "RX Loss",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum by (job) (rate(interfaces_tx_error{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[60s])) / sum by (job) (rate(interfaces_tx_packets{sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[60s]))",
+          "hide": false,
+          "legendFormat": "TX Loss",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Total Packetloss",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 4,
+        "y": 90
+      },
+      "id": 113,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by (job) (rate(interfaces_tx_packets{interface!~\".*\\\\..*\",sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[5m]))",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "TX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum by (job) (rate(interfaces_rx_packets{interface!~\".*\\\\..*\",sitename=\"REPLACEME_SITENAME\",software=\"VPP\"}[5m]))",
+          "hide": false,
+          "legendFormat": "RX",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Total traffic (packets/sec)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "D"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 93
+      },
+      "id": 118,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_rx_bytes{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[5m])) without (thread, index) * 8 ",
+          "hide": false,
+          "legendFormat": "{{interface}} RX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_tx_bytes{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[5m])) without (thread, index) * 8",
+          "hide": false,
+          "legendFormat": "{{interface}} TX",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_rx_bytes{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface) * 8",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total RX",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_tx_bytes{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface) * 8\n",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total TX",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "title": "Interface L2 Bits/Sec",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "D"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 93
+      },
+      "id": 119,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[5m])) without (thread, index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} RX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_tx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[5m])) without (thread, index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} TX",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_rx_packets{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface)\n",
+          "hide": false,
+          "legendFormat": "Total RX",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_tx_packets{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface)\n",
+          "hide": false,
+          "legendFormat": "Total TX",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "title": "Interface Packets/Sec",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 102
+      },
+      "id": 120,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_rx_bytes{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index) * 8\n",
+          "hide": false,
+          "legendFormat": "{{interface}} RX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_tx_bytes{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index) * 8\n",
+          "hide": false,
+          "legendFormat": "{{interface}} TX",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Sub-iface L2 Bits/Sec",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 102
+      },
+      "id": 121,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} RX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_tx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} TX",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Sub-iface Packets/Sec",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "RX Loss %",
+            "axisPlacement": "left",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "linearThreshold": 1000,
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 0.5,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "TX Loss %"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 111
+      },
+      "id": 122,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_rx_miss{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index) * 100 / sum(irate(interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m]) > 0) without (thread, index)\n",
+          "interval": "",
+          "legendFormat": "{{interface}} RX Loss",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "sum(irate(interfaces_tx_error{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (thread, index) / sum(irate(interfaces_tx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m]) > 0) without (thread, index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} TX Loss",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Interface RX Miss / TX Error",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 111
+      },
+      "id": 123,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_rx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} Thread {{thread}} RX",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(irate(interfaces_tx_packets{sitename=\"REPLACEME_SITENAME\", software=\"VPP\"}[2m])) without (index)\n",
+          "hide": false,
+          "legendFormat": "{{interface}} Thread {{thread}} TX",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Interface Packets/Sec (thread)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "REPLACEME_SITENAME",
+    "REPLACEME_SOFTWARE"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"REPLACEME_SITENAME\"}, hostname)",
+        "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Switches",
+        "multi": true,
+        "name": "switch",
+        "options": [],
+        "query": {
+          "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"REPLACEME_SITENAME\"}, hostname)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "REPLACEME_SITENAME",
+  "uid": "f13d0a6d-d9a5-4a1c-9b44-f7fbf9827323",
+  "version": 2,
+  "weekStart": ""
+}
