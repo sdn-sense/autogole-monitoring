@@ -26,7 +26,6 @@
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
     "id": 4785,
-    "iteration": 1716979852682,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -105,7 +104,7 @@
           },
           "textMode": "auto"
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
             "exemplar": true,
@@ -152,6 +151,7 @@
           "legend": {
             "displayMode": "list",
             "placement": "bottom",
+            "showLegend": true,
             "values": []
           },
           "pieType": "pie",
@@ -235,6 +235,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -291,7 +293,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -323,6 +326,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -384,7 +389,8 @@
               "min"
             ],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -416,6 +422,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -477,7 +485,8 @@
               "min"
             ],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -549,6 +558,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -608,7 +619,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -648,6 +660,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -706,7 +720,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -801,6 +816,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -857,7 +874,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -923,7 +941,8 @@
           "alignValue": "left",
           "legend": {
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "mergeValues": true,
           "rowHeight": 0.9,
@@ -958,6 +977,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1017,7 +1038,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -1088,6 +1110,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1145,8 +1169,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1217,6 +1242,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1274,8 +1301,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1307,6 +1335,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1364,8 +1394,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1436,6 +1467,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1493,8 +1526,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1565,6 +1599,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1622,8 +1658,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1694,6 +1731,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1751,8 +1790,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1784,6 +1824,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1840,7 +1882,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "single",
@@ -1872,6 +1915,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1928,7 +1973,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "single",
@@ -1960,6 +2006,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2018,7 +2066,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "right"
+            "placement": "right",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2051,6 +2100,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2109,7 +2160,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "right"
+            "placement": "right",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2140,7 +2192,10 @@
               "mode": "thresholds"
             },
             "custom": {
-              "displayMode": "auto",
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
               "filterable": false,
               "inspect": false
             },
@@ -2169,7 +2224,9 @@
         },
         "id": 49,
         "options": {
+          "cellHeight": "sm",
           "footer": {
+            "countRows": false,
             "fields": "",
             "reducer": [
               "sum"
@@ -2178,7 +2235,7 @@
           },
           "showHeader": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
             "exemplar": true,
@@ -2221,6 +2278,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2277,7 +2336,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2308,6 +2368,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2364,7 +2426,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2395,6 +2458,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2451,7 +2516,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2482,6 +2548,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2538,7 +2606,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2560,20 +2629,15 @@
       },
       {
         "collapsed": false,
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
           "y": 86
         },
-        "id": 33,
+        "id": 108,
         "panels": [],
-        "repeat": "switch",
-        "title": "$switch",
+        "title": "Software Router Monitoring (VPP)",
         "type": "row"
       },
       {
@@ -2584,35 +2648,7 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "mode": "thresholds"
             },
             "mappings": [],
             "thresholds": {
@@ -2621,49 +2657,57 @@
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
                 }
               ]
             },
-            "unit": "short"
+            "unit": "dtdurations"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 8,
+          "h": 3,
+          "w": 2,
           "x": 0,
           "y": 87
         },
-        "id": 25,
+        "id": 109,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom"
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
+          "text": {
+            "valueSize": 30
+          },
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sys_uptime{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{instance}}",
+            "range": true,
             "refId": "A"
           }
         ],
-        "title": "Interface MTU",
-        "type": "timeseries"
+        "title": "VPP Uptime",
+        "type": "stat"
       },
       {
         "datasource": {
@@ -2673,35 +2717,126 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
+              "mode": "thresholds"
             },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+            "mappings": [],
+            "min": -4,
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 2,
+          "x": 2,
+          "y": 87
+        },
+        "id": 111,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "value_and_name",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "count(count by (interface) (interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\",interface!~\".*\\\\..*\",software=\"VPP\"}))",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "interfaces",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\",interface=~\".*\\\\..*\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "sub-ifaces",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"tap[0-9]+\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "tap",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"vxlan_.*\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "vxlan",
+            "range": true,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"geneve_.*\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "geneve",
+            "range": true,
+            "refId": "E"
+          }
+        ],
+        "title": "Total (sub-)interfaces",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
             },
             "mappings": [],
             "thresholds": {
@@ -2710,49 +2845,69 @@
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
                 }
               ]
             },
-            "unit": "short"
+            "unit": "bps"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 8,
+          "h": 3,
+          "w": 2,
+          "x": 4,
           "y": 87
         },
-        "id": 35,
+        "id": 112,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom"
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (instance) (rate(interfaces_tx_bytes{interface!~\".*\\\\..*\",sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[5m])*8)",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "TX",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (rate(interfaces_rx_bytes{interface!~\".*\\\\..*\",sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[5m])*8)",
+            "hide": false,
+            "legendFormat": "RX",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface ADMIN Status",
-        "type": "timeseries"
+        "title": "Total traffic (bits/sec)",
+        "type": "stat"
       },
       {
         "datasource": {
@@ -2762,35 +2917,7 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "mode": "thresholds"
             },
             "mappings": [],
             "thresholds": {
@@ -2799,49 +2926,57 @@
                 {
                   "color": "green",
                   "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
                 }
               ]
             },
-            "unit": "short"
+            "unit": "pps"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 16,
+          "h": 6,
+          "w": 4,
+          "x": 6,
           "y": 87
         },
-        "id": 36,
+        "id": 114,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom"
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(irate(err{node=~\"(arp|bond|dpdk|virtio|ethernet|l2)-input$\", sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index, error)\n",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{node}}",
+            "range": true,
             "refId": "A"
           }
         ],
-        "title": "Interface Operation Status",
-        "type": "timeseries"
+        "title": "Input L2 packets/sec",
+        "type": "stat"
       },
       {
         "datasource": {
@@ -2851,15 +2986,427 @@
         "fieldConfig": {
           "defaults": {
             "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 10,
+          "y": 87
+        },
+        "id": 115,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(irate(err{node=~\"(ip4|ip6|mpls|vxlan4|vxlan6)-input(-.*)?$\", sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index, error)",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{node}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Input L3 packets/sec",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 0.4
+                },
+                {
+                  "color": "orange",
+                  "value": 0.6
+                },
+                {
+                  "color": "red",
+                  "value": 0.8
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 14,
+          "y": 87
+        },
+        "id": 116,
+        "options": {
+          "displayMode": "lcd",
+          "minVizHeight": 7,
+          "minVizWidth": 0,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "text": {
+            "valueSize": 8
+          },
+          "valueMode": "color"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (index) (sys_vector_rate_per_worker{software=\"VPP\",thread=\"0\",sitename=\"T3_FABRIC_UCSD\"})/256 ",
+            "legendFormat": "Thread {{index}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Worker CPU Utilization",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 1,
+            "mappings": [],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 0.6
+                },
+                {
+                  "color": "orange",
+                  "value": 0.8
+                },
+                {
+                  "color": "red",
+                  "value": 0.9
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 19,
+          "y": 87
+        },
+        "id": 117,
+        "options": {
+          "displayMode": "lcd",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "text": {
+            "valueSize": 16
+          },
+          "valueMode": "color"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "mem_used{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"} / mem_total{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"} ",
+            "legendFormat": "{{heap}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "buffer_pools_used{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"} / (buffer_pools_used{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"} + buffer_pools_available{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"})",
+            "hide": false,
+            "legendFormat": "buffers {{pool}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Memory Utilization",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 0,
+          "y": 90
+        },
+        "id": 110,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (job) (rate(interfaces_rx_miss{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[2m])) / sum by (job) (rate(interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[2m]))",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "RX Loss",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum by (job) (rate(interfaces_tx_error{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[60s])) / sum by (job) (rate(interfaces_tx_packets{sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[60s]))",
+            "hide": false,
+            "legendFormat": "TX Loss",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Total Packetloss",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 4,
+          "y": 90
+        },
+        "id": 113,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (job) (rate(interfaces_tx_packets{interface!~\".*\\\\..*\",sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[5m]))",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "TX",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum by (job) (rate(interfaces_rx_packets{interface!~\".*\\\\..*\",sitename=\"T3_FABRIC_UCSD\",software=\"VPP\"}[5m]))",
+            "hide": false,
+            "legendFormat": "RX",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Total traffic (packets/sec)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 30,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -2871,11 +3418,11 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -2897,132 +3444,126 @@
             },
             "unit": "bps"
           },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 24,
-          "x": 0,
-          "y": 95
-        },
-        "id": 124,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_FABRIC_UCSD\"}",
-            "interval": "",
-            "legendFormat": "{{vlan}} {{key1}} {{key2}}",
-            "refId": "A"
-          }
-        ],
-        "title": "QoS Requests from SENSE",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
               },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
+              "properties": [
                 {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
+                  "id": "custom.transform",
+                  "value": "negative-Y"
                 }
               ]
             },
-            "unit": "bps"
-          },
-          "overrides": []
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "D"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                },
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "C"
+              },
+              "properties": [
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
           "w": 12,
           "x": 0,
-          "y": 103
+          "y": 93
         },
-        "id": 37,
+        "id": 118,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
               "lastNotNull",
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_bytes{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[5m])) without (thread, index) * 8 ",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_bytes{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[5m])) without (thread, index) * 8",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_bytes{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface) * 8",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total RX",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_bytes{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface) * 8\n",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total TX",
+            "range": true,
+            "refId": "D"
           }
         ],
-        "title": "Interface Status (Octets In)",
+        "title": "Interface L2 Bits/Sec",
         "type": "timeseries"
       },
       {
@@ -3030,18 +3571,21 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 30,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -3053,11 +3597,11 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -3077,43 +3621,130 @@
                 }
               ]
             },
-            "unit": "bps"
+            "unit": "pps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "D"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                },
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "C"
+              },
+              "properties": [
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
           "w": 12,
           "x": 12,
-          "y": 103
+          "y": 93
         },
-        "id": 27,
+        "id": 119,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
               "lastNotNull",
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "expr": "sum(irate(interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[5m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_tx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[5m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_rx_packets{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface)\n",
+            "hide": false,
+            "legendFormat": "Total RX",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_tx_packets{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface)\n",
+            "hide": false,
+            "legendFormat": "Total TX",
+            "range": true,
+            "refId": "D"
           }
         ],
-        "title": "Interface Status (Octets Out)",
+        "title": "Interface Packets/Sec",
         "type": "timeseries"
       },
       {
@@ -3121,18 +3752,21 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -3144,7 +3778,132 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 102
+        },
+        "id": 120,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_bytes{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index) * 8\n",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_bytes{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index) * 8\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Sub-iface L2 Bits/Sec",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3170,41 +3929,211 @@
             },
             "unit": "pps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 102
+        },
+        "id": 121,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_tx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Sub-iface Packets/Sec",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "RX Loss %",
+              "axisPlacement": "left",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "linearThreshold": 1000,
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "area"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 0.5,
+            "noValue": "0",
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 50
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                },
+                {
+                  "id": "custom.axisLabel",
+                  "value": "TX Loss %"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
           "w": 12,
           "x": 0,
           "y": 111
         },
-        "id": 29,
+        "id": 122,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
+              "min",
+              "max",
+              "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_miss{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index) * 100 / sum(irate(interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m]) > 0) without (thread, index)\n",
             "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "legendFormat": "{{interface}} RX Loss",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_error{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (thread, index) / sum(irate(interfaces_tx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m]) > 0) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX Loss",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface Status (Discards In)",
+        "title": "Interface RX Miss / TX Error",
         "type": "timeseries"
       },
       {
@@ -3212,18 +4141,21 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -3235,7 +4167,7 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3261,774 +4193,79 @@
             },
             "unit": "pps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
           "w": 12,
           "x": 12,
           "y": 111
         },
-        "id": 28,
+        "id": 123,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
               "lastNotNull",
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "expr": "sum(irate(interfaces_rx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} Thread {{thread}} RX",
+            "range": true,
             "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Discards Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
           },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 119
-        },
-        "id": 30,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
+            "expr": "sum(irate(interfaces_tx_packets{sitename=\"T3_FABRIC_UCSD\", software=\"VPP\"}[2m])) without (index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} Thread {{thread}} TX",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface Status (Errors In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 119
-        },
-        "id": 31,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Errors Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 127
-        },
-        "id": 38,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Unicast In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 127
-        },
-        "id": 39,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Unicast Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 135
-        },
-        "id": 40,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Multicast In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 135
-        },
-        "id": 41,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Multicast Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 143
-        },
-        "id": 42,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Broadcast In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 143
-        },
-        "id": 43,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_FABRIC_UCSD\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Broadcast Out)",
+        "title": "Interface Packets/Sec (thread)",
         "type": "timeseries"
       }
     ],
     "refresh": "1m",
-    "schemaVersion": 36,
+    "schemaVersion": 38,
     "style": "dark",
     "tags": [
       "T3_FABRIC_UCSD",
@@ -4085,6 +4322,6 @@
     "weekStart": ""
   },
   "folderId": 1,
-  "message": "Script changes made on 2025-01-28. See git for changes",
+  "message": "Script changes made on 2025-02-05. See git for changes",
   "overwrite": true
 }
