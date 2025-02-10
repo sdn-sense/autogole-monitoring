@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: losa-sub2-host1-t3-fabric-losa
+  namespace: opennsa
+  labels:
+    k8s-app: losa-sub2-host1-t3-fabric-losa
+spec:
+  selector:
+    matchLabels:
+      k8s-app: losa-sub2-host1-t3-fabric-losa
+  template:
+    metadata:
+      labels:
+        k8s-app: losa-sub2-host1-t3-fabric-losa
+    spec:
+      nodeSelector:
+        nautilus.io/ipv6: "true"
+      containers:
+      - env:
+        - name: XRD_ENDPOINT
+          value: losa-sub2-host1.exp.fabric-testbed.net:1094
+        - name: X509_USER_PROXY
+          value: /etc/xcache-proxy/x509-proxy
+        - name: XRD_PROTOCOLS
+          value: davs,https
+        - name: XRD_MODES
+          value: read,write,delete
+        - name: XRD_WORKDIR
+          value: /srv/
+        - name: XRD_PATH
+          value: /store/temp/user/sense/kube-xrootd-test
+        - name: XRD_UNIQ_NAME
+          value: losa-sub2-host1.exp.fabric-testbed.net
+        - name: XRD_UNIQ_WRITE
+          value: 'True'
+        image: sdnsense/xrootd-mon:latest
+        imagePullPolicy: Always
+        name: losa-sub2-host1-t3-fabric-losa
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /etc/xcache-proxy
+          name: xcache-proxy
+      volumes:
+      - name: xcache-proxy
+        secret:
+          defaultMode: 384
+          secretName: xcache-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: opennsa
+  labels:
+    k8s-app: losa-sub2-host1-t3-fabric-losa
+  name: losa-sub2-host1-t3-fabric-losa
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    k8s-app: losa-sub2-host1-t3-fabric-losa
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: opennsa
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: losa-sub2-host1-t3-fabric-losa
+spec:
+  rules:
+  - host: losa-sub2-host1-t3-fabric-losa.nrp-nautilus.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: losa-sub2-host1-t3-fabric-losa
+            port:
+              number: 8000

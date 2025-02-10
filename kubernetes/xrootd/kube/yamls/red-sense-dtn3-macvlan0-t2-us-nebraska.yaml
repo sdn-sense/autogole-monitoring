@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: red-sense-dtn3-macvlan0-t2-us-nebraska
+  namespace: opennsa
+  labels:
+    k8s-app: red-sense-dtn3-macvlan0-t2-us-nebraska
+spec:
+  selector:
+    matchLabels:
+      k8s-app: red-sense-dtn3-macvlan0-t2-us-nebraska
+  template:
+    metadata:
+      labels:
+        k8s-app: red-sense-dtn3-macvlan0-t2-us-nebraska
+    spec:
+      nodeSelector:
+        nautilus.io/ipv6: "true"
+      containers:
+      - env:
+        - name: XRD_ENDPOINT
+          value: red-sense-dtn3-macvlan0.unl.edu:1095
+        - name: X509_USER_PROXY
+          value: /etc/xcache-proxy/x509-proxy
+        - name: XRD_PROTOCOLS
+          value: davs,https
+        - name: XRD_MODES
+          value: read,write,delete
+        - name: XRD_WORKDIR
+          value: /srv/
+        - name: XRD_PATH
+          value: /store/temp/user/sense/kube-xrootd-test
+        - name: XRD_UNIQ_NAME
+          value: red-sense-dtn3-macvlan0.unl.edu
+        - name: XRD_UNIQ_WRITE
+          value: 'True'
+        image: sdnsense/xrootd-mon:latest
+        imagePullPolicy: Always
+        name: red-sense-dtn3-macvlan0-t2-us-nebraska
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 1
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /etc/xcache-proxy
+          name: xcache-proxy
+      volumes:
+      - name: xcache-proxy
+        secret:
+          defaultMode: 384
+          secretName: xcache-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: opennsa
+  labels:
+    k8s-app: red-sense-dtn3-macvlan0-t2-us-nebraska
+  name: red-sense-dtn3-macvlan0-t2-us-nebraska
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    k8s-app: red-sense-dtn3-macvlan0-t2-us-nebraska
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: opennsa
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+  name: red-sense-dtn3-macvlan0-t2-us-nebraska
+spec:
+  rules:
+  - host: red-sense-dtn3-macvlan0-t2-us-nebraska.nrp-nautilus.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: red-sense-dtn3-macvlan0-t2-us-nebraska
+            port:
+              number: 8000
