@@ -120,8 +120,7 @@ PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                             {'source_labels': ['__address__'],
                                              'target_label': 'software',
                                              'replacement': 'WILLBEREPLACEDBYCODE'},
-                                            {'source_labels': ['prometheus_replica'],
-                                             'regex': '.*', 'action': 'drop'}]}
+                                            {'regex': 'prometheus_replica', 'action': 'labeldrop'}]}
 
 # XrootD Metadata scrape template
 XROOTD_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
