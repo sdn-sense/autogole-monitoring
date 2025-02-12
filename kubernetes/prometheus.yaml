@@ -52,7 +52,7 @@ spec:
       - name: prometheus
         image: prom/prometheus
         args:
-          - '--storage.tsdb.retention=30d'
+          - '--storage.tsdb.retention.time=30d'
           - '--storage.tsdb.path=/prometheus'
           - '--config.file=/etc/prometheus/prometheus.yml'
           - '--web.config.file=/etc/web.yml'
@@ -95,6 +95,25 @@ spec:
           name: prometheus-web-yml
           readOnly: true
           subPath: web.yml
+      - name: thanos-federate-proxy
+        image: ghcr.io/snapp-incubator/thanos-federate-proxy:main
+        resources:
+          limits:
+            cpu: 4
+            memory: 2Gi
+          requests:
+            cpu: 2
+            memory: 2Gi
+        args:
+          - -insecure-listen-address=0.0.0.0:9099
+          - -upstream=https://prometheus.nrp-nautilus.io
+        ports:
+          - containerPort: 9099
+            name: fedproxy
+            protocol: TCP
+        volumeMounts:
+        - name: prometheus-config-volume
+          mountPath: /etc/prometheus
       restartPolicy: Always
       volumes:
       - name: prometheus-config-volume
@@ -161,6 +180,22 @@ spec:
   sessionAffinity: None
   type: ClusterIP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: thanos-federate-proxy-service
+  labels:
+    app: thanos-federate-proxy
+spec:
+  ports:
+    - port: 9099
+      targetPort: fedproxy
+      protocol: TCP
+  selector:
+    app: prometheus
+  sessionAffinity: None
+  type: ClusterIP
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -179,3 +214,4 @@ spec:
             name: prometheus-service
             port:
               number: 9090
+
