@@ -2161,6 +2161,143 @@
       "type": "table"
     },
     {
+      "alert": {
+      "alertRuleTags": {},
+      "conditions": [
+        {
+          "evaluator": {
+            "params": [
+              0.7
+            ],
+            "type": "lt"
+          },
+          "operator": {
+            "type": "and"
+          },
+          "query": {
+            "params": [
+              "A",
+              "5m",
+              "now"
+            ]
+          },
+          "reducer": {
+            "params": [],
+            "type": "avg"
+          },
+          "type": "query"
+        }
+      ],
+      "executionErrorState": "alerting",
+      "for": "5m",
+      "frequency": "1m",
+      "handler": 1,
+      "message": "Not able to receive monitoring data for DTN for REPLACEME_SITENAME",
+      "name": "Not able to receive monitoring data for DTN for REPLACEME_SITENAME",
+      "noDataState": "alerting",
+      "notifications": REPLACEME_NOTIFICATIONS
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Checks if Prometheus is able to receive monitoring data for this specific Site DTNs. 1 means OK, 0 means failure.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "transparent",
+                "value": 0.7
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 69
+      },
+      "id": 125,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "up{sitename=\"REPLACEME_SITENAME\", software=\"SiteRM-Agent\"}",
+          "interval": "",
+          "legendFormat": "{{instance}} JOBID {{job}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Able to receive monitoring data from DTNs",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
