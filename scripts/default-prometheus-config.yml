@@ -104,7 +104,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -117,7 +117,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -130,7 +130,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -143,7 +143,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -156,7 +156,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -169,7 +169,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -182,7 +182,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -195,7 +195,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -208,7 +208,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -221,7 +221,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -234,7 +234,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -247,7 +247,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -260,7 +260,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -273,7 +273,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -286,7 +286,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
@@ -299,7 +299,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-Agent-Transfer
     source_labels:
     - __address__
     target_label: software
