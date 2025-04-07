@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 4783,
+    "id": null,
     "iteration": 1716979852682,
     "links": [],
     "liveNow": false,
@@ -109,7 +109,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"NRM_GPN\"}",
+            "expr": "probe_success{sitename=~\"T3_FABRIC_CIEN\"}",
             "interval": "",
             "legendFormat": "{{target}}",
             "refId": "A"
@@ -172,7 +172,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"NRM_GPN\"}) ",
+            "expr": " sum by (version) (running_version_info{sitename=\"T3_FABRIC_CIEN\"}) ",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -215,8 +215,8 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Failure to query Probe for NRM_GPN",
-          "name": "Probe Success alert for NRM_GPN",
+          "message": "Failure to query Probe for T3_FABRIC_CIEN",
+          "name": "Probe Success alert for T3_FABRIC_CIEN",
           "noDataState": "alerting",
           "notifications": [
             {
@@ -302,7 +302,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"NRM_GPN\"}",
+            "expr": "probe_success{sitename=~\"T3_FABRIC_CIEN\"}",
             "interval": "",
             "legendFormat": "{{job}}",
             "refId": "A"
@@ -395,7 +395,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"NRM_GPN\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_FABRIC_CIEN\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -488,7 +488,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"NRM_GPN\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_FABRIC_CIEN\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -529,8 +529,8 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Certificates expire in less than a week for NRM_GPN",
-          "name": "SSL Expiry alert for NRM_GPN",
+          "message": "Certificates expire in less than a week for T3_FABRIC_CIEN",
+          "name": "SSL Expiry alert for T3_FABRIC_CIEN",
           "noDataState": "no_data",
           "notifications": [
             {
@@ -619,14 +619,14 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"NRM_GPN\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_FABRIC_CIEN\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
           },
           {
             "exemplar": true,
-            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"NRM_GPN\"} - time()",
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T3_FABRIC_CIEN\"} - time()",
             "hide": false,
             "interval": "",
             "legendFormat": "{{hostname}}",
@@ -717,7 +717,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"NRM_GPN\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"T3_FABRIC_CIEN\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -781,8 +781,8 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "HTTP Query Status code error for NRM_GPN",
-          "name": "HTTP Status Code alert for NRM_GPN",
+          "message": "HTTP Query Status code error for T3_FABRIC_CIEN",
+          "name": "HTTP Status Code alert for T3_FABRIC_CIEN",
           "noDataState": "no_data",
           "notifications": [
             {
@@ -868,7 +868,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"NRM_GPN\"}",
+            "expr": "probe_http_status_code{sitename=~\"T3_FABRIC_CIEN\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -937,7 +937,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"NRM_GPN\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_FABRIC_CIEN\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1028,7 +1028,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "service_runtime{sitename=\"NRM_GPN\"}",
+            "expr": "service_runtime{sitename=\"T3_FABRIC_CIEN\"}",
             "interval": "",
             "legendFormat": "{{hostname}} {{servicename}}",
             "refId": "A"
@@ -1069,7 +1069,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM LookUpService Not OK for NRM_GPN",
+          "name": "SiteRM LookUpService Not OK for T3_FABRIC_CIEN",
           "noDataState": "ok",
           "notifications": [
             {
@@ -1157,7 +1157,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1198,7 +1198,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for NRM_GPN",
+          "name": "SiteRM ProvisioningService Not OK for T3_FABRIC_CIEN",
           "noDataState": "ok",
           "notifications": [
             {
@@ -1286,7 +1286,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1376,7 +1376,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1417,7 +1417,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Agent Not OK for NRM_GPN",
+          "name": "SiteRM Agent Not OK for T3_FABRIC_CIEN",
           "noDataState": "ok",
           "notifications": [
             {
@@ -1505,7 +1505,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1546,7 +1546,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Debugger Not OK for NRM_GPN",
+          "name": "SiteRM Debugger Not OK for T3_FABRIC_CIEN",
           "noDataState": "ok",
           "notifications": [
             {
@@ -1634,7 +1634,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1675,7 +1675,7 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "name": "SiteRM Ruler Not OK for NRM_GPN",
+          "name": "SiteRM Ruler Not OK for T3_FABRIC_CIEN",
           "noDataState": "ok",
           "notifications": [
             {
@@ -1763,7 +1763,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}}",
             "refId": "A"
@@ -1851,7 +1851,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"NRM_GPN\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T3_FABRIC_CIEN\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
@@ -1939,7 +1939,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"NRM_GPN\", service_state!=\"OK\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T3_FABRIC_CIEN\", service_state!=\"OK\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
@@ -2029,7 +2029,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"NRM_GPN\", key=\"vms\"}",
+            "expr": "memory_usage{sitename=\"T3_FABRIC_CIEN\", key=\"vms\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "VMS {{servicename}}",
@@ -2120,7 +2120,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"NRM_GPN\", key=~\"rss\"}",
+            "expr": "memory_usage{sitename=\"T3_FABRIC_CIEN\", key=~\"rss\"}",
             "interval": "",
             "legendFormat": "RSS {{servicename}}",
             "refId": "A"
@@ -2182,7 +2182,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"NRM_GPN\"}) ",
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T3_FABRIC_CIEN\"}) ",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2225,8 +2225,8 @@
           "for": "5m",
           "frequency": "1m",
           "handler": 1,
-          "message": "Not able to receive monitoring data for DTN for NRM_GPN",
-          "name": "Not able to receive monitoring data for DTN for NRM_GPN",
+          "message": "Not able to receive monitoring data for DTN for T3_FABRIC_CIEN",
+          "name": "Not able to receive monitoring data for DTN for T3_FABRIC_CIEN",
           "noDataState": "alerting",
           "notifications": [
             {
@@ -2324,7 +2324,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "up{sitename=\"NRM_GPN\", software=\"SiteRM-Agent\"}",
+            "expr": "up{sitename=\"T3_FABRIC_CIEN\", software=\"SiteRM-Agent\"}",
             "interval": "",
             "legendFormat": "{{instance}} JOBID {{job}}",
             "range": true,
@@ -2429,13 +2429,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"NRM_GPN\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T3_FABRIC_CIEN\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (ALL for NRM_GPN)",
+        "title": "Network Status VSW (ALL for T3_FABRIC_CIEN)",
         "type": "timeseries"
       },
       {
@@ -2516,13 +2516,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"NRM_GPN\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T3_FABRIC_CIEN\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (ALL for NRM_GPN)",
+        "title": "Network Status RST (ALL for T3_FABRIC_CIEN)",
         "type": "timeseries"
       },
       {
@@ -2603,13 +2603,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"NRM_GPN\", network_status!=\"activated\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T3_FABRIC_CIEN\", network_status!=\"activated\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for NRM_GPN)",
+        "title": "Network Status VSW (Not activated for T3_FABRIC_CIEN)",
         "type": "timeseries"
       },
       {
@@ -2690,13 +2690,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"NRM_GPN\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T3_FABRIC_CIEN\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for NRM_GPN)",
+        "title": "Network Status VSW (Not activated for T3_FABRIC_CIEN)",
         "type": "timeseries"
       },
       {
@@ -2797,7 +2797,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"NRM_GPN\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2886,7 +2886,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"NRM_GPN\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -2975,7 +2975,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"NRM_GPN\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3066,7 +3066,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"NRM_GPN\"}",
+            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_FABRIC_CIEN\"}",
             "interval": "",
             "legendFormat": "{{vlan}} {{key1}} {{key2}}",
             "refId": "A"
@@ -3157,7 +3157,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3248,7 +3248,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3339,7 +3339,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3430,7 +3430,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3521,7 +3521,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3612,7 +3612,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3703,7 +3703,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3794,7 +3794,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3885,7 +3885,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3976,7 +3976,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4067,7 +4067,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4158,7 +4158,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"NRM_GPN\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_FABRIC_CIEN\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4172,7 +4172,7 @@
     "schemaVersion": 36,
     "style": "dark",
     "tags": [
-      "NRM_GPN",
+      "T3_FABRIC_CIEN",
       "SiteRM"
     ],
     "templating": {
@@ -4191,7 +4191,7 @@
             "type": "prometheus",
             "uid": "qjScxmmVz"
           },
-          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"NRM_GPN\"}, hostname)",
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_CIEN\"}, hostname)",
           "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
           "hide": 2,
           "includeAll": true,
@@ -4200,7 +4200,7 @@
           "name": "switch",
           "options": [],
           "query": {
-            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"NRM_GPN\"}, hostname)",
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_FABRIC_CIEN\"}, hostname)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 1,
@@ -4220,9 +4220,9 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "NRM_GPN",
-    "uid": "dd7fd3b1-21ef-4104-8b27-152df64a519d",
-    "version": 1,
+    "title": "T3_FABRIC_CIEN",
+    "uid": null,
+    "version": 42,
     "weekStart": ""
   },
   "folderId": 1,
