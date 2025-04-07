@@ -106,7 +106,8 @@ spec:
             memory: 2Gi
         args:
           - -insecure-listen-address=0.0.0.0:9099
-          - -upstream=https://prometheus.nrp-nautilus.io
+          - -upstream=https://thanos.nrp-nautilus.io
+          - -tlsSkipVerify
         ports:
           - containerPort: 9099
             name: fedproxy
