@@ -2,6 +2,17 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: grafana-mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: grafana-pvc
 spec:
   accessModes:
@@ -43,6 +54,21 @@ spec:
                 - k8s-igrok-04.calit2.optiputer.net
                 - k8s-igrok-05.calit2.optiputer.net
                 - k8s-igrok-06.calit2.optiputer.net
+      initContainers:
+        - name: wait-for-mysql
+          image: busybox:1.35.0-uclibc
+          command:
+            - sh
+            - -c
+            - |
+              until nc -zv grafana-mysql 3306; do
+                echo "Waiting for MySQL...";
+                sleep 2;
+              done;
+          resources:
+            limits:
+              memory: "50Mi"
+              cpu: "50m"
       containers:
         - name: grafana
           image: grafana/grafana:9.5.19
@@ -114,6 +140,90 @@ spec:
               path: hostkey.pem
             defaultMode: 0644
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: grafana-mysql
+  name: grafana-mysql
+spec:
+  selector:
+    matchLabels:
+      app: grafana-mysql
+  template:
+    metadata:
+      labels:
+        app: grafana-mysql
+    spec:
+      securityContext:
+        fsGroup: 472
+        supplementalGroups:
+          - 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - k8s-igrok-01.calit2.optiputer.net
+                - k8s-igrok-02.calit2.optiputer.net
+                - k8s-igrok-03.calit2.optiputer.net
+                - k8s-igrok-04.calit2.optiputer.net
+                - k8s-igrok-05.calit2.optiputer.net
+                - k8s-igrok-06.calit2.optiputer.net
+      containers:
+        - image: mysql:8.0
+          name: grafana-mysql
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-pass-grafana
+                key: password
+          - name: MYSQL_DATABASE
+            value: grafana
+          - name: MYSQL_USER
+            value: grafana
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-pass-grafana
+                key: password
+          resources:
+            requests:
+              cpu: 500m
+              memory: 750Mi
+            limits:
+              cpu: 2
+              memory: 2Gi
+          ports:
+          - containerPort: 3306
+            name: grafana-mysql
+          volumeMounts:
+          - name: mysql-persistent-storage
+            mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: grafana-mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-mysql
+spec:
+  ports:
+    - name: grafana-mysql
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+  selector:
+    app: grafana-mysql
+  sessionAffinity: None
+  type: ClusterIP
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -123,6 +233,7 @@ spec:
     - port: 3000
       protocol: TCP
       targetPort: 3000
+      name: grafana
   selector:
     app: grafana
   sessionAffinity: None
