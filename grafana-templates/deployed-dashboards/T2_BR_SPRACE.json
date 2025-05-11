@@ -26,7 +26,6 @@
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
     "id": 13,
-    "iteration": 1716979852682,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -105,7 +104,7 @@
           },
           "textMode": "auto"
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
             "exemplar": true,
@@ -116,6 +115,73 @@
           }
         ],
         "title": "Status of all endpoints",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Running SiteRM Versions at Site.",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 16,
+          "y": 1
+        },
+        "id": 126,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"T2_BR_SPRACE\"}) or label_replace(0 * absent(ALERTS{sitename=\"T2_BR_SPRACE\"}), \"sitename\", \"T2_BR_SPRACE\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Errors",
         "type": "stat"
       },
       {
@@ -142,8 +208,8 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 8,
-          "x": 16,
+          "w": 4,
+          "x": 20,
           "y": 1
         },
         "id": 48,
@@ -152,6 +218,7 @@
           "legend": {
             "displayMode": "list",
             "placement": "bottom",
+            "showLegend": true,
             "values": []
           },
           "pieType": "pie",
@@ -184,49 +251,6 @@
         "type": "piechart"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0.9
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Failure to query Probe for T2_BR_SPRACE",
-          "name": "Probe Success alert for T2_BR_SPRACE",
-          "noDataState": "alerting",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -238,6 +262,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -294,7 +320,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -326,6 +353,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -387,7 +416,8 @@
               "min"
             ],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -419,6 +449,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -480,7 +512,8 @@
               "min"
             ],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -501,49 +534,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  604800
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Certificates expire in less than a week for T2_BR_SPRACE",
-          "name": "SSL Expiry alert for T2_BR_SPRACE",
-          "noDataState": "no_data",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -555,6 +545,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -614,7 +606,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -654,6 +647,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -695,7 +690,7 @@
                 }
               ]
             },
-            "unit": "dtdurations"
+            "unit": "s"
           },
           "overrides": []
         },
@@ -712,7 +707,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -733,72 +729,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  200
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            },
-            {
-              "evaluator": {
-                "params": [
-                  200
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "or"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "HTTP Query Status code error for T2_BR_SPRACE",
-          "name": "HTTP Status Code alert for T2_BR_SPRACE",
-          "noDataState": "no_data",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -810,6 +740,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -866,7 +798,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -932,7 +865,8 @@
           "alignValue": "left",
           "legend": {
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "mergeValues": true,
           "rowHeight": 0.9,
@@ -967,6 +901,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1026,7 +962,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -1047,48 +984,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T2_BR_SPRACE",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1100,6 +995,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1157,8 +1054,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1179,48 +1077,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T2_BR_SPRACE",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1232,6 +1088,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1289,8 +1147,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1322,6 +1181,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1379,8 +1240,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1401,48 +1263,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM Agent Not OK for T2_BR_SPRACE",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1454,6 +1274,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1511,8 +1333,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1533,48 +1356,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM Debugger Not OK for T2_BR_SPRACE",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1586,6 +1367,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1643,8 +1426,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1665,48 +1449,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM Ruler Not OK for T2_BR_SPRACE",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1718,6 +1460,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1775,8 +1519,9 @@
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "hidden",
-            "placement": "bottom"
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": false
           },
           "tooltip": {
             "mode": "multi",
@@ -1808,6 +1553,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1864,7 +1611,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "single",
@@ -1896,6 +1644,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -1952,7 +1702,8 @@
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "single",
@@ -1984,6 +1735,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2042,7 +1795,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "right"
+            "placement": "right",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2075,6 +1829,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2133,7 +1889,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "right"
+            "placement": "right",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2164,7 +1921,10 @@
               "mode": "thresholds"
             },
             "custom": {
-              "displayMode": "auto",
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
               "filterable": false,
               "inspect": false
             },
@@ -2193,7 +1953,9 @@
         },
         "id": 49,
         "options": {
+          "cellHeight": "sm",
           "footer": {
+            "countRows": false,
             "fields": "",
             "reducer": [
               "sum"
@@ -2202,7 +1964,7 @@
           },
           "showHeader": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
             "exemplar": true,
@@ -2218,49 +1980,6 @@
         "type": "table"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0.7
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Not able to receive monitoring data for DTN for T2_BR_SPRACE",
-          "name": "Not able to receive monitoring data for DTN for T2_BR_SPRACE",
-          "noDataState": "alerting",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            },
-            {
-              "uid": "naEtK6LSz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -2371,7 +2090,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 69
+          "y": 76
         },
         "id": 102,
         "panels": [],
@@ -2389,6 +2108,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2438,14 +2159,15 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 70
+          "y": 77
         },
         "id": 104,
         "options": {
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2476,6 +2198,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2525,14 +2249,15 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 70
+          "y": 77
         },
         "id": 105,
         "options": {
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2563,6 +2288,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2612,14 +2339,15 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 78
+          "y": 85
         },
         "id": 106,
         "options": {
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2650,6 +2378,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2699,14 +2429,15 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 78
+          "y": 85
         },
         "id": 107,
         "options": {
           "legend": {
             "calcs": [],
             "displayMode": "list",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2736,7 +2467,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 86
+          "y": 93
         },
         "id": 33,
         "panels": [],
@@ -2755,6 +2486,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2804,7 +2537,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 87
+          "y": 94
         },
         "id": 25,
         "options": {
@@ -2813,7 +2546,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2844,6 +2578,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2893,7 +2629,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 87
+          "y": 94
         },
         "id": 35,
         "options": {
@@ -2902,7 +2638,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -2933,6 +2670,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -2982,7 +2721,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 87
+          "y": 94
         },
         "id": 36,
         "options": {
@@ -2991,7 +2730,8 @@
               "lastNotNull"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3022,6 +2762,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3071,7 +2813,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 95
+          "y": 102
         },
         "id": 124,
         "options": {
@@ -3082,7 +2824,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3113,6 +2856,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3162,7 +2907,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 103
+          "y": 110
         },
         "id": 37,
         "options": {
@@ -3173,7 +2918,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3204,6 +2950,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3253,7 +3001,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 103
+          "y": 110
         },
         "id": 27,
         "options": {
@@ -3264,7 +3012,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3295,6 +3044,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3344,7 +3095,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 111
+          "y": 118
         },
         "id": 29,
         "options": {
@@ -3355,7 +3106,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3386,6 +3138,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3435,7 +3189,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 111
+          "y": 118
         },
         "id": 28,
         "options": {
@@ -3446,7 +3200,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3477,6 +3232,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3526,7 +3283,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 119
+          "y": 126
         },
         "id": 30,
         "options": {
@@ -3537,7 +3294,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3568,6 +3326,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3617,7 +3377,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 119
+          "y": 126
         },
         "id": 31,
         "options": {
@@ -3628,7 +3388,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3659,6 +3420,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3708,7 +3471,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 127
+          "y": 134
         },
         "id": 38,
         "options": {
@@ -3719,7 +3482,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3750,6 +3514,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3799,7 +3565,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 127
+          "y": 134
         },
         "id": 39,
         "options": {
@@ -3810,7 +3576,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3841,6 +3608,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3890,7 +3659,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 135
+          "y": 142
         },
         "id": 40,
         "options": {
@@ -3901,7 +3670,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -3932,6 +3702,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -3981,7 +3753,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 135
+          "y": 142
         },
         "id": 41,
         "options": {
@@ -3992,7 +3764,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -4023,6 +3796,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -4072,7 +3847,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 143
+          "y": 150
         },
         "id": 42,
         "options": {
@@ -4083,7 +3858,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -4114,6 +3890,8 @@
               "mode": "palette-classic"
             },
             "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
@@ -4163,7 +3941,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 143
+          "y": 150
         },
         "id": 43,
         "options": {
@@ -4174,7 +3952,8 @@
               "max"
             ],
             "displayMode": "table",
-            "placement": "bottom"
+            "placement": "bottom",
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -4196,7 +3975,7 @@
       }
     ],
     "refresh": "1m",
-    "schemaVersion": 36,
+    "schemaVersion": 38,
     "style": "dark",
     "tags": [
       "T2_BR_SPRACE",
@@ -4248,11 +4027,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T2_BR_SPRACE",
-    "uid": "iMurxiiVz",
+    "uid": "000000013",
     "version": 1,
     "weekStart": ""
   },
-  "folderId": 1,
-  "message": "Script changes made on 2025-03-30. See git for changes",
+  "folderId": 5181,
+  "message": "Script changes made on 2025-05-11. See git for changes",
   "overwrite": true
 }

@@ -125,6 +125,73 @@
         "description": "Running SiteRM Versions at Site.",
         "fieldConfig": {
           "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 4,
+          "x": 16,
+          "y": 1
+        },
+        "id": 126,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"T3_FABRIC_CERN\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_FABRIC_CERN\"}), \"sitename\", \"T3_FABRIC_CERN\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Errors",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Running SiteRM Versions at Site.",
+        "fieldConfig": {
+          "defaults": {
             "color": {
               "mode": "palette-classic"
             },
@@ -141,8 +208,8 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 8,
-          "x": 16,
+          "w": 4,
+          "x": 20,
           "y": 1
         },
         "id": 48,
@@ -184,46 +251,6 @@
         "type": "piechart"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0.9
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Failure to query Probe for T3_FABRIC_CERN",
-          "name": "Probe Success alert for T3_FABRIC_CERN",
-          "noDataState": "alerting",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -507,46 +534,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  604800
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Certificates expire in less than a week for T3_FABRIC_CERN",
-          "name": "SSL Expiry alert for T3_FABRIC_CERN",
-          "noDataState": "no_data",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -703,7 +690,7 @@
                 }
               ]
             },
-            "unit": "dtdurations"
+            "unit": "s"
           },
           "overrides": []
         },
@@ -742,69 +729,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  200
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            },
-            {
-              "evaluator": {
-                "params": [
-                  200
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "or"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "HTTP Query Status code error for T3_FABRIC_CERN",
-          "name": "HTTP Status Code alert for T3_FABRIC_CERN",
-          "noDataState": "no_data",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1060,45 +984,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM LookUpService Not OK for T3_FABRIC_CERN",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1192,45 +1077,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM ProvisioningService Not OK for T3_FABRIC_CERN",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1417,45 +1263,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM Agent Not OK for T3_FABRIC_CERN",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1549,45 +1356,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM Debugger Not OK for T3_FABRIC_CERN",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1681,45 +1449,6 @@
         "type": "timeseries"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0
-                ],
-                "type": "gt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "name": "SiteRM Ruler Not OK for T3_FABRIC_CERN",
-          "noDataState": "ok",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -2251,46 +1980,6 @@
         "type": "table"
       },
       {
-        "alert": {
-          "alertRuleTags": {},
-          "conditions": [
-            {
-              "evaluator": {
-                "params": [
-                  0.7
-                ],
-                "type": "lt"
-              },
-              "operator": {
-                "type": "and"
-              },
-              "query": {
-                "params": [
-                  "A",
-                  "5m",
-                  "now"
-                ]
-              },
-              "reducer": {
-                "params": [],
-                "type": "avg"
-              },
-              "type": "query"
-            }
-          ],
-          "executionErrorState": "alerting",
-          "for": "5m",
-          "frequency": "1m",
-          "handler": 1,
-          "message": "Not able to receive monitoring data for DTN for T3_FABRIC_CERN",
-          "name": "Not able to receive monitoring data for DTN for T3_FABRIC_CERN",
-          "noDataState": "alerting",
-          "notifications": [
-            {
-              "uid": "_2apKeLIz"
-            }
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -2401,7 +2090,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 69
+          "y": 76
         },
         "id": 102,
         "panels": [],
@@ -2470,7 +2159,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 70
+          "y": 77
         },
         "id": 104,
         "options": {
@@ -2560,7 +2249,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 70
+          "y": 77
         },
         "id": 105,
         "options": {
@@ -2650,7 +2339,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 78
+          "y": 85
         },
         "id": 106,
         "options": {
@@ -2740,7 +2429,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 78
+          "y": 85
         },
         "id": 107,
         "options": {
@@ -2774,7 +2463,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 86
+          "y": 93
         },
         "id": 108,
         "panels": [],
@@ -2796,8 +2485,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -2809,7 +2497,7 @@
           "h": 3,
           "w": 2,
           "x": 0,
-          "y": 87
+          "y": 94
         },
         "id": 109,
         "options": {
@@ -2867,8 +2555,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -2880,7 +2567,7 @@
           "h": 6,
           "w": 2,
           "x": 2,
-          "y": 87
+          "y": 94
         },
         "id": 111,
         "options": {
@@ -2984,8 +2671,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -2997,7 +2683,7 @@
           "h": 3,
           "w": 2,
           "x": 4,
-          "y": 87
+          "y": 94
         },
         "id": 112,
         "options": {
@@ -3065,8 +2751,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -3078,7 +2763,7 @@
           "h": 6,
           "w": 4,
           "x": 6,
-          "y": 87
+          "y": 94
         },
         "id": 114,
         "options": {
@@ -3134,8 +2819,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -3147,7 +2831,7 @@
           "h": 6,
           "w": 4,
           "x": 10,
-          "y": 87
+          "y": 94
         },
         "id": 115,
         "options": {
@@ -3206,8 +2890,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "yellow",
@@ -3231,7 +2914,7 @@
           "h": 6,
           "w": 5,
           "x": 14,
-          "y": 87
+          "y": 94
         },
         "id": 116,
         "options": {
@@ -3289,8 +2972,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "yellow",
@@ -3314,7 +2996,7 @@
           "h": 6,
           "w": 5,
           "x": 19,
-          "y": 87
+          "y": 94
         },
         "id": 117,
         "options": {
@@ -3381,8 +3063,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -3394,7 +3075,7 @@
           "h": 3,
           "w": 2,
           "x": 0,
-          "y": 90
+          "y": 97
         },
         "id": 110,
         "options": {
@@ -3462,8 +3143,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 }
               ]
             },
@@ -3475,7 +3155,7 @@
           "h": 3,
           "w": 2,
           "x": 4,
-          "y": 90
+          "y": 97
         },
         "id": 113,
         "options": {
@@ -3574,8 +3254,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3632,7 +3311,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 93
+          "y": 100
         },
         "id": 118,
         "options": {
@@ -3753,8 +3432,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3811,7 +3489,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 93
+          "y": 100
         },
         "id": 119,
         "options": {
@@ -3934,8 +3612,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3964,7 +3641,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 102
+          "y": 109
         },
         "id": 120,
         "options": {
@@ -4059,8 +3736,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -4089,7 +3765,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 102
+          "y": 109
         },
         "id": 121,
         "options": {
@@ -4189,8 +3865,7 @@
               "mode": "percentage",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "orange",
@@ -4227,7 +3902,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 111
+          "y": 118
         },
         "id": 122,
         "options": {
@@ -4323,8 +3998,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -4353,7 +4027,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 111
+          "y": 118
         },
         "id": 123,
         "options": {
@@ -4458,11 +4132,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T3_FABRIC_CERN",
-    "uid": "f13d0a6d-d9a5-4a1c-9b44-f7fbf9827323",
+    "uid": "000004786",
     "version": 1,
     "weekStart": ""
   },
-  "folderId": 1,
-  "message": "Script changes made on 2025-03-30. See git for changes",
+  "folderId": 5181,
+  "message": "Script changes made on 2025-05-11. See git for changes",
   "overwrite": true
 }

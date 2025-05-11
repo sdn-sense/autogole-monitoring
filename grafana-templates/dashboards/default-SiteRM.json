@@ -24,8 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 12,
-  "iteration": 1716979852682,
+  "id": 4788,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,7 +42,7 @@
       },
       "id": 84,
       "panels": [],
-      "title": "REPLACEME_SOFTWARE Status",
+      "title": "SiteRM Status",
       "type": "row"
     },
     {
@@ -104,7 +103,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.5.27",
+      "pluginVersion": "9.5.19",
       "targets": [
         {
           "exemplar": true,
@@ -122,7 +121,74 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Running REPLACEME_SOFTWARE Versions at Site.",
+      "description": "Running SiteRM Versions at Site.",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 126,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Errors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Running SiteRM Versions at Site.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -141,8 +207,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 16,
+        "w": 4,
+        "x": 20,
         "y": 1
       },
       "id": 48,
@@ -151,6 +217,7 @@
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
+          "showLegend": true,
           "values": []
         },
         "pieType": "pie",
@@ -183,42 +250,6 @@
       "type": "piechart"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0.9
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Failure to query Probe for REPLACEME_SITENAME",
-        "name": "Probe Success alert for REPLACEME_SITENAME",
-        "noDataState": "alerting",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -230,6 +261,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -286,7 +319,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -311,13 +345,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "ICMP V4 Round Trip time from Prometheus hosts to REPLACEME_SOFTWARE Frontend.",
+      "description": "ICMP V4 Round Trip time from Prometheus hosts to SiteRM Frontend.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -379,7 +415,8 @@
             "min"
           ],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -404,13 +441,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "ICMP V6 Round Trip time from Prometheus hosts to REPLACEME_SOFTWARE Frontend.",
+      "description": "ICMP V6 Round Trip time from Prometheus hosts to SiteRM Frontend.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -472,7 +511,8 @@
             "min"
           ],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -493,42 +533,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                604800
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Certificates expire in less than a week for REPLACEME_SITENAME",
-        "name": "SSL Expiry alert for REPLACEME_SITENAME",
-        "noDataState": "no_data",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -540,6 +544,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -599,7 +605,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -639,6 +646,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -680,7 +689,7 @@
               }
             ]
           },
-          "unit": "dtdurations"
+          "unit": "s"
         },
         "overrides": []
       },
@@ -697,7 +706,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -718,65 +728,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                200
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          },
-          {
-            "evaluator": {
-              "params": [
-                200
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "or"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "HTTP Query Status code error for REPLACEME_SITENAME",
-        "name": "HTTP Status Code alert for REPLACEME_SITENAME",
-        "noDataState": "no_data",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -788,6 +739,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -844,7 +797,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -910,7 +864,8 @@
         "alignValue": "left",
         "legend": {
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "mergeValues": true,
         "rowHeight": 0.9,
@@ -938,13 +893,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Individual REPLACEME_SOFTWARE Thread Runtime. Only for debugging purposes of stuck processes. ",
+      "description": "Individual SiteRM Thread Runtime. Only for debugging purposes of stuck processes. ",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1004,7 +961,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1021,56 +979,23 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Threads Runtime",
+      "title": "SiteRM Threads Runtime",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE LookUpService Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "SiteRM LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1128,8 +1053,9 @@
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1146,56 +1072,23 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE LookUpService Not OK Status",
+      "title": "SiteRM LookUpService Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE ProvisioningService Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "SiteRM ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1253,8 +1146,9 @@
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1271,7 +1165,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE ProvisioningService Not OK Status",
+      "title": "SiteRM ProvisioningService Not OK Status",
       "type": "timeseries"
     },
     {
@@ -1279,13 +1173,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
+      "description": "SiteRM SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1343,8 +1239,9 @@
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1361,56 +1258,23 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE SNMPMonitoring Not OK Status",
+      "title": "SiteRM SNMPMonitoring Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE Agent Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1468,8 +1332,9 @@
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1486,56 +1351,23 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Agent Not OK Status",
+      "title": "SiteRM Agent Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE Debugger Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1593,8 +1425,9 @@
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1611,56 +1444,23 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Debugger Not OK Status",
+      "title": "SiteRM Debugger Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE Ruler Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1718,8 +1518,9 @@
           "calcs": [
             "lastNotNull"
           ],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1736,7 +1537,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Ruler Not OK Status",
+      "title": "SiteRM Ruler Not OK Status",
       "type": "timeseries"
     },
     {
@@ -1744,13 +1545,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Component's statuses are grouped by hostname and service state (only Running correctly) over time. 1 - service runs normally. Below 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Component's statuses are grouped by hostname and service state (only Running correctly) over time. 1 - service runs normally. Below 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1807,7 +1610,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -1824,7 +1628,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Component Status",
+      "title": "SiteRM Component Status",
       "type": "timeseries"
     },
     {
@@ -1832,13 +1636,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Component's statuses are grouped by hostname and service state over time. 1+OK - service runs normally. Below 1 or not OK - Service has failed for some reason.",
+      "description": "All SiteRM Component's statuses are grouped by hostname and service state over time. 1+OK - service runs normally. Below 1 or not OK - Service has failed for some reason.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1895,7 +1701,8 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "single",
@@ -1912,7 +1719,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Component Status (NOT OK)",
+      "title": "SiteRM Component Status (NOT OK)",
       "type": "timeseries"
     },
     {
@@ -1920,13 +1727,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE Frontend Memory statistics for all processes. Only for debugging purposes.",
+      "description": "SiteRM Frontend Memory statistics for all processes. Only for debugging purposes.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -1985,7 +1794,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2003,7 +1813,7 @@
           "refId": "B"
         }
       ],
-      "title": "REPLACEME_SOFTWARE FE Thread Memory Monitoring (VMS)",
+      "title": "SiteRM FE Thread Memory Monitoring (VMS)",
       "type": "timeseries"
     },
     {
@@ -2011,13 +1821,15 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE Frontend Memory statistics for all processes. Only for debugging purposes.",
+      "description": "SiteRM Frontend Memory statistics for all processes. Only for debugging purposes.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2076,7 +1888,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2093,7 +1906,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE FE Thread Memory Monitoring (RSS)",
+      "title": "SiteRM FE Thread Memory Monitoring (RSS)",
       "type": "timeseries"
     },
     {
@@ -2107,7 +1920,10 @@
             "mode": "thresholds"
           },
           "custom": {
-            "displayMode": "auto",
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "filterable": false,
             "inspect": false
           },
@@ -2136,7 +1952,9 @@
       },
       "id": 49,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -2145,7 +1963,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "8.5.27",
+      "pluginVersion": "9.5.19",
       "targets": [
         {
           "exemplar": true,
@@ -2161,42 +1979,6 @@
       "type": "table"
     },
     {
-      "alert": {
-      "alertRuleTags": {},
-      "conditions": [
-        {
-          "evaluator": {
-            "params": [
-              0.7
-            ],
-            "type": "lt"
-          },
-          "operator": {
-            "type": "and"
-          },
-          "query": {
-            "params": [
-              "A",
-              "5m",
-              "now"
-            ]
-          },
-          "reducer": {
-            "params": [],
-            "type": "avg"
-          },
-          "type": "query"
-        }
-      ],
-      "executionErrorState": "alerting",
-      "for": "5m",
-      "frequency": "1m",
-      "handler": 1,
-      "message": "Not able to receive monitoring data for DTN for REPLACEME_SITENAME",
-      "name": "Not able to receive monitoring data for DTN for REPLACEME_SITENAME",
-      "noDataState": "alerting",
-      "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -2307,7 +2089,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 76
       },
       "id": 102,
       "panels": [],
@@ -2325,6 +2107,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2374,14 +2158,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 70
+        "y": 77
       },
       "id": 104,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2412,6 +2197,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2461,14 +2248,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 70
+        "y": 77
       },
       "id": 105,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2499,6 +2287,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2548,14 +2338,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 78
+        "y": 85
       },
       "id": 106,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2586,6 +2377,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2635,14 +2428,15 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 78
+        "y": 85
       },
       "id": 107,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2672,7 +2466,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 86
+        "y": 93
       },
       "id": 33,
       "panels": [],
@@ -2691,6 +2485,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2740,7 +2536,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 87
+        "y": 94
       },
       "id": 25,
       "options": {
@@ -2749,7 +2545,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2780,6 +2577,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2829,7 +2628,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 87
+        "y": 94
       },
       "id": 35,
       "options": {
@@ -2838,7 +2637,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2869,6 +2669,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -2918,7 +2720,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 87
+        "y": 94
       },
       "id": 36,
       "options": {
@@ -2927,7 +2729,8 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -2958,6 +2761,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3007,7 +2812,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 95
+        "y": 102
       },
       "id": 124,
       "options": {
@@ -3018,7 +2823,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3049,6 +2855,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3098,7 +2906,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 103
+        "y": 110
       },
       "id": 37,
       "options": {
@@ -3109,7 +2917,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3140,6 +2949,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3189,7 +3000,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 103
+        "y": 110
       },
       "id": 27,
       "options": {
@@ -3200,7 +3011,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3231,6 +3043,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3280,7 +3094,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 111
+        "y": 118
       },
       "id": 29,
       "options": {
@@ -3291,7 +3105,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3322,6 +3137,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3371,7 +3188,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 111
+        "y": 118
       },
       "id": 28,
       "options": {
@@ -3382,7 +3199,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3413,6 +3231,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3462,7 +3282,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 119
+        "y": 126
       },
       "id": 30,
       "options": {
@@ -3473,7 +3293,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3504,6 +3325,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3553,7 +3376,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 119
+        "y": 126
       },
       "id": 31,
       "options": {
@@ -3564,7 +3387,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3595,6 +3419,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3644,7 +3470,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 127
+        "y": 134
       },
       "id": 38,
       "options": {
@@ -3655,7 +3481,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3686,6 +3513,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3735,7 +3564,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 127
+        "y": 134
       },
       "id": 39,
       "options": {
@@ -3746,7 +3575,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3777,6 +3607,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3826,7 +3658,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 135
+        "y": 142
       },
       "id": 40,
       "options": {
@@ -3837,7 +3669,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3868,6 +3701,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -3917,7 +3752,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 135
+        "y": 142
       },
       "id": 41,
       "options": {
@@ -3928,7 +3763,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -3959,6 +3795,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -4008,7 +3846,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 143
+        "y": 150
       },
       "id": 42,
       "options": {
@@ -4019,7 +3857,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -4050,6 +3889,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -4099,7 +3940,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 143
+        "y": 150
       },
       "id": 43,
       "options": {
@@ -4110,7 +3951,8 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -4132,11 +3974,11 @@
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 36,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [
     "REPLACEME_SITENAME",
-    "REPLACEME_SOFTWARE"
+    "SiteRM"
   ],
   "templating": {
     "list": [
@@ -4184,7 +4026,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "REPLACEME_SITENAME",
-  "uid": "zU_9xiiVz",
-  "version": 42,
+  "uid": "000004788",
+  "version": 13,
   "weekStart": ""
 }

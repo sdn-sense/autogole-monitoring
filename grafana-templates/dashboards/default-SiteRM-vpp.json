@@ -42,7 +42,7 @@
       },
       "id": 84,
       "panels": [],
-      "title": "REPLACEME_SOFTWARE Status",
+      "title": "SiteRM Status",
       "type": "row"
     },
     {
@@ -121,7 +121,74 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Running REPLACEME_SOFTWARE Versions at Site.",
+      "description": "Running SiteRM Versions at Site.",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 126,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Errors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Running SiteRM Versions at Site.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -140,8 +207,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 16,
+        "w": 4,
+        "x": 20,
         "y": 1
       },
       "id": 48,
@@ -183,42 +250,6 @@
       "type": "piechart"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0.9
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Failure to query Probe for REPLACEME_SITENAME",
-        "name": "Probe Success alert for REPLACEME_SITENAME",
-        "noDataState": "alerting",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -314,7 +345,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "ICMP V4 Round Trip time from Prometheus hosts to REPLACEME_SOFTWARE Frontend.",
+      "description": "ICMP V4 Round Trip time from Prometheus hosts to SiteRM Frontend.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -410,7 +441,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "ICMP V6 Round Trip time from Prometheus hosts to REPLACEME_SOFTWARE Frontend.",
+      "description": "ICMP V6 Round Trip time from Prometheus hosts to SiteRM Frontend.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -502,42 +533,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                604800
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "Certificates expire in less than a week for REPLACEME_SITENAME",
-        "name": "SSL Expiry alert for REPLACEME_SITENAME",
-        "noDataState": "no_data",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -694,7 +689,7 @@
               }
             ]
           },
-          "unit": "dtdurations"
+          "unit": "s"
         },
         "overrides": []
       },
@@ -733,65 +728,6 @@
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                200
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          },
-          {
-            "evaluator": {
-              "params": [
-                200
-              ],
-              "type": "lt"
-            },
-            "operator": {
-              "type": "or"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "message": "HTTP Query Status code error for REPLACEME_SITENAME",
-        "name": "HTTP Status Code alert for REPLACEME_SITENAME",
-        "noDataState": "no_data",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -957,7 +893,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Individual REPLACEME_SOFTWARE Thread Runtime. Only for debugging purposes of stuck processes. ",
+      "description": "Individual SiteRM Thread Runtime. Only for debugging purposes of stuck processes. ",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1043,50 +979,15 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Threads Runtime",
+      "title": "SiteRM Threads Runtime",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE LookUpService Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "SiteRM LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1171,50 +1072,15 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE LookUpService Not OK Status",
+      "title": "SiteRM LookUpService Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE ProvisioningService Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "SiteRM ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1299,7 +1165,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE ProvisioningService Not OK Status",
+      "title": "SiteRM ProvisioningService Not OK Status",
       "type": "timeseries"
     },
     {
@@ -1307,7 +1173,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
+      "description": "SiteRM SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1392,50 +1258,15 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE SNMPMonitoring Not OK Status",
+      "title": "SiteRM SNMPMonitoring Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE Agent Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1520,50 +1351,15 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Agent Not OK Status",
+      "title": "SiteRM Agent Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE Debugger Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1648,50 +1444,15 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Debugger Not OK Status",
+      "title": "SiteRM Debugger Not OK Status",
       "type": "timeseries"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "5m",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "avg"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "5m",
-        "frequency": "1m",
-        "handler": 1,
-        "name": "REPLACEME_SOFTWARE Ruler Not OK for REPLACEME_SITENAME",
-        "noDataState": "ok",
-        "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1776,7 +1537,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Ruler Not OK Status",
+      "title": "SiteRM Ruler Not OK Status",
       "type": "timeseries"
     },
     {
@@ -1784,7 +1545,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Component's statuses are grouped by hostname and service state (only Running correctly) over time. 1 - service runs normally. Below 1 - Service has failed for some reason. If failure - it will alert.",
+      "description": "All SiteRM Component's statuses are grouped by hostname and service state (only Running correctly) over time. 1 - service runs normally. Below 1 - Service has failed for some reason. If failure - it will alert.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1867,7 +1628,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Component Status",
+      "title": "SiteRM Component Status",
       "type": "timeseries"
     },
     {
@@ -1875,7 +1636,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "All REPLACEME_SOFTWARE Component's statuses are grouped by hostname and service state over time. 1+OK - service runs normally. Below 1 or not OK - Service has failed for some reason.",
+      "description": "All SiteRM Component's statuses are grouped by hostname and service state over time. 1+OK - service runs normally. Below 1 or not OK - Service has failed for some reason.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1958,7 +1719,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE Component Status (NOT OK)",
+      "title": "SiteRM Component Status (NOT OK)",
       "type": "timeseries"
     },
     {
@@ -1966,7 +1727,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE Frontend Memory statistics for all processes. Only for debugging purposes.",
+      "description": "SiteRM Frontend Memory statistics for all processes. Only for debugging purposes.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2052,7 +1813,7 @@
           "refId": "B"
         }
       ],
-      "title": "REPLACEME_SOFTWARE FE Thread Memory Monitoring (VMS)",
+      "title": "SiteRM FE Thread Memory Monitoring (VMS)",
       "type": "timeseries"
     },
     {
@@ -2060,7 +1821,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "REPLACEME_SOFTWARE Frontend Memory statistics for all processes. Only for debugging purposes.",
+      "description": "SiteRM Frontend Memory statistics for all processes. Only for debugging purposes.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2145,7 +1906,7 @@
           "refId": "A"
         }
       ],
-      "title": "REPLACEME_SOFTWARE FE Thread Memory Monitoring (RSS)",
+      "title": "SiteRM FE Thread Memory Monitoring (RSS)",
       "type": "timeseries"
     },
     {
@@ -2218,42 +1979,6 @@
       "type": "table"
     },
     {
-      "alert": {
-      "alertRuleTags": {},
-      "conditions": [
-        {
-          "evaluator": {
-            "params": [
-              0.7
-            ],
-            "type": "lt"
-          },
-          "operator": {
-            "type": "and"
-          },
-          "query": {
-            "params": [
-              "A",
-              "5m",
-              "now"
-            ]
-          },
-          "reducer": {
-            "params": [],
-            "type": "avg"
-          },
-          "type": "query"
-        }
-      ],
-      "executionErrorState": "alerting",
-      "for": "5m",
-      "frequency": "1m",
-      "handler": 1,
-      "message": "Not able to receive monitoring data for DTN for REPLACEME_SITENAME",
-      "name": "Not able to receive monitoring data for DTN for REPLACEME_SITENAME",
-      "noDataState": "alerting",
-      "notifications": REPLACEME_NOTIFICATIONS
-      },
       "datasource": {
         "type": "prometheus",
         "uid": "qjScxmmVz"
@@ -2364,7 +2089,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 69
+        "y": 76
       },
       "id": 102,
       "panels": [],
@@ -2433,7 +2158,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 70
+        "y": 77
       },
       "id": 104,
       "options": {
@@ -2523,7 +2248,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 70
+        "y": 77
       },
       "id": 105,
       "options": {
@@ -2613,7 +2338,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 78
+        "y": 85
       },
       "id": 106,
       "options": {
@@ -2703,7 +2428,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 78
+        "y": 85
       },
       "id": 107,
       "options": {
@@ -2737,7 +2462,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 86
+        "y": 93
       },
       "id": 108,
       "panels": [],
@@ -2759,8 +2484,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2772,7 +2496,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 87
+        "y": 94
       },
       "id": 109,
       "options": {
@@ -2830,8 +2554,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2843,7 +2566,7 @@
         "h": 6,
         "w": 2,
         "x": 2,
-        "y": 87
+        "y": 94
       },
       "id": 111,
       "options": {
@@ -2947,8 +2670,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2960,7 +2682,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 87
+        "y": 94
       },
       "id": 112,
       "options": {
@@ -3028,8 +2750,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3041,7 +2762,7 @@
         "h": 6,
         "w": 4,
         "x": 6,
-        "y": 87
+        "y": 94
       },
       "id": 114,
       "options": {
@@ -3097,8 +2818,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3110,7 +2830,7 @@
         "h": 6,
         "w": 4,
         "x": 10,
-        "y": 87
+        "y": 94
       },
       "id": 115,
       "options": {
@@ -3169,8 +2889,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -3194,7 +2913,7 @@
         "h": 6,
         "w": 5,
         "x": 14,
-        "y": 87
+        "y": 94
       },
       "id": 116,
       "options": {
@@ -3252,8 +2971,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -3277,7 +2995,7 @@
         "h": 6,
         "w": 5,
         "x": 19,
-        "y": 87
+        "y": 94
       },
       "id": 117,
       "options": {
@@ -3344,8 +3062,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3357,7 +3074,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 90
+        "y": 97
       },
       "id": 110,
       "options": {
@@ -3425,8 +3142,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -3438,7 +3154,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 90
+        "y": 97
       },
       "id": 113,
       "options": {
@@ -3537,8 +3253,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3595,7 +3310,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 93
+        "y": 100
       },
       "id": 118,
       "options": {
@@ -3716,8 +3431,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3774,7 +3488,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 93
+        "y": 100
       },
       "id": 119,
       "options": {
@@ -3897,8 +3611,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3927,7 +3640,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 102
+        "y": 109
       },
       "id": 120,
       "options": {
@@ -4022,8 +3735,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4052,7 +3764,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 102
+        "y": 109
       },
       "id": 121,
       "options": {
@@ -4152,8 +3864,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -4190,7 +3901,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 111
+        "y": 118
       },
       "id": 122,
       "options": {
@@ -4286,8 +3997,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -4316,7 +4026,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 111
+        "y": 118
       },
       "id": 123,
       "options": {
@@ -4373,7 +4083,7 @@
   "style": "dark",
   "tags": [
     "REPLACEME_SITENAME",
-    "REPLACEME_SOFTWARE"
+    "SiteRM"
   ],
   "templating": {
     "list": [
@@ -4421,7 +4131,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "REPLACEME_SITENAME",
-  "uid": "f13d0a6d-d9a5-4a1c-9b44-f7fbf9827323",
-  "version": 2,
+  "uid": "000004786",
+  "version": 15,
   "weekStart": ""
 }

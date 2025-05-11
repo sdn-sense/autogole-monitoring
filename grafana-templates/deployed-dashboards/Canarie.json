@@ -952,10 +952,10 @@
     "timepicker": {},
     "timezone": "",
     "title": "Canarie",
-    "uid": "FWZjbim4k",
+    "uid": "000000025",
     "version": 1
   },
-  "folderId": 2,
-  "message": "Script changes made on 2025-03-30. See git for changes",
+  "folderId": 5182,
+  "message": "Script changes made on 2025-05-11. See git for changes",
   "overwrite": true
 }
