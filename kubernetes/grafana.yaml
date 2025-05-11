@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 4Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -19,7 +19,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
+      storage: 256Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -204,10 +204,41 @@ spec:
           volumeMounts:
           - name: mysql-persistent-storage
             mountPath: /var/lib/mysql
+          - name: grafana-mysql-config
+            mountPath: /etc/mysql/conf.d/
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: grafana-mysql-pvc
+        - name: grafana-mysql-config
+          configMap:
+            name: grafana-mysql-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-mysql-config
+data:
+  max_connections.cnf: |
+    [database]
+    max_open_conn = 500
+    max_idle_conn = 100
+    conn_max_lifetime = 300
+    [mysqld]
+    max_connections = 1000
+    wait_timeout = 180
+    interactive_timeout = 180
+    innodb_buffer_pool_size = 1073741824
+    innodb_redo_log_capacity = 536870912
+    innodb_flush_log_at_trx_commit = 2
+    innodb_flush_method = O_DIRECT
+    table_open_cache = 400
+    table_definition_cache = 400
+    max_allowed_packet = 64M
+    thread_cache_size = 50
+    character-set-server = utf8mb4
+    collation-server = utf8mb4_unicode_ci
+    skip-name-resolve
 ---
 apiVersion: v1
 kind: Service

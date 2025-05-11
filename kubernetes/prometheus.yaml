@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 40Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -68,7 +68,11 @@ spec:
           containerPort: 9090
         volumeMounts:
         - name: prometheus-config-volume
-          mountPath: /etc/prometheus
+          mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml
+        - mountPath: /etc/prometheus/alerts.yml
+          name: prometheus-alerts
+          subPath: alerts.yml
         - name: prometheus-storage-volume
           mountPath: /prometheus
         - mountPath: /etc/siterm-cert.pem
@@ -95,6 +99,24 @@ spec:
           name: prometheus-web-yml
           readOnly: true
           subPath: web.yml
+      - name: alertmanager
+        image: prom/alertmanager
+        resources:
+          limits:
+            cpu: 2
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        args:
+          - --config.file=/etc/alertmanager/alertmanager.yml
+          - --storage.path=/alertmanager
+        ports:
+          - name: alertmanager
+            containerPort: 9093
+        volumeMounts:
+          - name: alertmanager-config
+            mountPath: /etc/alertmanager
       - name: thanos-federate-proxy
         image: ghcr.io/snapp-incubator/thanos-federate-proxy:main
         resources:
@@ -119,8 +141,16 @@ spec:
       volumes:
       - name: prometheus-config-volume
         configMap:
-            defaultMode: 420
-            name: prometheus-config
+          defaultMode: 420
+          name: prometheus-config
+      - name: prometheus-alerts
+        configMap:
+          defaultMode: 420
+          name: prometheus-alerts
+      - name: alertmanager-config
+        configMap:
+          defaultMode: 420
+          name: alertmanager-config
       - name: siterm-cert
         secret:
           secretName: autogole-monitoring

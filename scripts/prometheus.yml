@@ -1,6 +1,13 @@
 global:
   evaluation_interval: 60s
   scrape_interval: 60s
+rule_files:
+  - /etc/prometheus/alerts.yml
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
 scrape_configs:
 - job_name: PACWAVE_SNMPMon
   metrics_path: /metrics
@@ -425,6 +432,137 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-ladowntown.nrp-nautilus.io
+- job_name: NRM_CENICDEV_STATE
+  metrics_path: /NRM_CENICDEV/sitefe/json/frontend/metrics
+  relabel_configs:
+  - replacement: NRM_CENICDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-dev-ladowntown.nrp-nautilus.io:443
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: NRM_CENICDEV_HTTPS_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: NRM_CENICDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-ladowntown.nrp-nautilus.io:443
+- job_name: NRM_CENICDEV_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: NRM_CENICDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-ladowntown.nrp-nautilus.io:443/NRM_CENICDEV/sitefe/v1/models?current=true&summary=false&encode=false
+- job_name: NRM_CENICDEV_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NRM_CENICDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - sense-dev-ladowntown.nrp-nautilus.io
 - job_name: NRM_GPN_STATE
   metrics_path: /NRM_GPN/sitefe/json/frontend/metrics
   relabel_configs:
@@ -1734,6 +1872,537 @@ scrape_configs:
   static_configs:
   - targets:
     - transfer-18.ultralight.org:9100
+- job_name: T2_US_Caltech_DEV_STATE
+  metrics_path: /T2_US_Caltech_DEV/sitefe/json/frontend/metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-dev-caltechprod.nrp-nautilus.io:443
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: T2_US_Caltech_DEV_HTTPS_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-caltechprod.nrp-nautilus.io:443
+- job_name: T2_US_Caltech_DEV_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-caltechprod.nrp-nautilus.io:443/T2_US_Caltech_DEV/sitefe/v1/models?current=true&summary=false&encode=false
+- job_name: T2_US_Caltech_DEV_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - sense-dev-caltechprod.nrp-nautilus.io
+- job_name: T2_US_Caltech_DEV_NODE
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - transfer-11.ultralight.org:9100
+- job_name: T2_US_Caltech_DEV_NODE_0
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - transfer-12.ultralight.org:9100
+- job_name: T2_US_Caltech_DEV_NODE_1
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - transfer-13.ultralight.org:9100
+- job_name: T2_US_Caltech_DEV_NODE_2
+  relabel_configs:
+  - replacement: T2_US_Caltech_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - transfer-14.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_STATE
+  metrics_path: /T2_US_Caltech_SDN_DEV/sitefe/json/frontend/metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - fe-caltech-sdn-dev.sdn-lb.ultralight.org:443
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: T2_US_Caltech_SDN_DEV_HTTPS_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://fe-caltech-sdn-dev.sdn-lb.ultralight.org:443
+- job_name: T2_US_Caltech_SDN_DEV_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://fe-caltech-sdn-dev.sdn-lb.ultralight.org:443/T2_US_Caltech_SDN_DEV/sitefe/v1/models?current=true&summary=false&encode=false
+- job_name: T2_US_Caltech_SDN_DEV_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 34.1377
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 118.1253
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - fe-caltech-sdn-dev.sdn-lb.ultralight.org
+- job_name: T2_US_Caltech_SDN_DEV_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-01
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-01-t2-us-caltech-sdn-dev.nrp-nautilus.io
+- job_name: T2_US_Caltech_SDN_DEV_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-02
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-02-t2-us-caltech-sdn-dev.nrp-nautilus.io
+- job_name: T2_US_Caltech_SDN_DEV_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-03
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-03-t2-us-caltech-sdn-dev.nrp-nautilus.io
+- job_name: T2_US_Caltech_SDN_DEV_XROOTD_2
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-04
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-04-t2-us-caltech-sdn-dev.nrp-nautilus.io
+- job_name: T2_US_Caltech_SDN_DEV_XROOTD_3
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: sense-redir-05
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - sense-redir-05-t2-us-caltech-sdn-dev.nrp-nautilus.io
+- job_name: T2_US_Caltech_SDN_DEV_NODE
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-dtn-1-7.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_0
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-1.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_1
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-5.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_2
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-6.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_3
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-3.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_4
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-dtn-2-09.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_5
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sdn-dtn-2-10.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_6
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-4.ultralight.org:9100
+- job_name: T2_US_Caltech_SDN_DEV_NODE_7
+  relabel_configs:
+  - replacement: T2_US_Caltech_SDN_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  static_configs:
+  - targets:
+    - sandie-10.ultralight.org:9100
 - job_name: T2_US_Caltech_Test_STATE
   metrics_path: /T2_US_Caltech_Test/sitefe/json/frontend/metrics
   relabel_configs:
@@ -1757,7 +2426,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-caltechdev.nrp-nautilus.io:443
+    - sense-caltechtest.sdn-lb.ultralight.org:443
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -1794,7 +2463,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sense-caltechdev.nrp-nautilus.io:443
+    - https://sense-caltechtest.sdn-lb.ultralight.org:443
 - job_name: T2_US_Caltech_Test_MODEL_V4
   metrics_path: /probe
   params:
@@ -1827,7 +2496,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sense-caltechdev.nrp-nautilus.io:443/T2_US_Caltech_Test/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-caltechtest.sdn-lb.ultralight.org:443/T2_US_Caltech_Test/sitefe/v1/models?current=true&summary=false&encode=false
 - job_name: T2_US_Caltech_Test_ICMP_V4
   metrics_path: /probe
   params:
@@ -1864,107 +2533,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - sense-caltechdev.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-01
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-01-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-02
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-02-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-03
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-03-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_2
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-04
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-04-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_3
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-05
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-05-t2-us-caltech-test.nrp-nautilus.io
+    - sense-caltechtest.sdn-lb.ultralight.org
 - job_name: T2_US_Caltech_Test_NODE
   relabel_configs:
   - replacement: T2_US_Caltech_Test
@@ -2202,6 +2771,66 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-mghpcc.nrp-nautilus.io:443/T2_US_MGHPCC/sitefe/v1/models?current=true&summary=false&encode=false
+- job_name: T2_US_MGHPCC_XROOTD
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-0-redir
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-0-redir-t2-us-mghpcc.nrp-nautilus.io
+- job_name: T2_US_MGHPCC_XROOTD_0
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-1-redir
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-1-redir-t2-us-mghpcc.nrp-nautilus.io
+- job_name: T2_US_MGHPCC_XROOTD_1
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: xrootd-2-redir
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: XRootD
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - xrootd-2-redir-t2-us-mghpcc.nrp-nautilus.io
 - honor_labels: true
   job_name: T2_US_MGHPCC_PROMFED
   metrics_path: /federate
@@ -2952,6 +3581,269 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
+- job_name: T2_US_SDSC_DEV_STATE
+  metrics_path: /T2_US_SDSC_DEV/sitefe/json/frontend/metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-dev-sdsc.nrp-nautilus.io:443
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: T2_US_SDSC_DEV_HTTPS_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-sdsc.nrp-nautilus.io:443
+- job_name: T2_US_SDSC_DEV_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-sdsc.nrp-nautilus.io:443/T2_US_SDSC_DEV/sitefe/v1/models?current=true&summary=false&encode=false
+- job_name: T2_US_SDSC_DEV_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - sense-dev-sdsc.nrp-nautilus.io
+- job_name: T2_US_SDSC_DEV_NSISNMPMon
+  metrics_path: /sn3700_s0/metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NSI-SNMPMon
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi-snmpmon-prpdev.nrp-nautilus.io
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: T2_US_SDSC_DEV_NSISNMPMon_0
+  metrics_path: /edgecore_s0/metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NSI-SNMPMon
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi-snmpmon-prpdev.nrp-nautilus.io
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- honor_labels: true
+  job_name: T2_US_SDSC_DEV_PROMFED
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-6.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_DEV_PROMFED_0
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-7.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_DEV_PROMFED_1
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-8.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_DEV_PROMFED_2
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-9.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC_DEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-Agent
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
 - job_name: T2_US_UCSD_OASIS_STATE
   metrics_path: /T2_US_UCSD_OASIS/sitefe/json/frontend/metrics
   relabel_configs:
@@ -3046,6 +3938,100 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-oasis.nrp-nautilus.io:443/T2_US_UCSD_OASIS/sitefe/v1/models?current=true&summary=false&encode=false
+- job_name: T2_US_SDSC_OASISDEV_STATE
+  metrics_path: /T2_US_SDSC_OASISDEV/sitefe/json/frontend/metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC_OASISDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-dev-oasis.nrp-nautilus.io:443
+  tls_config:
+    cert_file: /etc/siterm-cert.pem
+    insecure_skip_verify: true
+    key_file: /etc/siterm-privkey.pem
+- job_name: T2_US_SDSC_OASISDEV_HTTPS_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_SDSC_OASISDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-oasis.nrp-nautilus.io:443
+- job_name: T2_US_SDSC_OASISDEV_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_SDSC_OASISDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://sense-dev-oasis.nrp-nautilus.io:443/T2_US_SDSC_OASISDEV/sitefe/v1/models?current=true&summary=false&encode=false
 - job_name: T2_US_UCSD_STATE
   metrics_path: /T2_US_UCSD/sitefe/json/frontend/metrics
   relabel_configs:
@@ -3069,7 +4055,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-fe.nrp-nautilus.io:8443
+    - sense-fe.nrp-nautilus.io
   tls_config:
     cert_file: /etc/siterm-cert.pem
     insecure_skip_verify: true
@@ -3106,7 +4092,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sense-fe.nrp-nautilus.io:8443
+    - https://sense-fe.nrp-nautilus.io
 - job_name: T2_US_UCSD_MODEL_V4
   metrics_path: /probe
   params:
@@ -3139,7 +4125,7 @@ scrape_configs:
     target_label: __address__
   static_configs:
   - targets:
-    - https://sense-fe.nrp-nautilus.io:8443/T2_US_UCSD/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-fe.nrp-nautilus.io/T2_US_UCSD/sitefe/v1/models?current=true&summary=false&encode=false
 - honor_labels: true
   job_name: T2_US_UCSD_PROMFED_2
   metrics_path: /federate
@@ -5161,373 +6147,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://supa.netherlight.net:443/topology
-- job_name: GEANT_HTTPS
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-ams-nl.nml.xml
-- job_name: GEANT_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - prod-nsi.geant.org
-- job_name: GEANT_HTTPS_0
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-lon-uk.nml.xml
-- job_name: GEANT_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-dub-ie.nml.xml
-- job_name: GEANT_HTTPS_2
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-dub2-ie.nml.xml
-- job_name: GEANT_HTTPS_3
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-2-lis-pt.nml.xml
-- job_name: GEANT_HTTPS_4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-pra-cz.nml.xml
-- job_name: GEANT_HTTPS_5
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-poz-pl.nml.xml
-- job_name: GEANT_HTTPS_6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-fra-de.nml.xml
-- job_name: GEANT_HTTPS_7
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:9443/NSI/nsi.geant.net:2021:topology-1-bud-hu.nml.xml
-- job_name: GEANT_HTTPS_8
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.5099'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:8401/dds
 - job_name: Netherlight_HTTPS
   metrics_path: /probe
   params:
@@ -5594,385 +6213,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://agg.netherlight.net/nsa-discovery
-- job_name: Nautilus_HTTPS
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://dds.nsi.nrp-nautilus.io/dds
-- job_name: Nautilus_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - dds.nsi.nrp-nautilus.io
-- job_name: Nautilus_HTTPS_0
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/NSI/discovery.xml
-- job_name: Nautilus_ICMP_0
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - opennsa.nsi.nrp-nautilus.io
-- job_name: Nautilus_HTTPS_1
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/connections
-- job_name: Nautilus_HTTPS_2
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: Nautilus
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '52.3567'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '4.954585'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/NSI/calit2.optiputer.net:2020:prism-core.nml.xml
-- job_name: OptIPuter_HTTPS
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: OptIPuter
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '32.8826'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-117.237'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/connections
-- job_name: OptIPuter_ICMP
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: OptIPuter
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '32.8826'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-117.237'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - opennsa.nsi.nrp-nautilus.io
-- job_name: OptIPuter_HTTPS_0
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: OptIPuter
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '32.8826'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-117.237'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://opennsa.nsi.nrp-nautilus.io/NSI/calit2.optiputer.net:2020:prism-core.nml.xml
-- job_name: GEANT_HTTPS_9
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_network_2xx
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.509865'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://prod-nsi.geant.org:8401/dds
-- job_name: GEANT_ICMP_0
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: GEANT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NetworkRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: '51.509865'
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: '-0.118092'
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - prod-nsi.geant.org
 - job_name: ESNet_HTTPS
   metrics_path: /probe
   params:
@@ -6529,6 +6769,142 @@ scrape_configs:
   static_configs:
   - targets:
     - oscars-testbed.es.net
+- job_name: Nautilus_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: Nautilus
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://opennsa.nsi.nrp-nautilus.io/NSI/discovery.xml
+- job_name: Nautilus_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: Nautilus
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - opennsa.nsi.nrp-nautilus.io
+- job_name: Nautilus_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: Nautilus
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://opennsa.nsi.nrp-nautilus.io/connections
+- job_name: Nautilus_HTTPS_1
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: Nautilus
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://opennsa.nsi.nrp-nautilus.io/NSI/calit2.optiputer.net:2020:prism-core.nml.xml
 - job_name: Kreonet_HTTPS
   metrics_path: /probe
   params:
@@ -7357,3 +7733,143 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-rm.es.net
+- job_name: GEANT_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:8401/dds
+- job_name: GEANT_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - prod-nsi.geant.org
+- job_name: GEANT_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:8401/dds
+- job_name: GEANT_ICMP_0
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  static_configs:
+  - targets:
+    - prod-nsi.geant.org
