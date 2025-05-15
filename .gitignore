@@ -5,7 +5,9 @@ kubernetes/secrets/networkrm-privkey.pem
 kubernetes/secrets/siterm-cert.pem
 kubernetes/secrets/siterm-privkey.pem
 kubernetes/secrets/web.yml
+kubernetes/grafana-secret.yaml
 scripts/config.yaml
+scripts/prometheus-alertmanager.yml
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
