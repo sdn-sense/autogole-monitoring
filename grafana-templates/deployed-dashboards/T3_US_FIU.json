@@ -255,6 +255,150 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 9
+        },
+        "id": 144,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": false,
+              "displayName": "alertname"
+            }
+          ]
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "max_over_time(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"T3_US_FIU\"}[5m]) == 1",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Current active alerts",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "__name__": {
+                  "aggregations": []
+                },
+                "alertname": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "alertstate": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "filesystem": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "instance": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "job": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "key": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "latitude": {
+                  "aggregations": []
+                },
+                "sitename": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "software": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
         "description": "Probe query success, failure. \n1 - OK, Below 1 - Failure, see for more details below.",
         "fieldConfig": {
           "defaults": {
@@ -313,7 +457,7 @@
           "h": 7,
           "w": 8,
           "x": 0,
-          "y": 9
+          "y": 17
         },
         "id": 4,
         "options": {
@@ -404,7 +548,7 @@
           "h": 7,
           "w": 8,
           "x": 8,
-          "y": 9
+          "y": 17
         },
         "id": 2,
         "options": {
@@ -500,7 +644,7 @@
           "h": 7,
           "w": 8,
           "x": 16,
-          "y": 9
+          "y": 17
         },
         "id": 45,
         "options": {
@@ -597,7 +741,7 @@
           "h": 7,
           "w": 8,
           "x": 0,
-          "y": 16
+          "y": 24
         },
         "id": 12,
         "options": {
@@ -698,7 +842,7 @@
           "h": 7,
           "w": 8,
           "x": 8,
-          "y": 16
+          "y": 24
         },
         "id": 14,
         "options": {
@@ -791,7 +935,7 @@
           "h": 7,
           "w": 8,
           "x": 16,
-          "y": 16
+          "y": 24
         },
         "id": 10,
         "options": {
@@ -858,7 +1002,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 23
+          "y": 31
         },
         "id": 16,
         "options": {
@@ -952,7 +1096,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 31
+          "y": 39
         },
         "id": 44,
         "options": {
@@ -1046,7 +1190,7 @@
           "h": 5,
           "w": 8,
           "x": 0,
-          "y": 39
+          "y": 47
         },
         "id": 21,
         "options": {
@@ -1139,7 +1283,7 @@
           "h": 5,
           "w": 8,
           "x": 8,
-          "y": 39
+          "y": 47
         },
         "id": 23,
         "options": {
@@ -1232,7 +1376,7 @@
           "h": 5,
           "w": 8,
           "x": 16,
-          "y": 39
+          "y": 47
         },
         "id": 46,
         "options": {
@@ -1325,7 +1469,7 @@
           "h": 5,
           "w": 8,
           "x": 0,
-          "y": 44
+          "y": 52
         },
         "id": 19,
         "options": {
@@ -1418,7 +1562,7 @@
           "h": 5,
           "w": 8,
           "x": 8,
-          "y": 44
+          "y": 52
         },
         "id": 20,
         "options": {
@@ -1511,7 +1655,7 @@
           "h": 5,
           "w": 8,
           "x": 16,
-          "y": 44
+          "y": 52
         },
         "id": 24,
         "options": {
@@ -1604,7 +1748,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 49
+          "y": 57
         },
         "id": 17,
         "options": {
@@ -1695,7 +1839,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 49
+          "y": 57
         },
         "id": 18,
         "options": {
@@ -1786,7 +1930,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 56
+          "y": 64
         },
         "id": 47,
         "options": {
@@ -1880,7 +2024,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 56
+          "y": 64
         },
         "id": 66,
         "options": {
@@ -1908,6 +2052,206 @@
           }
         ],
         "title": "SiteRM FE Thread Memory Monitoring (RSS)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 71
+        },
+        "id": 145,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "disk_usage{sitename=\"T3_US_FIU\", key=\"UsePercentage\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{filesystem}} ",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "SiteRM FE Disk Usage ",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 71
+        },
+        "id": 146,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "disk_usage{sitename=\"T3_US_FIU\", key=\"IUsePercentage\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{filesystem}} ",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "SiteRM FE Disk Inodes Usage ",
         "type": "timeseries"
       },
       {
@@ -1949,7 +2293,7 @@
           "h": 6,
           "w": 24,
           "x": 0,
-          "y": 63
+          "y": 78
         },
         "id": 49,
         "options": {
@@ -2042,7 +2386,7 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 69
+          "y": 84
         },
         "id": 125,
         "options": {
@@ -2090,7 +2434,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 76
+          "y": 91
         },
         "id": 102,
         "panels": [],
@@ -2159,7 +2503,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 77
+          "y": 92
         },
         "id": 104,
         "options": {
@@ -2249,7 +2593,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 77
+          "y": 92
         },
         "id": 105,
         "options": {
@@ -2339,7 +2683,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 85
+          "y": 100
         },
         "id": 106,
         "options": {
@@ -2429,7 +2773,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 85
+          "y": 100
         },
         "id": 107,
         "options": {
@@ -2467,7 +2811,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 93
+          "y": 108
         },
         "id": 33,
         "panels": [],
@@ -2537,7 +2881,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 94
+          "y": 109
         },
         "id": 25,
         "options": {
@@ -2629,7 +2973,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 94
+          "y": 109
         },
         "id": 35,
         "options": {
@@ -2721,7 +3065,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 94
+          "y": 109
         },
         "id": 36,
         "options": {
@@ -2813,7 +3157,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 102
+          "y": 117
         },
         "id": 124,
         "options": {
@@ -2907,7 +3251,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 110
+          "y": 125
         },
         "id": 37,
         "options": {
@@ -3001,7 +3345,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 110
+          "y": 125
         },
         "id": 27,
         "options": {
@@ -3095,7 +3439,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 118
+          "y": 133
         },
         "id": 29,
         "options": {
@@ -3189,7 +3533,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 118
+          "y": 133
         },
         "id": 28,
         "options": {
@@ -3283,7 +3627,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 126
+          "y": 141
         },
         "id": 30,
         "options": {
@@ -3377,7 +3721,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 126
+          "y": 141
         },
         "id": 31,
         "options": {
@@ -3454,8 +3798,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3471,7 +3814,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 134
+          "y": 149
         },
         "id": 38,
         "options": {
@@ -3548,8 +3891,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3565,7 +3907,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 134
+          "y": 149
         },
         "id": 39,
         "options": {
@@ -3642,8 +3984,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3659,7 +4000,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 142
+          "y": 157
         },
         "id": 40,
         "options": {
@@ -3736,8 +4077,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3753,7 +4093,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 142
+          "y": 157
         },
         "id": 41,
         "options": {
@@ -3830,8 +4170,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3847,7 +4186,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 150
+          "y": 165
         },
         "id": 42,
         "options": {
@@ -3924,8 +4263,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3941,7 +4279,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 150
+          "y": 165
         },
         "id": 43,
         "options": {
@@ -4021,7 +4359,7 @@
       ]
     },
     "time": {
-      "from": "now-3h",
+      "from": "now-1h",
       "to": "now"
     },
     "timepicker": {},
@@ -4032,6 +4370,6 @@
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-05-11. See git for changes",
+  "message": "Script changes made on 2025-05-15. See git for changes",
   "overwrite": true
 }
