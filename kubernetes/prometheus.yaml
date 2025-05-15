@@ -10,6 +10,17 @@ spec:
     requests:
       storage: 40Gi
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alertmanager-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -117,6 +128,8 @@ spec:
         volumeMounts:
           - name: alertmanager-config
             mountPath: /etc/alertmanager
+          - name: alertmanager-storage
+            mountPath: /alertmanager
       - name: thanos-federate-proxy
         image: ghcr.io/snapp-incubator/thanos-federate-proxy:main
         resources:
@@ -196,6 +209,9 @@ spec:
       - name: prometheus-storage-volume
         persistentVolumeClaim:
             claimName: prometheus-pvc
+      - name: alertmanager-storage
+        persistentVolumeClaim:
+          claimName: alertmanager-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -245,4 +261,7 @@ spec:
             name: prometheus-service
             port:
               number: 9090
-
+  tls:
+  - hosts:
+    - autogole-prometheus.nrp-nautilus.io
+    secretName: cert-autogole-prometheus-nrp-nautilus-io
