@@ -1,0 +1,248 @@
+groups:
+- name: site-service-health
+  interval: 1m
+  rules:
+
+  - alert: ProbeFailed
+    expr: probe_success == 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Probe probe failed for {{ $labels.instance }}"
+      description: "Probe failed for site {{ $labels.sitename }} (instance {{ $labels.instance }})."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SSLCertificateExpiring
+    expr: (probe_ssl_earliest_cert_expiry - time()) < 86400 * 14 and (probe_ssl_earliest_cert_expiry - time()) > 0
+    for: 2m
+    labels:
+      severity: warning
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SSL certificate expiring soon for {{ $labels.instance }}"
+      description: "SSL cert for {{ $labels.sitename }} { $labels.instance }} expires in less than 14 days."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SSLCertificateExpired
+    expr: (probe_ssl_earliest_cert_expiry - time()) <= 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SSL certificate expired for {{ $labels.instance }}"
+      description: "SSL cert for {{ $labels.sitename }} {{ $labels.instance }} has already expired!"
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: HTTPStatusError
+    expr: probe_http_status_code != 200
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "HTTP probe returned non-200 for {{ $labels.instance }}"
+      description: "Non-200 status from HTTP probe at {{ $labels.sitename }} {{ $labels.instance }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DebuggerNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="Debugger"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Debugger not OK at {{ $labels.sitename }}"
+      description: "Debugger reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ValidatorServiceNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="ValidatorService"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ValidatorService not OK at {{ $labels.sitename }}"
+      description: "ValidatorService reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DBWorkerNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="DBWorker"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "DBWorker not OK at {{ $labels.sitename }}"
+      description: "DBWorker reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SNMPMonitoringNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="SNMPMonitoring"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
+      description: "SNMPMonitoring reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: PolicyServiceNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="PolicyService"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "PolicyService not OK at {{ $labels.sitename }}"
+      description: "PolicyService reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SwitchWorkerNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="SwitchWorker"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
+      description: "SwitchWorker reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: LookUpServiceNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="LookUpService"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "LookUpService not OK at {{ $labels.sitename }}"
+      description: "LookUpService reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: AgentNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="Agent"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Agent not OK at {{ $labels.sitename }}"
+      description: "Agent reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: RulerNotOK
+    expr: sum by (service_state, servicename, hostname) (
+            service_state{service_state!="OK", servicename="Ruler"}
+          ) > 0
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Ruler not OK at {{ $labels.sitename }}"
+      description: "Ruler reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ServiceRuntimeHighWarning
+    expr: service_runtime > 60 and service_runtime <= 120
+    for: 2m
+    labels:
+      severity: warning
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Service {{ $labels.servicename }} running long on {{ $labels.hostname }}"
+      description: "Runtime for {{ $labels.servicename }} on {{ $labels.sitename }} {{ $labels.hostname }} has exceeded 60 seconds."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ServiceRuntimeHighCritical
+    expr: service_runtime > 120
+    for: 2m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Service {{ $labels.servicename }} running too long on {{ $labels.hostname }}"
+      description: "Runtime for {{ $labels.servicename }} on {{ $labels.sitename }} {{ $labels.hostname }} has exceeded 120 seconds."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ServiceVersionMismatch
+    expr: count(running_version_info{version=~"^1\\.5\\.3.*"}) == 0
+    for: 1m
+    labels:
+      severity: warning
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Unexpected version for {{ $labels.servicename }} on {{ $labels.hostname }}"
+      description: "{{ $labels.servicename }} is not running expected version (1.5.3.x) on {{ $labels.hostname }} at {{ $labels.sitename }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: VirtualSwitchActivateError
+    expr: network_status{network_status="activate-error", action="vsw"} == 1
+    for: 1m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "VirtualSwitch activation error at {{ $labels.sitename }}"
+      description: |
+        VirtualSwitch (vsw) activation failed.
+        Interface: {{ $labels.key1 }}
+        Resource: {{ $labels.key0 }}
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: RoutingServiceActivateError
+    expr: network_status{network_status="activate-error", action="rst"} == 1
+    for: 1m
+    labels:
+      severity: critical
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "RoutingService activation error at {{ $labels.sitename }}"
+      description: |
+        RoutingService (rst) activation failed.
+        Interface: {{ $labels.key1 }}
+        Resource: {{ $labels.key0 }}
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DiskUsageHigh
+    expr: disk_usage{key="UsePercentage"} > 90
+    for: 2m
+    labels:
+      severity: warning
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "High disk usage at {{ $labels.sitename }}"
+      description: "Disk usage on {{ $labels.instance }} exceeded 90% (filesystem: {{ $labels.filesystem }})."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: InodeUsageHigh
+    expr: disk_usage{key="IUsePercentage"} > 90
+    for: 2m
+    labels:
+      severity: warning
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "High inode usage at {{ $labels.sitename }}"
+      description: "Inode usage on {{ $labels.instance }} exceeded 90% (filesystem: {{ $labels.filesystem }})."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
