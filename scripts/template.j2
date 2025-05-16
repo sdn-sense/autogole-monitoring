@@ -1,0 +1,28 @@
+{# To use it run: jinja2 template.j2 #}
+groups:
+- name: siterm-service-alerts
+  rules:
+{% for service in [
+  "Agent", "Ruler", "Debugger", "LookUpService", "ProvisioningService", "SNMPMonitoring",
+  "DBWorker", "PolicyService", "SwitchWorker", "Prometheus-Push", "Arp-Push", "ConfigFetcher", "ValidatorService"
+] %}
+{% for state, severity in {
+  "WARNING": "warning",
+  "UNKNOWN": "critical",
+  "FAILED": "critical",
+  "UNSET": "critical",
+  "KEYBOARDINTERRUPT": "critical"
+}.items() %}
+  - alert: {{ service }}{{ state }}State
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="{{ state }}", servicename="{{ service }}"}) > 0
+    for: 2m
+    labels:
+      severity: "{{ severity }}"
+      sitename: {% raw %}"{{ $labels.sitename }}"{% endraw %}
+    annotations:
+      summary: "{{ service }} not OK at {% raw %}{{ $labels.sitename }}{% endraw %}"
+      description: "{{ service }} reports state {% raw %}{{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}.{% endraw %}"
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={% raw %}{{ $labels.sitename }}{% endraw%}"
+{% endfor %}
+{% endfor %}
+
