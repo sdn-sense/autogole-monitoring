@@ -47,123 +47,6 @@ groups:
       description: "Non-200 status from HTTP probe at {{ $labels.sitename }} {{ $labels.instance }}."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
-  - alert: DebuggerNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="Debugger"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Debugger not OK at {{ $labels.sitename }}"
-      description: "Debugger reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: ValidatorServiceNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="ValidatorService"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "ValidatorService not OK at {{ $labels.sitename }}"
-      description: "ValidatorService reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: DBWorkerNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="DBWorker"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "DBWorker not OK at {{ $labels.sitename }}"
-      description: "DBWorker reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: SNMPMonitoringNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="SNMPMonitoring"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
-      description: "SNMPMonitoring reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: PolicyServiceNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="PolicyService"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "PolicyService not OK at {{ $labels.sitename }}"
-      description: "PolicyService reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: SwitchWorkerNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="SwitchWorker"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
-      description: "SwitchWorker reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: LookUpServiceNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="LookUpService"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "LookUpService not OK at {{ $labels.sitename }}"
-      description: "LookUpService reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: AgentNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="Agent"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Agent not OK at {{ $labels.sitename }}"
-      description: "Agent reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: RulerNotOK
-    expr: sum by (service_state, servicename, hostname) (
-            service_state{service_state!="OK", servicename="Ruler"}
-          ) > 0
-    for: 2m
-    labels:
-      severity: critical
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Ruler not OK at {{ $labels.sitename }}"
-      description: "Ruler reports state '{{ $labels.service_state }}' at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
   - alert: ServiceRuntimeHighWarning
     expr: service_runtime > 60 and service_runtime <= 120
     for: 2m
@@ -187,14 +70,14 @@ groups:
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: ServiceVersionMismatch
-    expr: count(running_version_info{version=~"^1\\.5\\.3.*"}) == 0
+    expr: count by (version, hostname, sitename) (running_version_info{version!~"^1\\.5\\.3.*"}) > 0
     for: 1m
     labels:
       severity: warning
       sitename: "{{ $labels.sitename }}"
     annotations:
       summary: "Unexpected version for {{ $labels.servicename }} on {{ $labels.hostname }}"
-      description: "{{ $labels.servicename }} is not running expected version (1.5.3.x) on {{ $labels.hostname }} at {{ $labels.sitename }}."
+      description: "{{ $labels.servicename }} is not running expected version (>1.5.32) on {{ $labels.hostname }} at {{ $labels.sitename }}."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: VirtualSwitchActivateError
@@ -226,7 +109,7 @@ groups:
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: DiskUsageHigh
-    expr: disk_usage{key="UsePercentage"} > 90
+    expr: disk_usage{key="UsePercentage"} > 80
     for: 2m
     labels:
       severity: warning
@@ -237,7 +120,7 @@ groups:
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: InodeUsageHigh
-    expr: disk_usage{key="IUsePercentage"} > 90
+    expr: disk_usage{key="IUsePercentage"} > 80
     for: 2m
     labels:
       severity: warning
@@ -245,4 +128,721 @@ groups:
     annotations:
       summary: "High inode usage at {{ $labels.sitename }}"
       description: "Inode usage on {{ $labels.instance }} exceeded 90% (filesystem: {{ $labels.filesystem }})."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: AgentWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Agent"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Agent not OK at {{ $labels.sitename }}"
+      description: "Agent reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: AgentUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Agent"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Agent not OK at {{ $labels.sitename }}"
+      description: "Agent reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: AgentFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Agent"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Agent not OK at {{ $labels.sitename }}"
+      description: "Agent reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: AgentUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Agent"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Agent not OK at {{ $labels.sitename }}"
+      description: "Agent reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: AgentKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Agent"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Agent not OK at {{ $labels.sitename }}"
+      description: "Agent reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+
+
+  - alert: RulerWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Ruler"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Ruler not OK at {{ $labels.sitename }}"
+      description: "Ruler reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: RulerUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Ruler"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Ruler not OK at {{ $labels.sitename }}"
+      description: "Ruler reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: RulerFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Ruler"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Ruler not OK at {{ $labels.sitename }}"
+      description: "Ruler reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: RulerUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Ruler"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Ruler not OK at {{ $labels.sitename }}"
+      description: "Ruler reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: RulerKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Ruler"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Ruler not OK at {{ $labels.sitename }}"
+      description: "Ruler reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DebuggerWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Debugger"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Debugger not OK at {{ $labels.sitename }}"
+      description: "Debugger reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DebuggerUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Debugger"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Debugger not OK at {{ $labels.sitename }}"
+      description: "Debugger reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DebuggerFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Debugger"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Debugger not OK at {{ $labels.sitename }}"
+      description: "Debugger reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DebuggerUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Debugger"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Debugger not OK at {{ $labels.sitename }}"
+      description: "Debugger reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DebuggerKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Debugger"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Debugger not OK at {{ $labels.sitename }}"
+      description: "Debugger reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: LookUpServiceWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="LookUpService"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "LookUpService not OK at {{ $labels.sitename }}"
+      description: "LookUpService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: LookUpServiceUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="LookUpService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "LookUpService not OK at {{ $labels.sitename }}"
+      description: "LookUpService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: LookUpServiceFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="LookUpService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "LookUpService not OK at {{ $labels.sitename }}"
+      description: "LookUpService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: LookUpServiceUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="LookUpService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "LookUpService not OK at {{ $labels.sitename }}"
+      description: "LookUpService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: LookUpServiceKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="LookUpService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "LookUpService not OK at {{ $labels.sitename }}"
+      description: "LookUpService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ProvisioningServiceWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="ProvisioningService"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ProvisioningService not OK at {{ $labels.sitename }}"
+      description: "ProvisioningService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ProvisioningServiceUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="ProvisioningService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ProvisioningService not OK at {{ $labels.sitename }}"
+      description: "ProvisioningService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ProvisioningServiceFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="ProvisioningService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ProvisioningService not OK at {{ $labels.sitename }}"
+      description: "ProvisioningService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ProvisioningServiceUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="ProvisioningService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ProvisioningService not OK at {{ $labels.sitename }}"
+      description: "ProvisioningService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ProvisioningServiceKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="ProvisioningService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ProvisioningService not OK at {{ $labels.sitename }}"
+      description: "ProvisioningService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SNMPMonitoringWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="SNMPMonitoring"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
+      description: "SNMPMonitoring reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SNMPMonitoringUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="SNMPMonitoring"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
+      description: "SNMPMonitoring reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SNMPMonitoringFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="SNMPMonitoring"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
+      description: "SNMPMonitoring reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SNMPMonitoringUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="SNMPMonitoring"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
+      description: "SNMPMonitoring reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SNMPMonitoringKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="SNMPMonitoring"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SNMPMonitoring not OK at {{ $labels.sitename }}"
+      description: "SNMPMonitoring reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DBWorkerWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="DBWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "DBWorker not OK at {{ $labels.sitename }}"
+      description: "DBWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DBWorkerUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="DBWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "DBWorker not OK at {{ $labels.sitename }}"
+      description: "DBWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DBWorkerFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="DBWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "DBWorker not OK at {{ $labels.sitename }}"
+      description: "DBWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DBWorkerUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="DBWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "DBWorker not OK at {{ $labels.sitename }}"
+      description: "DBWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: DBWorkerKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="DBWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "DBWorker not OK at {{ $labels.sitename }}"
+      description: "DBWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: PolicyServiceWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="PolicyService"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "PolicyService not OK at {{ $labels.sitename }}"
+      description: "PolicyService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: PolicyServiceUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="PolicyService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "PolicyService not OK at {{ $labels.sitename }}"
+      description: "PolicyService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: PolicyServiceFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="PolicyService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "PolicyService not OK at {{ $labels.sitename }}"
+      description: "PolicyService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: PolicyServiceUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="PolicyService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "PolicyService not OK at {{ $labels.sitename }}"
+      description: "PolicyService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: PolicyServiceKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="PolicyService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "PolicyService not OK at {{ $labels.sitename }}"
+      description: "PolicyService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SwitchWorkerWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="SwitchWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
+      description: "SwitchWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SwitchWorkerUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="SwitchWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
+      description: "SwitchWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SwitchWorkerFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="SwitchWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
+      description: "SwitchWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SwitchWorkerUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="SwitchWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
+      description: "SwitchWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: SwitchWorkerKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="SwitchWorker"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "SwitchWorker not OK at {{ $labels.sitename }}"
+      description: "SwitchWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Prometheus-PushWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Prometheus-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
+      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Prometheus-PushUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Prometheus-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
+      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Prometheus-PushFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Prometheus-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
+      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Prometheus-PushUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Prometheus-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
+      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Prometheus-PushKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Prometheus-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
+      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Arp-PushWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Arp-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Arp-Push not OK at {{ $labels.sitename }}"
+      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Arp-PushUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Arp-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Arp-Push not OK at {{ $labels.sitename }}"
+      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Arp-PushFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Arp-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Arp-Push not OK at {{ $labels.sitename }}"
+      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Arp-PushUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Arp-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Arp-Push not OK at {{ $labels.sitename }}"
+      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: Arp-PushKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Arp-Push"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Arp-Push not OK at {{ $labels.sitename }}"
+      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ConfigFetcherWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="ConfigFetcher"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ConfigFetcher not OK at {{ $labels.sitename }}"
+      description: "ConfigFetcher reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ConfigFetcherUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="ConfigFetcher"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ConfigFetcher not OK at {{ $labels.sitename }}"
+      description: "ConfigFetcher reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ConfigFetcherFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="ConfigFetcher"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ConfigFetcher not OK at {{ $labels.sitename }}"
+      description: "ConfigFetcher reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ConfigFetcherUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="ConfigFetcher"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ConfigFetcher not OK at {{ $labels.sitename }}"
+      description: "ConfigFetcher reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ConfigFetcherKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="ConfigFetcher"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ConfigFetcher not OK at {{ $labels.sitename }}"
+      description: "ConfigFetcher reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ValidatorServiceWARNINGState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="ValidatorService"}) > 0
+    for: 2m
+    labels:
+      severity: "warning"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ValidatorService not OK at {{ $labels.sitename }}"
+      description: "ValidatorService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ValidatorServiceUNKNOWNState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="ValidatorService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ValidatorService not OK at {{ $labels.sitename }}"
+      description: "ValidatorService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ValidatorServiceFAILEDState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="ValidatorService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ValidatorService not OK at {{ $labels.sitename }}"
+      description: "ValidatorService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ValidatorServiceUNSETState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="ValidatorService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ValidatorService not OK at {{ $labels.sitename }}"
+      description: "ValidatorService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
+  - alert: ValidatorServiceKEYBOARDINTERRUPTState
+    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="ValidatorService"}) > 0
+    for: 2m
+    labels:
+      severity: "critical"
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "ValidatorService not OK at {{ $labels.sitename }}"
+      description: "ValidatorService reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
