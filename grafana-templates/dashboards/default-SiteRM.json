@@ -171,7 +171,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "expr": "count(ALERTS{alertstate=\"firing\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -179,7 +179,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Errors",
+      "title": "Total Errors/Warnings",
       "type": "stat"
     },
     {
@@ -318,7 +318,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max_over_time(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"REPLACEME_SITENAME\"}[5m]) == 1",
+          "expr": "max_over_time(ALERTS{alertstate=\"firing\", sitename=\"REPLACEME_SITENAME\"}[5m]) == 1",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -326,7 +326,7 @@
           "refId": "A"
         }
       ],
-      "title": "Current active alerts",
+      "title": "Current active alerts/warnings",
       "transformations": [
         {
           "id": "organize",

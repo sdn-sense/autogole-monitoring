@@ -173,7 +173,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"NRM_CENICDEV\"}) or label_replace(0 * absent(ALERTS{sitename=\"NRM_CENICDEV\"}), \"sitename\", \"NRM_CENICDEV\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", sitename=\"NRM_CENICDEV\"}) or label_replace(0 * absent(ALERTS{sitename=\"NRM_CENICDEV\"}), \"sitename\", \"NRM_CENICDEV\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -181,7 +181,7 @@
             "refId": "A"
           }
         ],
-        "title": "Total Errors",
+        "title": "Total Errors/Warnings",
         "type": "stat"
       },
       {
@@ -320,7 +320,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "max_over_time(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"NRM_CENICDEV\"}[5m]) == 1",
+            "expr": "max_over_time(ALERTS{alertstate=\"firing\", sitename=\"NRM_CENICDEV\"}[5m]) == 1",
             "format": "table",
             "instant": true,
             "legendFormat": "__auto",
@@ -328,7 +328,7 @@
             "refId": "A"
           }
         ],
-        "title": "Current active alerts",
+        "title": "Current active alerts/warnings",
         "transformations": [
           {
             "id": "organize",
@@ -4370,6 +4370,6 @@
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-05-15. See git for changes",
+  "message": "Script changes made on 2025-05-16. See git for changes",
   "overwrite": true
 }
