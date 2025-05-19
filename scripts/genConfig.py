@@ -343,15 +343,6 @@ class PromModel():
             self.default['scrape_configs'].append(tmpEntry)
             # 2. Query Endpoint and get TLS/Certificate information of Service
             if 'https_v4_siterm_2xx' in probes and ipv4_addr:
-                tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
-                tmpEntry['job_name'] = self._genName(f'{site}_HTTPS_V4')
-                tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
-                tmpEntry['relabel_configs'][0]['replacement'] = site
-                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
-                tmpEntry['relabel_configs'][2]['replacement'] = lat
-                tmpEntry['relabel_configs'][3]['replacement'] = lng
-                tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
-                self.default['scrape_configs'].append(tmpEntry)
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V4')
@@ -364,15 +355,6 @@ class PromModel():
                 self.default['scrape_configs'].append(tmpEntry)
             if 'https_v6_siterm_2xx' in probes and ipv6_addr:
                 # Check that it has IPv6
-                tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
-                tmpEntry['job_name'] = self._genName(f'{site}_HTTPS_V6')
-                tmpEntry['static_configs'][0]['targets'].append(origwebdomain)
-                tmpEntry['relabel_configs'][0]['replacement'] = site
-                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
-                tmpEntry['relabel_configs'][2]['replacement'] = lat
-                tmpEntry['relabel_configs'][3]['replacement'] = lng
-                tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
-                self.default['scrape_configs'].append(tmpEntry)
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V6')
