@@ -160,7 +160,6 @@ VPP_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # This uses blackbox exporter and we need to relabel config and use localhost to query
 # remote endpoints
 # In case it is https, it will use https_v[46]_network_2xx module of blackbox (v6 only if DNS Replies with v6 record)
-# In case it is http, it will use http_v[46]_network_2xx module of blackbox (v6 only if DNS Replies with v6 record)
 HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
                    'metrics_path': '/probe',
                    'params':{'module': ['WILLBEREPLACEDBYCODE']},
@@ -513,7 +512,7 @@ class PromModel():
                 elif parsedurl.scheme == 'http' and 'https_v4_network_2xx' in nrmconfig['probes']:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
                     tmpEntry['job_name'] = self._genName(f'{site}_HTTPS')
-                    tmpEntry['params']['module'][0] = 'http_v4_network_2xx'
+                    tmpEntry['params']['module'][0] = 'https_v4_network_2xx'
                     tmpEntry['static_configs'][0]['targets'].append(url)
                     tmpEntry['relabel_configs'][0]['replacement'] = site
                     tmpEntry['relabel_configs'][1]['replacement'] = 'NetworkRM'  # Any way to get it automated?
