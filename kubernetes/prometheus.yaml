@@ -86,26 +86,14 @@ spec:
           subPath: alerts.yml
         - name: prometheus-storage-volume
           mountPath: /prometheus
-        - mountPath: /etc/siterm-cert.pem
-          name: siterm-cert
+        - mountPath: /etc/tls/tls.crt
+          name: grafana-tls
+          subPath: tls.crt
           readOnly: true
-          subPath: siterm-cert.pem
-        - mountPath: /etc/siterm-privkey.pem
-          name: siterm-key
+        - mountPath: /etc/tls/tls.key
+          name: grafana-tls
+          subPath: tls.key
           readOnly: true
-          subPath: siterm-key.pem
-        - mountPath: /etc/networkrm-cert.pem
-          name: networkrm-cert
-          readOnly: true
-          subPath: networkrm-cert.pem
-        - mountPath: /etc/networkrm-privkey.pem
-          name: networkrm-key
-          readOnly: true
-          subPath: networkrm-key.pem
-        - mountPath: /etc/bundle-ca.pem
-          name: bundle-ca
-          readOnly: true
-          subPath: bundle-ca.pem
         - mountPath: /etc/web.yml
           name: prometheus-web-yml
           readOnly: true
@@ -164,40 +152,9 @@ spec:
         configMap:
           defaultMode: 420
           name: alertmanager-config
-      - name: siterm-cert
+      - name: grafana-tls
         secret:
-          secretName: autogole-monitoring
-          items:
-          - key: siterm-cert
-            path: siterm-cert.pem
-          defaultMode: 0644
-      - name: siterm-key
-        secret:
-          secretName: autogole-monitoring
-          items:
-          - key: siterm-key
-            path: siterm-key.pem
-          defaultMode: 0644
-      - name: networkrm-cert
-        secret:
-          secretName: autogole-monitoring
-          items:
-          - key: networkrm-cert
-            path: networkrm-cert.pem
-          defaultMode: 0644
-      - name: networkrm-key
-        secret:
-          secretName: autogole-monitoring
-          items:
-          - key: networkrm-key
-            path: networkrm-key.pem
-          defaultMode: 0644
-      - name: bundle-ca
-        secret:
-          secretName: autogole-monitoring
-          items:
-          - key: bundle-ca
-            path: bundle-ca.pem
+          secretName: autogole-grafana-secrets
           defaultMode: 0644
       - name: prometheus-web-yml
         secret:

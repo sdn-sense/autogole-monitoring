@@ -15,9 +15,8 @@ data:
           preferred_ip_protocol: "ip4"
           tls_config:
             insecure_skip_verify: true
-            cert_file: /etc/siterm-cert.pem
-            key_file: /etc/siterm-privkey.pem
-            ca_file: /etc/bundle-ca.pem
+            cert_file: /etc/tls/tls.crt
+            key_file: /etc/tls/tls.key
       https_v6_siterm_2xx:
         prober: http
         http:
@@ -26,9 +25,8 @@ data:
           preferred_ip_protocol: "ip6"
           tls_config:
             insecure_skip_verify: true
-            cert_file: /etc/siterm-cert.pem
-            key_file: /etc/siterm-privkey.pem
-            ca_file: /etc/bundle-ca.pem
+            cert_file: /etc/tls/tls.crt
+            key_file: /etc/tls/tls.key
       https_v4_network_2xx:
         prober: http
         http:
@@ -37,9 +35,8 @@ data:
           preferred_ip_protocol: "ip4"
           tls_config:
             insecure_skip_verify: true
-            cert_file: /etc/networkrm-cert.pem
-            key_file: /etc/networkrm-privkey.pem
-            ca_file: /etc/bundle-ca.pem
+            cert_file: /etc/tls/tls.crt
+            key_file: /etc/tls/tls.key
       https_v6_network_2xx:
         prober: http
         http:
@@ -48,9 +45,8 @@ data:
           preferred_ip_protocol: "ip6"
           tls_config:
             insecure_skip_verify: true
-            cert_file: /etc/networkrm-cert.pem
-            key_file: /etc/networkrm-privkey.pem
-            ca_file: /etc/bundle-ca.pem
+            cert_file: /etc/tls/tls.crt
+            key_file: /etc/tls/tls.key
       http_v4_network_2xx:
         prober: http
         http:
