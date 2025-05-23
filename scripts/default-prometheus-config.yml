@@ -41,9 +41,9 @@ scrape_configs:
   - targets:
     - nsi-snmpmon-cenic.nrp-nautilus.io
   tls_config:
-    cert_file: /etc/siterm-cert.pem
+    cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
-    key_file: /etc/siterm-privkey.pem
+    key_file: /etc/tls/tls.key
 - job_name: ESnet_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -69,9 +69,9 @@ scrape_configs:
   - targets:
     - nsi-snmpmon-esnet.nrp-nautilus.io
   tls_config:
-    cert_file: /etc/siterm-cert.pem
+    cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
-    key_file: /etc/siterm-privkey.pem
+    key_file: /etc/tls/tls.key
 - job_name: Internet2_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -97,9 +97,9 @@ scrape_configs:
   - targets:
     - nsi-snmpmon-internet2.nrp-nautilus.io
   tls_config:
-    cert_file: /etc/siterm-cert.pem
+    cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
-    key_file: /etc/siterm-privkey.pem
+    key_file: /etc/tls/tls.key
 - job_name: T2_US_SDSC_POD_0
   relabel_configs:
   - replacement: T2_US_SDSC
