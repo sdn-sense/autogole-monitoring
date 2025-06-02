@@ -550,7 +550,7 @@ def execute():
         siteConfDir = os.path.join(workdir, dirName)
         worker.looper(siteConfDir)
     removeDir(workdir)
-    worker.addNRM('../configs/nsi-endpoints')
+    #worker.addNRM('../configs/nsi-endpoints')
     worker.dump()
 
 if __name__ == "__main__":
