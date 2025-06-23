@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 40Gi
+      storage: 200Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -63,7 +63,7 @@ spec:
       - name: prometheus
         image: prom/prometheus
         args:
-          - '--storage.tsdb.retention.time=30d'
+          - '--storage.tsdb.retention.time=360d'
           - '--storage.tsdb.path=/prometheus'
           - '--config.file=/etc/prometheus/prometheus.yml'
           - '--web.config.file=/etc/web.yml'

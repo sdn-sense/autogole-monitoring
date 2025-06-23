@@ -13,6 +13,8 @@ from nrm import allNSIEndpoints
 
 # STATE - Will Query FE (/<SITENAME>/sitefe/json/frontend/metrics)
 # and get all services states of that FE and Agent's registered to it.
+# It is also used for Apache scrape for SiteRM endpoints. It uses the following exporter:
+# https://github.com/Lusitaniae/apache_exporter?tab=readme-ov-file
 STATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                 'scrape_interval': '30s',
                 'static_configs': [{'targets': []}],
@@ -60,7 +62,6 @@ HTTPS_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                     'target_label': 'instance'},
                                    {'target_label': '__address__',
                                     'replacement': 'prometheus-blackbox-exporter-service:9115'}]}
-
 
 # ICMP - Will ping FE endpoint and get RTT
 # v6 only if DNS Replies with v6 record
@@ -307,8 +308,6 @@ class PromModel():
             self.default['scrape_configs'].append(tmpEntry)
 
 
-
-
     def _addFE(self, dirname):
         confFile = os.path.join(dirname, 'main.yaml')
         if not os.path.isfile(confFile):
@@ -341,7 +340,17 @@ class PromModel():
             tmpEntry['relabel_configs'][2]['replacement'] = lat
             tmpEntry['relabel_configs'][3]['replacement'] = lng
             self.default['scrape_configs'].append(tmpEntry)
-            # 2. Query Endpoint and get TLS/Certificate information of Service
+            # 2. Scrape apache HTTP Status information from SiteRM Endpoints
+            tmpEntry = copy.deepcopy(STATE_SCRAPE)
+            tmpEntry['job_name'] = self._genName(f'{site}_STATEHTTP')
+            tmpEntry['static_configs'][0]['targets'].append(webdomain)
+            tmpEntry['metrics_path'] = "/siterm-http-status"
+            tmpEntry['relabel_configs'][0]['replacement'] = site
+            tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-HTTP'
+            tmpEntry['relabel_configs'][2]['replacement'] = lat
+            tmpEntry['relabel_configs'][3]['replacement'] = lng
+            self.default['scrape_configs'].append(tmpEntry)
+            # 3. Query Endpoint and get TLS/Certificate information of Service
             if 'https_v4_siterm_2xx' in probes and ipv4_addr:
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
@@ -365,7 +374,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
                 self.default['scrape_configs'].append(tmpEntry)
-            # 3. Add ICMP Check for FE
+            # 4. Add ICMP Check for FE
             if 'icmp_v4' in probes and ipv4_addr:
                 tmpEntry = copy.deepcopy(ICMP_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_ICMP_V4')
@@ -388,7 +397,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][4]['replacement'] = 'v6'
                 tmpEntry['params']['module'][0] = 'icmp_v6'
                 self.default['scrape_configs'].append(tmpEntry)
-            # 4. Check if fe config has node_exporter defined
+            # 5. Check if fe config has node_exporter defined
             if conf.get('general', {}).get('node_exporter', ''):
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_NODE')

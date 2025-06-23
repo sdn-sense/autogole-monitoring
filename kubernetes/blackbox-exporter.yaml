@@ -37,7 +37,6 @@ spec:
           imagePullPolicy: IfNotPresent
           securityContext:
             readOnlyRootFilesystem: true
-            privileged: true
           args:
             - "--config.file=/config/blackbox.yaml"
           ports:
