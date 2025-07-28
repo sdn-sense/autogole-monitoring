@@ -317,6 +317,7 @@ class PromModel():
         origwebdomain = webdomain.strip('/')
         probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
                                                         'icmp_v4', 'icmp_v6'])
+        fastapi = conf.get('general', {}).get('fastapi', False)
         if webdomain.startswith('https://'):
             webdomain = webdomain[8:]
         if not webdomain:
@@ -334,7 +335,10 @@ class PromModel():
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
             tmpEntry['job_name'] = self._genName(f'{site}_STATE')
             tmpEntry['static_configs'][0]['targets'].append(webdomain)
-            tmpEntry['metrics_path'] = f"/{site}/sitefe/json/frontend/metrics"
+            if not fastapi:
+                tmpEntry['metrics_path'] = f"/{site}/sitefe/json/frontend/metrics"
+            else:
+                tmpEntry['metrics_path'] = f"/api/{site}/monitoring/prometheus/metrics"
             tmpEntry['relabel_configs'][0]['replacement'] = site
             tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
             tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -355,7 +359,10 @@ class PromModel():
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V4')
-                tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
+                if not fastapi:
+                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
+                else:
+                    tmpEntry['static_configs'][0]['targets'].append(f'/api/{site}/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -367,7 +374,10 @@ class PromModel():
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V6')
-                tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
+                if not fastapi:
+                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
+                else:
+                    tmpEntry['static_configs'][0]['targets'].append(f'/api/{site}/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
