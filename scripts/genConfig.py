@@ -362,7 +362,7 @@ class PromModel():
                 if not fastapi:
                     tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
                 else:
-                    tmpEntry['static_configs'][0]['targets'].append(f'/api/{site}/models?current=true&summary=false&encode=false')
+                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/api/{site}/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -377,7 +377,7 @@ class PromModel():
                 if not fastapi:
                     tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
                 else:
-                    tmpEntry['static_configs'][0]['targets'].append(f'/api/{site}/models?current=true&summary=false&encode=false')
+                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/api/{site}/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
