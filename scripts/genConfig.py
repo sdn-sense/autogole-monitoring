@@ -326,6 +326,12 @@ class PromModel():
             return
         sites = conf.get('general', {}).get('sites', [])
         if not sites:
+            # This is to cover old configurations, where sitename is a list
+            # TODO: Remove after 1.50 release. (Aug 2025)
+            sites = conf.get('general', {}).get('sitename', [])
+            if isinstance(sites, str):
+                sites = [sites]
+        if not sites:
             return
         ipv6_addr = getIPv6Address(webdomain.split(':')[0])
         ipv4_addr = getIPv4Address(webdomain.split(':')[0])
@@ -449,6 +455,10 @@ class PromModel():
         promFederate = conf.get('general', {}).get('prometheus_federate', '')
         promQuery = conf.get('general', {}).get('prometheus_query', '')
         site = conf.get('general', {}).get('sitename', '')
+        # This is to cover old configurations, where sitename is a list
+        # TODO: Remove after 1.50 release. (Aug 2025)
+        if isinstance(site, str):
+            site = [site]
         if site and nodeExporter:
             for sitename in site:
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
