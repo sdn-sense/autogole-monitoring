@@ -577,6 +577,9 @@ def execute():
     workdir = getSiteRMRepo()
     for dirName in os.listdir(workdir):
         siteConfDir = os.path.join(workdir, dirName)
+        if os.path.isfile(os.path.join(siteConfDir, "disabled")):
+            print(f"There is a disabled flag set. Will not add site to monitoring. {dirName}")
+            continue
         worker.looper(siteConfDir)
     removeDir(workdir)
     #worker.addNRM('../configs/nsi-endpoints')
