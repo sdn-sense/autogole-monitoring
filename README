@@ -82,16 +82,10 @@ Download json template from grafana and save it as (new-default-SiteRM.json); Re
 Do vimdiff Snd compare default SiteRM dashboard json with new one. Identify variables for:
 ```
      REPLACEME_SITENAME
-     REPLACEME_NOTIFICATION_ALL
-     REPLACEME_NOTIFICATION_SITE
-     REPLACEME_SOFTWARE
 ```
 Once identified, issued sed and replace all to KEY, like:
 ```
 sed -i '' 's/T2_US_Caltech_Test/REPLACEME_SITENAME/' new-default-SiteRM.json
-sed -i '' 's/puAWMcmVk/REPLACEME_NOTIFICATION_ALL/' new-default-SiteRM.json
-sed -i '' 's/MysWMcmVk/REPLACEME_NOTIFICATION_SITE/' new-default-SiteRM.json
-sed -i '' 's/SiteRM/REPLACEME_SOFTWARE/' new-default-SiteRM.json
 sed -i '' 's/dellos9_s0/$switch/' new-default-SiteRM.json
 sed -i '' 's/dellos9_s1/$switch/' new-default-SiteRM.json
 ```
