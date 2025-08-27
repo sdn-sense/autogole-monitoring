@@ -15,7 +15,7 @@ scrape_configs:
   - replacement: NSI_PACWAVE
     source_labels:
     - __address__
-    target_label: sitename
+    target_label: nsisitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -37,41 +37,13 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: ESnet_SNMPMon
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: ESnet
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: NSI-SNMPMon
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 37.876
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -122.253
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - nsi-snmpmon-esnet.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: Internet2_SNMPMon
   metrics_path: /metrics
   relabel_configs:
   - replacement: Internet2
     source_labels:
     - __address__
-    target_label: sitename
+    target_label: nsisitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -93,216 +65,8 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_POD_0
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-01-111.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_1
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-02-111.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_2
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-03-111.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_3
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-04-111.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_4
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-01-112.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_5
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-02-112.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_6
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-03-112.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_7
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-04-112.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_8
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-01-113.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_9
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-02-113.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_10
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-03-113.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_11
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-04-113.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_12
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-01-114.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_13
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-02-114.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_14
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-03-114.sdsc.optiputer.net:9100
-- job_name: T2_US_SDSC_POD_15
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent-Transfer
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-04-114.sdsc.optiputer.net:9100
 - job_name: NRM_CENIC_STATE
-  metrics_path: /NRM_CENIC/sitefe/json/frontend/metrics
+  metrics_path: /api/NRM_CENIC/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: NRM_CENIC
     source_labels:
@@ -387,9 +151,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-ladowntown.nrp-nautilus.io:443/NRM_CENIC/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-ladowntown.nrp-nautilus.io:443/api/NRM_CENIC/models?current=true&summary=false&encode=false
 - job_name: NRM_CENIC_ICMP_V4
   metrics_path: /probe
   params:
@@ -424,11 +189,12 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-ladowntown.nrp-nautilus.io
 - job_name: NRM_CENICDEV_STATE
-  metrics_path: /NRM_CENICDEV/sitefe/json/frontend/metrics
+  metrics_path: /api/NRM_CENICDEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: NRM_CENICDEV
     source_labels:
@@ -513,9 +279,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-dev-ladowntown.nrp-nautilus.io:443/NRM_CENICDEV/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-dev-ladowntown.nrp-nautilus.io:443/api/NRM_CENICDEV/models?current=true&summary=false&encode=false
 - job_name: NRM_CENICDEV_ICMP_V4
   metrics_path: /probe
   params:
@@ -550,11 +317,12 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-dev-ladowntown.nrp-nautilus.io
 - job_name: NRM_GPN_STATE
-  metrics_path: /NRM_GPN/sitefe/json/frontend/metrics
+  metrics_path: /api/NRM_GPN/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: NRM_GPN
     source_labels:
@@ -639,161 +407,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-gpn.nrp-nautilus.io:443/NRM_GPN/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T1_DE_KIT_STATE
-  metrics_path: /T1_DE_KIT/sitefe/json/frontend/metrics
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - a01-102-151-e.gridka.de:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_DE_KIT_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_DE_KIT_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://a01-102-151-e.gridka.de:8443/T1_DE_KIT/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T1_DE_KIT_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de
-- job_name: T1_DE_KIT_NODE
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - a01-102-101-e.gridka.de:9100
-- job_name: T1_DE_KIT_NODE_0
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de:9100
+    - https://sense-gpn.nrp-nautilus.io:443/api/NRM_GPN/models?current=true&summary=false&encode=false
 - job_name: T1_US_FNAL_STATE
   metrics_path: /T1_US_FNAL/sitefe/json/frontend/metrics
   relabel_configs:
@@ -880,6 +497,7 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - https://cmssense1.fnal.gov:8443/T1_US_FNAL/sitefe/v1/models?current=true&summary=false&encode=false
@@ -917,345 +535,82 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - cmssense1.fnal.gov
-- job_name: T1_US_FNAL_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T1_US_FNAL
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cmssense2-origin-2841-1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cmssense2-origin-2841-1-t1-us-fnal.nrp-nautilus.io
-- job_name: T1_US_FNAL_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T1_US_FNAL
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cmssense2-origin-2842-1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cmssense2-origin-2842-1-t1-us-fnal.nrp-nautilus.io
-- job_name: T1_US_FNAL_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T1_US_FNAL
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cmssense2-origin-2843-1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cmssense2-origin-2843-1-t1-us-fnal.nrp-nautilus.io
 - job_name: T1_US_FNAL_NODE
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense2.fnal.gov:15000
+    - cmssense2.fnal.gov:9100
 - job_name: T1_US_FNAL_NODE_0
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense3.fnal.gov:15000
+    - cmssense3.fnal.gov:9100
 - job_name: T1_US_FNAL_NODE_1
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense4.fnal.gov:15000
+    - cmssense4.fnal.gov:9100
 - job_name: T1_US_FNAL_NODE_2
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense5.fnal.gov:15000
+    - cmssense5.fnal.gov:9100
 - job_name: T1_US_FNAL_NODE_3
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  static_configs:
-  - targets:
-    - cmssense6.fnal.gov:15000
-- job_name: T2_BR_SPRACE_STATE
-  metrics_path: /T2_BR_SPRACE/sitefe/json/frontend/metrics
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -23.511344
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -46.66769
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sprace02.sprace.org.br:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_BR_SPRACE_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -23.511344
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -46.66769
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sprace02.sprace.org.br:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_BR_SPRACE_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -23.511344
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -46.66769
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sprace02.sprace.org.br:8443/T2_BR_SPRACE/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T2_BR_SPRACE_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -23.511344
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -46.66769
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sprace02.sprace.org.br:8443/T2_BR_SPRACE/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T2_BR_SPRACE_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -23.511344
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -46.66769
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sprace02.sprace.org.br
-- job_name: T2_BR_SPRACE_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -23.511344
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -46.66769
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sprace02.sprace.org.br
-- job_name: T2_BR_SPRACE_NODE
-  relabel_configs:
-  - replacement: T2_BR_SPRACE
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - sprace02.sprace.org.br:9100
+    - cmssense6.fnal.gov:9100
 - job_name: T2_US_Caltech_STATE
-  metrics_path: /T2_US_Caltech/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_Caltech/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -1340,9 +695,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-caltechprod.nrp-nautilus.io:443/T2_US_Caltech/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-caltechprod.nrp-nautilus.io:443/api/T2_US_Caltech/models?current=true&summary=false&encode=false
 - job_name: T2_US_Caltech_ICMP_V4
   metrics_path: /probe
   params:
@@ -1377,339 +733,21 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-caltechprod.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-01
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-01-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-02
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-02-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-03
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-03-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_2
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-04
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-04-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_3
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-05
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-05-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_4
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-06
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-06-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_5
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-07
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-07-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_6
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-08
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-08-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_7
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-09
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-09-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_8
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-10
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-10-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_9
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-11
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-11-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_10
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-12
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-12-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_11
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-13
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-13-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_12
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-14
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-14-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_13
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-15
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-15-t2-us-caltech.nrp-nautilus.io
-- job_name: T2_US_Caltech_XROOTD_14
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: redir-16
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - redir-16-t2-us-caltech.nrp-nautilus.io
 - job_name: T2_US_Caltech_NODE
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-11.ultralight.org:9100
@@ -1719,10 +757,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-12.ultralight.org:9100
@@ -1732,10 +771,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-13.ultralight.org:9100
@@ -1745,10 +785,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-14.ultralight.org:9100
@@ -1758,10 +799,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-15.ultralight.org:9100
@@ -1771,10 +813,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-16.ultralight.org:9100
@@ -1784,10 +827,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-17.ultralight.org:9100
@@ -1797,15 +841,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-18.ultralight.org:9100
 - job_name: T2_US_Caltech_DEV_STATE
-  metrics_path: /T2_US_Caltech_DEV/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_Caltech_DEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
     source_labels:
@@ -1890,9 +935,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-dev-caltechprod.nrp-nautilus.io:443/T2_US_Caltech_DEV/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-dev-caltechprod.nrp-nautilus.io:443/api/T2_US_Caltech_DEV/models?current=true&summary=false&encode=false
 - job_name: T2_US_Caltech_DEV_ICMP_V4
   metrics_path: /probe
   params:
@@ -1927,6 +973,7 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-dev-caltechprod.nrp-nautilus.io
@@ -1936,10 +983,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-11.ultralight.org:9100
@@ -1949,10 +997,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-12.ultralight.org:9100
@@ -1962,10 +1011,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-13.ultralight.org:9100
@@ -1975,15 +1025,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - transfer-14.ultralight.org:9100
 - job_name: T2_US_Caltech_Test_STATE
-  metrics_path: /T2_US_Caltech_Test/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_Caltech_Test/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -2068,9 +1119,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-caltechtest.sdn-lb.ultralight.org:443/T2_US_Caltech_Test/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-caltechtest.sdn-lb.ultralight.org:443/api/T2_US_Caltech_Test/models?current=true&summary=false&encode=false
 - job_name: T2_US_Caltech_Test_ICMP_V4
   metrics_path: /probe
   params:
@@ -2105,119 +1157,21 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-caltechtest.sdn-lb.ultralight.org
-- job_name: T2_US_Caltech_Test_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-01
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-01-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-02
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-02-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-03
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-03-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_2
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-04
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-04-t2-us-caltech-test.nrp-nautilus.io
-- job_name: T2_US_Caltech_Test_XROOTD_3
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: sense-redir-05
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - sense-redir-05-t2-us-caltech-test.nrp-nautilus.io
 - job_name: T2_US_Caltech_Test_NODE
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sdn-dtn-1-7.ultralight.org:9100
@@ -2227,10 +1181,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-1.ultralight.org:9100
@@ -2240,10 +1195,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-5.ultralight.org:9100
@@ -2253,10 +1209,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-6.ultralight.org:9100
@@ -2266,10 +1223,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-3.ultralight.org:9100
@@ -2279,10 +1237,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sdn-dtn-2-09.ultralight.org:9100
@@ -2292,10 +1251,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sdn-dtn-2-11.ultralight.org:9100
@@ -2305,10 +1265,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sdn-dtn-2-10.ultralight.org:9100
@@ -2318,10 +1279,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-4.ultralight.org:9100
@@ -2331,10 +1293,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-10.ultralight.org:9100
@@ -2344,15 +1307,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sandie-7.ultralight.org:9100
 - job_name: T2_US_MGHPCC_STATE
-  metrics_path: /T2_US_MGHPCC/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_MGHPCC/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_MGHPCC
     source_labels:
@@ -2437,69 +1401,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-mghpcc.nrp-nautilus.io:443/T2_US_MGHPCC/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T2_US_MGHPCC_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-0-redir
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-0-redir-t2-us-mghpcc.nrp-nautilus.io
-- job_name: T2_US_MGHPCC_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-1-redir
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-1-redir-t2-us-mghpcc.nrp-nautilus.io
-- job_name: T2_US_MGHPCC_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-2-redir
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-2-redir-t2-us-mghpcc.nrp-nautilus.io
+    - https://sense-mghpcc.nrp-nautilus.io:443/api/T2_US_MGHPCC/models?current=true&summary=false&encode=false
 - honor_labels: true
   job_name: T2_US_MGHPCC_PROMFED
   metrics_path: /federate
@@ -2511,16 +1416,17 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - job_name: T2_US_Nebraska_STATE
-  metrics_path: /T2_US_Nebraska/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_Nebraska/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Nebraska
     source_labels:
@@ -2605,9 +1511,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://red-sense-rm.unl.edu:10443/T2_US_Nebraska/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://red-sense-rm.unl.edu:10443/api/T2_US_Nebraska/models?current=true&summary=false&encode=false
 - job_name: T2_US_Nebraska_ICMP_V4
   metrics_path: /probe
   params:
@@ -2642,79 +1549,21 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - red-sense-rm.unl.edu
-- job_name: T2_US_Nebraska_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Nebraska
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: red-sense-dtn3-macvlan0
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - red-sense-dtn3-macvlan0-t2-us-nebraska.nrp-nautilus.io
-- job_name: T2_US_Nebraska_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Nebraska
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: red-sense-dtn3-macvlan1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - red-sense-dtn3-macvlan1-t2-us-nebraska.nrp-nautilus.io
-- job_name: T2_US_Nebraska_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_Nebraska
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: red-sense-dtn3-macvlan2
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - red-sense-dtn3-macvlan2-t2-us-nebraska.nrp-nautilus.io
 - job_name: T2_US_Nebraska_NODE
   relabel_configs:
   - replacement: T2_US_Nebraska
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - red-xfer7.unl.edu:9100
@@ -2724,15 +1573,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - red-xfer8.unl.edu:9100
 - job_name: T2_US_SDSC_STATE
-  metrics_path: /T2_US_SDSC/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_SDSC/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_SDSC
     source_labels:
@@ -2817,9 +1667,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-prpdev.nrp-nautilus.io:443/T2_US_SDSC/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-prpdev.nrp-nautilus.io:443/api/T2_US_SDSC/models?current=true&summary=false&encode=false
 - job_name: T2_US_SDSC_ICMP_V4
   metrics_path: /probe
   params:
@@ -2854,6 +1705,7 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-prpdev.nrp-nautilus.io
@@ -2913,86 +1765,6 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-sense-ucsd-redirector-111
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-redirector-111-t2-us-sdsc.nrp-nautilus.io
-- job_name: T2_US_SDSC_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-sense-ucsd-redirector-112
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-redirector-112-t2-us-sdsc.nrp-nautilus.io
-- job_name: T2_US_SDSC_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-sense-ucsd-redirector-113
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-redirector-113-t2-us-sdsc.nrp-nautilus.io
-- job_name: T2_US_SDSC_XROOTD_2
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: xrootd-sense-ucsd-redirector-114
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - xrootd-sense-ucsd-redirector-114-t2-us-sdsc.nrp-nautilus.io
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED
   metrics_path: /federate
@@ -3004,11 +1776,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3023,11 +1796,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3042,11 +1816,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3061,11 +1836,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3080,11 +1856,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3099,11 +1876,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3118,11 +1896,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3137,11 +1916,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3156,11 +1936,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3175,73 +1956,77 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_UCSD_PROMFED
+  job_name: T3_US_NRP_PROMFED
   metrics_path: /federate
   params:
     match[]:
     - '{instance="k8s-ceph-01.ampath.net", service="node-exporter"}'
   relabel_configs:
-  - replacement: T2_US_UCSD
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_0
+  job_name: T3_US_NRP_PROMFED_0
   metrics_path: /federate
   params:
     match[]:
     - '{instance="k8s-ceph-02.ampath.net", service="node-exporter"}'
   relabel_configs:
-  - replacement: T2_US_UCSD
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_1
+  job_name: T3_US_NRP_PROMFED_1
   metrics_path: /federate
   params:
     match[]:
     - '{instance="k8s-gen4-01.ampath.net", service="node-exporter"}'
   relabel_configs:
-  - replacement: T2_US_UCSD
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - job_name: T2_US_SDSC_DEV_STATE
-  metrics_path: /T2_US_SDSC_DEV/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_SDSC_DEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
     source_labels:
@@ -3326,9 +2111,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-dev-sdsc.nrp-nautilus.io:443/T2_US_SDSC_DEV/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-dev-sdsc.nrp-nautilus.io:443/api/T2_US_SDSC_DEV/models?current=true&summary=false&encode=false
 - job_name: T2_US_SDSC_DEV_ICMP_V4
   metrics_path: /probe
   params:
@@ -3363,6 +2149,7 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-dev-sdsc.nrp-nautilus.io
@@ -3433,11 +2220,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3452,11 +2240,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3471,11 +2260,12 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
@@ -3490,16 +2280,17 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - job_name: T2_US_UCSD_OASIS_STATE
-  metrics_path: /T2_US_UCSD_OASIS/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_UCSD_OASIS/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_UCSD_OASIS
     source_labels:
@@ -3584,11 +2375,12 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-oasis.nrp-nautilus.io:443/T2_US_UCSD_OASIS/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-oasis.nrp-nautilus.io:443/api/T2_US_UCSD_OASIS/models?current=true&summary=false&encode=false
 - job_name: T2_US_SDSC_OASISDEV_STATE
-  metrics_path: /T2_US_SDSC_OASISDEV/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_SDSC_OASISDEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_OASISDEV
     source_labels:
@@ -3673,11 +2465,12 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-dev-oasis.nrp-nautilus.io:443/T2_US_SDSC_OASISDEV/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-dev-oasis.nrp-nautilus.io:443/api/T2_US_SDSC_OASISDEV/models?current=true&summary=false&encode=false
 - job_name: T2_US_UCSD_STATE
-  metrics_path: /T2_US_UCSD/sitefe/json/frontend/metrics
+  metrics_path: /api/T2_US_UCSD/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3699,7 +2492,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-fe.nrp-nautilus.io
+    - sense-t2-us-ucsd.nrp-nautilus.io:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -3727,7 +2520,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-fe.nrp-nautilus.io
+    - sense-t2-us-ucsd.nrp-nautilus.io:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -3762,184 +2555,112 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-fe.nrp-nautilus.io/T2_US_UCSD/sitefe/v1/models?current=true&summary=false&encode=false
-- honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_2
-  metrics_path: /federate
+    - https://sense-t2-us-ucsd.nrp-nautilus.io:443/api/T2_US_UCSD/models?current=true&summary=false&encode=false
+- job_name: T2_US_UCSD_ICMP_V4
+  metrics_path: /probe
   params:
-    match[]:
-    - '{instance="k8s-igrok-01.calit2.optiputer.net", service="node-exporter"}'
+    module:
+    - icmp_v4
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM
     source_labels:
     - __address__
     target_label: software
-  scheme: http
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - thanos-federate-proxy-service:9099
+    - sense-t2-us-ucsd.nrp-nautilus.io
 - honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_3
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-igrok-02.calit2.optiputer.net", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_4
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-ceph-01.ultralight.org", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_5
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-gen4-07.ultralight.org", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_6
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-nvme-01.ultralight.org", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_7
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="ucsd-nrp.cern.ch", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_8
+  job_name: T3_US_NRP_PROMFED_2
   metrics_path: /federate
   params:
     match[]:
     - '{instance="fiona.its.hawaii.edu", service="node-exporter"}'
   relabel_configs:
-  - replacement: T2_US_UCSD
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_9
+  job_name: T3_US_NRP_PROMFED_3
   metrics_path: /federate
   params:
     match[]:
     - '{instance="prp01.ifa.hawaii.edu", service="node-exporter"}'
   relabel_configs:
-  - replacement: T2_US_UCSD
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_UCSD_PROMFED_10
+  job_name: T3_US_NRP_PROMFED_4
   metrics_path: /federate
   params:
     match[]:
     - '{instance="k8s-dtn-01.uog.edu", service="node-exporter"}'
   relabel_configs:
-  - replacement: T2_US_UCSD
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
   scheme: http
+  scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T2_US_UMD_STATE
-  metrics_path: /T2_US_UMD/sitefe/json/frontend/metrics
+- job_name: T3_FABRIC_AMST_STATE
+  metrics_path: /api/T3_FABRIC_AMST/monitoring/prometheus/metrics
   relabel_configs:
-  - replacement: T2_US_UMD
+  - replacement: T3_FABRIC_AMST
     source_labels:
     - __address__
     target_label: sitename
@@ -3947,11 +2668,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 38.9869
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 76.9426
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -3959,15 +2680,15 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - ptxn-sense-v1.maxgigapop.net:8443
+    - amst-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T2_US_UMD_STATEHTTP
+- job_name: T3_FABRIC_AMST_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
-  - replacement: T2_US_UMD
+  - replacement: T3_FABRIC_AMST
     source_labels:
     - __address__
     target_label: sitename
@@ -3975,11 +2696,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 38.9869
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 76.9426
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -3987,18 +2708,18 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - ptxn-sense-v1.maxgigapop.net:8443
+    - amst-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T2_US_UMD_MODEL_V4
+- job_name: T3_FABRIC_AMST_MODEL_V6
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - https_v6_siterm_2xx
   relabel_configs:
-  - replacement: T2_US_UMD
+  - replacement: T3_FABRIC_AMST
     source_labels:
     - __address__
     target_label: sitename
@@ -4006,11 +2727,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 38.9869
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 76.9426
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -4022,200 +2743,54 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
-  static_configs:
-  - targets:
-    - https://ptxn-sense-v1.maxgigapop.net:8443/T2_US_UMD/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T2_US_UMD_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T2_US_UMD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 38.9869
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 76.9426
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - ptxn-sense-v1.maxgigapop.net
-- job_name: T2_US_UMD_NODE
-  relabel_configs:
-  - replacement: T2_US_UMD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - ptxn-sense-v1.maxgigapop.net:9100
-- job_name: T3_BR_RNP_STATE
-  metrics_path: /T3_BR_RNP/sitefe/json/frontend/metrics
-  relabel_configs:
-  - replacement: T3_BR_RNP
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: -22.9542068
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -43.1766169
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - 200.159.252.130:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_BR_RNP_STATEHTTP
-  metrics_path: /siterm-http-status
+    - https://amst-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_AMST/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_AMST_NODE
   relabel_configs:
-  - replacement: T3_BR_RNP
+  - replacement: T3_FABRIC_AMST
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-HTTP
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  - replacement: -22.9542068
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -43.1766169
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - 200.159.252.130:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_BR_RNP_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
+    - amst-sub1-host1.exp.fabric-testbed.net:9100
+- job_name: T3_FABRIC_AMST_NODE_0
   relabel_configs:
-  - replacement: T3_BR_RNP
+  - replacement: T3_FABRIC_AMST
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  - replacement: -22.9542068
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -43.1766169
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://200.159.252.130:8443/T3_BR_RNP/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_BR_RNP_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
+    - amst-sub1-host1.exp.fabric-testbed.net:9100
+- job_name: T3_FABRIC_AMST_NODE_1
   relabel_configs:
-  - replacement: T3_BR_RNP
+  - replacement: T3_FABRIC_AMST
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  - replacement: -22.9542068
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -43.1766169
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - 200.159.252.130
-- job_name: T3_BR_RNP_NODE
-  relabel_configs:
-  - replacement: T3_BR_RNP
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - 200.159.252.130:9100
+    - amst-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_FABRIC_CERN_STATE
-  metrics_path: /T3_FABRIC_CERN/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_FABRIC_CERN/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_CERN
     source_labels:
@@ -4300,9 +2875,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-cern-fabric.nrp-nautilus.io:443/T3_FABRIC_CERN/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-cern-fabric.nrp-nautilus.io:443/api/T3_FABRIC_CERN/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_CERN_MODEL_V6
   metrics_path: /probe
   params:
@@ -4333,9 +2909,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-cern-fabric.nrp-nautilus.io:443/T3_FABRIC_CERN/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://sense-cern-fabric.nrp-nautilus.io:443/api/T3_FABRIC_CERN/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_CERN_ICMP_V4
   metrics_path: /probe
   params:
@@ -4370,6 +2947,7 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-cern-fabric.nrp-nautilus.io
@@ -4407,90 +2985,12 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - sense-cern-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cern-sub1-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cern-sub1-host1-t3-fabric-cern.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cern-sub2-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cern-sub2-host1-t3-fabric-cern.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cern-sub3-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cern-sub3-host1-t3-fabric-cern.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: '[2602:fcfb:1d:fff0::2]:1234'
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - '[2602:fcfb:1d:fff0::2]:1234'
 - job_name: T3_FABRIC_CERN1_STATE
-  metrics_path: /T3_FABRIC_CERN1/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_FABRIC_CERN1/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_CERN1
     source_labels:
@@ -4512,7 +3012,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-cern1-fabric.nrp-nautilus.io:443
+    - cern1-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -4540,44 +3040,11 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-cern1-fabric.nrp-nautilus.io:443
+    - cern1-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_CERN1_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-cern1-fabric.nrp-nautilus.io:443/T3_FABRIC_CERN1/sitefe/v1/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_CERN1_MODEL_V6
   metrics_path: /probe
   params:
@@ -4608,216 +3075,54 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-cern1-fabric.nrp-nautilus.io:443/T3_FABRIC_CERN1/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_CERN1_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
+    - https://cern1-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_CERN1/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_CERN1_NODE
   relabel_configs:
   - replacement: T3_FABRIC_CERN1
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-cern1-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN1_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
+    - cern1-sub1-host1.exp.fabric-testbed.net:9100
+- job_name: T3_FABRIC_CERN1_NODE_0
   relabel_configs:
   - replacement: T3_FABRIC_CERN1
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-cern1-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN1_XROOTD
-  metrics_path: /metrics
+    - cern1-sub1-host2.exp.fabric-testbed.net:9100
+- job_name: T3_FABRIC_CERN1_NODE_1
   relabel_configs:
   - replacement: T3_FABRIC_CERN1
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: cern1-sub1-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  scheme: http
-  scrape_interval: 60s
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - cern1-sub1-host1-t3-fabric-cern1.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN1_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cern1-sub2-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cern1-sub2-host1-t3-fabric-cern1.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN1_XROOTD_1
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cern1-sub3-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - cern1-sub3-host1-t3-fabric-cern1.nrp-nautilus.io
-- job_name: T3_FABRIC_CERN1_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: '[2602:fcfb:1d:ffe0::2]:1234'
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - '[2602:fcfb:1d:ffe0::2]:1234'
-- job_name: T3_FABRIC_CERN_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - cern-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_CERN_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - cern-sub1-host2.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_CERN_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - cern-sub1-host3.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_CERN_NODE_2
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - cern-sub1-host4.exp.fabric-testbed.net:9100
+    - cern1-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_FABRIC_LOSA_STATE
-  metrics_path: /T3_FABRIC_LOSA/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_FABRIC_LOSA/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_LOSA
     source_labels:
@@ -4839,7 +3144,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-losa-fabric.nrp-nautilus.io:443
+    - losa-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -4867,44 +3172,11 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-losa-fabric.nrp-nautilus.io:443
+    - losa-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_LOSA_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-losa-fabric.nrp-nautilus.io:443/T3_FABRIC_LOSA/sitefe/v1/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_LOSA_MODEL_V6
   metrics_path: /probe
   params:
@@ -4935,152 +3207,21 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-losa-fabric.nrp-nautilus.io:443/T3_FABRIC_LOSA/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_LOSA_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-losa-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_LOSA_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-losa-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_LOSA_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: losa-sub2-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - losa-sub2-host1-t3-fabric-losa.nrp-nautilus.io
-- job_name: T3_FABRIC_LOSA_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: losa-sub3-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - losa-sub3-host1-t3-fabric-losa.nrp-nautilus.io
-- job_name: T3_FABRIC_LOSA_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: '[2602:fcfb:12:fff0::2]:1234'
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - '[2602:fcfb:12:fff0::2]:1234'
+    - https://losa-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_LOSA/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_LOSA_NODE
   relabel_configs:
   - replacement: T3_FABRIC_LOSA
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - losa-sub1-host1.exp.fabric-testbed.net:9100
@@ -5090,10 +3231,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - losa-sub1-host1.exp.fabric-testbed.net:9100
@@ -5103,15 +3245,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - losa-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_FABRIC_NEWY_STATE
-  metrics_path: /T3_FABRIC_NEWY/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_FABRIC_NEWY/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_NEWY
     source_labels:
@@ -5133,7 +3276,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-newy-fabric.nrp-nautilus.io:443
+    - newy-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -5161,7 +3304,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-newy-fabric.nrp-nautilus.io:443
+    - newy-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -5196,78 +3339,21 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-newy-fabric.nrp-nautilus.io:443/T3_FABRIC_NEWY/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_NEWY_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: newy-sub2-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - newy-sub2-host1-t3-fabric-newy.nrp-nautilus.io
-- job_name: T3_FABRIC_NEWY_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: newy-sub3-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - newy-sub3-host1-t3-fabric-newy.nrp-nautilus.io
-- job_name: T3_FABRIC_NEWY_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: '[2602:fcfb:13:fff0::2]:1234'
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - '[2602:fcfb:13:fff0::2]:1234'
+    - https://newy-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_NEWY/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_NEWY_NODE
   relabel_configs:
   - replacement: T3_FABRIC_NEWY
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - newy-sub1-host1.exp.fabric-testbed.net:9100
@@ -5277,10 +3363,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - newy-sub1-host2.exp.fabric-testbed.net:9100
@@ -5290,15 +3377,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - newy-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_FABRIC_STAR_STATE
-  metrics_path: /T3_FABRIC_STAR/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_FABRIC_STAR/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_STAR
     source_labels:
@@ -5320,7 +3408,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-star-fabric.nrp-nautilus.io:443
+    - star-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -5348,44 +3436,11 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-star-fabric.nrp-nautilus.io:443
+    - star-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_STAR_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - https://sense-star-fabric.nrp-nautilus.io:443/T3_FABRIC_STAR/sitefe/v1/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_STAR_MODEL_V6
   metrics_path: /probe
   params:
@@ -5416,152 +3471,21 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-star-fabric.nrp-nautilus.io:443/T3_FABRIC_STAR/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_STAR_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-star-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_STAR_ICMP_V6
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v6
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v6
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  static_configs:
-  - targets:
-    - sense-star-fabric.nrp-nautilus.io
-- job_name: T3_FABRIC_STAR_XROOTD
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: star-sub2-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - star-sub2-host1-t3-fabric-star.nrp-nautilus.io
-- job_name: T3_FABRIC_STAR_XROOTD_0
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: star-sub3-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
-    source_labels:
-    - __address__
-    target_label: software
-  scheme: http
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - star-sub3-host1-t3-fabric-star.nrp-nautilus.io
-- job_name: T3_FABRIC_STAR_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: '[2602:fcfb:3:fff0::2]:1234'
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 60s
-  static_configs:
-  - targets:
-    - '[2602:fcfb:3:fff0::2]:1234'
+    - https://star-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_STAR/models?current=true&summary=false&encode=false
 - job_name: T3_FABRIC_STAR_NODE
   relabel_configs:
   - replacement: T3_FABRIC_STAR
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - star-sub1-host1.exp.fabric-testbed.net:9100
@@ -5571,10 +3495,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - star-sub1-host2.exp.fabric-testbed.net:9100
@@ -5584,15 +3509,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - star-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_FABRIC_UCSD_STATE
-  metrics_path: /T3_FABRIC_UCSD/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_FABRIC_UCSD/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_UCSD
     source_labels:
@@ -5614,7 +3540,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-ucsd-fabric.nrp-nautilus.io:443
+    - ucsd-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -5642,7 +3568,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-ucsd-fabric.nrp-nautilus.io:443
+    - ucsd-sub1-gw1.exp.fabric-testbed.net:443
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
@@ -5677,72 +3603,56 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-ucsd-fabric.nrp-nautilus.io:443/T3_FABRIC_UCSD/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_UCSD_XROOTD
-  metrics_path: /metrics
+    - https://ucsd-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_UCSD/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_UCSD_NODE
   relabel_configs:
   - replacement: T3_FABRIC_UCSD
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: ucsd-sub2-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  scheme: http
-  scrape_interval: 60s
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - ucsd-sub2-host1-t3-fabric-ucsd.nrp-nautilus.io
-- job_name: T3_FABRIC_UCSD_XROOTD_0
-  metrics_path: /metrics
+    - ucsd-sub1-host1.exp.fabric-testbed.net:9100
+- job_name: T3_FABRIC_UCSD_NODE_0
   relabel_configs:
   - replacement: T3_FABRIC_UCSD
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: ucsd-sub3-host1
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: XRootD
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  scheme: http
-  scrape_interval: 60s
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - ucsd-sub3-host1-t3-fabric-ucsd.nrp-nautilus.io
-- job_name: T3_FABRIC_UCSD_VPP
-  metrics_path: /metrics
+    - ucsd-sub1-host2.exp.fabric-testbed.net:9100
+- job_name: T3_FABRIC_UCSD_NODE_1
   relabel_configs:
   - replacement: T3_FABRIC_UCSD
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: '[2602:fcfb:d:fff0::2]:1234'
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
-  scrape_interval: 60s
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - '[2602:fcfb:d:fff0::2]:1234'
-- job_name: T3_US_FIU_STATE
-  metrics_path: /T3_US_FIU/sitefe/json/frontend/metrics
+    - ucsd-sub1-host3.exp.fabric-testbed.net:9100
+- job_name: T3_US_Internet2_STATE
+  metrics_path: /api/T3_US_Internet2/monitoring/prometheus/metrics
   relabel_configs:
-  - replacement: T3_US_FIU
+  - replacement: T3_US_Internet2
     source_labels:
     - __address__
     target_label: sitename
@@ -5750,11 +3660,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 25.7574
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -80.3733
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5762,15 +3672,15 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - ox.amlight.net:8443
+    - sense-nrp-internet2.nrp-nautilus.io
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_US_FIU_STATEHTTP
+- job_name: T3_US_Internet2_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
-  - replacement: T3_US_FIU
+  - replacement: T3_US_Internet2
     source_labels:
     - __address__
     target_label: sitename
@@ -5778,11 +3688,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 25.7574
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -80.3733
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5790,18 +3700,18 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - ox.amlight.net:8443
+    - sense-nrp-internet2.nrp-nautilus.io
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_US_FIU_MODEL_V4
+- job_name: T3_US_Internet2_MODEL_V4
   metrics_path: /probe
   params:
     module:
     - https_v4_siterm_2xx
   relabel_configs:
-  - replacement: T3_US_FIU
+  - replacement: T3_US_Internet2
     source_labels:
     - __address__
     target_label: sitename
@@ -5809,11 +3719,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 25.7574
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -80.3733
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5825,16 +3735,17 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://ox.amlight.net:8443/T3_US_FIU/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_US_FIU_ICMP_V4
+    - https://sense-nrp-internet2.nrp-nautilus.io/api/T3_US_Internet2/models?current=true&summary=false&encode=false
+- job_name: T3_US_Internet2_ICMP_V4
   metrics_path: /probe
   params:
     module:
     - icmp_v4
   relabel_configs:
-  - replacement: T3_US_FIU
+  - replacement: T3_US_Internet2
     source_labels:
     - __address__
     target_label: sitename
@@ -5842,11 +3753,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 25.7574
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -80.3733
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5862,26 +3773,14 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - ox.amlight.net
-- job_name: T3_US_FIU_NODE
+    - sense-nrp-internet2.nrp-nautilus.io
+- job_name: T3_US_NRP_STATE
+  metrics_path: /api/T3_US_NRP/monitoring/prometheus/metrics
   relabel_configs:
-  - replacement: T3_US_FIU
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-Agent
-    source_labels:
-    - __address__
-    target_label: software
-  static_configs:
-  - targets:
-    - ox.amlight.net:9100
-- job_name: T3_US_Kreonet_STATE
-  metrics_path: /T3_US_Kreonet/sitefe/json/frontend/metrics
-  relabel_configs:
-  - replacement: T3_US_Kreonet
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
@@ -5889,11 +3788,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 35.9
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 127.76
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5901,15 +3800,15 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - siterm-fe.kreonet2.net:8443
+    - sense-fe.nrp-nautilus.io
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_US_Kreonet_STATEHTTP
+- job_name: T3_US_NRP_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
-  - replacement: T3_US_Kreonet
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
@@ -5917,11 +3816,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 35.9
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 127.76
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5929,18 +3828,18 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - siterm-fe.kreonet2.net:8443
+    - sense-fe.nrp-nautilus.io
   tls_config:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T3_US_Kreonet_MODEL_V4
+- job_name: T3_US_NRP_MODEL_V4
   metrics_path: /probe
   params:
     module:
     - https_v4_siterm_2xx
   relabel_configs:
-  - replacement: T3_US_Kreonet
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
@@ -5948,11 +3847,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 35.9
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 127.76
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -5964,16 +3863,17 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://siterm-fe.kreonet2.net:8443/T3_US_Kreonet/sitefe/v1/models?current=true&summary=false&encode=false
-- job_name: T3_US_Kreonet_ICMP_V4
+    - https://sense-fe.nrp-nautilus.io/api/T3_US_NRP/models?current=true&summary=false&encode=false
+- job_name: T3_US_NRP_ICMP_V4
   metrics_path: /probe
   params:
     module:
     - icmp_v4
   relabel_configs:
-  - replacement: T3_US_Kreonet
+  - replacement: T3_US_NRP
     source_labels:
     - __address__
     target_label: sitename
@@ -5981,11 +3881,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 35.9
+  - replacement: 32.882648
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 127.76
+  - replacement: -117.234579
     source_labels:
     - __address__
     target_label: longitude
@@ -6001,11 +3901,132 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - siterm-fe.kreonet2.net
+    - sense-fe.nrp-nautilus.io
+- honor_labels: true
+  job_name: T3_US_NRP_PROMFED_5
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-igrok-01.calit2.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_NRP_PROMFED_6
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-igrok-02.calit2.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_NRP_PROMFED_7
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-ceph-01.ultralight.org", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_NRP_PROMFED_8
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-gen4-07.ultralight.org", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_NRP_PROMFED_9
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-nvme-01.ultralight.org", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_NRP_PROMFED_10
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="ucsd-nrp.cern.ch", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
 - job_name: T3_US_Starlight_STATE
-  metrics_path: /T3_US_Starlight/sitefe/json/frontend/metrics
+  metrics_path: /api/T3_US_Starlight/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_US_Starlight
     source_labels:
@@ -6090,9 +4111,10 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
-    - https://r740xd4.it.northwestern.edu:8443/T3_US_Starlight/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://r740xd4.it.northwestern.edu:8443/api/T3_US_Starlight/models?current=true&summary=false&encode=false
 - job_name: T3_US_Starlight_ICMP_V4
   metrics_path: /probe
   params:
@@ -6127,6 +4149,7 @@ scrape_configs:
     target_label: instance
   - replacement: prometheus-blackbox-exporter-service:9115
     target_label: __address__
+  scrape_interval: 30s
   static_configs:
   - targets:
     - r740xd4.it.northwestern.edu
@@ -6136,10 +4159,67 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: SiteRM-Agent
+  - replacement: SiteRM-NodeExporter
     source_labels:
     - __address__
     target_label: software
+  scrape_interval: 30s
   static_configs:
   - targets:
     - r740xd4.it.northwestern.edu:9100
+- job_name: T9_US_JUSTASDEV_STATE
+  metrics_path: /api/T9_US_JUSTASDEV/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: T9_US_JUSTASDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - fake1.localhost.com:443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
+- job_name: T9_US_JUSTASDEV_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: T9_US_JUSTASDEV
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - fake1.localhost.com:443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
