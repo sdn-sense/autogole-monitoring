@@ -22,7 +22,7 @@ scrape_configs:
   - replacement: NSI_PACWAVE
     source_labels:
     - __address__
-    target_label: sitename
+    target_label: nsisitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -50,7 +50,7 @@ scrape_configs:
   - replacement: Internet2
     source_labels:
     - __address__
-    target_label: sitename
+    target_label: nsisitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
