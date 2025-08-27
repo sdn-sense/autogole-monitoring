@@ -14,6 +14,17 @@ groups:
       description: "Probe failed for site {{ $labels.sitename }} (instance {{ $labels.instance }})."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
+  - alert: MonitoringUnavailable
+    expr: up{software="SiteRM-NodeExporter"} == 0
+    for: 2m
+    labels:
+      severity: warning
+      sitename: "{{ $labels.sitename }}"
+    annotations:
+      summary: "Unable to get monitoring for {{ $labels.instance }}"
+      description: "Unable to get monitoring for {{ $labels.sitename }} (instance {{ $labels.instance }})."
+      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
+
   - alert: SSLCertificateExpiring
     expr: (probe_ssl_earliest_cert_expiry - time()) < 86400 * 14 and (probe_ssl_earliest_cert_expiry - time()) > 0
     for: 2m

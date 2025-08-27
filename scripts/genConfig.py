@@ -431,7 +431,7 @@ class PromModel():
                 tmpEntry['job_name'] = self._genName(f'{sitename}_NODE')
                 tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
-                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
                 self.default['scrape_configs'].append(tmpEntry)
         elif site and promFederate and promQuery:
             for sitename in site:
@@ -443,7 +443,7 @@ class PromModel():
                 tmpEntry['params']['match[]'] = [promQuery]
                 tmpEntry['static_configs'][0]['targets'].append(parsedurl.netloc)
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
-                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-Agent'
+                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
                 self.default['scrape_configs'].append(tmpEntry)
         else:
             print(f'No Node Exporter or Prometheus Federate defined in Agent Config. {confFile} {site}')
