@@ -24,6 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 45,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -49,81 +50,23 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "List of endpoints that are queried by Prometheus.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
               },
-              {
-                "color": "red",
-                "value": 0
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 16,
-        "x": 0,
-        "y": 1
-      },
-      "id": 8,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+              "type": "special"
+            }
           ],
-          "fields": "",
-          "values": false
-        },
-        "text": {
-          "titleSize": 12,
-          "valueSize": 12
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.19",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
-          "interval": "",
-          "legendFormat": "{{target}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Status of all endpoints",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "Running SiteRM Versions at Site.",
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -137,14 +80,82 @@
               }
             ]
           },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 147,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "apache_uptime_seconds_total{sitename=\"REPLACEME_SITENAME\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "range": true,
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of Total Critical Errors",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
           "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 4,
-        "x": 16,
+        "h": 3,
+        "w": 5,
+        "x": 4,
         "y": 1
       },
       "id": 126,
@@ -171,7 +182,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "count(ALERTS{alertstate=\"firing\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -179,7 +190,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Errors/Warnings",
+      "title": "Total Critical Errors",
       "type": "stat"
     },
     {
@@ -187,39 +198,39 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Running SiteRM Versions at Site.",
+      "description": "Count of Total Warnings at Site",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              }
+            ]
           },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            }
-          },
-          "mappings": []
+          "unit": "short"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 4,
-        "x": 20,
+        "h": 3,
+        "w": 5,
+        "x": 9,
         "y": 1
       },
-      "id": 48,
+      "id": 148,
       "options": {
-        "displayLabels": [],
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true,
-          "values": []
-        },
-        "pieType": "pie",
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -227,26 +238,243 @@
           "fields": "",
           "values": false
         },
-        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(ALERTS{sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Warnings",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Active Virtual Switching Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 14,
+        "y": 1
+      },
+      "id": 149,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Active VSW Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Active Routing Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 19,
+        "y": 1
+      },
+      "id": 150,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Active Routing Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "List of endpoints that are queried by Prometheus.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 8,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
         "tooltip": {
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "7.5.16",
+      "pluginVersion": "9.5.19",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": " sum by (version) (running_version_info{sitename=\"REPLACEME_SITENAME\"}) ",
-          "format": "time_series",
-          "instant": true,
+          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
           "interval": "",
-          "legendFormat": "{{version}}",
+          "legendFormat": "{{job}} {{instance}}",
+          "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "up{sitename=~\"REPLACEME_SITENAME\"}",
+          "hide": false,
+          "legendFormat": "{{job}} {{instance}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Running Versions",
-      "type": "piechart"
+      "title": "Status of all endpoints",
+      "type": "state-timeline"
     },
     {
       "datasource": {
@@ -259,12 +487,12 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "center",
             "cellOptions": {
               "type": "auto"
             },
             "filterable": true,
-            "inspect": false
+            "inspect": true
           },
           "mappings": [],
           "thresholds": {
@@ -284,10 +512,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 11,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 16
       },
       "id": 144,
       "options": {
@@ -295,7 +523,9 @@
         "footer": {
           "countRows": false,
           "enablePagination": true,
-          "fields": "",
+          "fields": [
+            "Value"
+          ],
           "reducer": [
             "sum"
           ],
@@ -318,7 +548,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max_over_time(ALERTS{alertstate=\"firing\", sitename=\"REPLACEME_SITENAME\"}[5m]) == 1",
+          "expr": "ALERTS{alertstate=\"firing\", sitename=\"REPLACEME_SITENAME\"}[5m]",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -397,97 +627,6 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Probe query success, failure. \n1 - OK, Below 1 - Failure, see for more details below.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "transparent",
-                "value": 0.9
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 17
-      },
-      "id": 4,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "probe_success{sitename=~\"REPLACEME_SITENAME\"}",
-          "interval": "",
-          "legendFormat": "{{job}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Probe Success",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
       "description": "ICMP V4 Round Trip time from Prometheus hosts to SiteRM Frontend.",
       "fieldConfig": {
         "defaults": {
@@ -544,9 +683,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 17
+        "w": 12,
+        "x": 0,
+        "y": 27
       },
       "id": 2,
       "options": {
@@ -640,9 +779,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 17
+        "w": 12,
+        "x": 12,
+        "y": 27
       },
       "id": 45,
       "options": {
@@ -739,7 +878,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 24
+        "y": 34
       },
       "id": 12,
       "options": {
@@ -840,7 +979,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 24
+        "y": 34
       },
       "id": 14,
       "options": {
@@ -933,7 +1072,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 24
+        "y": 34
       },
       "id": 10,
       "options": {
@@ -1000,7 +1139,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 41
       },
       "id": 16,
       "options": {
@@ -1094,7 +1233,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 49
       },
       "id": 44,
       "options": {
@@ -1123,564 +1262,6 @@
         }
       ],
       "title": "SiteRM Threads Runtime",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "SiteRM LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 0,
-        "y": 47
-      },
-      "id": 21,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "title": "SiteRM LookUpService Not OK Status",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "SiteRM ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 8,
-        "y": 47
-      },
-      "id": 23,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "title": "SiteRM ProvisioningService Not OK Status",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "SiteRM SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 47
-      },
-      "id": 46,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "title": "SiteRM SNMPMonitoring Not OK Status",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "All SiteRM Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 0,
-        "y": 52
-      },
-      "id": 19,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "title": "SiteRM Agent Not OK Status",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "All SiteRM Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 8,
-        "y": 52
-      },
-      "id": 20,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "title": "SiteRM Debugger Not OK Status",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "qjScxmmVz"
-      },
-      "description": "All SiteRM Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "transparent",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 52
-      },
-      "id": 24,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "8.5.27",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"REPLACEME_SITENAME\"}) > 0",
-          "interval": "",
-          "legendFormat": "{{servicename}} - {{service_state}}",
-          "refId": "A"
-        }
-      ],
-      "title": "SiteRM Ruler Not OK Status",
       "type": "timeseries"
     },
     {
@@ -1718,7 +1299,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1809,7 +1390,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -2288,8 +1869,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 24,
+        "h": 7,
+        "w": 20,
         "x": 0,
         "y": 78
       },
@@ -2320,6 +1901,72 @@
       ],
       "title": "Running Versions grouped by Service,Hostname,Version",
       "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Running SiteRM Versions at Site.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 20,
+        "y": 78
+      },
+      "id": 48,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": []
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.16",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": " sum by (version) (running_version_info{sitename=\"REPLACEME_SITENAME\"}) ",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{version}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Running Versions",
+      "type": "piechart"
     },
     {
       "datasource": {
@@ -2384,7 +2031,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 84
+        "y": 85
       },
       "id": 125,
       "options": {
@@ -2432,7 +2079,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 91
+        "y": 92
       },
       "id": 102,
       "panels": [],
@@ -2501,7 +2148,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 92
+        "y": 93
       },
       "id": 104,
       "options": {
@@ -2519,10 +2166,16 @@
       "pluginVersion": "8.5.27",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\"} > 0",
           "interval": "",
           "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -2591,7 +2244,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 92
+        "y": 93
       },
       "id": 105,
       "options": {
@@ -2681,7 +2334,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 100
+        "y": 101
       },
       "id": 106,
       "options": {
@@ -2771,7 +2424,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 100
+        "y": 101
       },
       "id": 107,
       "options": {
@@ -2809,7 +2462,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 108
+        "y": 109
       },
       "id": 33,
       "panels": [],
@@ -2879,7 +2532,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 109
+        "y": 110
       },
       "id": 25,
       "options": {
@@ -2971,7 +2624,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 109
+        "y": 110
       },
       "id": 35,
       "options": {
@@ -3063,7 +2716,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 109
+        "y": 110
       },
       "id": 36,
       "options": {
@@ -3155,7 +2808,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 117
+        "y": 118
       },
       "id": 124,
       "options": {
@@ -3249,7 +2902,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 125
+        "y": 126
       },
       "id": 37,
       "options": {
@@ -3343,7 +2996,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 125
+        "y": 126
       },
       "id": 27,
       "options": {
@@ -3437,7 +3090,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 133
+        "y": 134
       },
       "id": 29,
       "options": {
@@ -3531,7 +3184,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 133
+        "y": 134
       },
       "id": 28,
       "options": {
@@ -3625,7 +3278,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 141
+        "y": 142
       },
       "id": 30,
       "options": {
@@ -3719,7 +3372,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 141
+        "y": 142
       },
       "id": 31,
       "options": {
@@ -3796,7 +3449,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3812,7 +3466,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 149
+        "y": 150
       },
       "id": 38,
       "options": {
@@ -3889,7 +3543,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3905,7 +3560,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 149
+        "y": 150
       },
       "id": 39,
       "options": {
@@ -3982,7 +3637,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3998,7 +3654,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 157
+        "y": 158
       },
       "id": 40,
       "options": {
@@ -4075,7 +3731,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4091,7 +3748,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 157
+        "y": 158
       },
       "id": 41,
       "options": {
@@ -4168,7 +3825,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4184,7 +3842,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 165
+        "y": 166
       },
       "id": 42,
       "options": {
@@ -4261,7 +3919,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -4277,7 +3936,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 165
+        "y": 166
       },
       "id": 43,
       "options": {
@@ -4363,5 +4022,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "REPLACEME_SITENAME",
+  "uid": "000000045",
+  "version": 48,
   "weekStart": ""
 }

@@ -331,9 +331,14 @@ def updateSiteRM(dirname, worker):
             if not os.path.isfile(confFile):
                 return
             conf = loadYamlFile(confFile)
-            for sitename in conf['general']['sites']:
-                vppurl = conf.get(sitename, {}).get('vpp_exporter', {})
-                addDashboard(sitename, 'SiteRM', worker, vppurl=vppurl)
+            print(conf["general"])
+            try:
+                sitename = conf['general']['sitename']
+            except KeyError:
+                print(f"WARNING: Old site config for {confFile}")
+                continue
+            vppurl = conf.get(sitename, {}).get('vpp_exporter', {})
+            addDashboard(sitename, 'SiteRM', worker, vppurl=vppurl)
     return
 
 def updateNSA(fname, worker):
@@ -360,6 +365,9 @@ def run():
     workdir = getSiteRMRepo()
     for dirName in os.listdir(workdir):
         siteConfDir = os.path.join(workdir, dirName)
+        if os.path.isfile(os.path.join(siteConfDir, "disabled")):
+            print(f"There is a disabled flag set. Will not add site to monitoring. {dirName}")
+            continue
         updateSiteRM(siteConfDir, worker)
     updateNSA('../configs/nsi-endpoints', worker)
 

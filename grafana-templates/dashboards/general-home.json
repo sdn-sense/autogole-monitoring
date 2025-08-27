@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -13,19 +16,20 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 5,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
       },
       "gridPos": {
-        "h": 5,
-        "w": 24,
+        "h": 7,
+        "w": 19,
         "x": 0,
         "y": 0
       },
@@ -41,27 +45,108 @@
         "showStarred": false,
         "tags": []
       },
-      "pluginVersion": "7.5.16",
+      "pluginVersion": "9.5.19",
       "tags": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "General dashboards",
       "type": "dashlist"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Running SiteRM Versions at Site.",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
         "overrides": []
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "7.5.16",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum by (version) (\n  running_version_info\n    and (timestamp(running_version_info) > time() - 300)\n)",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{version}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Running SiteRM Versions",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
         "x": 0,
-        "y": 5
+        "y": 7
       },
       "id": 3,
       "links": [],
       "options": {
-        "folderId": REPLACEME_FOLDERID_SiteRM,
+        "folderId": 5181,
         "maxItems": 30,
         "query": "",
         "showHeadings": false,
@@ -70,114 +155,559 @@
         "showStarred": false,
         "tags": []
       },
-      "pluginVersion": "7.5.16",
+      "pluginVersion": "9.5.19",
       "tags": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Dashboards for SiteRM",
       "type": "dashlist"
     },
     {
-      "dashboardFilter": "",
-      "dashboardTags": [],
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
         "overrides": []
       },
-      "folderId": REPLACEME_FOLDERID_SiteRM,
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 5
+        "w": 8,
+        "x": 9,
+        "y": 7
       },
       "id": 6,
-      "limit": "100",
-      "nameFilter": "",
-      "onlyAlertsOnDashboard": false,
-      "pluginVersion": "7.5.16",
-      "show": "current",
-      "sortOrder": 3,
-      "stateFilter": [
-        "paused",
-        "no_data",
-        "execution_error",
-        "alerting",
-        "pending"
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Alerts for SiteRM",
-      "type": "alertlist"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 12
-      },
-      "id": 7,
-      "links": [],
       "options": {
-        "folderId": REPLACEME_FOLDERID_NSI,
-        "maxItems": 30,
-        "query": "",
-        "showHeadings": false,
-        "showRecentlyViewed": false,
-        "showSearch": true,
-        "showStarred": false,
-        "tags": []
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "7.5.16",
-      "tags": [],
-      "title": "Dashboards for NSI",
-      "type": "dashlist"
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count by (sitename) (\n  max_over_time(ALERTS{alertstate=\"firing\", software=\"SiteRM\", severity=\"critical\"}[5m])\n)",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "{{sitename}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Count of Alerts per Site (Critical)",
+      "type": "piechart"
     },
     {
-      "dashboardFilter": "",
-      "dashboardTags": [],
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
         "overrides": []
       },
-      "folderId": REPLACEME_FOLDERID_NSI,
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 12
+        "w": 7,
+        "x": 17,
+        "y": 7
       },
-      "id": 8,
-      "limit": "100",
-      "nameFilter": "",
-      "onlyAlertsOnDashboard": false,
-      "pluginVersion": "7.5.16",
-      "show": "current",
-      "sortOrder": 3,
-      "stateFilter": [
-        "paused",
-        "no_data",
-        "execution_error",
-        "alerting",
-        "pending"
+      "id": 10,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true,
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count by (sitename) (\n  max_over_time(ALERTS{alertstate=\"firing\", severity=\"warning\"}[5m])\n)",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "{{sitename}}",
+          "range": false,
+          "refId": "A"
+        }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Alerts for NSI",
-      "type": "alertlist"
+      "title": "Count of Alerts per Site (Warning)",
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 11,
+      "panels": [],
+      "repeat": "sitename",
+      "repeatDirection": "h",
+      "title": "$sitename",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 0,
+        "y": 15
+      },
+      "id": 12,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "apache_uptime_seconds_total{sitename=\"$sitename\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "range": true,
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of Total Critical Errors",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 4,
+        "y": 15
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"$sitename\"}) or label_replace(0 * absent(ALERTS{sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Critical Errors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of Total Warnings at Site",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 9,
+        "y": 15
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"$sitename\"}) or label_replace(0 * absent(ALERTS{sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Warnings",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Active Virtual Switching Requests",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 14,
+        "y": 15
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(network_status{action=\"vsw\", sitename=~\"$sitename\"}) or label_replace(0 * absent(network_status{action=\"vsw\", sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Active VSW Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Active Routing Requests",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 19,
+        "y": 15
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(network_status{action=\"rst\", sitename=~\"$sitename\"}) or label_replace(0 * absent(network_status{action=\"rst\", sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Active Routing Requests",
+      "type": "stat"
     }
   ],
-  "schemaVersion": 27,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "definition": "label_values(up,sitename)",
+        "hide": 2,
+        "includeAll": true,
+        "multi": false,
+        "name": "sitename",
+        "options": [],
+        "query": {
+          "query": "label_values(up,sitename)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -211,5 +741,8 @@
     "type": "timepicker"
   },
   "timezone": "browser",
-  "title": "Home"
+  "title": "Home",
+  "uid": "000000005",
+  "version": 92,
+  "weekStart": ""
 }

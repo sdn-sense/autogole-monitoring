@@ -51,81 +51,23 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "List of endpoints that are queried by Prometheus.",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
+            "decimals": 1,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
                 },
-                {
-                  "color": "red",
-                  "value": 0
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 16,
-          "x": 0,
-          "y": 1
-        },
-        "id": 8,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
+                "type": "special"
+              }
             ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "titleSize": 12,
-            "valueSize": 12
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.5.19",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_FABRIC_NEWY\"}",
-            "interval": "",
-            "legendFormat": "{{target}}",
-            "refId": "A"
-          }
-        ],
-        "title": "Status of all endpoints",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "Running SiteRM Versions at Site.",
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -139,17 +81,85 @@
                 }
               ]
             },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 0,
+          "y": 1
+        },
+        "id": 129,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "apache_uptime_seconds_total{sitename=\"T3_FABRIC_NEWY\"}",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "range": true,
+            "refId": "A",
+            "step": 240
+          }
+        ],
+        "title": "Uptime",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of Total Critical Errors",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
             "unit": "short"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 16,
+          "h": 3,
+          "w": 5,
+          "x": 4,
           "y": 1
         },
-        "id": 126,
+        "id": 130,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -173,7 +183,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", software=\"SiteRM\", sitename=\"T3_FABRIC_NEWY\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_FABRIC_NEWY\"}), \"sitename\", \"T3_FABRIC_NEWY\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"T3_FABRIC_NEWY\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_FABRIC_NEWY\"}), \"sitename\", \"T3_FABRIC_NEWY\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -181,7 +191,7 @@
             "refId": "A"
           }
         ],
-        "title": "Total Errors",
+        "title": "Total Critical Errors",
         "type": "stat"
       },
       {
@@ -189,39 +199,39 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Running SiteRM Versions at Site.",
+        "description": "Count of Total Warnings at Site",
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 1
+                }
+              ]
             },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": []
+            "unit": "short"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 20,
+          "h": 3,
+          "w": 5,
+          "x": 9,
           "y": 1
         },
-        "id": 48,
+        "id": 131,
         "options": {
-          "displayLabels": [],
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true,
-            "values": []
-          },
-          "pieType": "pie",
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -229,67 +239,169 @@
             "fields": "",
             "values": false
           },
-          "text": {},
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
+          "textMode": "auto"
         },
-        "pluginVersion": "7.5.16",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T3_FABRIC_NEWY\"}) ",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"T3_FABRIC_NEWY\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_FABRIC_NEWY\"}), \"sitename\", \"T3_FABRIC_NEWY\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
-            "legendFormat": "{{version}}",
+            "legendFormat": "__auto",
             "refId": "A"
           }
         ],
-        "title": "Running Versions",
-        "type": "piechart"
+        "title": "Total Warnings",
+        "type": "stat"
       },
       {
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Probe query success, failure. \n1 - OK, Below 1 - Failure, see for more details below.",
+        "description": "Count of all Total Active Virtual Switching Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 14,
+          "y": 1
+        },
+        "id": 132,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(network_status{action=\"vsw\", sitename=~\"T3_FABRIC_NEWY\"}) or label_replace(0 * absent(network_status{action=\"vsw\", sitename=\"T3_FABRIC_NEWY\"}), \"sitename\", \"T3_FABRIC_NEWY\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Active VSW Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Active Routing Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 19,
+          "y": 1
+        },
+        "id": 133,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(network_status{action=\"rst\", sitename=~\"T3_FABRIC_NEWY\"}) or label_replace(0 * absent(network_status{action=\"rst\", sitename=\"T3_FABRIC_NEWY\"}), \"sitename\", \"T3_FABRIC_NEWY\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Active Routing Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "List of endpoints that are queried by Prometheus.",
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
+              "mode": "thresholds"
             },
             "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
+              "fillOpacity": 70,
+              "lineWidth": 0,
+              "spanNulls": false
             },
             "mappings": [],
             "thresholds": {
@@ -300,46 +412,216 @@
                   "value": null
                 },
                 {
-                  "color": "transparent",
-                  "value": 0.9
+                  "color": "yellow",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 1
                 }
               ]
-            },
-            "unit": "short"
+            }
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
-          "w": 8,
+          "h": 11,
+          "w": 24,
           "x": 0,
-          "y": 9
+          "y": 4
         },
-        "id": 4,
+        "id": 127,
         "options": {
+          "alignValue": "left",
           "legend": {
-            "calcs": [],
             "displayMode": "list",
             "placement": "bottom",
             "showLegend": true
           },
+          "mergeValues": true,
+          "rowHeight": 0.9,
+          "showValue": "auto",
           "tooltip": {
-            "mode": "multi",
+            "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
             "expr": "probe_success{sitename=~\"T3_FABRIC_NEWY\"}",
             "interval": "",
-            "legendFormat": "{{job}}",
+            "legendFormat": "{{job}} {{instance}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "up{sitename=~\"T3_FABRIC_NEWY\"}",
+            "hide": false,
+            "legendFormat": "{{job}} {{instance}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Status of all endpoints",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": true
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 24,
+          "x": 0,
+          "y": 15
+        },
+        "id": 128,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": [
+              "Value"
+            ],
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": false,
+              "displayName": "alertname"
+            }
+          ]
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "ALERTS{alertstate=\"firing\", sitename=\"T3_FABRIC_NEWY\"}[5m]",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
             "refId": "A"
           }
         ],
-        "title": "Probe Success",
-        "type": "timeseries"
+        "title": "Current active alerts/warnings",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "__name__": {
+                  "aggregations": []
+                },
+                "alertname": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "alertstate": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "filesystem": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "instance": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "job": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "key": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "latitude": {
+                  "aggregations": []
+                },
+                "sitename": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "software": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          }
+        ],
+        "type": "table"
       },
       {
         "datasource": {
@@ -402,9 +684,9 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 8,
-          "x": 8,
-          "y": 9
+          "w": 12,
+          "x": 0,
+          "y": 26
         },
         "id": 2,
         "options": {
@@ -498,9 +780,9 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 8,
-          "x": 16,
-          "y": 9
+          "w": 12,
+          "x": 12,
+          "y": 26
         },
         "id": 45,
         "options": {
@@ -597,7 +879,7 @@
           "h": 7,
           "w": 8,
           "x": 0,
-          "y": 16
+          "y": 33
         },
         "id": 12,
         "options": {
@@ -698,7 +980,7 @@
           "h": 7,
           "w": 8,
           "x": 8,
-          "y": 16
+          "y": 33
         },
         "id": 14,
         "options": {
@@ -791,7 +1073,7 @@
           "h": 7,
           "w": 8,
           "x": 16,
-          "y": 16
+          "y": 33
         },
         "id": 10,
         "options": {
@@ -858,7 +1140,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 23
+          "y": 40
         },
         "id": 16,
         "options": {
@@ -935,8 +1217,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -952,7 +1233,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 31
+          "y": 48
         },
         "id": 44,
         "options": {
@@ -981,564 +1262,6 @@
           }
         ],
         "title": "SiteRM Threads Runtime",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "SiteRM LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 0,
-          "y": 39
-        },
-        "id": 21,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM LookUpService Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "SiteRM ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 8,
-          "y": 39
-        },
-        "id": 23,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM ProvisioningService Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "SiteRM SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 16,
-          "y": 39
-        },
-        "id": 46,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM SNMPMonitoring Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "All SiteRM Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 0,
-          "y": 44
-        },
-        "id": 19,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM Agent Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "All SiteRM Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 8,
-          "y": 44
-        },
-        "id": 20,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM Debugger Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "All SiteRM Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 16,
-          "y": 44
-        },
-        "id": 24,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T3_FABRIC_NEWY\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM Ruler Not OK Status",
         "type": "timeseries"
       },
       {
@@ -1576,7 +1299,7 @@
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -1587,8 +1310,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1604,7 +1326,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 49
+          "y": 56
         },
         "id": 17,
         "options": {
@@ -1667,7 +1389,7 @@
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -1678,8 +1400,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1695,7 +1416,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 49
+          "y": 56
         },
         "id": 18,
         "options": {
@@ -1769,8 +1490,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1786,7 +1506,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 56
+          "y": 63
         },
         "id": 47,
         "options": {
@@ -1863,8 +1583,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1880,7 +1599,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 56
+          "y": 63
         },
         "id": 66,
         "options": {
@@ -1933,8 +1652,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1946,10 +1664,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 6,
-          "w": 24,
+          "h": 9,
+          "w": 20,
           "x": 0,
-          "y": 63
+          "y": 70
         },
         "id": 49,
         "options": {
@@ -1984,101 +1702,66 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Checks if Prometheus is able to receive monitoring data for this specific Site DTNs. 1 means OK, 0 means failure.",
+        "description": "Running SiteRM Versions at Site.",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "palette-classic"
             },
             "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
                 "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
               }
             },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "transparent",
-                  "value": 0.7
-                }
-              ]
-            },
-            "unit": "short"
+            "mappings": []
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
-          "w": 24,
-          "x": 0,
-          "y": 69
+          "h": 9,
+          "w": 4,
+          "x": 20,
+          "y": 70
         },
-        "id": 125,
+        "id": 48,
         "options": {
+          "displayLabels": [],
           "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true,
+            "values": []
+          },
+          "pieType": "pie",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Last *",
-            "sortDesc": false
+            "fields": "",
+            "values": false
           },
+          "text": {},
           "tooltip": {
             "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "7.5.16",
         "targets": [
           {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
             "exemplar": true,
-            "expr": "up{sitename=\"T3_FABRIC_NEWY\", software=\"SiteRM-Agent\"}",
+            "expr": " sum by (version) (running_version_info{sitename=\"T3_FABRIC_NEWY\"}) ",
+            "format": "time_series",
+            "instant": true,
             "interval": "",
-            "legendFormat": "{{instance}} JOBID {{job}}",
-            "range": true,
+            "legendFormat": "{{version}}",
             "refId": "A"
           }
         ],
-        "title": "Able to receive monitoring data from DTNs",
-        "type": "timeseries"
+        "title": "Running Versions",
+        "type": "piechart"
       },
       {
         "collapsed": false,
@@ -2090,7 +1773,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 76
+          "y": 79
         },
         "id": 102,
         "panels": [],
@@ -2142,8 +1825,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2159,7 +1841,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 77
+          "y": 80
         },
         "id": 104,
         "options": {
@@ -2232,8 +1914,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2249,7 +1930,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 77
+          "y": 80
         },
         "id": 105,
         "options": {
@@ -2322,8 +2003,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2339,7 +2019,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 85
+          "y": 88
         },
         "id": 106,
         "options": {
@@ -2412,8 +2092,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2429,7 +2108,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 85
+          "y": 88
         },
         "id": 107,
         "options": {
@@ -2463,7 +2142,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 93
+          "y": 96
         },
         "id": 108,
         "panels": [],
@@ -2497,7 +2176,7 @@
           "h": 3,
           "w": 2,
           "x": 0,
-          "y": 94
+          "y": 97
         },
         "id": 109,
         "options": {
@@ -2567,7 +2246,7 @@
           "h": 6,
           "w": 2,
           "x": 2,
-          "y": 94
+          "y": 97
         },
         "id": 111,
         "options": {
@@ -2683,7 +2362,7 @@
           "h": 3,
           "w": 2,
           "x": 4,
-          "y": 94
+          "y": 97
         },
         "id": 112,
         "options": {
@@ -2763,7 +2442,7 @@
           "h": 6,
           "w": 4,
           "x": 6,
-          "y": 94
+          "y": 97
         },
         "id": 114,
         "options": {
@@ -2831,7 +2510,7 @@
           "h": 6,
           "w": 4,
           "x": 10,
-          "y": 94
+          "y": 97
         },
         "id": 115,
         "options": {
@@ -2914,7 +2593,7 @@
           "h": 6,
           "w": 5,
           "x": 14,
-          "y": 94
+          "y": 97
         },
         "id": 116,
         "options": {
@@ -2996,7 +2675,7 @@
           "h": 6,
           "w": 5,
           "x": 19,
-          "y": 94
+          "y": 97
         },
         "id": 117,
         "options": {
@@ -3075,7 +2754,7 @@
           "h": 3,
           "w": 2,
           "x": 0,
-          "y": 97
+          "y": 100
         },
         "id": 110,
         "options": {
@@ -3155,7 +2834,7 @@
           "h": 3,
           "w": 2,
           "x": 4,
-          "y": 97
+          "y": 100
         },
         "id": 113,
         "options": {
@@ -3311,7 +2990,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 100
+          "y": 103
         },
         "id": 118,
         "options": {
@@ -3489,7 +3168,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 100
+          "y": 103
         },
         "id": 119,
         "options": {
@@ -3641,7 +3320,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 109
+          "y": 112
         },
         "id": 120,
         "options": {
@@ -3765,7 +3444,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 109
+          "y": 112
         },
         "id": 121,
         "options": {
@@ -3902,7 +3581,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 118
+          "y": 121
         },
         "id": 122,
         "options": {
@@ -4027,7 +3706,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 118
+          "y": 121
         },
         "id": 123,
         "options": {
@@ -4137,6 +3816,6 @@
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-05-16. See git for changes",
+  "message": "Script changes made on 2025-08-27. See git for changes",
   "overwrite": true
 }
