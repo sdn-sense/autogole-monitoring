@@ -41,6 +41,7 @@ STATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # This uses blackbox exporter and we need to relabel config and use localhost to query
 # remote endpoints
 HTTPS_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                'scrape_interval': '30s',
                 'metrics_path': '/probe',
                 'params':{'module': ['WILLBEREPLACEDBYCODE']},
                 'static_configs':[{'targets': []}],
@@ -66,6 +67,7 @@ HTTPS_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # ICMP - Will ping FE endpoint and get RTT
 # v6 only if DNS Replies with v6 record
 ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                'scrape_interval': '30s',
                 'metrics_path': '/probe',
                 'params':{'module': ['WILLBEREPLACEDBYCODE']},
                 'static_configs':[{'targets': []}],
@@ -96,6 +98,7 @@ ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 #   node_exporter: <URL>
 # It will add that to prometheus config and will scrape node exporter endpoint
 NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                        'scrape_interval': '30s',
                         'static_configs': [{'targets': []}],
                         'relabel_configs': [{'source_labels': ['__address__'],
                                              'target_label': 'sitename',
@@ -110,6 +113,7 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 #   prometheus_query: '{instance="k8s-gen4-07.ultralight.org", service="node-exporter"}'
 # Which in that case it will use that to scrape metrics
 PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
+                              'scrape_interval': '30s',
                               'honor_labels': True,
                               'metrics_path': '/federate', # Default path (might be replaced if url diff https://url/federatenew)
                               'scheme': 'http', # Default scheme (might be replaced if url diff, e.g. https://...)
@@ -122,25 +126,9 @@ PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                              'target_label': 'software',
                                              'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
-# XrootD Metadata scrape template
-XROOTD_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
-                'scrape_interval': '60s',
-                'static_configs': [{'targets': []}],
-                'scheme': 'http',
-                'metrics_path': 'WILLBEREPLACEDBYCODE',
-                'relabel_configs': [{'source_labels': ['__address__'],
-                                     'target_label': 'sitename',
-                                     'replacement': 'WILLBEREPLACEDBYCODE'},
-                                    {'source_labels': ['__address__'],
-                                     'target_label': 'endpoint',
-                                     'replacement': 'WILLBEREPLACEDBYCODE'},
-                                    {'source_labels': ['__address__'],
-                                     'target_label': 'software',
-                                     'replacement': 'WILLBEREPLACEDBYCODE'}]}
-
 # VPP Exporter - Will query VPP Exporter endpoint and get VPP Metrics
 VPP_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
-                       'scrape_interval': '60s',
+                       'scrape_interval': '30s',
                        'static_configs': [{'targets': []}],
                        'metrics_path': 'WILLBEREPLACEDBYCODE',
                        'relabel_configs': [{'source_labels': ['__address__'],
@@ -162,6 +150,7 @@ VPP_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # remote endpoints
 # In case it is https, it will use https_v[46]_network_2xx module of blackbox (v6 only if DNS Replies with v6 record)
 HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
+                   'scrape_interval': '30s',
                    'metrics_path': '/probe',
                    'params':{'module': ['WILLBEREPLACEDBYCODE']},
                    'static_configs':[{'targets': []}],
@@ -186,6 +175,7 @@ HTTPS_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
 
 # ICMP - Will ping NRM endpoint and get RTT
 ICMP_SCRAPE_NRM = {'job_name': 'WILLBEREPLACEDBYCODE',
+                   'scrape_interval': '30s',
                    'metrics_path': '/probe',
                    'params':{'module': ['WILLBEREPLACEDBYCODE']},
                    'static_configs':[{'targets': []}],
@@ -261,30 +251,6 @@ class PromModel():
                 self.jobs.append(nName)
                 return nName
         return tmpName
-
-    def _addXrootD(self, dirname):
-        """Add XrootD Metadata to Prometheus config"""
-        confFile = os.path.join(dirname, 'main.yaml')
-        if not os.path.isfile(confFile):
-            return
-        conf = loadYamlFile(confFile)
-        sites = conf.get('general', {}).get('sites', [])
-        for site in sites:
-            # Get XrootD Metadata information
-            xdata = conf.get(site, {}).get('metadata', {}).get('xrootd', {})
-            for _iprange, redir in xdata.items():
-                if redir in self.xrootdPresent:
-                    continue
-                self.xrootdPresent.append(redir)
-                url = f"{redir.split('.')[0]}-{site.replace('_', '-').lower()}.nrp-nautilus.io"
-                tmpEntry = copy.deepcopy(XROOTD_SCRAPE)
-                tmpEntry['job_name'] = self._genName(f'{site}_XROOTD')
-                tmpEntry['metrics_path'] = "/metrics"
-                tmpEntry['static_configs'][0]['targets'].append(url)
-                tmpEntry['relabel_configs'][0]['replacement'] = site
-                tmpEntry['relabel_configs'][1]['replacement'] = redir.split('.')[0]
-                tmpEntry['relabel_configs'][2]['replacement'] = 'XRootD'
-                self.default['scrape_configs'].append(tmpEntry)
 
     def _addVPP(self, dirname):
         confFile = os.path.join(dirname, 'main.yaml')
@@ -556,7 +522,6 @@ class PromModel():
             elif val.get('type', '') == 'FE' and val.get('config', ''):
                 tmpD = os.path.join(dirname, val.get('config'))
                 self._addFE(tmpD)
-                self._addXrootD(tmpD)
                 self._addVPP(tmpD)
 
     def dump(self):
