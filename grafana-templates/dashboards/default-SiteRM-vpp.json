@@ -86,7 +86,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
+        "w": 5,
         "x": 0,
         "y": 1
       },
@@ -154,8 +154,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 4,
+        "w": 6,
+        "x": 5,
         "y": 1
       },
       "id": 130,
@@ -221,8 +221,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 9,
+        "w": 7,
+        "x": 11,
         "y": 1
       },
       "id": 131,
@@ -265,6 +265,69 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
+      "description": "Count of all Total Virtual Switching Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 18,
+        "y": 1
+      },
+      "id": 134,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total VSW Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
       "description": "Count of all Total Active Virtual Switching Requests",
       "fieldConfig": {
         "defaults": {
@@ -283,12 +346,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 14,
+        "h": 4,
+        "w": 2,
+        "x": 20,
         "y": 1
       },
-      "id": 132,
+      "id": 135,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -312,7 +375,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -320,7 +383,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Active VSW Requests",
+      "title": "Active VSW Requests",
       "type": "stat"
     },
     {
@@ -328,7 +391,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Count of all Total Active Routing Requests",
+      "description": "Count of all Total Not Active Virtual Switching Requests",
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -338,6 +401,10 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1
               }
             ]
           },
@@ -346,12 +413,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 19,
+        "h": 4,
+        "w": 2,
+        "x": 22,
         "y": 1
       },
-      "id": 133,
+      "id": 136,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -375,7 +442,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\"}) or label_replace(0 * absent(network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\"}), \"sitename\", \"REPLACEME_SITENAME\", \"\", \"\")",
+          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -383,7 +450,7 @@
           "refId": "A"
         }
       ],
-      "title": "Total Active Routing Requests",
+      "title": "Not Active VSW Requests",
       "type": "stat"
     },
     {
@@ -424,8 +491,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 24,
+        "h": 13,
+        "w": 18,
         "x": 0,
         "y": 4
       },
@@ -481,6 +548,585 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
+      "description": "Count of all Total Routing Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 18,
+        "y": 5
+      },
+      "id": 137,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total RST Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Active Routing Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 20,
+        "y": 5
+      },
+      "id": 138,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Active Routing Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Not Active Routing Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 5
+      },
+      "id": 139,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Not Active Routing Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Kube Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 18,
+        "y": 9
+      },
+      "id": 140,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"REPLACEME_SITENAME\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Kube Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Kube Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 20,
+        "y": 9
+      },
+      "id": 141,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"REPLACEME_SITENAME\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Active Kube Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Not Active Kube Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 9
+      },
+      "id": 142,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Not Active Kube Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total SinglePort Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 18,
+        "y": 13
+      },
+      "id": 143,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"REPLACEME_SITENAME\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Total SinglePort Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total SinglePort Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 20,
+        "y": 13
+      },
+      "id": 144,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"REPLACEME_SITENAME\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Active SinglePort Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Not Active SinglePort Requests",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 22,
+        "y": 13
+      },
+      "id": 145,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"REPLACEME_SITENAME\"}),\n  \"sitename\", \n  \"REPLACEME_SITENAME\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "refId": "A"
+        }
+      ],
+      "title": "Not Active SinglePort Requests",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -515,7 +1161,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 17
       },
       "id": 128,
       "options": {
@@ -685,7 +1331,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 28
       },
       "id": 2,
       "options": {
@@ -781,7 +1427,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 28
       },
       "id": 45,
       "options": {
@@ -878,7 +1524,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 33
+        "y": 35
       },
       "id": 12,
       "options": {
@@ -979,7 +1625,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 33
+        "y": 35
       },
       "id": 14,
       "options": {
@@ -1072,7 +1718,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 33
+        "y": 35
       },
       "id": 10,
       "options": {
@@ -1139,7 +1785,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 42
       },
       "id": 16,
       "options": {
@@ -1216,7 +1862,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1232,7 +1879,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 50
       },
       "id": 44,
       "options": {
@@ -1309,7 +1956,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1325,7 +1973,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 58
       },
       "id": 17,
       "options": {
@@ -1399,7 +2047,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1415,7 +2064,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 58
       },
       "id": 18,
       "options": {
@@ -1489,7 +2138,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1505,7 +2155,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 63
+        "y": 65
       },
       "id": 47,
       "options": {
@@ -1582,7 +2232,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1598,7 +2249,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 63
+        "y": 65
       },
       "id": 66,
       "options": {
@@ -1651,7 +2302,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1666,7 +2318,7 @@
         "h": 9,
         "w": 20,
         "x": 0,
-        "y": 70
+        "y": 72
       },
       "id": 49,
       "options": {
@@ -1722,7 +2374,7 @@
         "h": 9,
         "w": 4,
         "x": 20,
-        "y": 70
+        "y": 72
       },
       "id": 48,
       "options": {
@@ -1772,7 +2424,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 79
+        "y": 81
       },
       "id": 102,
       "panels": [],
@@ -1824,7 +2476,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1840,9 +2493,9 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 80
+        "y": 82
       },
-      "id": 104,
+      "id": 146,
       "options": {
         "legend": {
           "calcs": [],
@@ -1858,10 +2511,16 @@
       "pluginVersion": "8.5.27",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\"} > 0",
+          "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
           "interval": "",
           "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1913,7 +2572,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1929,9 +2589,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 80
+        "y": 82
       },
-      "id": 105,
+      "id": 147,
       "options": {
         "legend": {
           "calcs": [],
@@ -1947,10 +2607,112 @@
       "pluginVersion": "8.5.27",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"unknown\"} > 0",
+          "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
           "interval": "",
           "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status VSW (Not activated for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 90
+      },
+      "id": 148,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -2002,7 +2764,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2017,10 +2780,10 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 88
+        "x": 12,
+        "y": 90
       },
-      "id": 106,
+      "id": 149,
       "options": {
         "legend": {
           "calcs": [],
@@ -2036,14 +2799,20 @@
       "pluginVersion": "8.5.27",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "network_status{action=\"vsw\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\"} > 0",
+          "expr": "network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
           "interval": "",
           "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Network Status VSW (Not activated for REPLACEME_SITENAME)",
+      "title": "Network Status RST (Not activated for REPLACEME_SITENAME)",
       "type": "timeseries"
     },
     {
@@ -2091,7 +2860,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2106,10 +2876,10 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 88
+        "x": 0,
+        "y": 98
       },
-      "id": 107,
+      "id": 150,
       "options": {
         "legend": {
           "calcs": [],
@@ -2125,14 +2895,308 @@
       "pluginVersion": "8.5.27",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "network_status{action=\"rst\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+          "expr": "network_status{action=\"kube\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
           "interval": "",
           "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Network Status VSW (Not activated for REPLACEME_SITENAME)",
+      "title": "Network Status Kube (ALL for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 98
+      },
+      "id": 151,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "network_status{action=\"kube\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status Kube (Not activated for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 106
+      },
+      "id": 152,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "network_status{action=\"singleport\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status SinglePort (ALL for REPLACEME_SITENAME)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 106
+      },
+      "id": 153,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "network_status{action=\"singleport\", sitename=~\"REPLACEME_SITENAME\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+          "interval": "",
+          "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Network Status SinglePort (Not activated for REPLACEME_SITENAME)",
       "type": "timeseries"
     },
     {
@@ -2141,7 +3205,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 96
+        "y": 114
       },
       "id": 108,
       "panels": [],
@@ -2163,7 +3227,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2175,7 +3240,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 97
+        "y": 115
       },
       "id": 109,
       "options": {
@@ -2233,7 +3298,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2245,7 +3311,7 @@
         "h": 6,
         "w": 2,
         "x": 2,
-        "y": 97
+        "y": 115
       },
       "id": 111,
       "options": {
@@ -2349,7 +3415,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2361,7 +3428,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 97
+        "y": 115
       },
       "id": 112,
       "options": {
@@ -2429,7 +3496,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2441,7 +3509,7 @@
         "h": 6,
         "w": 4,
         "x": 6,
-        "y": 97
+        "y": 115
       },
       "id": 114,
       "options": {
@@ -2497,7 +3565,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2509,7 +3578,7 @@
         "h": 6,
         "w": 4,
         "x": 10,
-        "y": 97
+        "y": 115
       },
       "id": 115,
       "options": {
@@ -2568,7 +3637,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -2592,7 +3662,7 @@
         "h": 6,
         "w": 5,
         "x": 14,
-        "y": 97
+        "y": 115
       },
       "id": 116,
       "options": {
@@ -2650,7 +3720,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "yellow",
@@ -2674,7 +3745,7 @@
         "h": 6,
         "w": 5,
         "x": 19,
-        "y": 97
+        "y": 115
       },
       "id": 117,
       "options": {
@@ -2741,7 +3812,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2753,7 +3825,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 100
+        "y": 118
       },
       "id": 110,
       "options": {
@@ -2821,7 +3893,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2833,7 +3906,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 100
+        "y": 118
       },
       "id": 113,
       "options": {
@@ -2932,7 +4005,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2989,7 +4063,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 103
+        "y": 121
       },
       "id": 118,
       "options": {
@@ -3110,7 +4184,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3167,7 +4242,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 103
+        "y": 121
       },
       "id": 119,
       "options": {
@@ -3290,7 +4365,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3319,7 +4395,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 112
+        "y": 130
       },
       "id": 120,
       "options": {
@@ -3414,7 +4490,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3443,7 +4520,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 112
+        "y": 130
       },
       "id": 121,
       "options": {
@@ -3543,7 +4620,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "orange",
@@ -3580,7 +4658,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 121
+        "y": 139
       },
       "id": 122,
       "options": {
@@ -3676,7 +4754,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3705,7 +4784,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 121
+        "y": 139
       },
       "id": 123,
       "options": {
@@ -3811,6 +4890,6 @@
   "timezone": "",
   "title": "REPLACEME_SITENAME",
   "uid": "000004786",
-  "version": 23,
+  "version": 27,
   "weekStart": ""
 }

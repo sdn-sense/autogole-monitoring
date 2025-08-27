@@ -436,7 +436,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
+        "w": 2,
         "x": 4,
         "y": 15
       },
@@ -503,8 +503,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 9,
+        "w": 2,
+        "x": 6,
         "y": 15
       },
       "id": 14,
@@ -547,7 +547,7 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Count of all Total Active Virtual Switching Requests",
+      "description": "Count of all Virtual Switching Requests",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -560,6 +560,10 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -569,8 +573,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 14,
+        "w": 4,
+        "x": 8,
         "y": 15
       },
       "id": 15,
@@ -597,15 +601,45 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(network_status{action=\"vsw\", sitename=~\"$sitename\"}) or label_replace(0 * absent(network_status{action=\"vsw\", sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "__auto",
+          "legendFormat": "Total",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"$sitename\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"$sitename\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Not Active",
+          "refId": "C"
         }
       ],
-      "title": "Total Active VSW Requests",
+      "title": "VSW",
       "type": "stat"
     },
     {
@@ -613,11 +647,11 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Count of all Total Active Routing Requests",
+      "description": "Count of all Routing Service Requests",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "palette-classic"
           },
           "mappings": [],
           "thresholds": {
@@ -626,6 +660,10 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
               }
             ]
           },
@@ -635,11 +673,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 4,
+        "x": 12,
         "y": 15
       },
-      "id": 16,
+      "id": 185,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -663,15 +701,245 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(network_status{action=\"rst\", sitename=~\"$sitename\"}) or label_replace(0 * absent(network_status{action=\"rst\", sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "__auto",
+          "legendFormat": "Total",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"$sitename\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"$sitename\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Not Active",
+          "refId": "C"
         }
       ],
-      "title": "Total Active Routing Requests",
+      "title": "RST",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all Total Kube Port Requests",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 15
+      },
+      "id": 186,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"$sitename\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"$sitename\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Not Active",
+          "refId": "C"
+        }
+      ],
+      "title": "Kube",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "Count of all SinglePort Requests",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 15
+      },
+      "id": 187,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.19",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"$sitename\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Active",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"$sitename\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Not Active",
+          "refId": "C"
+        }
+      ],
+      "title": "SinglePort",
       "type": "stat"
     }
   ],
@@ -743,6 +1011,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "000000005",
-  "version": 92,
+  "version": 95,
   "weekStart": ""
 }
