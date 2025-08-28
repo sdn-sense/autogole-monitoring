@@ -2747,6 +2747,25 @@ scrape_configs:
   static_configs:
   - targets:
     - https://amst-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_AMST/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_AMST_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_AMST
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: amst-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - amst-sub1-gw1.exp.fabric-testbed.net:1234
 - job_name: T3_FABRIC_AMST_NODE
   relabel_configs:
   - replacement: T3_FABRIC_AMST
@@ -2989,6 +3008,25 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-cern-fabric.nrp-nautilus.io
+- job_name: T3_FABRIC_CERN_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_CERN
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: '[2602:fcfb:1d:fff0::2]:1234'
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - '[2602:fcfb:1d:fff0::2]:1234'
 - job_name: T3_FABRIC_CERN1_STATE
   metrics_path: /api/T3_FABRIC_CERN1/monitoring/prometheus/metrics
   relabel_configs:
@@ -3079,6 +3117,25 @@ scrape_configs:
   static_configs:
   - targets:
     - https://cern1-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_CERN1/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_CERN1_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_CERN1
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: cern1-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - cern1-sub1-gw1.exp.fabric-testbed.net:1234
 - job_name: T3_FABRIC_CERN1_NODE
   relabel_configs:
   - replacement: T3_FABRIC_CERN1
@@ -3211,6 +3268,25 @@ scrape_configs:
   static_configs:
   - targets:
     - https://losa-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_LOSA/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_LOSA_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_LOSA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: losa-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - losa-sub1-gw1.exp.fabric-testbed.net:1234
 - job_name: T3_FABRIC_LOSA_NODE
   relabel_configs:
   - replacement: T3_FABRIC_LOSA
@@ -3343,6 +3419,25 @@ scrape_configs:
   static_configs:
   - targets:
     - https://newy-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_NEWY/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_NEWY_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_NEWY
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: newy-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - newy-sub1-gw1.exp.fabric-testbed.net:1234
 - job_name: T3_FABRIC_NEWY_NODE
   relabel_configs:
   - replacement: T3_FABRIC_NEWY
@@ -3475,6 +3570,25 @@ scrape_configs:
   static_configs:
   - targets:
     - https://star-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_STAR/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_STAR_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_STAR
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: star-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - star-sub1-gw1.exp.fabric-testbed.net:1234
 - job_name: T3_FABRIC_STAR_NODE
   relabel_configs:
   - replacement: T3_FABRIC_STAR
@@ -3607,6 +3721,25 @@ scrape_configs:
   static_configs:
   - targets:
     - https://ucsd-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_UCSD/models?current=true&summary=false&encode=false
+- job_name: T3_FABRIC_UCSD_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_FABRIC_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: ucsd-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-gw1.exp.fabric-testbed.net:1234
 - job_name: T3_FABRIC_UCSD_NODE
   relabel_configs:
   - replacement: T3_FABRIC_UCSD
