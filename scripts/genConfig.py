@@ -232,6 +232,20 @@ def getIPv4Address(inHostname):
     except socket.gaierror:
         return None
 
+def getSitesFromConfig(conf):
+    """Get Sites from Config"""
+    sites = conf.get('general', {}).get('sites', [])
+    if not sites:
+        # This is to cover old configurations, where sitename is a list
+        # TODO: Remove after 1.50 release. (Aug 2025)
+        sites = conf.get('general', {}).get('sitename', [])
+        if isinstance(sites, str):
+            sites = [sites]
+    if not sites:
+        return []
+    return sites
+
+
 class PromModel():
     """Class for generating Prometheus config file"""
     def __init__(self,):
@@ -257,7 +271,9 @@ class PromModel():
         if not os.path.isfile(confFile):
             return
         conf = loadYamlFile(confFile)
-        sites = conf.get('general', {}).get('sites', [])
+        sites = getSitesFromConfig(conf)
+        if not sites:
+            return
         for site in sites:
             # Get XrootD Metadata information
             vppurl = conf.get(site, {}).get('vpp_exporter', {})
@@ -290,13 +306,7 @@ class PromModel():
             return
         if webdomain.startswith('127.0.0.1'):
             return
-        sites = conf.get('general', {}).get('sites', [])
-        if not sites:
-            # This is to cover old configurations, where sitename is a list
-            # TODO: Remove after 1.50 release. (Aug 2025)
-            sites = conf.get('general', {}).get('sitename', [])
-            if isinstance(sites, str):
-                sites = [sites]
+        sites = getSitesFromConfig(conf)
         if not sites:
             return
         ipv6_addr = getIPv6Address(webdomain.split(':')[0])
@@ -421,7 +431,7 @@ class PromModel():
         promFederate = conf.get('general', {}).get('prometheus_federate', '')
         promQuery = conf.get('general', {}).get('prometheus_query', '')
         site = conf.get('general', {}).get('sitename', '')
-        # This is to cover old configurations, where sitename is a list
+        # This is to cover old configurations, where sitename is a string
         # TODO: Remove after 1.50 release. (Aug 2025)
         if isinstance(site, str):
             site = [site]
