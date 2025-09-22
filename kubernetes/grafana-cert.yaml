@@ -3,6 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt
+  namespace: opennsa
 spec:
   acme:
     email: juztas@gmail.com
@@ -25,6 +26,7 @@ kind: Certificate
 metadata:
   annotations:
   name: autogole-grafana-certificate
+  namespace: opennsa
 spec:
   commonName: autogole-grafana.nrp-nautilus.io
   dnsNames:
