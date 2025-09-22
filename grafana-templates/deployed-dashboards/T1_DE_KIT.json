@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 4550,
+    "id": null,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -51,81 +51,23 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "List of endpoints that are queried by Prometheus.",
         "fieldConfig": {
           "defaults": {
             "color": {
               "mode": "thresholds"
             },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
+            "decimals": 1,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
                 },
-                {
-                  "color": "red",
-                  "value": 0
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 16,
-          "x": 0,
-          "y": 1
-        },
-        "id": 8,
-        "options": {
-          "colorMode": "background",
-          "graphMode": "area",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
+                "type": "special"
+              }
             ],
-            "fields": "",
-            "values": false
-          },
-          "text": {
-            "titleSize": 12,
-            "valueSize": 12
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.5.19",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "probe_success{sitename=~\"T1_DE_KIT\"}",
-            "interval": "",
-            "legendFormat": "{{target}}",
-            "refId": "A"
-          }
-        ],
-        "title": "Status of all endpoints",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "Running SiteRM Versions at Site.",
-        "fieldConfig": {
-          "defaults": {
-            "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -139,14 +81,82 @@
                 }
               ]
             },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 5,
+          "x": 0,
+          "y": 1
+        },
+        "id": 147,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "apache_uptime_seconds_total{sitename=\"T1_DE_KIT\"}",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "range": true,
+            "refId": "A",
+            "step": 240
+          }
+        ],
+        "title": "Uptime",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of Total Critical Errors",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
             "unit": "short"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 16,
+          "h": 3,
+          "w": 5,
+          "x": 5,
           "y": 1
         },
         "id": 126,
@@ -173,7 +183,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", sitename=\"T1_DE_KIT\"}) or label_replace(0 * absent(ALERTS{sitename=\"T1_DE_KIT\"}), \"sitename\", \"T1_DE_KIT\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"T1_DE_KIT\"}) or label_replace(0 * absent(ALERTS{sitename=\"T1_DE_KIT\"}), \"sitename\", \"T1_DE_KIT\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -181,7 +191,7 @@
             "refId": "A"
           }
         ],
-        "title": "Total Errors/Warnings",
+        "title": "Total Critical Errors",
         "type": "stat"
       },
       {
@@ -189,39 +199,39 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Running SiteRM Versions at Site.",
+        "description": "Count of Total Warnings at Site",
         "fieldConfig": {
           "defaults": {
-            "color": {
-              "mode": "palette-classic"
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 1
+                }
+              ]
             },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": []
+            "unit": "short"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 4,
-          "x": 20,
+          "h": 3,
+          "w": 5,
+          "x": 10,
           "y": 1
         },
-        "id": 48,
+        "id": 148,
         "options": {
-          "displayLabels": [],
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true,
-            "values": []
-          },
-          "pieType": "pie",
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
           "reduceOptions": {
             "calcs": [
               "lastNotNull"
@@ -229,26 +239,889 @@
             "fields": "",
             "values": false
           },
-          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"T1_DE_KIT\"}) or label_replace(0 * absent(ALERTS{sitename=\"T1_DE_KIT\"}), \"sitename\", \"T1_DE_KIT\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Warnings",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Virtual Switching Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 15,
+          "y": 1
+        },
+        "id": 149,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T1_DE_KIT\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total VSW Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Active Virtual Switching Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 18,
+          "y": 1
+        },
+        "id": 185,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T1_DE_KIT\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Active VSW Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Not Active Virtual Switching Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 1
+        },
+        "id": 186,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Not Active VSW Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "List of endpoints that are queried by Prometheus.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0,
+              "spanNulls": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 0
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 15,
+          "x": 0,
+          "y": 4
+        },
+        "id": 8,
+        "options": {
+          "alignValue": "right",
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "mergeValues": true,
+          "rowHeight": 0.9,
+          "showValue": "auto",
           "tooltip": {
             "mode": "single",
             "sort": "none"
           }
         },
-        "pluginVersion": "7.5.16",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T1_DE_KIT\"}) ",
+            "expr": "probe_success{sitename=~\"T1_DE_KIT\"}",
+            "interval": "",
+            "legendFormat": "{{job}} {{instance}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "up{sitename=~\"T1_DE_KIT\"}",
+            "hide": false,
+            "legendFormat": "{{job}} {{instance}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Status of all endpoints",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Routing Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 15,
+          "y": 5
+        },
+        "id": 187,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T1_DE_KIT\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
-            "legendFormat": "{{version}}",
+            "legendFormat": "__auto",
             "refId": "A"
           }
         ],
-        "title": "Running Versions",
-        "type": "piechart"
+        "title": "Total RST Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Active Routing Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 18,
+          "y": 5
+        },
+        "id": 188,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T1_DE_KIT\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Active Routing Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Not Active Routing Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 5
+        },
+        "id": 189,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Not Active Routing Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Kube Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 15,
+          "y": 9
+        },
+        "id": 190,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T1_DE_KIT\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total Kube Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Kube Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 18,
+          "y": 9
+        },
+        "id": 191,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T1_DE_KIT\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Active Kube Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Not Active Kube Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 9
+        },
+        "id": 192,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Not Active Kube Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total SinglePort Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 15,
+          "y": 13
+        },
+        "id": 227,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T1_DE_KIT\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Total SinglePort Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total SinglePort Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 18,
+          "y": 13
+        },
+        "id": 228,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T1_DE_KIT\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Active SinglePort Requests",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of all Total Not Active SinglePort Requests",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 13
+        },
+        "id": 229,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T1_DE_KIT\"}),\n  \"sitename\", \n  \"T1_DE_KIT\", \n  \"\", \n  \"\"\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Not Active SinglePort Requests",
+        "type": "stat"
       },
       {
         "datasource": {
@@ -261,12 +1134,12 @@
               "mode": "thresholds"
             },
             "custom": {
-              "align": "auto",
+              "align": "center",
               "cellOptions": {
                 "type": "auto"
               },
               "filterable": true,
-              "inspect": false
+              "inspect": true
             },
             "mappings": [],
             "thresholds": {
@@ -286,10 +1159,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
+          "h": 11,
           "w": 24,
           "x": 0,
-          "y": 9
+          "y": 17
         },
         "id": 144,
         "options": {
@@ -297,7 +1170,9 @@
           "footer": {
             "countRows": false,
             "enablePagination": true,
-            "fields": "",
+            "fields": [
+              "Value"
+            ],
             "reducer": [
               "sum"
             ],
@@ -320,7 +1195,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "max_over_time(ALERTS{alertstate=\"firing\", sitename=\"T1_DE_KIT\"}[5m]) == 1",
+            "expr": "ALERTS{alertstate=\"firing\", sitename=\"T1_DE_KIT\"}[5m]",
             "format": "table",
             "instant": true,
             "legendFormat": "__auto",
@@ -399,97 +1274,6 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Probe query success, failure. \n1 - OK, Below 1 - Failure, see for more details below.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "transparent",
-                  "value": 0.9
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 8,
-          "x": 0,
-          "y": 17
-        },
-        "id": 4,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "probe_success{sitename=~\"T1_DE_KIT\"}",
-            "interval": "",
-            "legendFormat": "{{job}}",
-            "refId": "A"
-          }
-        ],
-        "title": "Probe Success",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
         "description": "ICMP V4 Round Trip time from Prometheus hosts to SiteRM Frontend.",
         "fieldConfig": {
           "defaults": {
@@ -546,9 +1330,9 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 8,
-          "x": 8,
-          "y": 17
+          "w": 12,
+          "x": 0,
+          "y": 28
         },
         "id": 2,
         "options": {
@@ -642,9 +1426,9 @@
         },
         "gridPos": {
           "h": 7,
-          "w": 8,
-          "x": 16,
-          "y": 17
+          "w": 12,
+          "x": 12,
+          "y": 28
         },
         "id": 45,
         "options": {
@@ -724,8 +1508,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
-                  "value": null
+                  "color": "red"
                 },
                 {
                   "color": "transparent",
@@ -741,7 +1524,7 @@
           "h": 7,
           "w": 8,
           "x": 0,
-          "y": 24
+          "y": 35
         },
         "id": 12,
         "options": {
@@ -825,8 +1608,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -842,7 +1624,7 @@
           "h": 7,
           "w": 8,
           "x": 8,
-          "y": 24
+          "y": 35
         },
         "id": 14,
         "options": {
@@ -918,8 +1700,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "transparent",
-                  "value": null
+                  "color": "transparent"
                 },
                 {
                   "color": "red",
@@ -935,7 +1716,7 @@
           "h": 7,
           "w": 8,
           "x": 16,
-          "y": 24
+          "y": 35
         },
         "id": 10,
         "options": {
@@ -985,8 +1766,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1002,7 +1782,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 31
+          "y": 42
         },
         "id": 16,
         "options": {
@@ -1079,8 +1859,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1096,7 +1875,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 39
+          "y": 50
         },
         "id": 44,
         "options": {
@@ -1125,564 +1904,6 @@
           }
         ],
         "title": "SiteRM Threads Runtime",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "SiteRM LookUpService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 0,
-          "y": 47
-        },
-        "id": 21,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"LookUpService\", sitename=\"T1_DE_KIT\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM LookUpService Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "SiteRM ProvisioningService status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 8,
-          "y": 47
-        },
-        "id": 23,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"ProvisioningService\", sitename=\"T1_DE_KIT\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM ProvisioningService Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "SiteRM SNMPMonitoring status over time. No data - Service runs normally. 1 - Service has failed for some reason. It will not alert as SNMP is not mandatory.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 16,
-          "y": 47
-        },
-        "id": 46,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"SNMPMonitoring\", sitename=\"T1_DE_KIT\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM SNMPMonitoring Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "All SiteRM Agents' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 0,
-          "y": 52
-        },
-        "id": 19,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Agent\", sitename=\"T1_DE_KIT\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM Agent Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "All SiteRM Debugger's status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 8,
-          "y": 52
-        },
-        "id": 20,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Debugger\", sitename=\"T1_DE_KIT\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM Debugger Not OK Status",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "All SiteRM Rulers' status over time. No data - Service runs normally. 1 - Service has failed for some reason. If failure - it will alert.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "transparent",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 0
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 5,
-          "w": 8,
-          "x": 16,
-          "y": 52
-        },
-        "id": 24,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": false
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": " sum by (service_state,servicename) (service_state{service_state!=\"OK\",servicename=\"Ruler\", sitename=\"T1_DE_KIT\"}) > 0",
-            "interval": "",
-            "legendFormat": "{{servicename}} - {{service_state}}",
-            "refId": "A"
-          }
-        ],
-        "title": "SiteRM Ruler Not OK Status",
         "type": "timeseries"
       },
       {
@@ -1720,7 +1941,7 @@
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -1731,8 +1952,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1748,7 +1968,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 57
+          "y": 58
         },
         "id": 17,
         "options": {
@@ -1811,7 +2031,7 @@
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -1822,8 +2042,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1839,7 +2058,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 57
+          "y": 58
         },
         "id": 18,
         "options": {
@@ -1913,8 +2132,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -1930,7 +2148,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 64
+          "y": 65
         },
         "id": 47,
         "options": {
@@ -2007,8 +2225,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2024,7 +2241,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 64
+          "y": 65
         },
         "id": 66,
         "options": {
@@ -2100,8 +2317,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2117,7 +2333,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 71
+          "y": 72
         },
         "id": 145,
         "options": {
@@ -2200,8 +2416,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2217,7 +2432,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 71
+          "y": 72
         },
         "id": 146,
         "options": {
@@ -2277,8 +2492,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2290,10 +2504,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 6,
-          "w": 24,
+          "h": 7,
+          "w": 20,
           "x": 0,
-          "y": 78
+          "y": 79
         },
         "id": 49,
         "options": {
@@ -2322,6 +2536,72 @@
         ],
         "title": "Running Versions grouped by Service,Hostname,Version",
         "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Running SiteRM Versions at Site.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 4,
+          "x": 20,
+          "y": 79
+        },
+        "id": 48,
+        "options": {
+          "displayLabels": [],
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true,
+            "values": []
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "7.5.16",
+        "targets": [
+          {
+            "exemplar": true,
+            "expr": " sum by (version) (running_version_info{sitename=\"T1_DE_KIT\"}) ",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{version}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Running Versions",
+        "type": "piechart"
       },
       {
         "datasource": {
@@ -2369,8 +2649,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red",
-                  "value": null
+                  "color": "red"
                 },
                 {
                   "color": "transparent",
@@ -2386,7 +2665,7 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 84
+          "y": 86
         },
         "id": 125,
         "options": {
@@ -2434,7 +2713,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 91
+          "y": 93
         },
         "id": 102,
         "panels": [],
@@ -2486,8 +2765,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2503,7 +2781,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 92
+          "y": 94
         },
         "id": 104,
         "options": {
@@ -2521,10 +2799,16 @@
         "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T1_DE_KIT\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T1_DE_KIT\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
             "refId": "A"
           }
         ],
@@ -2576,8 +2860,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2593,9 +2876,9 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 92
+          "y": 94
         },
-        "id": 105,
+        "id": 106,
         "options": {
           "legend": {
             "calcs": [],
@@ -2611,10 +2894,111 @@
         "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T1_DE_KIT\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Network Status VSW (Not activated for T1_DE_KIT)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 102
+        },
+        "id": 230,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "network_status{action=\"rst\", sitename=~\"T1_DE_KIT\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
             "refId": "A"
           }
         ],
@@ -2666,8 +3050,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2682,10 +3065,10 @@
         "gridPos": {
           "h": 8,
           "w": 12,
-          "x": 0,
-          "y": 100
+          "x": 12,
+          "y": 102
         },
-        "id": 106,
+        "id": 231,
         "options": {
           "legend": {
             "calcs": [],
@@ -2701,14 +3084,20 @@
         "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T1_DE_KIT\", network_status!=\"activated\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T1_DE_KIT)",
+        "title": "Network Status RST (Not activated for T1_DE_KIT)",
         "type": "timeseries"
       },
       {
@@ -2756,8 +3145,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2772,10 +3160,10 @@
         "gridPos": {
           "h": 8,
           "w": 12,
-          "x": 12,
-          "y": 100
+          "x": 0,
+          "y": 110
         },
-        "id": 107,
+        "id": 232,
         "options": {
           "legend": {
             "calcs": [],
@@ -2791,14 +3179,305 @@
         "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\"} > 0",
+            "expr": "network_status{action=\"kube\", sitename=~\"T1_DE_KIT\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T1_DE_KIT)",
+        "title": "Network Status Kube (ALL for T1_DE_KIT)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 110
+        },
+        "id": 233,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "network_status{action=\"kube\", sitename=~\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Network Status Kube (Not activated for T1_DE_KIT)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 118
+        },
+        "id": 234,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "network_status{action=\"singleport\", sitename=~\"T1_DE_KIT\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Network Status SinglePort (ALL for T1_DE_KIT)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 118
+        },
+        "id": 235,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "network_status{action=\"singleport\", sitename=~\"T1_DE_KIT\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "interval": "",
+            "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Network Status SinglePort (Not activated for T1_DE_KIT)",
         "type": "timeseries"
       },
       {
@@ -2811,7 +3490,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 108
+          "y": 126
         },
         "id": 33,
         "panels": [],
@@ -2864,8 +3543,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2881,7 +3559,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 109
+          "y": 127
         },
         "id": 25,
         "options": {
@@ -2956,8 +3634,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -2973,7 +3650,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 109
+          "y": 127
         },
         "id": 35,
         "options": {
@@ -3048,8 +3725,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3065,7 +3741,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 109
+          "y": 127
         },
         "id": 36,
         "options": {
@@ -3140,8 +3816,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3157,7 +3832,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 117
+          "y": 135
         },
         "id": 124,
         "options": {
@@ -3234,8 +3909,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3251,7 +3925,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 125
+          "y": 143
         },
         "id": 37,
         "options": {
@@ -3328,8 +4002,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3345,7 +4018,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 125
+          "y": 143
         },
         "id": 27,
         "options": {
@@ -3422,8 +4095,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3439,7 +4111,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 133
+          "y": 151
         },
         "id": 29,
         "options": {
@@ -3516,8 +4188,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3533,7 +4204,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 133
+          "y": 151
         },
         "id": 28,
         "options": {
@@ -3610,8 +4281,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3627,7 +4297,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 141
+          "y": 159
         },
         "id": 30,
         "options": {
@@ -3704,8 +4374,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green",
-                  "value": null
+                  "color": "green"
                 },
                 {
                   "color": "red",
@@ -3721,7 +4390,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 141
+          "y": 159
         },
         "id": 31,
         "options": {
@@ -3814,7 +4483,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 149
+          "y": 167
         },
         "id": 38,
         "options": {
@@ -3907,7 +4576,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 149
+          "y": 167
         },
         "id": 39,
         "options": {
@@ -4000,7 +4669,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 157
+          "y": 175
         },
         "id": 40,
         "options": {
@@ -4093,7 +4762,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 157
+          "y": 175
         },
         "id": 41,
         "options": {
@@ -4186,7 +4855,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 165
+          "y": 183
         },
         "id": 42,
         "options": {
@@ -4279,7 +4948,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 165
+          "y": 183
         },
         "id": 43,
         "options": {
@@ -4365,11 +5034,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T1_DE_KIT",
-    "uid": "000004550",
-    "version": 1,
+    "uid": null,
+    "version": 19,
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-05-16. See git for changes",
+  "message": "Script changes made on 2025-09-12. See git for changes",
   "overwrite": true
 }
