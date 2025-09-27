@@ -84,7 +84,7 @@ groups:
     expr: count by (version, hostname, sitename) (
             running_version_info
             unless
-            running_version_info{version=~"^1\\.5\\.(4\\d|5.*)"}
+            running_version_info{version=~"^1\\.5\\.5.*"}
           ) > 0
     for: 1m
     labels:
@@ -92,11 +92,11 @@ groups:
       sitename: "{{ $labels.sitename }}"
     annotations:
       summary: "Unexpected version for {{ $labels.servicename }} on {{ $labels.hostname }}"
-      description: "{{ $labels.servicename }} is not running expected version (>1.5.32) on {{ $labels.hostname }} at {{ $labels.sitename }}."
+      description: "{{ $labels.servicename }} is not running expected version (>1.5.5X) on {{ $labels.hostname }} at {{ $labels.sitename }}."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: VirtualSwitchActivateError
-    expr: network_status{network_status="activate-error", action="vsw"} == 1
+    expr: network_status{network_status="activate-error", action=~"vsw|singleport|kube"} == 1
     for: 1m
     labels:
       severity: critical
@@ -124,7 +124,7 @@ groups:
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: DiskUsageHigh
-    expr: disk_usage{key="UsePercentage"} > 80
+    expr: disk_usage{key="UsePercentage"} > 90
     for: 2m
     labels:
       severity: warning
@@ -135,7 +135,7 @@ groups:
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: InodeUsageHigh
-    expr: disk_usage{key="IUsePercentage"} > 80
+    expr: disk_usage{key="IUsePercentage"} > 90
     for: 2m
     labels:
       severity: warning
@@ -640,116 +640,6 @@ groups:
     annotations:
       summary: "SwitchWorker not OK at {{ $labels.sitename }}"
       description: "SwitchWorker reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Prometheus-PushWARNINGState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Prometheus-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "warning"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
-      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Prometheus-PushUNKNOWNState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Prometheus-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
-      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Prometheus-PushFAILEDState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Prometheus-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
-      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Prometheus-PushUNSETState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Prometheus-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
-      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Prometheus-PushKEYBOARDINTERRUPTState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Prometheus-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Prometheus-Push not OK at {{ $labels.sitename }}"
-      description: "Prometheus-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Arp-PushWARNINGState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="WARNING", servicename="Arp-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "warning"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Arp-Push not OK at {{ $labels.sitename }}"
-      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Arp-PushUNKNOWNState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNKNOWN", servicename="Arp-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Arp-Push not OK at {{ $labels.sitename }}"
-      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Arp-PushFAILEDState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="FAILED", servicename="Arp-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Arp-Push not OK at {{ $labels.sitename }}"
-      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Arp-PushUNSETState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="UNSET", servicename="Arp-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Arp-Push not OK at {{ $labels.sitename }}"
-      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
-      dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
-
-  - alert: Arp-PushKEYBOARDINTERRUPTState
-    expr: sum by (sitename, service_state, servicename, hostname) (service_state{service_state="KEYBOARDINTERRUPT", servicename="Arp-Push"}) > 0
-    for: 2m
-    labels:
-      severity: "critical"
-      sitename: "{{ $labels.sitename }}"
-    annotations:
-      summary: "Arp-Push not OK at {{ $labels.sitename }}"
-      description: "Arp-Push reports state {{ $labels.service_state }} at {{ $labels.sitename }} and host {{ $labels.hostname }}."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: ConfigFetcherWARNINGState

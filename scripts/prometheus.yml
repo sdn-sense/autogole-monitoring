@@ -6,9 +6,17 @@ alerting:
 global:
   evaluation_interval: 60s
   scrape_interval: 60s
+  scrape_timeout: 50s
 rule_files:
 - /etc/prometheus/alerts.yml
 scrape_configs:
+- job_name: IRIMON
+  metrics_path: /metrics
+  scheme: http
+  scrape_interval: 60s
+  static_configs:
+  - targets:
+    - iri-htc.virnao.com:8080
 - job_name: PACWAVE_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -4071,7 +4079,847 @@ scrape_configs:
   metrics_path: /federate
   params:
     match[]:
+    - '{instance="pas.alba.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_0
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.ashb.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_1
+  metrics_path: /federate
+  params:
+    match[]:
     - '{instance="pas.bois.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_2
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.bost.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_3
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.char.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_4
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.cinc.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_5
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.clev.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_6
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.dall.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_7
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.dall3.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_8
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.denv.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_9
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.elpa.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_10
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.eqch.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_11
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.hart2.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_12
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.holy.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_13
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.houh.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_14
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.hous.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_15
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.indi.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_16
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.jack.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_17
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.jcsn.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_18
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.lasv.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_19
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.losa.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_20
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.losa2.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_21
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.loui.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_22
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.minn.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_23
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.miss.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_24
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.nash.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_25
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.newy32aoa.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_26
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.pens.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_27
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.phil.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_28
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.phoe.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_29
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.pitt.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_30
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.port.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_31
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.rale.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_32
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.reno.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_33
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.sacr.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_34
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.salt.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_35
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.seat.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_36
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.star.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_37
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.sunn.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_38
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.tole2.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_39
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.tucs.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_40
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.tuls.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_41
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.wash.net.internet2.edu", service="node-exporter"}'
   relabel_configs:
   - replacement: T3_US_Internet2
     source_labels:
@@ -4462,6 +5310,26 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-t3-us-nrp-stratix.nrp-nautilus.io
+- honor_labels: true
+  job_name: T3_US_NRP_STRATIX_PROMFED
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-stratix-10-01.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_NRP_STRATIX
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
 - job_name: T3_US_Starlight_STATE
   metrics_path: /api/T3_US_Starlight/monitoring/prometheus/metrics
   relabel_configs:
