@@ -125,7 +125,9 @@ NODE_EXPORTER_SCRAPE_SSL = {'job_name': 'WILLBEREPLACEDBYCODE',
                                                 'replacement': 'WILLBEREPLACEDBYCODE'},
                                                 {'source_labels': ['__address__'],
                                                 'target_label': 'software',
-                                                'replacement': 'WILLBEREPLACEDBYCODE'}]}
+                                                'replacement': 'WILLBEREPLACEDBYCODE'},
+                                                {'source_labels': ['__address__'],
+                                                 'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 
 
@@ -461,9 +463,12 @@ class PromModel():
                     tmpEntry['metrics_path'] = f"/api/{sitename}/monitoring/prometheus/passthrough/{host}"
                     if webdomain.startswith('https://'):
                         webdomain = webdomain[8:]
-                    tmpEntry['static_configs'][0]['targets'].append(webdomain)
+                    tmpEntry['static_configs'][0]['targets'].append(host)
+                    tmpEntry['relabel_configs'][2]['replacement'] = webdomain
                 else:
                     tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
+                    # Delete [2]
+                    del tmpEntry['relabel_configs'][2]
                 tmpEntry['job_name'] = self._genName(f'{sitename}_NODE')
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
