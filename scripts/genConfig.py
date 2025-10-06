@@ -126,7 +126,7 @@ NODE_EXPORTER_SCRAPE_SSL = {'job_name': 'WILLBEREPLACEDBYCODE',
                                                 {'source_labels': ['__address__'],
                                                 'target_label': 'software',
                                                 'replacement': 'WILLBEREPLACEDBYCODE'},
-                                                {'source_labels': ['__address__'],
+                                                {'target_label': ['__address__'],
                                                  'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 
