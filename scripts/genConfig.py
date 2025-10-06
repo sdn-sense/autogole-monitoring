@@ -93,7 +93,7 @@ ICMP_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                    {'target_label': '__address__',
                                     'replacement': 'prometheus-blackbox-exporter-service:9115'}]}
 
-# If Agent or FE has:
+# If Agent has:
 # general:
 #   node_exporter: <URL>
 # It will add that to prometheus config and will scrape node exporter endpoint
@@ -106,6 +106,28 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                             {'source_labels': ['__address__'],
                                              'target_label': 'software',
                                              'replacement': 'WILLBEREPLACEDBYCODE'}]}
+
+# If Agent has:
+# general:
+#   node_exporter: <URL>
+#   node_exporter_passthrough: true
+# That needs to go via Frontend and requires ssl
+NODE_EXPORTER_SCRAPE_SSL = {'job_name': 'WILLBEREPLACEDBYCODE',
+                            'scrape_interval': '30s',
+                            'static_configs': [{'targets': []}],
+                            'scheme': 'https',
+                            'metrics_path': 'WILLBEREPLACEDBYCODE',
+                            'tls_config': {'cert_file': '/etc/tls/tls.crt',
+                                        'key_file': '/etc/tls/tls.key',
+                                        'insecure_skip_verify': True},
+                            'relabel_configs': [{'source_labels': ['__address__'],
+                                                'target_label': 'sitename',
+                                                'replacement': 'WILLBEREPLACEDBYCODE'},
+                                                {'source_labels': ['__address__'],
+                                                'target_label': 'software',
+                                                'replacement': 'WILLBEREPLACEDBYCODE'}]}
+
+
 
 # Agent might also have prometheus_federate defined in general section
 # general:
@@ -389,14 +411,6 @@ class PromModel():
                 tmpEntry['relabel_configs'][4]['replacement'] = 'v6'
                 tmpEntry['params']['module'][0] = 'icmp_v6'
                 self.default['scrape_configs'].append(tmpEntry)
-            # 5. Check if fe config has node_exporter defined
-            if conf.get('general', {}).get('node_exporter', ''):
-                tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
-                tmpEntry['job_name'] = self._genName(f'{site}_NODE')
-                tmpEntry['static_configs'][0]['targets'].append(conf['general']['node_exporter'])
-                tmpEntry['relabel_configs'][0]['replacement'] = site
-                tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
-                self.default['scrape_configs'].append(tmpEntry)
             # Add external snmp for all network devices;
             devices = conf.get(site, {}).get('switch', [])
             for device in devices:
@@ -428,6 +442,7 @@ class PromModel():
             print(f'Failed to load {confFile}. Empty return')
             return
         nodeExporter = conf.get('general', {}).get('node_exporter', '')
+        webdomain = conf.get('general', {}).get('webdomain', '')
         promFederate = conf.get('general', {}).get('prometheus_federate', '')
         promQuery = conf.get('general', {}).get('prometheus_query', '')
         site = conf.get('general', {}).get('sitename', '')
@@ -438,8 +453,16 @@ class PromModel():
         if site and nodeExporter:
             for sitename in site:
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
+                if conf.get('general', {}).get('node_exporter_passthrough', False):
+                    tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE_SSL)
+                    # Get hostname from nodeExporter URL
+                    host = nodeExporter.split(':')[0]
+                    # "/{sitename}/monitoring/prometheus/passthrough/{hostname}",
+                    tmpEntry['metrics_path'] = f"/api/{sitename}/monitoring/prometheus/passthrough/{host}"
+                    tmpEntry['static_configs'][0]['targets'].append(webdomain)
+                else:
+                    tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
                 tmpEntry['job_name'] = self._genName(f'{sitename}_NODE')
-                tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
                 self.default['scrape_configs'].append(tmpEntry)
