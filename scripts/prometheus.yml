@@ -2761,6 +2761,115 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-t2-us-ucsd.nrp-nautilus.io
+- job_name: T2_US_UChicago_STATE
+  metrics_path: /api/T2_US_UChicago/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.789722
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.599722
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense.af.uchicago.edu:443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
+- job_name: T2_US_UChicago_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.789722
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.599722
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense.af.uchicago.edu:443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
+- job_name: T2_US_UChicago_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.789722
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.599722
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://sense.af.uchicago.edu:443/api/T2_US_UChicago/models?current=true&summary=false&encode=false
+- job_name: T2_US_UChicago_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: '[2605:9a00:10:7::1]:1234'
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - '[2605:9a00:10:7::1]:1234'
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_2
   metrics_path: /federate

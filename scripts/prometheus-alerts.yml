@@ -84,7 +84,7 @@ groups:
     expr: count by (version, hostname, sitename) (
             running_version_info
             unless
-            running_version_info{version=~"^1\\.5\\.5.*"}
+            running_version_info{version=~"^1\\.5\\.6.*"}
           ) > 0
     for: 1m
     labels:
@@ -92,7 +92,7 @@ groups:
       sitename: "{{ $labels.sitename }}"
     annotations:
       summary: "Unexpected version for {{ $labels.servicename }} on {{ $labels.hostname }}"
-      description: "{{ $labels.servicename }} is not running expected version (>1.5.5X) on {{ $labels.hostname }} at {{ $labels.sitename }}."
+      description: "{{ $labels.servicename }} is not running expected version (>1.5.6X) on {{ $labels.hostname }} at {{ $labels.sitename }}."
       dashboard: "https://autogole-grafana.nrp-nautilus.io/d/000004548/siterm-endpoints-variable?orgId=1&refresh=1m&var-switch=All&var-Sitename={{ $labels.sitename }}"
 
   - alert: VirtualSwitchActivateError

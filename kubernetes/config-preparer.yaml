@@ -9,7 +9,7 @@ spec:
       hostNetwork: true
       terminationGracePeriodSeconds: 30
       containers:
-      - image: sdnsense/site-agent-sense:dev
+      - image: quay.io/sdnsense/siterm-agent:dev
         imagePullPolicy: "Always"
         name: siterm-agent
         resources: {}
