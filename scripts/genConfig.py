@@ -467,8 +467,6 @@ class PromModel():
                     tmpEntry['relabel_configs'][2]['replacement'] = webdomain
                 else:
                     tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
-                    # Delete [2]
-                    del tmpEntry['relabel_configs'][2]
                 tmpEntry['job_name'] = self._genName(f'{sitename}_NODE')
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
