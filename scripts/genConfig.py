@@ -459,6 +459,8 @@ class PromModel():
                     host = nodeExporter.split(':')[0]
                     # "/{sitename}/monitoring/prometheus/passthrough/{hostname}",
                     tmpEntry['metrics_path'] = f"/api/{sitename}/monitoring/prometheus/passthrough/{host}"
+                    if webdomain.startswith('https://'):
+                        webdomain = webdomain[8:]
                     tmpEntry['static_configs'][0]['targets'].append(webdomain)
                 else:
                     tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
