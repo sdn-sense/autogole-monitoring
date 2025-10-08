@@ -105,6 +105,9 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                              'replacement': 'WILLBEREPLACEDBYCODE'},
                                             {'source_labels': ['__address__'],
                                              'target_label': 'software',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'},
+                                            {'source_labels': ['__address__'],
+                                             'target_label': 'realhostname',
                                              'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 # If Agent has:
@@ -126,7 +129,8 @@ NODE_EXPORTER_SCRAPE_SSL = {'job_name': 'WILLBEREPLACEDBYCODE',
                                                 {'source_labels': ['__address__'],
                                                 'target_label': 'software',
                                                 'replacement': 'WILLBEREPLACEDBYCODE'},
-                                                {'target_label': '__address__',
+                                                {'source_labels': ['__address__'],
+                                                 'target_label': 'realhostname',
                                                  'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 
@@ -463,13 +467,15 @@ class PromModel():
                     tmpEntry['metrics_path'] = f"/api/{sitename}/monitoring/prometheus/passthrough/{host}"
                     if webdomain.startswith('https://'):
                         webdomain = webdomain[8:]
-                    tmpEntry['static_configs'][0]['targets'].append(host)
-                    tmpEntry['relabel_configs'][2]['replacement'] = webdomain
+                    tmpEntry['static_configs'][0]['targets'].append(webdomain)
+                    tmpEntry['relabel_configs'][2]['replacement'] = host
                 else:
                     tmpEntry['static_configs'][0]['targets'].append(nodeExporter)
+                    tmpEntry['relabel_configs'][2]['replacement'] = nodeExporter.split(':')[0]
                 tmpEntry['job_name'] = self._genName(f'{sitename}_NODE')
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
+
                 self.default['scrape_configs'].append(tmpEntry)
         elif site and promFederate and promQuery:
             for sitename in site:
