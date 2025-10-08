@@ -86,7 +86,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_time_seconds{instance=\"$node\",sitename=\"$Sitename\"} - node_boot_time_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_time_seconds{realhostname=\"$node\",sitename=\"$Sitename\"} - node_boot_time_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -174,7 +174,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(count(node_cpu_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}) by (cpu))",
+          "expr": "count(count(node_cpu_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}) by (cpu))",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -263,7 +263,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_filesystem_size_bytes{instance=\"$node\",sitename=\"$Sitename\",mountpoint=\"/\",fstype!=\"rootfs\"}",
+          "expr": "node_filesystem_size_bytes{realhostname=\"$node\",sitename=\"$Sitename\",mountpoint=\"/\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -354,7 +354,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -443,7 +443,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_memory_SwapTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_memory_SwapTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -544,7 +544,7 @@
       "pluginVersion": "7.5.16",
       "targets": [
         {
-          "expr": "(((count(count(node_cpu_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance=\"$node\",sitename=\"$Sitename\"}[5m])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}) by (cpu))",
+          "expr": "(((count(count(node_cpu_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])))) * 100) / count(count(node_cpu_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}) by (cpu))",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
@@ -621,7 +621,7 @@
       "pluginVersion": "7.5.16",
       "targets": [
         {
-          "expr": "avg(node_load5{instance=\"$node\",sitename=\"$Sitename\"}) /  count(count(node_cpu_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}) by (cpu)) * 100",
+          "expr": "avg(node_load5{realhostname=\"$node\",sitename=\"$Sitename\"}) /  count(count(node_cpu_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}) by (cpu)) * 100",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -699,7 +699,7 @@
       "pluginVersion": "7.5.16",
       "targets": [
         {
-          "expr": "avg(node_load15{instance=\"$node\",sitename=\"$Sitename\"}) /  count(count(node_cpu_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}) by (cpu)) * 100",
+          "expr": "avg(node_load15{realhostname=\"$node\",sitename=\"$Sitename\"}) /  count(count(node_cpu_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}) by (cpu)) * 100",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
@@ -770,7 +770,7 @@
       "pluginVersion": "7.5.16",
       "targets": [
         {
-          "expr": "((node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_MemFree_bytes{instance=\"$node\",sitename=\"$Sitename\"}) / (node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} )) * 100",
+          "expr": "((node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_MemFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}) / (node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} )) * 100",
           "format": "time_series",
           "hide": true,
           "interval": "",
@@ -780,7 +780,7 @@
           "step": 900
         },
         {
-          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$node\",sitename=\"$Sitename\"} * 100) / node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"})",
+          "expr": "100 - ((node_memory_MemAvailable_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} * 100) / node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -858,7 +858,7 @@
       "pluginVersion": "7.5.16",
       "targets": [
         {
-          "expr": "((node_memory_SwapTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapFree_bytes{instance=\"$node\",sitename=\"$Sitename\"}) / (node_memory_SwapTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} )) * 100",
+          "expr": "((node_memory_SwapTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}) / (node_memory_SwapTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} )) * 100",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -934,7 +934,7 @@
       "pluginVersion": "7.5.16",
       "targets": [
         {
-          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$node\",sitename=\"$Sitename\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$node\",sitename=\"$Sitename\",mountpoint=\"/\",fstype!=\"rootfs\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{realhostname=\"$node\",sitename=\"$Sitename\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{realhostname=\"$node\",sitename=\"$Sitename\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1054,7 +1054,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode=\"system\",instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode=\"system\",realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1064,7 +1064,7 @@
           "step": 240
         },
         {
-          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode='user',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode='user',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1074,7 +1074,7 @@
           "step": 240
         },
         {
-          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode='iowait',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode='iowait',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1083,7 +1083,7 @@
           "step": 240
         },
         {
-          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode=~\".*irq\",instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+          "expr": "sum by (instance)(irate(node_cpu_seconds_total{mode=~\".*irq\",realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1092,7 +1092,7 @@
           "step": 240
         },
         {
-          "expr": "sum (irate(node_cpu_seconds_total{mode!='idle',mode!='user',mode!='system',mode!='iowait',mode!='irq',mode!='softirq',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+          "expr": "sum (irate(node_cpu_seconds_total{mode!='idle',mode!='user',mode!='system',mode!='iowait',mode!='irq',mode!='softirq',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1101,7 +1101,7 @@
           "step": 240
         },
         {
-          "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+          "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1247,7 +1247,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1256,7 +1256,7 @@
           "step": 240
         },
         {
-          "expr": "node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_MemFree_bytes{instance=\"$node\",sitename=\"$Sitename\"} - (node_memory_Cached_bytes{instance=\"$node\",sitename=\"$Sitename\"} + node_memory_Buffers_bytes{instance=\"$node\",sitename=\"$Sitename\"})",
+          "expr": "node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_MemFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - (node_memory_Cached_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} + node_memory_Buffers_bytes{realhostname=\"$node\",sitename=\"$Sitename\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1265,7 +1265,7 @@
           "step": 240
         },
         {
-          "expr": "node_memory_Cached_bytes{instance=\"$node\",sitename=\"$Sitename\"} + node_memory_Buffers_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_memory_Cached_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} + node_memory_Buffers_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "RAM Cache + Buffer",
@@ -1273,7 +1273,7 @@
           "step": 240
         },
         {
-          "expr": "node_memory_MemFree_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_memory_MemFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "RAM Free",
@@ -1281,7 +1281,7 @@
           "step": 240
         },
         {
-          "expr": "(node_memory_SwapTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapFree_bytes{instance=\"$node\",sitename=\"$Sitename\"})",
+          "expr": "(node_memory_SwapTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "SWAP Used",
@@ -1415,7 +1415,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_bytes_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])*8",
+          "expr": "irate(node_network_receive_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])*8",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "recv {{device}}",
@@ -1423,7 +1423,7 @@
           "step": 240
         },
         {
-          "expr": "irate(node_network_transmit_bytes_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])*8",
+          "expr": "irate(node_network_transmit_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])*8",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "trans {{device}} ",
@@ -1529,7 +1529,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'} * 100) / node_filesystem_size_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'})",
+          "expr": "100 - ((node_filesystem_avail_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'} * 100) / node_filesystem_size_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{mountpoint}}",
@@ -1651,7 +1651,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode=\"system\",instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode=\"system\",realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "interval": "10s",
               "intervalFactor": 2,
@@ -1660,7 +1660,7 @@
               "step": 20
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='user',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='user',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "User - Normal processes executing in user mode",
@@ -1668,7 +1668,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='nice',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='nice',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Nice - Niced processes executing in user mode",
@@ -1676,7 +1676,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Idle - Waiting for something to happen",
@@ -1684,7 +1684,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='iowait',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='iowait',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Iowait - Waiting for I/O to complete",
@@ -1692,7 +1692,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='irq',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='irq',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Irq - Servicing interrupts",
@@ -1700,7 +1700,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='softirq',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='softirq',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Softirq - Servicing softirqs",
@@ -1708,7 +1708,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='steal',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='steal',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Steal - Time spent in other operating systems when running in a virtualized environment",
@@ -1716,7 +1716,7 @@
               "step": 240
             },
             {
-              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='guest',instance=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
+              "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='guest',realhostname=\"$node\",sitename=\"$Sitename\"}[5m])) * 100",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Guest - Time spent running a virtual CPU for a guest operating system",
@@ -1840,7 +1840,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_MemTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_MemFree_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_Buffers_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_Cached_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_Slab_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_PageTables_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapCached_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_MemTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_MemFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_Buffers_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_Cached_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_Slab_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_PageTables_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapCached_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1849,7 +1849,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_PageTables_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_PageTables_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1858,7 +1858,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_SwapCached_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_SwapCached_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "SwapCache - Memory that keeps track of pages that have been fetched from swap but not yet been modified",
@@ -1866,7 +1866,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_Slab_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Slab_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1875,7 +1875,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_Cached_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Cached_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1884,7 +1884,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_Buffers_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Buffers_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1893,7 +1893,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_MemFree_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_MemFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1902,7 +1902,7 @@
               "step": 240
             },
             {
-              "expr": "(node_memory_SwapTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapFree_bytes{instance=\"$node\",sitename=\"$Sitename\"})",
+              "expr": "(node_memory_SwapTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"} - node_memory_SwapFree_bytes{realhostname=\"$node\",sitename=\"$Sitename\"})",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1911,7 +1911,7 @@
               "step": 240
             },
             {
-              "expr": "node_memory_HardwareCorrupted_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_HardwareCorrupted_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2015,7 +2015,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_network_receive_bytes_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])*8",
+              "expr": "irate(node_network_receive_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])*8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Receive",
@@ -2023,7 +2023,7 @@
               "step": 240
             },
             {
-              "expr": "irate(node_network_transmit_bytes_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])*8",
+              "expr": "irate(node_network_transmit_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])*8",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Transmit",
@@ -2122,7 +2122,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_filesystem_size_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'} - node_filesystem_avail_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_size_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'} - node_filesystem_avail_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{mountpoint}}",
@@ -2307,14 +2307,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_reads_completed_total{instance=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
+              "expr": "irate(node_disk_reads_completed_total{realhostname=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - Reads completed",
               "refId": "A",
               "step": 480
             },
             {
-              "expr": "irate(node_disk_writes_completed_total{instance=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
+              "expr": "irate(node_disk_writes_completed_total{realhostname=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Writes completed",
               "refId": "B",
@@ -2438,7 +2438,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_read_bytes_total{instance=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
+              "expr": "irate(node_disk_read_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2447,7 +2447,7 @@
               "step": 240
             },
             {
-              "expr": "irate(node_disk_written_bytes_total{instance=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
+              "expr": "irate(node_disk_written_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"}[5m])",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2548,7 +2548,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_io_time_seconds_total{instance=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"} [5m])",
+              "expr": "irate(node_disk_io_time_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\",device=~\"$diskdevices\"} [5m])",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2679,7 +2679,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Inactive_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Inactive_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Inactive - Memory which has been less recently used.  It is more eligible to be reclaimed for other purposes",
@@ -2687,7 +2687,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Active_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Active_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Active - Memory that has been used more recently and usually not reclaimed unless absolutely necessary",
@@ -2810,7 +2810,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Committed_AS_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Committed_AS_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Committed_AS - Amount of memory presently allocated on the system",
@@ -2818,7 +2818,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_CommitLimit_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_CommitLimit_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "CommitLimit - Amount of  memory currently available to be allocated on the system",
@@ -2932,7 +2932,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Inactive_file_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Inactive_file_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2941,7 +2941,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Inactive_anon_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Inactive_anon_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2950,7 +2950,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Active_file_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Active_file_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -2959,7 +2959,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Active_anon_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Active_anon_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -3076,7 +3076,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Writeback_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Writeback_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Writeback - Memory which is actively being written back to disk",
@@ -3084,7 +3084,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_WritebackTmp_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_WritebackTmp_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "WritebackTmp - Memory used by FUSE for temporary writeback buffers",
@@ -3092,7 +3092,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Dirty_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Dirty_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Dirty - Memory which is waiting to get written back to the disk",
@@ -3215,7 +3215,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Mapped_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Mapped_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Mapped - Used memory in mapped pages files which have been mmaped, such as libraries",
@@ -3223,7 +3223,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Shmem_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Shmem_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Shmem - Used shared memory (shared between several processes, thus including RAM disks)",
@@ -3231,7 +3231,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_ShmemHugePages_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_ShmemHugePages_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -3240,7 +3240,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_ShmemPmdMapped_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_ShmemPmdMapped_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -3357,7 +3357,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_SUnreclaim_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_SUnreclaim_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "SUnreclaim - Part of Slab, that cannot be reclaimed on memory pressure",
@@ -3365,7 +3365,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_SReclaimable_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_SReclaimable_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "SReclaimable - Part of Slab, that might be reclaimed, such as caches",
@@ -3480,7 +3480,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_VmallocChunk_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_VmallocChunk_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -3489,7 +3489,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_VmallocTotal_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_VmallocTotal_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -3498,7 +3498,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_VmallocUsed_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_VmallocUsed_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -3613,7 +3613,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Bounce_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Bounce_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Bounce - Memory used for block device bounce buffers",
@@ -3733,7 +3733,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_AnonHugePages_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_AnonHugePages_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "AnonHugePages - Memory in anonymous huge pages",
@@ -3741,7 +3741,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_AnonPages_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_AnonPages_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "AnonPages - Memory in user pages not backed by files",
@@ -3855,7 +3855,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_KernelStack_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_KernelStack_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "KernelStack - Kernel memory stack. This is not reclaimable",
@@ -3863,7 +3863,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Percpu_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Percpu_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -3979,7 +3979,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_HugePages_Free{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_HugePages_Free{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "HugePages_Free - Huge pages in the pool that are not yet allocated",
@@ -3987,7 +3987,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_HugePages_Rsvd{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_HugePages_Rsvd{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "HugePages_Rsvd - Huge pages for which a commitment to allocate from the pool has been made, but no allocation has yet been made",
@@ -3995,7 +3995,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_HugePages_Surp{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_HugePages_Surp{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "HugePages_Surp - Huge pages in the pool above the value in /proc/sys/vm/nr_hugepages",
@@ -4110,7 +4110,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_HugePages_Total{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_HugePages_Total{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "HugePages - Total size of the pool of huge pages",
@@ -4118,7 +4118,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Hugepagesize_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Hugepagesize_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Hugepagesize - Huge Page size",
@@ -4235,7 +4235,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_DirectMap1G_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_DirectMap1G_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "DirectMap1G - Amount of pages mapped as this size",
@@ -4243,7 +4243,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_DirectMap2M_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_DirectMap2M_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -4252,7 +4252,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_DirectMap4k_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_DirectMap4k_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -4367,7 +4367,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_Unevictable_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Unevictable_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Unevictable - Amount of unevictable memory that can't be swapped out for a variety of reasons",
@@ -4375,7 +4375,7 @@
               "step": 4
             },
             {
-              "expr": "node_memory_Mlocked_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_Mlocked_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "MLocked - Size of pages locked to memory using the mlock() system call",
@@ -4491,7 +4491,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_NFS_Unstable_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_memory_NFS_Unstable_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "NFS Unstable - Memory in NFS pages sent to the server, but not yet commited to the storage",
@@ -4606,7 +4606,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_vmstat_pgpgin{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pgpgin{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pagesin - Page in operations",
@@ -4614,7 +4614,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_vmstat_pgpgout{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pgpgout{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pagesout - Page out operations",
@@ -4713,7 +4713,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_vmstat_pswpin{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pswpin{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pswpin - Pages swapped in",
@@ -4721,7 +4721,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_vmstat_pswpout{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pswpout{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pswpout - Pages swapped out",
@@ -4841,7 +4841,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_vmstat_pgfault{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pgfault{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pgfault - Page major and minor fault operations",
@@ -4849,7 +4849,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_vmstat_pgmajfault{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pgmajfault{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pgmajfault - Major page fault operations",
@@ -4857,7 +4857,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_vmstat_pgfault{instance=\"$node\",sitename=\"$Sitename\"}[5m])  - irate(node_vmstat_pgmajfault{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_pgfault{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])  - irate(node_vmstat_pgmajfault{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Pgminfault - Minor page fault operations",
@@ -4973,7 +4973,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_vmstat_oom_kill{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_vmstat_oom_kill{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5088,7 +5088,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_timex_estimated_error_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_estimated_error_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -5098,7 +5098,7 @@
               "step": 240
             },
             {
-              "expr": "node_timex_offset_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_offset_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -5108,7 +5108,7 @@
               "step": 240
             },
             {
-              "expr": "node_timex_maxerror_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_maxerror_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -5203,7 +5203,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_timex_loop_time_constant{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_loop_time_constant{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5302,7 +5302,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_timex_sync_status{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_sync_status{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5311,7 +5311,7 @@
               "step": 240
             },
             {
-              "expr": "node_timex_frequency_adjustment_ratio{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_frequency_adjustment_ratio{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5405,7 +5405,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_timex_tick_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_tick_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5414,7 +5414,7 @@
               "step": 240
             },
             {
-              "expr": "node_timex_tai_offset_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_timex_tai_offset_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5523,7 +5523,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_procs_blocked{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_procs_blocked{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Processes blocked waiting for I/O to complete",
@@ -5531,7 +5531,7 @@
               "step": 240
             },
             {
-              "expr": "node_procs_running{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_procs_running{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Processes in runnable state",
@@ -5624,7 +5624,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_processes_state{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_processes_state{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5718,7 +5718,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_forks_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_forks_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -5816,7 +5816,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(process_virtual_memory_bytes{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(process_virtual_memory_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -5825,7 +5825,7 @@
               "step": 240
             },
             {
-              "expr": "process_resident_memory_max_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "process_resident_memory_max_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -5834,7 +5834,7 @@
               "step": 240
             },
             {
-              "expr": "irate(process_virtual_memory_bytes{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(process_virtual_memory_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -5843,7 +5843,7 @@
               "step": 240
             },
             {
-              "expr": "irate(process_virtual_memory_max_bytes{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(process_virtual_memory_max_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -5943,7 +5943,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_processes_pids{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_processes_pids{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -5952,7 +5952,7 @@
               "step": 240
             },
             {
-              "expr": "node_processes_max_processes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_processes_max_processes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6051,7 +6051,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_schedstat_running_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_schedstat_running_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6060,7 +6060,7 @@
               "step": 240
             },
             {
-              "expr": "irate(node_schedstat_waiting_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_schedstat_waiting_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6160,7 +6160,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_processes_threads{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_processes_threads{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6169,7 +6169,7 @@
               "step": 240
             },
             {
-              "expr": "node_processes_max_threads{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_processes_max_threads{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6279,7 +6279,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_context_switches_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_context_switches_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Context switches",
@@ -6287,7 +6287,7 @@
               "step": 240
             },
             {
-              "expr": "irate(node_intr_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_intr_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -6382,7 +6382,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_load1{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_load1{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 4,
               "legendFormat": "Load 1m",
@@ -6390,7 +6390,7 @@
               "step": 480
             },
             {
-              "expr": "node_load5{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_load5{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 4,
               "legendFormat": "Load 5m",
@@ -6398,7 +6398,7 @@
               "step": 480
             },
             {
-              "expr": "node_load15{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_load15{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 4,
               "legendFormat": "Load 15m",
@@ -6501,7 +6501,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_interrupts_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_interrupts_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6595,7 +6595,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_schedstat_timeslices_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_schedstat_timeslices_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6689,7 +6689,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_entropy_available_bits{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_entropy_available_bits{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Entropy available to random number generators",
@@ -6782,7 +6782,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(process_cpu_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(process_cpu_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -6881,7 +6881,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "process_max_fds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "process_max_fds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Maximum open file descriptors",
@@ -6889,7 +6889,7 @@
               "step": 240
             },
             {
-              "expr": "process_open_fds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "process_open_fds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "Open file descriptors",
@@ -7008,7 +7008,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_hwmon_temp_celsius{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_hwmon_temp_celsius{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7017,7 +7017,7 @@
               "step": 240
             },
             {
-              "expr": "node_hwmon_temp_crit_alarm_celsius{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_hwmon_temp_crit_alarm_celsius{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": true,
               "interval": "",
@@ -7027,7 +7027,7 @@
               "step": 240
             },
             {
-              "expr": "node_hwmon_temp_crit_celsius{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_hwmon_temp_crit_celsius{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7036,7 +7036,7 @@
               "step": 240
             },
             {
-              "expr": "node_hwmon_temp_crit_hyst_celsius{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_hwmon_temp_crit_hyst_celsius{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": true,
               "interval": "",
@@ -7046,7 +7046,7 @@
               "step": 240
             },
             {
-              "expr": "node_hwmon_temp_max_celsius{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_hwmon_temp_max_celsius{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": true,
               "interval": "",
@@ -7146,7 +7146,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_cooling_device_cur_state{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_cooling_device_cur_state{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -7156,7 +7156,7 @@
               "step": 240
             },
             {
-              "expr": "node_cooling_device_max_state{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_cooling_device_max_state{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7249,7 +7249,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_power_supply_online{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_power_supply_online{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -7358,7 +7358,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_systemd_socket_accepted_connections_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_systemd_socket_accepted_connections_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7472,7 +7472,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_systemd_units{instance=\"$node\",sitename=\"$Sitename\",state=\"activating\"}",
+              "expr": "node_systemd_units{realhostname=\"$node\",sitename=\"$Sitename\",state=\"activating\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7481,7 +7481,7 @@
               "step": 240
             },
             {
-              "expr": "node_systemd_units{instance=\"$node\",sitename=\"$Sitename\",state=\"active\"}",
+              "expr": "node_systemd_units{realhostname=\"$node\",sitename=\"$Sitename\",state=\"active\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7490,7 +7490,7 @@
               "step": 240
             },
             {
-              "expr": "node_systemd_units{instance=\"$node\",sitename=\"$Sitename\",state=\"deactivating\"}",
+              "expr": "node_systemd_units{realhostname=\"$node\",sitename=\"$Sitename\",state=\"deactivating\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7499,7 +7499,7 @@
               "step": 240
             },
             {
-              "expr": "node_systemd_units{instance=\"$node\",sitename=\"$Sitename\",state=\"failed\"}",
+              "expr": "node_systemd_units{realhostname=\"$node\",sitename=\"$Sitename\",state=\"failed\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7508,7 +7508,7 @@
               "step": 240
             },
             {
-              "expr": "node_systemd_units{instance=\"$node\",sitename=\"$Sitename\",state=\"inactive\"}",
+              "expr": "node_systemd_units{realhostname=\"$node\",sitename=\"$Sitename\",state=\"inactive\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -7706,14 +7706,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_reads_completed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_reads_completed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - Reads completed",
               "refId": "A",
               "step": 8
             },
             {
-              "expr": "irate(node_disk_writes_completed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_writes_completed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Writes completed",
               "refId": "B",
@@ -7893,7 +7893,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_read_bytes_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_read_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - Read bytes",
@@ -7901,7 +7901,7 @@
               "step": 8
             },
             {
-              "expr": "irate(node_disk_written_bytes_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_written_bytes_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Written bytes",
@@ -8084,7 +8084,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_read_time_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_read_time_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "hide": false,
               "intervalFactor": 4,
               "legendFormat": "{{device}} - Read time",
@@ -8092,7 +8092,7 @@
               "step": 8
             },
             {
-              "expr": "irate(node_disk_write_time_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_write_time_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Write time",
@@ -8271,7 +8271,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_io_time_weighted_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_io_time_weighted_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - IO time weighted",
               "refId": "A",
@@ -8453,14 +8453,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_reads_merged_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_reads_merged_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Read merged",
               "refId": "A",
               "step": 4
             },
             {
-              "expr": "irate(node_disk_writes_merged_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_writes_merged_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Write merged",
               "refId": "B",
@@ -8638,14 +8638,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_io_time_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_io_time_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - IO time",
               "refId": "A",
               "step": 8
             },
             {
-              "expr": "irate(node_disk_discard_time_seconds_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_discard_time_seconds_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "interval": "",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - discard time",
@@ -8824,7 +8824,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_io_now{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_io_now{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - IO now",
               "refId": "A",
@@ -9000,7 +9000,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_disk_discards_completed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_discards_completed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "interval": "",
               "intervalFactor": 4,
               "legendFormat": "{{device}} - Discards completed",
@@ -9008,7 +9008,7 @@
               "step": 8
             },
             {
-              "expr": "irate(node_disk_discards_merged_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_disk_discards_merged_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "{{device}} - Discards merged",
@@ -9120,7 +9120,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_filesystem_avail_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_avail_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -9130,7 +9130,7 @@
               "step": 4
             },
             {
-              "expr": "node_filesystem_free_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_free_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 2,
@@ -9139,7 +9139,7 @@
               "step": 2
             },
             {
-              "expr": "node_filesystem_size_bytes{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_size_bytes{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "hide": true,
               "intervalFactor": 2,
@@ -9235,7 +9235,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_filesystem_files_free{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_files_free{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -9330,7 +9330,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_filefd_maximum{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_filefd_maximum{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 4,
               "legendFormat": "Max open files",
@@ -9338,7 +9338,7 @@
               "step": 8
             },
             {
-              "expr": "node_filefd_allocated{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_filefd_allocated{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Open files",
@@ -9433,7 +9433,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_filesystem_files{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_files{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -9534,7 +9534,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_filesystem_readonly{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_readonly{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{mountpoint}} - ReadOnly",
@@ -9542,7 +9542,7 @@
               "step": 4
             },
             {
-              "expr": "node_filesystem_device_error{instance=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
+              "expr": "node_filesystem_device_error{realhostname=\"$node\",sitename=\"$Sitename\",device!~'rootfs'}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -9658,7 +9658,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_network_address_info{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_network_address_info{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -9766,7 +9766,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_errs_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_errs_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Receive errors",
@@ -9774,7 +9774,7 @@
           "step": 4
         },
         {
-          "expr": "irate(node_network_transmit_errs_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_errs_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Rransmit errors",
@@ -9885,7 +9885,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_packets_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_packets_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -9894,7 +9894,7 @@
           "step": 4
         },
         {
-          "expr": "irate(node_network_transmit_packets_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_packets_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -10005,7 +10005,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_compressed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_compressed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Receive compressed",
@@ -10013,7 +10013,7 @@
           "step": 4
         },
         {
-          "expr": "irate(node_network_transmit_compressed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_compressed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Transmit compressed",
@@ -10123,7 +10123,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_drop_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_drop_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Receive drop",
@@ -10131,7 +10131,7 @@
           "step": 4
         },
         {
-          "expr": "irate(node_network_transmit_drop_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_drop_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Transmit drop",
@@ -10241,7 +10241,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_fifo_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_fifo_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Receive fifo",
@@ -10249,7 +10249,7 @@
           "step": 4
         },
         {
-          "expr": "irate(node_network_transmit_fifo_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_fifo_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Transmit fifo",
@@ -10359,7 +10359,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_multicast_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_multicast_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Receive multicast",
@@ -10464,7 +10464,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_transmit_carrier_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_carrier_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Statistic transmit_carrier",
@@ -10574,7 +10574,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_frame_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_receive_frame_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -10681,7 +10681,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_nf_conntrack_entries{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_nf_conntrack_entries{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "NF conntrack entries",
@@ -10689,7 +10689,7 @@
           "step": 4
         },
         {
-          "expr": "node_nf_conntrack_entries_limit{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_nf_conntrack_entries_limit{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "NF conntrack limit",
@@ -10799,7 +10799,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_transmit_colls_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_network_transmit_colls_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}} - Transmit colls",
@@ -10899,7 +10899,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_network_mtu_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_network_mtu_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ device }} - Bytes",
@@ -11000,7 +11000,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_arp_entries{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_arp_entries{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ device }} - ARP entries",
@@ -11100,7 +11100,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_network_transmit_queue_length{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_network_transmit_queue_length{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ device }} -   Interface transmit queue length",
@@ -11201,7 +11201,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_network_speed_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_network_speed_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{ device }} - Speed",
@@ -11307,7 +11307,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_softnet_times_squeezed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_softnet_times_squeezed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -11418,7 +11418,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_softnet_processed_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_softnet_processed_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -11427,7 +11427,7 @@
           "step": 4
         },
         {
-          "expr": "irate(node_softnet_dropped_total{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+          "expr": "irate(node_softnet_dropped_total{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -11533,7 +11533,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_network_up{operstate=\"up\",instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_network_up{operstate=\"up\",realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{interface}} - Operational state UP",
@@ -11541,7 +11541,7 @@
           "step": 4
         },
         {
-          "expr": "node_network_carrier{instance=\"$node\",sitename=\"$Sitename\"}",
+          "expr": "node_network_carrier{realhostname=\"$node\",sitename=\"$Sitename\"}",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{device}} - Physical link state",
@@ -11647,7 +11647,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_sockstat_TCP_alloc{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_TCP_alloc{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11656,7 +11656,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_TCP_inuse{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_TCP_inuse{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11665,7 +11665,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_TCP_mem{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_TCP_mem{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": true,
               "interval": "",
@@ -11675,7 +11675,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_TCP_orphan{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_TCP_orphan{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11684,7 +11684,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_TCP_tw{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_TCP_tw{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11781,7 +11781,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_sockstat_UDPLITE_inuse{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_UDPLITE_inuse{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11790,7 +11790,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_UDP_inuse{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_UDP_inuse{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11799,7 +11799,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_UDP_mem{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_UDP_mem{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11896,7 +11896,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_sockstat_sockets_used{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_sockets_used{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -11993,7 +11993,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_sockstat_TCP_mem_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_TCP_mem_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12002,7 +12002,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_UDP_mem_bytes{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_UDP_mem_bytes{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12099,7 +12099,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_sockstat_FRAG_inuse{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_FRAG_inuse{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12108,7 +12108,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_FRAG_memory{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_FRAG_memory{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12117,7 +12117,7 @@
               "step": 240
             },
             {
-              "expr": "node_sockstat_RAW_inuse{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_sockstat_RAW_inuse{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12247,7 +12247,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_IpExt_InOctets{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_IpExt_InOctets{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12256,7 +12256,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_IpExt_OutOctets{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_IpExt_OutOctets{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "OutOctets - Sent octets",
@@ -12363,7 +12363,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Ip_Forwarding{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Ip_Forwarding{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12476,7 +12476,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Icmp_InMsgs{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Icmp_InMsgs{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12485,7 +12485,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Icmp_OutMsgs{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Icmp_OutMsgs{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12598,7 +12598,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Icmp_InErrors{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Icmp_InErrors{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12715,7 +12715,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Udp_InDatagrams{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Udp_InDatagrams{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12724,7 +12724,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Udp_OutDatagrams{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Udp_OutDatagrams{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12831,7 +12831,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Udp_InErrors{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Udp_InErrors{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12840,7 +12840,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Udp_NoPorts{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Udp_NoPorts{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12849,13 +12849,13 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_UdpLite_InErrors{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_UdpLite_InErrors{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "interval": "",
               "legendFormat": "InErrors Lite - UDPLite Datagrams that could not be delivered to an application",
               "refId": "C"
             },
             {
-              "expr": "irate(node_netstat_Udp_RcvbufErrors{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Udp_RcvbufErrors{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12864,7 +12864,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Udp_SndbufErrors{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Udp_SndbufErrors{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -12981,7 +12981,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Tcp_InSegs{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Tcp_InSegs{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "instant": false,
               "interval": "",
@@ -12991,7 +12991,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Tcp_OutSegs{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Tcp_OutSegs{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -13100,7 +13100,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_TcpExt_ListenOverflows{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_TcpExt_ListenOverflows{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13110,7 +13110,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_TcpExt_ListenDrops{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_TcpExt_ListenDrops{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13120,7 +13120,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_TcpExt_TCPSynRetrans{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_TcpExt_TCPSynRetrans{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -13129,13 +13129,13 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Tcp_RetransSegs{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Tcp_RetransSegs{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "interval": "",
               "legendFormat": "RetransSegs - Segments retransmitted - that is, the number of TCP segments transmitted containing one or more previously transmitted octets",
               "refId": "D"
             },
             {
-              "expr": "irate(node_netstat_Tcp_InErrs{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Tcp_InErrs{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "interval": "",
               "legendFormat": "InErrs - Segments received in error (e.g., bad TCP checksums)",
               "refId": "E"
@@ -13244,7 +13244,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_netstat_Tcp_CurrEstab{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_netstat_Tcp_CurrEstab{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13254,7 +13254,7 @@
               "step": 4
             },
             {
-              "expr": "node_netstat_Tcp_MaxConn{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_netstat_Tcp_MaxConn{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13369,7 +13369,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_TcpExt_SyncookiesFailed{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_TcpExt_SyncookiesFailed{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13379,7 +13379,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_TcpExt_SyncookiesRecv{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_TcpExt_SyncookiesRecv{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13389,7 +13389,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_TcpExt_SyncookiesSent{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_TcpExt_SyncookiesSent{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13496,7 +13496,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(node_netstat_Tcp_ActiveOpens{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Tcp_ActiveOpens{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -13505,7 +13505,7 @@
               "step": 4
             },
             {
-              "expr": "irate(node_netstat_Tcp_PassiveOpens{instance=\"$node\",sitename=\"$Sitename\"}[5m])",
+              "expr": "irate(node_netstat_Tcp_PassiveOpens{realhostname=\"$node\",sitename=\"$Sitename\"}[5m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
@@ -13625,7 +13625,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_scrape_collector_duration_seconds{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_scrape_collector_duration_seconds{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13734,7 +13734,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_scrape_collector_success{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_scrape_collector_success{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13744,7 +13744,7 @@
               "step": 4
             },
             {
-              "expr": "node_textfile_scrape_error{instance=\"$node\",sitename=\"$Sitename\"}",
+              "expr": "node_textfile_scrape_error{realhostname=\"$node\",sitename=\"$Sitename\"}",
               "format": "time_series",
               "hide": false,
               "interval": "",
@@ -13867,7 +13867,7 @@
           "value": "67.17.206.195:9100"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{sitename=\"$Sitename\"}, instance)",
+        "definition": "label_values(node_time_seconds{sitename=\"$Sitename\"}, realhostname)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -13877,7 +13877,7 @@
         "name": "node",
         "options": [],
         "query": {
-          "query": "label_values(node_uname_info{sitename=\"$Sitename\"}, instance)",
+          "query": "label_values(node_time_seconds{sitename=\"$Sitename\"}, realhostname)",
           "refId": "Prometheus-node-Variable-Query"
         },
         "refresh": 1,

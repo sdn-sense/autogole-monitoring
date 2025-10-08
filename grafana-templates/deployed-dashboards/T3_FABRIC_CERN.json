@@ -534,11 +534,23 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T3_FABRIC_CERN\"}",
+            "expr": "up{sitename=~\"T3_FABRIC_CERN\", realhostname=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
             "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "up{sitename=~\"T3_FABRIC_CERN\", realhostname!=\"\"}",
+            "hide": false,
+            "legendFormat": "{{job}} {{realhostname}}",
+            "range": true,
+            "refId": "C"
           }
         ],
         "title": "Status of all endpoints",
@@ -2180,7 +2192,7 @@
             "expr": "memory_usage{sitename=\"T3_FABRIC_CERN\", key=\"vms\"}",
             "hide": false,
             "interval": "",
-            "legendFormat": "VMS {{servicename}}",
+            "legendFormat": "VMS {{servicename}} {{hostname}}",
             "refId": "B"
           }
         ],
@@ -2273,7 +2285,7 @@
             "exemplar": true,
             "expr": "memory_usage{sitename=\"T3_FABRIC_CERN\", key=~\"rss\"}",
             "interval": "",
-            "legendFormat": "RSS {{servicename}}",
+            "legendFormat": "RSS {{servicename}} {{hostname}}",
             "refId": "A"
           }
         ],
@@ -4895,6 +4907,6 @@
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-09-30. See git for changes",
+  "message": "Script changes made on 2025-10-08. See git for changes",
   "overwrite": true
 }

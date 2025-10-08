@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": null,
+    "id": 5317,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -534,11 +534,23 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T2_US_UChicago\"}",
+            "expr": "up{sitename=~\"T2_US_UChicago\", realhostname=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
             "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "up{sitename=~\"T2_US_UChicago\", realhostname!=\"\"}",
+            "hide": false,
+            "legendFormat": "{{job}} {{realhostname}}",
+            "range": true,
+            "refId": "C"
           }
         ],
         "title": "Status of all endpoints",
@@ -2180,7 +2192,7 @@
             "expr": "memory_usage{sitename=\"T2_US_UChicago\", key=\"vms\"}",
             "hide": false,
             "interval": "",
-            "legendFormat": "VMS {{servicename}}",
+            "legendFormat": "VMS {{servicename}} {{hostname}}",
             "refId": "B"
           }
         ],
@@ -2273,7 +2285,7 @@
             "exemplar": true,
             "expr": "memory_usage{sitename=\"T2_US_UChicago\", key=~\"rss\"}",
             "interval": "",
-            "legendFormat": "RSS {{servicename}}",
+            "legendFormat": "RSS {{servicename}} {{hostname}}",
             "refId": "A"
           }
         ],
@@ -4890,11 +4902,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T2_US_UChicago",
-    "uid": null,
-    "version": 27,
+    "uid": "a12c9f83-f083-4103-bd24-24e1ca767f94",
+    "version": 1,
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-09-30. See git for changes",
+  "message": "Script changes made on 2025-10-08. See git for changes",
   "overwrite": true
 }

@@ -533,11 +533,23 @@
             "uid": "qjScxmmVz"
           },
           "editorMode": "code",
-          "expr": "up{sitename=~\"REPLACEME_SITENAME\"}",
+          "expr": "up{sitename=~\"REPLACEME_SITENAME\", realhostname=\"\"}",
           "hide": false,
           "legendFormat": "{{job}} {{instance}}",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "up{sitename=~\"REPLACEME_SITENAME\", realhostname!=\"\"}",
+          "hide": false,
+          "legendFormat": "{{job}} {{realhostname}}",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Status of all endpoints",
@@ -2179,7 +2191,7 @@
           "expr": "memory_usage{sitename=\"REPLACEME_SITENAME\", key=\"vms\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "VMS {{servicename}}",
+          "legendFormat": "VMS {{servicename}} {{hostname}}",
           "refId": "B"
         }
       ],
@@ -2272,7 +2284,7 @@
           "exemplar": true,
           "expr": "memory_usage{sitename=\"REPLACEME_SITENAME\", key=~\"rss\"}",
           "interval": "",
-          "legendFormat": "RSS {{servicename}}",
+          "legendFormat": "RSS {{servicename}} {{hostname}}",
           "refId": "A"
         }
       ],
