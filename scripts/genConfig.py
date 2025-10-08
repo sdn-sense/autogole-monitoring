@@ -152,6 +152,9 @@ PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                              'replacement': 'WILLBEREPLACEDBYCODE'},
                                             {'source_labels': ['__address__'],
                                              'target_label': 'software',
+                                             'replacement': 'WILLBEREPLACEDBYCODE'},
+                                            {'source_labels': ['__address__'],
+                                             'target_label': 'realhostname',
                                              'replacement': 'WILLBEREPLACEDBYCODE'}]}
 
 # VPP Exporter - Will query VPP Exporter endpoint and get VPP Metrics
@@ -479,6 +482,7 @@ class PromModel():
                 self.default['scrape_configs'].append(tmpEntry)
         elif site and promFederate and promQuery:
             for sitename in site:
+                hostname = conf.get('agent', {}).get('hostname', 'UNDEFINEDHOSTNAME')
                 parsedurl = urlparse(promFederate)
                 tmpEntry = copy.deepcopy(PROMETHEUS_FEDERATE_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{sitename}_PROMFED')
@@ -488,6 +492,7 @@ class PromModel():
                 tmpEntry['static_configs'][0]['targets'].append(parsedurl.netloc)
                 tmpEntry['relabel_configs'][0]['replacement'] = sitename
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM-NodeExporter'
+                tmpEntry['relabel_configs'][2]['replacement'] = hostname
                 self.default['scrape_configs'].append(tmpEntry)
         else:
             print(f'No Node Exporter or Prometheus Federate defined in Agent Config. {confFile} {site}')
