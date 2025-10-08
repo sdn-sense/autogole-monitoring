@@ -13,7 +13,7 @@ scrape_configs:
 - job_name: IRIMON
   metrics_path: /metrics
   scheme: http
-  scrape_interval: 60s
+  scrape_interval: 30s
   static_configs:
   - targets:
     - iri-htc.virnao.com:8080
@@ -557,6 +557,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: a01-102-101-e.gridka.de
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -571,12 +575,16 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: a01-102-151-e.gridka.de
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
     - a01-102-151-e.gridka.de:9100
 - job_name: T1_US_FNAL_STATE
-  metrics_path: /T1_US_FNAL/sitefe/json/frontend/metrics
+  metrics_path: /api/T1_US_FNAL/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -664,7 +672,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - https://cmssense1.fnal.gov:8443/T1_US_FNAL/sitefe/v1/models?current=true&summary=false&encode=false
+    - https://cmssense1.fnal.gov:8443/api/T1_US_FNAL/models?current=true&summary=false&encode=false
 - job_name: T1_US_FNAL_ICMP_V4
   metrics_path: /probe
   params:
@@ -704,6 +712,7 @@ scrape_configs:
   - targets:
     - cmssense1.fnal.gov
 - job_name: T1_US_FNAL_NODE
+  metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense2.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -713,11 +722,21 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: cmssense2.fnal.gov
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense2.fnal.gov:9100
+    - cmssense1.fnal.gov:8443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_0
+  metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense3.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -727,11 +746,21 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: cmssense3.fnal.gov
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense3.fnal.gov:9100
+    - cmssense1.fnal.gov:8443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_1
+  metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense4.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -741,11 +770,21 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: cmssense4.fnal.gov
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense4.fnal.gov:9100
+    - cmssense1.fnal.gov:8443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_2
+  metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense5.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -755,11 +794,21 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: cmssense5.fnal.gov
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense5.fnal.gov:9100
+    - cmssense1.fnal.gov:8443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_3
+  metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense6.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -769,10 +818,19 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: cmssense6.fnal.gov
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - cmssense6.fnal.gov:9100
+    - cmssense1.fnal.gov:8443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
 - job_name: T2_US_Caltech_STATE
   metrics_path: /api/T2_US_Caltech/monitoring/prometheus/metrics
   relabel_configs:
@@ -911,6 +969,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-11.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -925,6 +987,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-12.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -939,6 +1005,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-13.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -953,6 +1023,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-14.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -967,6 +1041,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-15.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -981,6 +1059,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-16.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -995,6 +1077,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-17.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1009,6 +1095,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-18.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1151,6 +1241,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-11.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1165,6 +1259,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-12.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1179,6 +1277,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-13.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1193,6 +1295,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: transfer-14.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1335,6 +1441,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sdn-dtn-1-7.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1349,6 +1459,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-1.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1363,6 +1477,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-5.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1377,6 +1495,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-6.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1391,6 +1513,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-3.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1405,6 +1531,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sdn-dtn-2-09.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1419,6 +1549,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sdn-dtn-2-11.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1433,6 +1567,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sdn-dtn-2-10.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1447,6 +1585,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-4.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1461,6 +1603,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-10.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1475,6 +1621,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sandie-7.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1584,6 +1734,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: nrp-sense01.rnd.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -1727,6 +1881,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: red-xfer7.unl.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1741,6 +1899,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: red-xfer8.unl.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
@@ -1944,6 +2106,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-gen5-01.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -1964,6 +2130,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-gen5-02.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -1984,6 +2154,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-gen4-01.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2004,6 +2178,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-gen4-02.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2024,6 +2202,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-6.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2044,6 +2226,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-7.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2064,6 +2250,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-8.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2084,6 +2274,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-9.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2104,6 +2298,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-10.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2124,6 +2322,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-11.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2144,6 +2346,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-ceph-01.ampath.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2164,6 +2370,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-ceph-02.ampath.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2184,6 +2394,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-gen4-01.ampath.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2388,6 +2602,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-6.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2408,6 +2626,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-7.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2428,6 +2650,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-8.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2448,6 +2674,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: node-2-9.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2761,6 +2991,150 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-t2-us-ucsd.nrp-nautilus.io
+- job_name: T2_US_UCSD_NODE
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-01.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-01.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_0
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-02.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-02.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_1
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-03.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-03.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_2
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-04.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-04.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_3
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-05.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-05.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_4
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-06.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-06.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_5
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-07.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-07.t2.ucsd.edu:9100
+- job_name: T2_US_UCSD_NODE_6
+  relabel_configs:
+  - replacement: T2_US_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: dtn-08.t2.ucsd.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - dtn-08.t2.ucsd.edu:9100
 - job_name: T2_US_UChicago_STATE
   metrics_path: /api/T2_US_UChicago/monitoring/prometheus/metrics
   relabel_configs:
@@ -2870,6 +3244,24 @@ scrape_configs:
   static_configs:
   - targets:
     - '[2605:9a00:10:7::1]:1234'
+- job_name: T2_US_UChicago_NODE
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: c020.af.uchicago.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - c020.af.uchicago.edu:9100
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_2
   metrics_path: /federate
@@ -2885,6 +3277,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: fiona.its.hawaii.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2905,6 +3301,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: prp01.ifa.hawaii.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -2925,162 +3325,15 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-dtn-01.uog.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T3_FABRIC_AMST_STATE
-  metrics_path: /api/T3_FABRIC_AMST/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - amst-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_AMST_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - amst-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_AMST_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://amst-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_AMST/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_AMST_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: amst-sub1-gw1.exp.fabric-testbed.net:1234
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - amst-sub1-gw1.exp.fabric-testbed.net:1234
-- job_name: T3_FABRIC_AMST_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - amst-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_AMST_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - amst-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_AMST_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_AMST
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - amst-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_FABRIC_CERN_STATE
   metrics_path: /api/T3_FABRIC_CERN/monitoring/prometheus/metrics
   relabel_configs:
@@ -3300,761 +3553,6 @@ scrape_configs:
   static_configs:
   - targets:
     - '[2602:fcfb:1d:fff0::2]:1234'
-- job_name: T3_FABRIC_CERN1_STATE
-  metrics_path: /api/T3_FABRIC_CERN1/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - cern1-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_CERN1_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - cern1-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_CERN1_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://cern1-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_CERN1/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_CERN1_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: cern1-sub1-gw1.exp.fabric-testbed.net:1234
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - cern1-sub1-gw1.exp.fabric-testbed.net:1234
-- job_name: T3_FABRIC_CERN1_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - cern1-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_CERN1_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - cern1-sub1-host2.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_CERN1_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_CERN1
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - cern1-sub1-host3.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_LOSA_STATE
-  metrics_path: /api/T3_FABRIC_LOSA/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - losa-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_LOSA_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - losa-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_LOSA_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://losa-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_LOSA/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_LOSA_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: losa-sub1-gw1.exp.fabric-testbed.net:1234
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - losa-sub1-gw1.exp.fabric-testbed.net:1234
-- job_name: T3_FABRIC_LOSA_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - losa-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_LOSA_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - losa-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_LOSA_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_LOSA
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - losa-sub1-host3.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_NEWY_STATE
-  metrics_path: /api/T3_FABRIC_NEWY/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - newy-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_NEWY_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - newy-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_NEWY_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://newy-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_NEWY/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_NEWY_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: newy-sub1-gw1.exp.fabric-testbed.net:1234
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - newy-sub1-gw1.exp.fabric-testbed.net:1234
-- job_name: T3_FABRIC_NEWY_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - newy-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_NEWY_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - newy-sub1-host2.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_NEWY_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_NEWY
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - newy-sub1-host3.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_STAR_STATE
-  metrics_path: /api/T3_FABRIC_STAR/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - star-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_STAR_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - star-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_STAR_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://star-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_STAR/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_STAR_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: star-sub1-gw1.exp.fabric-testbed.net:1234
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - star-sub1-gw1.exp.fabric-testbed.net:1234
-- job_name: T3_FABRIC_STAR_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - star-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_STAR_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - star-sub1-host2.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_STAR_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_STAR
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - star-sub1-host3.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_UCSD_STATE
-  metrics_path: /api/T3_FABRIC_UCSD/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - ucsd-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_UCSD_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - ucsd-sub1-gw1.exp.fabric-testbed.net:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_UCSD_MODEL_V6
-  metrics_path: /probe
-  params:
-    module:
-    - https_v6_siterm_2xx
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://ucsd-sub1-gw1.exp.fabric-testbed.net:443/api/T3_FABRIC_UCSD/models?current=true&summary=false&encode=false
-- job_name: T3_FABRIC_UCSD_VPP
-  metrics_path: /metrics
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: ucsd-sub1-gw1.exp.fabric-testbed.net:1234
-    source_labels:
-    - __address__
-    target_label: endpoint
-  - replacement: VPP
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - ucsd-sub1-gw1.exp.fabric-testbed.net:1234
-- job_name: T3_FABRIC_UCSD_NODE
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - ucsd-sub1-host1.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_UCSD_NODE_0
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - ucsd-sub1-host2.exp.fabric-testbed.net:9100
-- job_name: T3_FABRIC_UCSD_NODE_1
-  relabel_configs:
-  - replacement: T3_FABRIC_UCSD
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - ucsd-sub1-host3.exp.fabric-testbed.net:9100
 - job_name: T3_US_Internet2_STATE
   metrics_path: /api/T3_US_Internet2/monitoring/prometheus/metrics
   relabel_configs:
@@ -4198,6 +3696,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.alba.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4218,6 +3720,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.ashb.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4238,6 +3744,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.bois.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4258,6 +3768,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.bost.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4278,6 +3792,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.char.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4298,6 +3816,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.cinc.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4318,6 +3840,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.clev.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4338,6 +3864,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.dall.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4358,6 +3888,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.dall3.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4378,6 +3912,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.denv.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4398,6 +3936,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.elpa.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4418,6 +3960,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.eqch.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4438,6 +3984,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.hart2.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4458,6 +4008,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.holy.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4478,6 +4032,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.houh.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4498,6 +4056,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.hous.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4518,6 +4080,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.indi.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4538,6 +4104,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.jack.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4558,6 +4128,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.jcsn.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4578,6 +4152,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.lasv.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4598,6 +4176,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.losa.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4618,6 +4200,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.losa2.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4638,6 +4224,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.loui.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4658,6 +4248,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.minn.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4678,6 +4272,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.miss.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4698,6 +4296,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.nash.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4718,6 +4320,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.newy32aoa.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4738,6 +4344,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.pens.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4758,6 +4368,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.phil.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4778,6 +4392,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.phoe.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4798,6 +4416,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.pitt.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4818,6 +4440,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.port.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4838,6 +4464,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.rale.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4858,6 +4488,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.reno.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4878,6 +4512,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.sacr.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4898,6 +4536,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.salt.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4918,6 +4560,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.seat.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4938,6 +4584,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.star.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4958,6 +4608,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.sunn.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4978,6 +4632,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.tole2.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -4998,6 +4656,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.tucs.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5018,6 +4680,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.tuls.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5038,6 +4704,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: pas.wash.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5186,6 +4856,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-igrok-01.calit2.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5206,6 +4880,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-igrok-02.calit2.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5226,6 +4904,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-ceph-01.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5246,6 +4928,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-gen4-07.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5266,6 +4952,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-nvme-01.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5286,6 +4976,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: ucsd-nrp.cern.ch
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5434,6 +5128,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: k8s-stratix-10-01.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -5577,6 +5275,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: r740xd4.it.northwestern.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
   scrape_interval: 30s
   static_configs:
   - targets:
