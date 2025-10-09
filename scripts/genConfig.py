@@ -108,7 +108,9 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                              'replacement': 'WILLBEREPLACEDBYCODE'},
                                             {'source_labels': ['__address__'],
                                              'target_label': 'realhostname',
-                                             'replacement': 'WILLBEREPLACEDBYCODE'}]}
+                                             'replacement': 'WILLBEREPLACEDBYCODE'}],
+                        'metric_relabel_configs': [{'source_labels': ['__name__'], 'regex': 'ALERTS', 'action': 'drop'},
+                                                   {'source_labels': ['__name__'], 'regex': 'ALERTS_FOR_STATE', 'action': 'drop'}]}
 
 # If Agent has:
 # general:
@@ -131,7 +133,9 @@ NODE_EXPORTER_SCRAPE_SSL = {'job_name': 'WILLBEREPLACEDBYCODE',
                                                 'replacement': 'WILLBEREPLACEDBYCODE'},
                                                 {'source_labels': ['__address__'],
                                                  'target_label': 'realhostname',
-                                                 'replacement': 'WILLBEREPLACEDBYCODE'}]}
+                                                 'replacement': 'WILLBEREPLACEDBYCODE'}],
+                            'metric_relabel_configs': [{'source_labels': ['__name__'], 'regex': 'ALERTS', 'action': 'drop'},
+                                                       {'source_labels': ['__name__'], 'regex': 'ALERTS_FOR_STATE', 'action': 'drop'}]}
 
 
 
