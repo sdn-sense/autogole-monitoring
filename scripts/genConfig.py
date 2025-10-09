@@ -159,7 +159,9 @@ PROMETHEUS_FEDERATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                                              'replacement': 'WILLBEREPLACEDBYCODE'},
                                             {'source_labels': ['__address__'],
                                              'target_label': 'realhostname',
-                                             'replacement': 'WILLBEREPLACEDBYCODE'}]}
+                                             'replacement': 'WILLBEREPLACEDBYCODE'}],
+                              'metric_relabel_configs': [{'source_labels': ['__name__'], 'regex': 'ALERTS', 'action': 'drop'},
+                                                         {'source_labels': ['__name__'], 'regex': 'ALERTS_FOR_STATE', 'action': 'drop'}]}
 
 # VPP Exporter - Will query VPP Exporter endpoint and get VPP Metrics
 VPP_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
