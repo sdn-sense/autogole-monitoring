@@ -11,7 +11,7 @@ rule_files:
 - /etc/prometheus/alerts.yml
 scrape_configs:
 - job_name: IRIMON
-  metrics_path: /metrics
+  metrics_path: /api/v1/metrics
   scheme: http
   scrape_interval: 30s
   static_configs:
@@ -73,6 +73,1032 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
+- job_name: T2_US_MGHPCC_DC1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn001.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn001.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn002.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn002.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn003.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn003.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn004.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn004.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn005.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn005.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn006.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn006.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC7
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn007.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn007.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC8
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn008.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn008.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC9
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn009.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn009.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC10
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn010.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn010.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC11
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn011.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn011.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC12
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn012.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn012.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC13
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn013.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn013.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC14
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn014.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn014.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC15
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn015.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn015.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC16
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn016.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn016.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC17
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn017.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn017.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC18
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn018.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn018.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC19
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn019.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn019.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC20
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn020.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn020.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC21
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn021.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn021.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC22
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn022.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn022.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC23
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn023.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn023.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC24
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn024.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn024.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC25
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn025.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn025.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC26
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn026.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn026.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC27
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn027.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn027.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC28
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn028.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn028.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC29
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn029.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn029.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC30
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn030.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn030.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC31
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn031.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn031.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC32
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn032.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn032.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC33
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn033.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn033.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC34
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn034.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn034.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC35
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn035.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn035.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC36
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn1106.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn1106.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC37
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn1107.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn1107.data.net2.mghpcc.org:9100
+- job_name: T2_US_MGHPCC_DC38
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: atn1108.data.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn1108.data.net2.mghpcc.org:9100
 - job_name: NRM_CENIC_STATE
   metrics_path: /api/NRM_CENIC/monitoring/prometheus/metrics
   relabel_configs:
@@ -419,6 +1445,96 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-gpn.nrp-nautilus.io:443/api/NRM_GPN/models?current=true&summary=false&encode=false
+- job_name: NRM_SCINET_STATE
+  metrics_path: /api/NRM_SCINET/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: NRM_SCINET
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 38.6274
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 90.1982
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-scinet.nrp-nautilus.io:443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
+- job_name: NRM_SCINET_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: NRM_SCINET
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 38.6274
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 90.1982
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-scinet.nrp-nautilus.io:443
+  tls_config:
+    cert_file: /etc/tls/tls.crt
+    insecure_skip_verify: true
+    key_file: /etc/tls/tls.key
+- job_name: NRM_SCINET_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_siterm_2xx
+  relabel_configs:
+  - replacement: NRM_SCINET
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 38.6274
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: 90.1982
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://sense-scinet.nrp-nautilus.io:443/api/NRM_SCINET/models?current=true&summary=false&encode=false
 - job_name: T1_DE_KIT_STATE
   metrics_path: /api/T1_DE_KIT/monitoring/prometheus/metrics
   relabel_configs:
@@ -548,6 +1664,15 @@ scrape_configs:
   - targets:
     - a01-102-151-e.gridka.de
 - job_name: T1_DE_KIT_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T1_DE_KIT
     source_labels:
@@ -566,6 +1691,15 @@ scrape_configs:
   - targets:
     - a01-102-101-e.gridka.de:9100
 - job_name: T1_DE_KIT_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T1_DE_KIT
     source_labels:
@@ -712,6 +1846,15 @@ scrape_configs:
   - targets:
     - cmssense1.fnal.gov
 - job_name: T1_US_FNAL_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense2.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -736,6 +1879,15 @@ scrape_configs:
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense3.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -760,6 +1912,15 @@ scrape_configs:
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense4.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -784,6 +1945,15 @@ scrape_configs:
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense5.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -808,6 +1978,15 @@ scrape_configs:
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_NODE_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/passthrough/cmssense6.fnal.gov
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -960,6 +2139,15 @@ scrape_configs:
   - targets:
     - sense-caltechprod.nrp-nautilus.io
 - job_name: T2_US_Caltech_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -978,6 +2166,15 @@ scrape_configs:
   - targets:
     - transfer-11.ultralight.org:9100
 - job_name: T2_US_Caltech_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -996,6 +2193,15 @@ scrape_configs:
   - targets:
     - transfer-12.ultralight.org:9100
 - job_name: T2_US_Caltech_NODE_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -1014,6 +2220,15 @@ scrape_configs:
   - targets:
     - transfer-13.ultralight.org:9100
 - job_name: T2_US_Caltech_NODE_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -1032,6 +2247,15 @@ scrape_configs:
   - targets:
     - transfer-14.ultralight.org:9100
 - job_name: T2_US_Caltech_NODE_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -1050,6 +2274,15 @@ scrape_configs:
   - targets:
     - transfer-15.ultralight.org:9100
 - job_name: T2_US_Caltech_NODE_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -1067,42 +2300,6 @@ scrape_configs:
   static_configs:
   - targets:
     - transfer-16.ultralight.org:9100
-- job_name: T2_US_Caltech_NODE_5
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: transfer-17.ultralight.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - transfer-17.ultralight.org:9100
-- job_name: T2_US_Caltech_NODE_6
-  relabel_configs:
-  - replacement: T2_US_Caltech
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: transfer-18.ultralight.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - transfer-18.ultralight.org:9100
 - job_name: T2_US_Caltech_DEV_STATE
   metrics_path: /api/T2_US_Caltech_DEV/monitoring/prometheus/metrics
   relabel_configs:
@@ -1232,6 +2429,15 @@ scrape_configs:
   - targets:
     - sense-dev-caltechprod.nrp-nautilus.io
 - job_name: T2_US_Caltech_DEV_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
     source_labels:
@@ -1250,6 +2456,15 @@ scrape_configs:
   - targets:
     - transfer-11.ultralight.org:9100
 - job_name: T2_US_Caltech_DEV_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
     source_labels:
@@ -1268,6 +2483,15 @@ scrape_configs:
   - targets:
     - transfer-12.ultralight.org:9100
 - job_name: T2_US_Caltech_DEV_NODE_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
     source_labels:
@@ -1286,6 +2510,15 @@ scrape_configs:
   - targets:
     - transfer-13.ultralight.org:9100
 - job_name: T2_US_Caltech_DEV_NODE_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
     source_labels:
@@ -1432,6 +2665,15 @@ scrape_configs:
   - targets:
     - sense-caltechtest.sdn-lb.ultralight.org
 - job_name: T2_US_Caltech_Test_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1450,6 +2692,15 @@ scrape_configs:
   - targets:
     - sdn-dtn-1-7.ultralight.org:9100
 - job_name: T2_US_Caltech_Test_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1468,24 +2719,15 @@ scrape_configs:
   - targets:
     - sandie-1.ultralight.org:9100
 - job_name: T2_US_Caltech_Test_NODE_1
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
     source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
     source_labels:
-    - __address__
-    target_label: software
-  - replacement: sandie-5.ultralight.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sandie-5.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_2
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1503,7 +2745,16 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-6.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_3
+- job_name: T2_US_Caltech_Test_NODE_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1521,7 +2772,16 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-3.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_4
+- job_name: T2_US_Caltech_Test_NODE_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1539,43 +2799,16 @@ scrape_configs:
   static_configs:
   - targets:
     - sdn-dtn-2-09.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_5
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
+- job_name: T2_US_Caltech_Test_NODE_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
     source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
     source_labels:
-    - __address__
-    target_label: software
-  - replacement: sdn-dtn-2-11.ultralight.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sdn-dtn-2-11.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_6
-  relabel_configs:
-  - replacement: T2_US_Caltech_Test
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: sdn-dtn-2-10.ultralight.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sdn-dtn-2-10.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_7
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1593,7 +2826,16 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-4.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_8
+- job_name: T2_US_Caltech_Test_NODE_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1611,7 +2853,16 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-10.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_9
+- job_name: T2_US_Caltech_Test_NODE_6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -1721,6 +2972,15 @@ scrape_configs:
     - https://sense-mghpcc.nrp-nautilus.io:443/api/T2_US_MGHPCC/models?current=true&summary=false&encode=false
 - honor_labels: true
   job_name: T2_US_MGHPCC_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -1735,6 +2995,72 @@ scrape_configs:
     - __address__
     target_label: software
   - replacement: nrp-sense01.rnd.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_MGHPCC_PROMFED_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="nrp-sense02.rnd.net2.mghpcc.org", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: nrp-sense02.rnd.net2.mghpcc.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_MGHPCC_PROMFED_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="nrp-sense03.rnd.net2.mghpcc.org", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: nrp-sense03.rnd.net2.mghpcc.org
     source_labels:
     - __address__
     target_label: realhostname
@@ -1872,6 +3198,15 @@ scrape_configs:
   - targets:
     - red-sense-rm.unl.edu
 - job_name: T2_US_Nebraska_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Nebraska
     source_labels:
@@ -1890,6 +3225,15 @@ scrape_configs:
   - targets:
     - red-xfer7.unl.edu:9100
 - job_name: T2_US_Nebraska_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_Nebraska
     source_labels:
@@ -2093,6 +3437,15 @@ scrape_configs:
     key_file: /etc/tls/tls.key
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2117,6 +3470,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2141,6 +3503,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2165,6 +3536,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2189,6 +3569,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2213,6 +3602,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2237,6 +3635,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2261,6 +3668,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2285,6 +3701,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_7
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2309,6 +3734,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED_8
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2333,6 +3767,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2357,6 +3800,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2381,6 +3833,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2589,6 +4050,15 @@ scrape_configs:
     key_file: /etc/tls/tls.key
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2613,6 +4083,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2637,6 +4116,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2661,6 +4149,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -2992,6 +4489,15 @@ scrape_configs:
   - targets:
     - sense-t2-us-ucsd.nrp-nautilus.io
 - job_name: T2_US_UCSD_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3010,6 +4516,15 @@ scrape_configs:
   - targets:
     - dtn-01.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3028,6 +4543,15 @@ scrape_configs:
   - targets:
     - dtn-02.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3046,6 +4570,15 @@ scrape_configs:
   - targets:
     - dtn-03.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3064,6 +4597,15 @@ scrape_configs:
   - targets:
     - dtn-04.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3082,6 +4624,15 @@ scrape_configs:
   - targets:
     - dtn-05.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3100,6 +4651,15 @@ scrape_configs:
   - targets:
     - dtn-06.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3118,6 +4678,15 @@ scrape_configs:
   - targets:
     - dtn-07.t2.ucsd.edu:9100
 - job_name: T2_US_UCSD_NODE_6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -3245,6 +4814,15 @@ scrape_configs:
   - targets:
     - '[2605:9a00:10:7::1]:1234'
 - job_name: T2_US_UChicago_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T2_US_UChicago
     source_labels:
@@ -3264,6 +4842,15 @@ scrape_configs:
     - c020.af.uchicago.edu:9100
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3288,6 +4875,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3302,30 +4898,6 @@ scrape_configs:
     - __address__
     target_label: software
   - replacement: prp01.ifa.hawaii.edu
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T3_US_NRP_PROMFED_4
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-dtn-01.uog.edu", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T3_US_NRP
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: k8s-dtn-01.uog.edu
     source_labels:
     - __address__
     target_label: realhostname
@@ -3683,6 +5255,15 @@ scrape_configs:
     - sense-nrp-internet2.nrp-nautilus.io
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3707,6 +5288,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3731,6 +5321,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3755,6 +5354,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3779,6 +5387,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3803,6 +5420,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3827,6 +5453,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3851,6 +5486,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3875,6 +5519,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_7
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3899,6 +5552,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_8
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3923,6 +5585,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_9
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3947,6 +5618,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_10
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3971,6 +5651,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_11
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -3995,6 +5684,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_12
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4019,6 +5717,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_13
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4043,6 +5750,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_14
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4067,6 +5783,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_15
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4091,6 +5816,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_16
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4115,6 +5849,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_17
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4139,6 +5882,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_18
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4163,6 +5915,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_19
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4187,6 +5948,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_20
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4211,6 +5981,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_21
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4235,6 +6014,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_22
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4259,6 +6047,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_23
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4283,6 +6080,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_24
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4307,6 +6113,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_25
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4331,6 +6146,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_26
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4355,6 +6179,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_27
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4379,6 +6212,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_28
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4403,6 +6245,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_29
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4427,6 +6278,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_30
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4451,6 +6311,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_31
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4475,6 +6344,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_32
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4499,6 +6377,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_33
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4523,6 +6410,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_34
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4547,6 +6443,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_35
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4571,6 +6476,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_36
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4595,6 +6509,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_37
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4619,6 +6542,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_38
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4643,6 +6575,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_39
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4667,6 +6608,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_40
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4691,6 +6641,15 @@ scrape_configs:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
   job_name: T3_US_Internet2_PROMFED_41
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4842,7 +6801,16 @@ scrape_configs:
   - targets:
     - sense-fe.nrp-nautilus.io
 - honor_labels: true
-  job_name: T3_US_NRP_PROMFED_5
+  job_name: T3_US_NRP_PROMFED_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4866,7 +6834,16 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T3_US_NRP_PROMFED_6
+  job_name: T3_US_NRP_PROMFED_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4890,7 +6867,16 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T3_US_NRP_PROMFED_7
+  job_name: T3_US_NRP_PROMFED_6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4914,7 +6900,16 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T3_US_NRP_PROMFED_8
+  job_name: T3_US_NRP_PROMFED_7
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -4938,31 +6933,16 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T3_US_NRP_PROMFED_9
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-nvme-01.ultralight.org", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T3_US_NRP
+  job_name: T3_US_NRP_PROMFED_8
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
     source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
     source_labels:
-    - __address__
-    target_label: software
-  - replacement: k8s-nvme-01.ultralight.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T3_US_NRP_PROMFED_10
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -5115,6 +7095,15 @@ scrape_configs:
     - sense-t3-us-nrp-stratix.nrp-nautilus.io
 - honor_labels: true
   job_name: T3_US_NRP_STRATIX_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   metrics_path: /federate
   params:
     match[]:
@@ -5266,6 +7255,15 @@ scrape_configs:
   - targets:
     - r740xd4.it.northwestern.edu
 - job_name: T3_US_Starlight_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
   relabel_configs:
   - replacement: T3_US_Starlight
     source_labels:
