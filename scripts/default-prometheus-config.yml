@@ -80,3 +80,876 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
+- job_name: T2_US_MGHPCC_DC1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn001.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn001.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn002.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn002.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn003.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn003.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn004.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn004.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn005.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn005.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC6
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn006.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn006.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC7
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn007.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn007.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC8
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn008.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn008.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC9
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn009.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn009.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC10
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn010.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn010.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC11
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn011.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn011.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC12
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn012.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn012.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC13
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn013.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn013.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC14
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn014.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn014.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC15
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn015.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn015.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC16
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn016.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn016.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC17
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn017.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn017.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC18
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn018.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn018.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC19
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn019.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn019.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC20
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn020.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn020.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC21
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn021.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn021.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC22
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn022.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn022.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC23
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn023.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn023.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC24
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn024.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn024.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC25
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn025.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn025.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC26
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn026.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn026.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC27
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn027.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn027.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC28
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn028.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn028.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC29
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn029.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn029.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC30
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn030.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn030.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC31
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn031.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn031.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC32
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn032.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn032.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC33
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn033.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn033.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC34
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn034.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn034.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC35
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn035.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn035.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC36
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn1106.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn1106.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC37
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn1107.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn1107.data.net2.mghpcc.org:9100
+
+- job_name: T2_US_MGHPCC_DC38
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels: [__name__]
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels: [__name__]
+  relabel_configs:
+  - replacement: T2_US_MGHPCC
+    source_labels: [__address__]
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels: [__address__]
+    target_label: software
+  - replacement: atn1108.data.net2.mghpcc.org
+    source_labels: [__address__]
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - atn1108.data.net2.mghpcc.org:9100
