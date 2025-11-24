@@ -1445,96 +1445,6 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-gpn.nrp-nautilus.io:443/api/NRM_GPN/models?current=true&summary=false&encode=false
-- job_name: NRM_SCINET_STATE
-  metrics_path: /api/NRM_SCINET/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: NRM_SCINET
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 38.6274
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 90.1982
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sense-scinet.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: NRM_SCINET_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: NRM_SCINET
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 38.6274
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 90.1982
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sense-scinet.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: NRM_SCINET_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: NRM_SCINET
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 38.6274
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 90.1982
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://sense-scinet.nrp-nautilus.io:443/api/NRM_SCINET/models?current=true&summary=false&encode=false
 - job_name: T1_DE_KIT_STATE
   metrics_path: /api/T1_DE_KIT/monitoring/prometheus/metrics
   relabel_configs:
@@ -2818,6 +2728,33 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
+  - replacement: sdn-dtn-2-11.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sdn-dtn-2-11.ultralight.org:9100
+- job_name: T2_US_Caltech_Test_NODE_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_Caltech_Test
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
   - replacement: sandie-4.ultralight.org
     source_labels:
     - __address__
@@ -2826,7 +2763,7 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-4.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_5
+- job_name: T2_US_Caltech_Test_NODE_6
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2853,7 +2790,7 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-10.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_NODE_6
+- job_name: T2_US_Caltech_Test_NODE_7
   metric_relabel_configs:
   - action: drop
     regex: ALERTS

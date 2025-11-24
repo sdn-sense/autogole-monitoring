@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 51,
+    "id": null,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -116,7 +116,7 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "apache_uptime_seconds_total{sitename=\"T2_US_UCSD_OASIS\"}",
+            "expr": "apache_uptime_seconds_total{sitename=\"NRM_SCINET\"}",
             "format": "time_series",
             "intervalFactor": 1,
             "range": true,
@@ -183,7 +183,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"T2_US_UCSD_OASIS\"}) or label_replace(0 * absent(ALERTS{sitename=\"T2_US_UCSD_OASIS\"}), \"sitename\", \"T2_US_UCSD_OASIS\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"NRM_SCINET\"}) or label_replace(0 * absent(ALERTS{sitename=\"NRM_SCINET\"}), \"sitename\", \"NRM_SCINET\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -250,7 +250,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"T2_US_UCSD_OASIS\"}) or label_replace(0 * absent(ALERTS{sitename=\"T2_US_UCSD_OASIS\"}), \"sitename\", \"T2_US_UCSD_OASIS\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"NRM_SCINET\"}) or label_replace(0 * absent(ALERTS{sitename=\"NRM_SCINET\"}), \"sitename\", \"NRM_SCINET\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -313,7 +313,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T2_US_UCSD_OASIS\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"NRM_SCINET\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -376,7 +376,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T2_US_UCSD_OASIS\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"NRM_SCINET\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -443,7 +443,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -522,7 +522,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T2_US_UCSD_OASIS\"}",
+            "expr": "probe_success{sitename=~\"NRM_SCINET\"}",
             "interval": "",
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
@@ -534,7 +534,7 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T2_US_UCSD_OASIS\", realhostname=\"\"}",
+            "expr": "up{sitename=~\"NRM_SCINET\", realhostname=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
@@ -546,7 +546,7 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T2_US_UCSD_OASIS\", realhostname!=\"\"}",
+            "expr": "up{sitename=~\"NRM_SCINET\", realhostname!=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{realhostname}}",
             "range": true,
@@ -608,7 +608,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T2_US_UCSD_OASIS\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"NRM_SCINET\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -671,7 +671,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T2_US_UCSD_OASIS\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"NRM_SCINET\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -738,7 +738,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -801,7 +801,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T2_US_UCSD_OASIS\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"NRM_SCINET\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -864,7 +864,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T2_US_UCSD_OASIS\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"NRM_SCINET\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -931,7 +931,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -994,7 +994,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T2_US_UCSD_OASIS\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"NRM_SCINET\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1057,7 +1057,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T2_US_UCSD_OASIS\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"NRM_SCINET\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1124,7 +1124,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T2_US_UCSD_OASIS\"}),\n  \"sitename\", \n  \"T2_US_UCSD_OASIS\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"NRM_SCINET\"}),\n  \"sitename\", \n  \"NRM_SCINET\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1207,7 +1207,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "ALERTS{alertstate=\"firing\", sitename=\"T2_US_UCSD_OASIS\"}[5m]",
+            "expr": "ALERTS{alertstate=\"firing\", sitename=\"NRM_SCINET\"}[5m]",
             "format": "table",
             "instant": true,
             "legendFormat": "__auto",
@@ -1368,7 +1368,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_UCSD_OASIS\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"NRM_SCINET\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -1464,7 +1464,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T2_US_UCSD_OASIS\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"NRM_SCINET\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -1557,14 +1557,14 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T2_US_UCSD_OASIS\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"NRM_SCINET\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
           },
           {
             "exemplar": true,
-            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T2_US_UCSD_OASIS\"} - time()",
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"NRM_SCINET\"} - time()",
             "hide": false,
             "interval": "",
             "legendFormat": "{{hostname}}",
@@ -1657,7 +1657,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T2_US_UCSD_OASIS\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"NRM_SCINET\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -1747,7 +1747,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"T2_US_UCSD_OASIS\"}",
+            "expr": "probe_http_status_code{sitename=~\"NRM_SCINET\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -1816,7 +1816,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T2_US_UCSD_OASIS\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"NRM_SCINET\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1909,7 +1909,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "service_runtime{sitename=\"T2_US_UCSD_OASIS\"}",
+            "expr": "service_runtime{sitename=\"NRM_SCINET\"}",
             "interval": "",
             "legendFormat": "{{hostname}} {{servicename}}",
             "refId": "A"
@@ -1999,7 +1999,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T2_US_UCSD_OASIS\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"NRM_SCINET\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
@@ -2089,7 +2089,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T2_US_UCSD_OASIS\", service_state!=\"OK\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"NRM_SCINET\", service_state!=\"OK\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
@@ -2181,7 +2181,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T2_US_UCSD_OASIS\", key=\"vms\"}",
+            "expr": "memory_usage{sitename=\"NRM_SCINET\", key=\"vms\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "VMS {{servicename}} {{hostname}}",
@@ -2274,7 +2274,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T2_US_UCSD_OASIS\", key=~\"rss\"}",
+            "expr": "memory_usage{sitename=\"NRM_SCINET\", key=~\"rss\"}",
             "interval": "",
             "legendFormat": "RSS {{servicename}} {{hostname}}",
             "refId": "A"
@@ -2371,7 +2371,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "disk_usage{sitename=\"T2_US_UCSD_OASIS\", key=\"UsePercentage\"}",
+            "expr": "disk_usage{sitename=\"NRM_SCINET\", key=\"UsePercentage\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "{{filesystem}} {{hostname}}",
@@ -2470,7 +2470,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "disk_usage{sitename=\"T2_US_UCSD_OASIS\", key=\"IUsePercentage\"}",
+            "expr": "disk_usage{sitename=\"NRM_SCINET\", key=\"IUsePercentage\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "{{filesystem}} {{hostname}}",
@@ -2538,7 +2538,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T2_US_UCSD_OASIS\"}) ",
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"NRM_SCINET\"}) ",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2604,7 +2604,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T2_US_UCSD_OASIS\"}) ",
+            "expr": " sum by (version) (running_version_info{sitename=\"NRM_SCINET\"}) ",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -2705,7 +2705,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "up{sitename=\"T2_US_UCSD_OASIS\", software=\"SiteRM-Agent\"}",
+            "expr": "up{sitename=\"NRM_SCINET\", software=\"SiteRM-Agent\"}",
             "interval": "",
             "legendFormat": "{{instance}} JOBID {{job}}",
             "range": true,
@@ -2817,14 +2817,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"NRM_SCINET\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (ALL for T2_US_UCSD_OASIS)",
+        "title": "Network Status VSW (ALL for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -2912,14 +2912,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T2_US_UCSD_OASIS)",
+        "title": "Network Status VSW (Not activated for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3007,14 +3007,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"NRM_SCINET\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (ALL for T2_US_UCSD_OASIS)",
+        "title": "Network Status RST (ALL for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3102,14 +3102,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (Not activated for T2_US_UCSD_OASIS)",
+        "title": "Network Status RST (Not activated for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3197,14 +3197,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"kube\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"kube\", sitename=~\"NRM_SCINET\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status Kube (ALL for T2_US_UCSD_OASIS)",
+        "title": "Network Status Kube (ALL for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3292,14 +3292,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"kube\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"kube\", sitename=~\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status Kube (Not activated for T2_US_UCSD_OASIS)",
+        "title": "Network Status Kube (Not activated for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3387,14 +3387,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"singleport\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"singleport\", sitename=~\"NRM_SCINET\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status SinglePort (ALL for T2_US_UCSD_OASIS)",
+        "title": "Network Status SinglePort (ALL for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3482,14 +3482,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"singleport\", sitename=~\"T2_US_UCSD_OASIS\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"singleport\", sitename=~\"NRM_SCINET\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status SinglePort (Not activated for T2_US_UCSD_OASIS)",
+        "title": "Network Status SinglePort (Not activated for NRM_SCINET)",
         "type": "timeseries"
       },
       {
@@ -3592,7 +3592,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3683,7 +3683,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3774,7 +3774,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}",
+            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -3867,7 +3867,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T2_US_UCSD_OASIS\"}",
+            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"NRM_SCINET\"}",
             "interval": "",
             "legendFormat": "{{vlan}} {{key1}} {{key2}}",
             "refId": "A"
@@ -3960,7 +3960,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4053,7 +4053,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4146,7 +4146,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4239,7 +4239,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4332,7 +4332,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4425,7 +4425,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4518,7 +4518,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4611,7 +4611,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4704,7 +4704,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4797,7 +4797,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4890,7 +4890,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4983,7 +4983,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T2_US_UCSD_OASIS\", hostname=\"$switch\"}[5m])*8",
+            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"NRM_SCINET\", hostname=\"$switch\"}[5m])*8",
             "interval": "",
             "legendFormat": "{{ifDescr}} ({{ifAlias}})",
             "refId": "A"
@@ -4997,7 +4997,7 @@
     "schemaVersion": 38,
     "style": "dark",
     "tags": [
-      "T2_US_UCSD_OASIS",
+      "NRM_SCINET",
       "SiteRM"
     ],
     "templating": {
@@ -5016,7 +5016,7 @@
             "type": "prometheus",
             "uid": "qjScxmmVz"
           },
-          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\"}, hostname)",
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"NRM_SCINET\"}, hostname)",
           "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
           "hide": 2,
           "includeAll": true,
@@ -5025,7 +5025,7 @@
           "name": "switch",
           "options": [],
           "query": {
-            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T2_US_UCSD_OASIS\"}, hostname)",
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"NRM_SCINET\"}, hostname)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 1,
@@ -5045,9 +5045,9 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T2_US_UCSD_OASIS",
-    "uid": "000000051",
-    "version": 1,
+    "title": "NRM_SCINET",
+    "uid": null,
+    "version": 19,
     "weekStart": ""
   },
   "folderId": 5181,
