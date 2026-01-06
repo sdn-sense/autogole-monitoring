@@ -602,7 +602,7 @@ def execute():
             continue
         worker.looper(siteConfDir)
     removeDir(workdir)
-    #worker.addNRM('../configs/nsi-endpoints')
+    worker.addNRM('../configs/nsi-endpoints')
     worker.dump()
 
 if __name__ == "__main__":
