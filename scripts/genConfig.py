@@ -530,7 +530,7 @@ class PromModel():
                 lng = nrmconfig.get('discovery', {}).get(name, {}).get('location', {}).get('longitude', '0.00')
             for url in vals['url']:
                 parsedurl = urlparse(url)
-                site = nrmconfig['discovery'][name]['sitename']
+                site = f"NSI_{nrmconfig['discovery'][name]['sitename']}"
                 if parsedurl.scheme == 'https' and 'https_v4_network_2xx' in probes:
                     tmpEntry = copy.deepcopy(HTTPS_SCRAPE_NRM)
                     tmpEntry['job_name'] = self._genName(f'{site}_HTTPS')
