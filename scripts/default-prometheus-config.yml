@@ -17,13 +17,6 @@ alerting:
 
 # A scrape configuration containing exactly one endpoint to scrape
 scrape_configs:
-- job_name: IRIMON
-  metrics_path: /api/v1/metrics
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - iri-htc.virnao.com:8080
 - job_name: PACWAVE_SNMPMon
   metrics_path: /metrics
   relabel_configs:
