@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-blackbox-exporter-deployment
+  namespace: opennsa
   labels:
     app: prometheus-blackbox-exporter
 spec:
@@ -53,14 +54,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-            - mountPath: /etc/tls/tls.crt
+            - mountPath: /etc/tls/
               name: grafana-tls
-              subPath: tls.crt
-              readOnly: true
-            - mountPath: /etc/tls/tls.key
-              name: grafana-tls
-              subPath: tls.key
-              readOnly: true
           resources:
             limits:
               cpu: ".5"
@@ -101,6 +96,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: prometheus-blackbox-exporter-service
+  namespace: opennsa
   labels:
     app: prometheus-blackbox-exporter
 spec:

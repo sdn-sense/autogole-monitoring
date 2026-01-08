@@ -110,14 +110,9 @@ spec:
             - name: grafana-config-vol
               mountPath: /usr/share/grafana/conf/defaults.ini
               subPath: grafana.ini-default
-            - mountPath: /etc/grid-security/hostcert.pem
-              name: hostcert
+            - name: grafana-tls
+              mountPath: /etc/tls
               readOnly: true
-              subPath: hostcert.pem
-            - mountPath: /etc/grid-security/hostkey.pem
-              name: hostkey
-              readOnly: true
-              subPath: hostkey.pem
       volumes:
         - name: grafana-pv
           persistentVolumeClaim:
@@ -125,19 +120,9 @@ spec:
         - name: grafana-config-vol
           configMap:
             name: grafana-config
-        - name: hostcert
+        - name: grafana-tls
           secret:
             secretName: autogole-grafana-secrets
-            items:
-            - key: tls.crt
-              path: hostcert.pem
-            defaultMode: 0644
-        - name: hostkey
-          secret:
-            secretName: autogole-grafana-secrets
-            items:
-            - key: tls.key
-              path: hostkey.pem
             defaultMode: 0644
 ---
 apiVersion: apps/v1

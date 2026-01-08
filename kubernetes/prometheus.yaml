@@ -8,7 +8,16 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 400Gi
+      storage: 800Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sense-o-auth
+data:
+  .sense-o-auth.yaml: |
+    SITERM_CERT: /etc/tls/tls.crt
+    SITERM_KEY: /etc/tls/tls.key
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -78,6 +87,9 @@ spec:
         - name: http-prometheus
           containerPort: 9090
         volumeMounts:
+        - name: oidc-token-dir
+          mountPath: /etc/oidc
+          readOnly: true
         - name: prometheus-config-volume
           mountPath: /etc/prometheus/prometheus.yml
           subPath: prometheus.yml
@@ -138,12 +150,47 @@ spec:
         volumeMounts:
         - name: prometheus-config-volume
           mountPath: /etc/prometheus
+      - name: oidcgen
+        image: sdnsense/oidcgen:latest
+        imagePullPolicy: Always
+        env:
+          - name: SITERM_TOKEN_DIR
+            value: /tokens
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+          - name: oidc-token-dir
+            mountPath: /tokens
+          - name: sense-o-auth
+            mountPath: /root/.sense-o-auth.yaml
+            subPath: .sense-o-auth.yaml
+            readOnly: true
+          - name: grafana-tls
+            mountPath: /etc/tls/tls.crt
+            subPath: tls.crt
+            readOnly: true
+          - name: grafana-tls
+            mountPath: /etc/tls/tls.key
+            subPath: tls.key
+            readOnly: true
       restartPolicy: Always
       volumes:
       - name: prometheus-config-volume
         configMap:
           defaultMode: 420
           name: prometheus-config
+      - name: oidc-token-dir
+        emptyDir:
+          medium: Memory
+      - name: sense-o-auth
+        configMap:
+          name: sense-o-auth
+          defaultMode: 0644
       - name: prometheus-alerts
         configMap:
           defaultMode: 420

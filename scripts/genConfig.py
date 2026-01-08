@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Generate Prometheus Config file from SiteRM Configs and Network-RM Configs"""
 import os
 import socket
@@ -282,6 +281,12 @@ def getSitesFromConfig(conf):
         return []
     return sites
 
+def oidcOrTls(oidc, conf, site):
+    """Identify OIDC or TLS configuration"""
+    if oidc:
+        conf.pop('tls_config', None)
+        conf['authorization'] = {'credentials_file': f'/etc/oidc/oidc-{site.lower()}.token'}
+    return conf
 
 class PromModel():
     """Class for generating Prometheus config file"""
@@ -336,7 +341,8 @@ class PromModel():
         origwebdomain = webdomain.strip('/')
         probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
                                                         'icmp_v4', 'icmp_v6'])
-        fastapi = conf.get('general', {}).get('fastapi', False)
+        # Get auth method (by default remains x509), unless oidc flag is set
+        oidc = conf.get('general', {}).get('oidc', False)
         if webdomain.startswith('https://'):
             webdomain = webdomain[8:]
         if not webdomain:
@@ -352,12 +358,10 @@ class PromModel():
             lat, lng = conf.get(site, {}).get('latitude', '0.00'), conf.get(site, {}).get('longitude', '0.00')
             # 1. Query for State of all Services registered to FE
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
+            tmpEntry = oidcOrTls(oidc, tmpEntry, site)
             tmpEntry['job_name'] = self._genName(f'{site}_STATE')
             tmpEntry['static_configs'][0]['targets'].append(webdomain)
-            if not fastapi:
-                tmpEntry['metrics_path'] = f"/{site}/sitefe/json/frontend/metrics"
-            else:
-                tmpEntry['metrics_path'] = f"/api/{site}/monitoring/prometheus/metrics"
+            tmpEntry['metrics_path'] = f"/api/{site}/monitoring/prometheus/metrics"
             tmpEntry['relabel_configs'][0]['replacement'] = site
             tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
             tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -365,6 +369,7 @@ class PromModel():
             self.default['scrape_configs'].append(tmpEntry)
             # 2. Scrape apache HTTP Status information from SiteRM Endpoints
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
+            tmpEntry = oidcOrTls(oidc, tmpEntry, site)
             tmpEntry['job_name'] = self._genName(f'{site}_STATEHTTP')
             tmpEntry['static_configs'][0]['targets'].append(webdomain)
             tmpEntry['metrics_path'] = "/siterm-http-status"
@@ -378,10 +383,7 @@ class PromModel():
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V4')
-                if not fastapi:
-                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
-                else:
-                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/api/{site}/models?current=true&summary=false&encode=false')
+                tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/api/{site}/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -393,10 +395,7 @@ class PromModel():
                 # Query models api and get model and timing (output ignored)
                 tmpEntry = copy.deepcopy(HTTPS_SCRAPE)
                 tmpEntry['job_name'] = self._genName(f'{site}_MODEL_V6')
-                if not fastapi:
-                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/{site}/sitefe/v1/models?current=true&summary=false&encode=false')
-                else:
-                    tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/api/{site}/models?current=true&summary=false&encode=false')
+                tmpEntry['static_configs'][0]['targets'].append(f'{origwebdomain}/api/{site}/models?current=true&summary=false&encode=false')
                 tmpEntry['relabel_configs'][0]['replacement'] = site
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
@@ -434,6 +433,7 @@ class PromModel():
                 if not externalsnmp:
                     continue
                 tmpEntry = copy.deepcopy(STATE_SCRAPE)
+                tmpEntry = oidcOrTls(oidc, tmpEntry, site)
                 parsedUrl = urlparse(externalsnmp)
                 tmpEntry['job_name'] = self._genName(f'{site}_NSISNMPMon')
                 tmpEntry['static_configs'][0]['targets'].append(parsedUrl.netloc)
@@ -583,13 +583,6 @@ class PromModel():
         """Dump New prometheus yaml file from generated output"""
         with open('prometheus.yml', 'w', encoding='utf-8') as fd:
             ydump(self.default, fd)
-        # Also need to dump file for rt mon (with 10s interval)
-        prometheus_config = copy.deepcopy(self.default)
-        prometheus_config['global']['scrape_interval'] = '10s'
-        for job in prometheus_config['scrape_configs']:
-            job['scrape_interval'] = '10s'
-        with open('prometheus-rt.yml', 'w', encoding='utf-8') as fd:
-            ydump(prometheus_config, fd)
 
 def execute():
     """Main execute"""

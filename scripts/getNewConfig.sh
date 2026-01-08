@@ -8,7 +8,6 @@ while true; do
   fi
   sleep 10
   kubectl cp autogole-monitoring-config-preparer:/root/prometheus.yml prometheus.yml-new --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
-  kubectl cp autogole-monitoring-config-preparer:/root/prometheus-rt.yml prometheus-rt.yml-new --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
   kubectl cp autogole-monitoring-config-preparer:/root/getConflog.log getConflog.log-new --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 done
 
