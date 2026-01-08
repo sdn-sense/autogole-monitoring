@@ -34,7 +34,7 @@ spec:
                 - k8s-igrok-06.calit2.optiputer.net
       containers:
         - name: blackbox-exporter
-          image: "prom/blackbox-exporter:v0.18.0"
+          image: "quay.io/prometheus/blackbox-exporter:v0.25.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             readOnlyRootFilesystem: true
@@ -56,33 +56,38 @@ spec:
               name: config
             - mountPath: /etc/tls/
               name: grafana-tls
-          resources:
-            limits:
-              cpu: ".5"
-              memory: "200Mi"
-            requests:
-              cpu: ".5"
-              memory: "200Mi"
-        - name: configmap-reload
-          image: "jimmidyson/configmap-reload:v0.2.2"
-          imagePullPolicy: "IfNotPresent"
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 65534
-          args:
-            - --volume-dir=/etc/config
-            - --webhook-url=http://localhost:9115/-/reload
-          resources:
-            limits:
-              cpu: ".5"
-              memory: "200Mi"
-            requests:
-              cpu: ".5"
-              memory: "200Mi"
-          volumeMounts:
-            - mountPath: /etc/config
-              name: config
+            - mountPath: /etc/oidc
+              name: oidc-token-dir
               readOnly: true
+          resources:
+            limits:
+              cpu: ".5"
+              memory: "200Mi"
+            requests:
+              cpu: ".5"
+              memory: "200Mi"
+        - name: oidcgen
+          image: sdnsense/oidcgen:latest
+          imagePullPolicy: Always
+          env:
+            - name: SITERM_TOKEN_DIR
+              value: /tokens
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          volumeMounts:
+            - name: oidc-token-dir
+              mountPath: /tokens
+            - name: sense-o-auth
+              mountPath: /root/.sense-o-auth.yaml
+              subPath: .sense-o-auth.yaml
+              readOnly: true
+            - mountPath: /etc/tls/
+              name: grafana-tls
       volumes:
         - name: config
           configMap:
@@ -90,6 +95,13 @@ spec:
         - name: grafana-tls
           secret:
             secretName: autogole-grafana-secrets
+            defaultMode: 0644
+        - name: oidc-token-dir
+          emptyDir:
+            medium: Memory
+        - name: sense-o-auth
+          configMap:
+            name: sense-o-auth
             defaultMode: 0644
 ---
 kind: Service

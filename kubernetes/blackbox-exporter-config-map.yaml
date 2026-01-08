@@ -27,6 +27,70 @@ data:
             insecure_skip_verify: true
             cert_file: /etc/tls/tls.crt
             key_file: /etc/tls/tls.key
+      v4_nrm_cenicdev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
+      v6_nrm_cenicdev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
+      v4_t2_us_caltech_dev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_caltech_dev.token
+      v6_t2_us_caltech_dev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_caltech_dev.token
+      v4_t2_us_sdsc_dev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+      v6_t2_us_sdsc_dev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+      v4_t2_us_sdsc_oasisdev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasisdev.token
+      v6_t2_us_sdsc_oasisdev:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasisdev.token
       https_v4_network_2xx:
         prober: http
         http:

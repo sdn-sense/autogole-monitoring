@@ -389,6 +389,8 @@ class PromModel():
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
+                if oidc:
+                    tmpEntry['params']['module'][0] = f"v4_{site.lower()}"
                 self.default['scrape_configs'].append(tmpEntry)
             if 'https_v6_siterm_2xx' in probes and ipv6_addr:
                 # Check that it has IPv6
@@ -401,6 +403,8 @@ class PromModel():
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
                 tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
+                if oidc:
+                    tmpEntry['params']['module'][0] = f"v6_{site.lower()}"
                 self.default['scrape_configs'].append(tmpEntry)
             # 4. Add ICMP Check for FE
             if 'icmp_v4' in probes and ipv4_addr:
