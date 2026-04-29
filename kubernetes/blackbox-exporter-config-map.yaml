@@ -7,6 +7,7 @@ metadata:
 data:
   blackbox.yaml: |
     modules:
+
       https_v4_siterm_2xx:
         prober: http
         http:
@@ -27,6 +28,58 @@ data:
             insecure_skip_verify: true
             cert_file: /etc/tls/tls.crt
             key_file: /etc/tls/tls.key
+
+      v4_.git:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-.git.token
+      v6_.git:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-.git.token
+
+      v4_.github:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-.github.token
+      v6_.github:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-.github.token
+
+      v4_nrm_cenic:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_cenic.token
+      v6_nrm_cenic:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_cenic.token
+
       v4_nrm_cenicdev:
         prober: http
         http:
@@ -43,6 +96,58 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
+
+      v4_nrm_gpn:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_gpn.token
+      v6_nrm_gpn:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_gpn.token
+
+      v4_t1_us_fnal:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+      v6_t1_us_fnal:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+
+      v4_t2_us_caltech:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_caltech.token
+      v6_t2_us_caltech:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_caltech.token
+
       v4_t2_us_caltech_dev:
         prober: http
         http:
@@ -59,6 +164,75 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-t2_us_caltech_dev.token
+
+      v4_t2_us_caltech_test:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_caltech_test.token
+      v6_t2_us_caltech_test:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_caltech_test.token
+
+      v4_t2_us_mghpcc:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_mghpcc.token
+      v6_t2_us_mghpcc:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_mghpcc.token
+
+      v4_t2_us_nebraska:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_nebraska.token
+      v6_t2_us_nebraska:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_nebraska.token
+
+      v4_t2_us_sdsc:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
+      v6_t2_us_sdsc:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
+
       v4_t2_us_sdsc_dev:
         prober: http
         http:
@@ -75,6 +249,24 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+
+      v4_t2_us_sdsc_oasis:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasis.token
+      v6_t2_us_sdsc_oasis:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasis.token
+
       v4_t2_us_sdsc_oasisdev:
         prober: http
         http:
@@ -91,6 +283,143 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasisdev.token
+
+      v4_t2_us_sdsc_s63:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_s63.token
+      v6_t2_us_sdsc_s63:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_sdsc_s63.token
+
+      v4_t2_us_ucsd:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_ucsd.token
+      v6_t2_us_ucsd:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_ucsd.token
+
+      v4_t2_us_uchicago:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_uchicago.token
+      v6_t2_us_uchicago:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_uchicago.token
+
+      v4_t3_fabric_cern:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_cern.token
+      v6_t3_fabric_cern:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_cern.token
+
+      v4_t3_us_fab_ucsd:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_ucsd.token
+      v6_t3_us_fab_ucsd:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_ucsd.token
+
+      v4_t3_us_internet2:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_internet2.token
+      v6_t3_us_internet2:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_internet2.token
+
+      v4_t3_us_nrp:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_nrp.token
+      v6_t3_us_nrp:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_nrp.token
+
+      v4_t3_us_starlight:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_starlight.token
+      v6_t3_us_starlight:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_starlight.token
+
       https_v4_network_2xx:
         prober: http
         http:

@@ -10,13 +10,6 @@ global:
 rule_files:
 - /etc/prometheus/alerts.yml
 scrape_configs:
-- job_name: IRIMON
-  metrics_path: /api/v1/metrics
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - iri-htc.virnao.com:8080
 - job_name: PACWAVE_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -73,1033 +66,16 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T2_US_MGHPCC_DC1
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn001.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
+- job_name: DMMMON
+  metrics_path: metrics
+  scheme: https
   scrape_interval: 30s
   static_configs:
   - targets:
-    - atn001.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC2
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn002.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn002.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC3
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn003.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn003.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC4
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn004.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn004.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC5
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn005.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn005.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC6
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn006.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn006.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC7
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn007.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn007.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC8
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn008.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn008.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC9
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn009.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn009.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC10
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn010.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn010.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC11
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn011.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn011.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC12
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn012.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn012.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC13
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn013.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn013.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC14
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn014.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn014.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC15
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn015.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn015.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC16
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn016.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn016.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC17
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn017.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn017.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC18
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn018.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn018.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC19
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn019.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn019.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC20
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn020.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn020.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC21
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn021.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn021.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC22
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn022.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn022.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC23
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn023.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn023.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC24
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn024.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn024.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC25
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn025.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn025.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC26
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn026.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn026.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC27
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn027.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn027.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC28
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn028.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn028.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC29
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn029.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn029.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC30
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn030.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn030.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC31
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn031.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn031.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC32
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn032.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn032.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC33
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn033.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn033.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC34
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn034.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn034.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC35
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn035.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn035.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC36
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn1106.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn1106.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC37
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn1107.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn1107.data.net2.mghpcc.org:9100
-- job_name: T2_US_MGHPCC_DC38
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T2_US_MGHPCC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: atn1108.data.net2.mghpcc.org
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - atn1108.data.net2.mghpcc.org:9100
-- job_name: NRM_CENIC_STATE
+    - dmm.nrp-nautilus.io:433
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenic.token
+  job_name: NRM_CENIC_STATE
   metrics_path: /api/NRM_CENIC/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: NRM_CENIC
@@ -1123,11 +99,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-ladowntown.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: NRM_CENIC_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenic.token
+  job_name: NRM_CENIC_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: NRM_CENIC
@@ -1151,15 +125,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-ladowntown.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: NRM_CENIC_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_nrm_cenic
   relabel_configs:
   - replacement: NRM_CENIC
     source_labels:
@@ -1227,7 +197,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-ladowntown.nrp-nautilus.io
-- job_name: NRM_CENICDEV_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
+  job_name: NRM_CENICDEV_STATE
   metrics_path: /api/NRM_CENICDEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: NRM_CENICDEV
@@ -1251,11 +223,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-ladowntown.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: NRM_CENICDEV_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
+  job_name: NRM_CENICDEV_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: NRM_CENICDEV
@@ -1279,15 +249,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-ladowntown.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: NRM_CENICDEV_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_nrm_cenicdev
   relabel_configs:
   - replacement: NRM_CENICDEV
     source_labels:
@@ -1355,7 +321,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-ladowntown.nrp-nautilus.io
-- job_name: NRM_GPN_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_gpn.token
+  job_name: NRM_GPN_STATE
   metrics_path: /api/NRM_GPN/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: NRM_GPN
@@ -1379,11 +347,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-gpn.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: NRM_GPN_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_gpn.token
+  job_name: NRM_GPN_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: NRM_GPN
@@ -1407,15 +373,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-gpn.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: NRM_GPN_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_nrm_gpn
   relabel_configs:
   - replacement: NRM_GPN
     source_labels:
@@ -1445,189 +407,9 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-gpn.nrp-nautilus.io:443/api/NRM_GPN/models?current=true&summary=false&encode=false
-- job_name: T1_DE_KIT_STATE
-  metrics_path: /api/T1_DE_KIT/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_DE_KIT_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_DE_KIT_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://a01-102-151-e.gridka.de:8443/api/T1_DE_KIT/models?current=true&summary=false&encode=false
-- job_name: T1_DE_KIT_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 51.2993
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: 9.491
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de
-- job_name: T1_DE_KIT_NODE
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: a01-102-101-e.gridka.de
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - a01-102-101-e.gridka.de:9100
-- job_name: T1_DE_KIT_NODE_0
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  relabel_configs:
-  - replacement: T1_DE_KIT
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: a01-102-151-e.gridka.de
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - a01-102-151-e.gridka.de:9100
-- job_name: T1_US_FNAL_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_STATE
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -1651,11 +433,9 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_US_FNAL_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T1_US_FNAL
@@ -1679,15 +459,11 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T1_US_FNAL_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t1_us_fnal
   relabel_configs:
   - replacement: T1_US_FNAL
     source_labels:
@@ -1920,7 +696,9 @@ scrape_configs:
     cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
     key_file: /etc/tls/tls.key
-- job_name: T2_US_Caltech_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_caltech.token
+  job_name: T2_US_Caltech_STATE
   metrics_path: /api/T2_US_Caltech/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Caltech
@@ -1943,12 +721,10 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-caltechprod.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_Caltech_STATEHTTP
+    - sense-caltech-fe.tier2-lb.ultralight.org:443
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_caltech.token
+  job_name: T2_US_Caltech_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_Caltech
@@ -1971,16 +747,12 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-caltechprod.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
+    - sense-caltech-fe.tier2-lb.ultralight.org:443
 - job_name: T2_US_Caltech_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_caltech
   relabel_configs:
   - replacement: T2_US_Caltech
     source_labels:
@@ -2009,7 +781,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-caltechprod.nrp-nautilus.io:443/api/T2_US_Caltech/models?current=true&summary=false&encode=false
+    - https://sense-caltech-fe.tier2-lb.ultralight.org:443/api/T2_US_Caltech/models?current=true&summary=false&encode=false
 - job_name: T2_US_Caltech_ICMP_V4
   metrics_path: /probe
   params:
@@ -2047,7 +819,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-caltechprod.nrp-nautilus.io
+    - sense-caltech-fe.tier2-lb.ultralight.org
 - job_name: T2_US_Caltech_NODE
   metric_relabel_configs:
   - action: drop
@@ -2210,7 +982,36 @@ scrape_configs:
   static_configs:
   - targets:
     - transfer-16.ultralight.org:9100
-- job_name: T2_US_Caltech_DEV_STATE
+- job_name: T2_US_Caltech_NODE_5
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_Caltech
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: transfer-18.ultralight.org
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - transfer-18.ultralight.org:9100
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_caltech_dev.token
+  job_name: T2_US_Caltech_DEV_STATE
   metrics_path: /api/T2_US_Caltech_DEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
@@ -2234,11 +1035,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-caltechprod.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_Caltech_DEV_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_caltech_dev.token
+  job_name: T2_US_Caltech_DEV_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
@@ -2262,15 +1061,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-caltechprod.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_Caltech_DEV_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_caltech_dev
   relabel_configs:
   - replacement: T2_US_Caltech_DEV
     source_labels:
@@ -2446,7 +1241,9 @@ scrape_configs:
   static_configs:
   - targets:
     - transfer-14.ultralight.org:9100
-- job_name: T2_US_Caltech_Test_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_caltech_test.token
+  job_name: T2_US_Caltech_Test_STATE
   metrics_path: /api/T2_US_Caltech_Test/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Caltech_Test
@@ -2470,11 +1267,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-caltechtest.sdn-lb.ultralight.org:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_Caltech_Test_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_caltech_test.token
+  job_name: T2_US_Caltech_Test_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_Caltech_Test
@@ -2498,15 +1293,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-caltechtest.sdn-lb.ultralight.org:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_Caltech_Test_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_caltech_test
   relabel_configs:
   - replacement: T2_US_Caltech_Test
     source_labels:
@@ -2817,7 +1608,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sandie-7.ultralight.org:9100
-- job_name: T2_US_MGHPCC_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_mghpcc.token
+  job_name: T2_US_MGHPCC_STATE
   metrics_path: /api/T2_US_MGHPCC/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_MGHPCC
@@ -2841,11 +1634,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-mghpcc.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_MGHPCC_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_mghpcc.token
+  job_name: T2_US_MGHPCC_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_MGHPCC
@@ -2869,15 +1660,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-mghpcc.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_MGHPCC_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_mghpcc
   relabel_configs:
   - replacement: T2_US_MGHPCC
     source_labels:
@@ -3006,7 +1793,9 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T2_US_Nebraska_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_nebraska.token
+  job_name: T2_US_Nebraska_STATE
   metrics_path: /api/T2_US_Nebraska/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_Nebraska
@@ -3030,11 +1819,9 @@ scrape_configs:
   static_configs:
   - targets:
     - red-sense-rm.unl.edu:10443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_Nebraska_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_nebraska.token
+  job_name: T2_US_Nebraska_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_Nebraska
@@ -3058,15 +1845,11 @@ scrape_configs:
   static_configs:
   - targets:
     - red-sense-rm.unl.edu:10443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_Nebraska_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_nebraska
   relabel_configs:
   - replacement: T2_US_Nebraska
     source_labels:
@@ -3188,7 +1971,9 @@ scrape_configs:
   static_configs:
   - targets:
     - red-xfer8.unl.edu:9100
-- job_name: T2_US_SDSC_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
+  job_name: T2_US_SDSC_STATE
   metrics_path: /api/T2_US_SDSC/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -3212,11 +1997,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-prpdev.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
+  job_name: T2_US_SDSC_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -3240,15 +2023,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-prpdev.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_SDSC_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_sdsc
   relabel_configs:
   - replacement: T2_US_SDSC
     source_labels:
@@ -3316,7 +2095,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-prpdev.nrp-nautilus.io
-- job_name: T2_US_SDSC_NSISNMPMon
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
+  job_name: T2_US_SDSC_NSISNMPMon
   metrics_path: /sn3700_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -3340,11 +2121,9 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_NSISNMPMon_0
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
+  job_name: T2_US_SDSC_NSISNMPMon_0
   metrics_path: /edgecore_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -3368,10 +2147,6 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED
   metric_relabel_configs:
@@ -3801,7 +2576,9 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T2_US_SDSC_DEV_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+  job_name: T2_US_SDSC_DEV_STATE
   metrics_path: /api/T2_US_SDSC_DEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
@@ -3825,11 +2602,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-sdsc.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_DEV_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+  job_name: T2_US_SDSC_DEV_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
@@ -3853,15 +2628,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-sdsc.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_SDSC_DEV_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_sdsc_dev
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
     source_labels:
@@ -3929,7 +2700,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-sdsc.nrp-nautilus.io
-- job_name: T2_US_SDSC_DEV_NSISNMPMon
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+  job_name: T2_US_SDSC_DEV_NSISNMPMon
   metrics_path: /sn3700_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
@@ -3953,11 +2726,9 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_DEV_NSISNMPMon_0
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
+  job_name: T2_US_SDSC_DEV_NSISNMPMon_0
   metrics_path: /edgecore_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
@@ -3981,10 +2752,6 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED
   metric_relabel_configs:
@@ -4117,7 +2884,9 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T2_US_UCSD_OASIS_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_ucsd_oasis.token
+  job_name: T2_US_UCSD_OASIS_STATE
   metrics_path: /api/T2_US_UCSD_OASIS/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_UCSD_OASIS
@@ -4141,11 +2910,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-oasis.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_UCSD_OASIS_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_ucsd_oasis.token
+  job_name: T2_US_UCSD_OASIS_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_UCSD_OASIS
@@ -4169,15 +2936,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-oasis.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_UCSD_OASIS_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_ucsd_oasis
   relabel_configs:
   - replacement: T2_US_UCSD_OASIS
     source_labels:
@@ -4207,7 +2970,9 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-oasis.nrp-nautilus.io:443/api/T2_US_UCSD_OASIS/models?current=true&summary=false&encode=false
-- job_name: T2_US_SDSC_OASISDEV_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasisdev.token
+  job_name: T2_US_SDSC_OASISDEV_STATE
   metrics_path: /api/T2_US_SDSC_OASISDEV/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_OASISDEV
@@ -4231,11 +2996,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-oasis.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_SDSC_OASISDEV_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasisdev.token
+  job_name: T2_US_SDSC_OASISDEV_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_SDSC_OASISDEV
@@ -4259,15 +3022,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-oasis.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_SDSC_OASISDEV_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_sdsc_oasisdev
   relabel_configs:
   - replacement: T2_US_SDSC_OASISDEV
     source_labels:
@@ -4297,7 +3056,199 @@ scrape_configs:
   static_configs:
   - targets:
     - https://sense-dev-oasis.nrp-nautilus.io:443/api/T2_US_SDSC_OASISDEV/models?current=true&summary=false&encode=false
-- job_name: T2_US_UCSD_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_s63.token
+  job_name: T2_US_SDSC_S63_STATE
+  metrics_path: /api/T2_US_SDSC_S63/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: T2_US_SDSC_S63
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-t2-us-sdsc-s63.nrp-nautilus.io:443
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_s63.token
+  job_name: T2_US_SDSC_S63_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: T2_US_SDSC_S63
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-t2-us-sdsc-s63.nrp-nautilus.io:443
+- job_name: T2_US_SDSC_S63_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - v4_t2_us_sdsc_s63
+  relabel_configs:
+  - replacement: T2_US_SDSC_S63
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://sense-t2-us-sdsc-s63.nrp-nautilus.io:443/api/T2_US_SDSC_S63/models?current=true&summary=false&encode=false
+- job_name: T2_US_SDSC_S63_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T2_US_SDSC_S63
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-t2-us-sdsc-s63.nrp-nautilus.io
+- honor_labels: true
+  job_name: T2_US_SDSC_S63_PROMFED
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="k8s-stratix-10-01.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC_S63
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: k8s-stratix-10-01.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_S63_PROMFED_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="nrp-s63-25.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC_S63
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: nrp-s63-25.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_ucsd.token
+  job_name: T2_US_UCSD_STATE
   metrics_path: /api/T2_US_UCSD/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_UCSD
@@ -4321,11 +3272,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-t2-us-ucsd.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_UCSD_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_ucsd.token
+  job_name: T2_US_UCSD_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_UCSD
@@ -4349,15 +3298,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-t2-us-ucsd.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_UCSD_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_ucsd
   relabel_configs:
   - replacement: T2_US_UCSD
     source_labels:
@@ -4641,7 +3586,9 @@ scrape_configs:
   static_configs:
   - targets:
     - dtn-08.t2.ucsd.edu:9100
-- job_name: T2_US_UChicago_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_uchicago.token
+  job_name: T2_US_UChicago_STATE
   metrics_path: /api/T2_US_UChicago/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T2_US_UChicago
@@ -4665,11 +3612,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense.af.uchicago.edu:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T2_US_UChicago_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t2_us_uchicago.token
+  job_name: T2_US_UChicago_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T2_US_UChicago
@@ -4693,15 +3638,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense.af.uchicago.edu:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T2_US_UChicago_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t2_us_uchicago
   relabel_configs:
   - replacement: T2_US_UChicago
     source_labels:
@@ -4738,7 +3679,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: '[2605:9a00:10:7::1]:1234'
+  - replacement: '[2605:9a00:10:7::1]:80'
     source_labels:
     - __address__
     target_label: endpoint
@@ -4749,7 +3690,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - '[2605:9a00:10:7::1]:1234'
+    - '[2605:9a00:10:7::1]:80'
 - job_name: T2_US_UChicago_NODE
   metric_relabel_configs:
   - action: drop
@@ -4777,6 +3718,141 @@ scrape_configs:
   static_configs:
   - targets:
     - c020.af.uchicago.edu:9100
+- job_name: T2_US_UChicago_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: c111.af.uchicago.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - c111.af.uchicago.edu:9100
+- job_name: T2_US_UChicago_NODE_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: c112.af.uchicago.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - c112.af.uchicago.edu:9100
+- job_name: T2_US_UChicago_NODE_2
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: c113.af.uchicago.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - c113.af.uchicago.edu:9100
+- job_name: T2_US_UChicago_NODE_3
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: c114.af.uchicago.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - c114.af.uchicago.edu:9100
+- job_name: T2_US_UChicago_NODE_4
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T2_US_UChicago
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: c115.af.uchicago.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - c115.af.uchicago.edu:9100
 - honor_labels: true
   job_name: T3_US_NRP_PROMFED_2
   metric_relabel_configs:
@@ -4843,7 +3919,9 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T3_FABRIC_CERN_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_fabric_cern.token
+  job_name: T3_FABRIC_CERN_STATE
   metrics_path: /api/T3_FABRIC_CERN/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_FABRIC_CERN
@@ -4867,11 +3945,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-cern-fabric.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_FABRIC_CERN_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_fabric_cern.token
+  job_name: T3_FABRIC_CERN_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T3_FABRIC_CERN
@@ -4895,15 +3971,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-cern-fabric.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T3_FABRIC_CERN_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t3_fabric_cern
   relabel_configs:
   - replacement: T3_FABRIC_CERN
     source_labels:
@@ -4937,7 +4009,7 @@ scrape_configs:
   metrics_path: /probe
   params:
     module:
-    - https_v6_siterm_2xx
+    - v6_t3_fabric_cern
   relabel_configs:
   - replacement: T3_FABRIC_CERN
     source_labels:
@@ -5050,7 +4122,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: '[2602:fcfb:1d:fff0::2]:1234'
+  - replacement: '[2602:fcfb:1d:fff0::2]:80'
     source_labels:
     - __address__
     target_label: endpoint
@@ -5061,8 +4133,267 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - '[2602:fcfb:1d:fff0::2]:1234'
-- job_name: T3_US_Internet2_STATE
+    - '[2602:fcfb:1d:fff0::2]:80'
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_fab_bluefield3.token
+  job_name: T3_US_FAB_Bluefield3_STATE
+  metrics_path: /api/T3_US_FAB_Bluefield3/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: T3_US_FAB_Bluefield3
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - '[2602:fcfb:a:fff0::2]:443'
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_fab_bluefield3.token
+  job_name: T3_US_FAB_Bluefield3_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: T3_US_FAB_Bluefield3
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - '[2602:fcfb:a:fff0::2]:443'
+- job_name: T3_US_FAB_Bluefield3_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_US_FAB_Bluefield3
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: '[2602:fcfb:a:fff0::2]:80'
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - '[2602:fcfb:a:fff0::2]:80'
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_fab_ucsd.token
+  job_name: T3_US_FAB_UCSD_STATE
+  metrics_path: /api/T3_US_FAB_UCSD/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-gw1.exp.fabric-testbed.net:443
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_fab_ucsd.token
+  job_name: T3_US_FAB_UCSD_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-gw1.exp.fabric-testbed.net:443
+- job_name: T3_US_FAB_UCSD_MODEL_V6
+  metrics_path: /probe
+  params:
+    module:
+    - v6_t3_us_fab_ucsd
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 32.882648
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -117.234579
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://ucsd-sub1-gw1.exp.fabric-testbed.net:443/api/T3_US_FAB_UCSD/models?current=true&summary=false&encode=false
+- job_name: T3_US_FAB_UCSD_VPP
+  metrics_path: /metrics
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: ucsd-sub1-gw1.exp.fabric-testbed.net:1234
+    source_labels:
+    - __address__
+    target_label: endpoint
+  - replacement: VPP
+    source_labels:
+    - __address__
+    target_label: software
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-gw1.exp.fabric-testbed.net:1234
+- job_name: T3_US_FAB_UCSD_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: ucsd-sub1-host1.exp.fabric-testbed.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-host1.exp.fabric-testbed.net:9100
+- job_name: T3_US_FAB_UCSD_NODE_0
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: ucsd-sub1-host2.exp.fabric-testbed.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-host2.exp.fabric-testbed.net:9100
+- job_name: T3_US_FAB_UCSD_NODE_1
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T3_US_FAB_UCSD
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: ucsd-sub1-host3.exp.fabric-testbed.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - ucsd-sub1-host3.exp.fabric-testbed.net:9100
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_internet2.token
+  job_name: T3_US_Internet2_STATE
   metrics_path: /api/T3_US_Internet2/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_US_Internet2
@@ -5086,11 +4417,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-nrp-internet2.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_US_Internet2_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_internet2.token
+  job_name: T3_US_Internet2_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T3_US_Internet2
@@ -5114,15 +4443,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-nrp-internet2.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T3_US_Internet2_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t3_us_internet2
   relabel_configs:
   - replacement: T3_US_Internet2
     source_labels:
@@ -6609,7 +5934,9 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T3_US_NRP_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_nrp.token
+  job_name: T3_US_NRP_STATE
   metrics_path: /api/T3_US_NRP/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_US_NRP
@@ -6633,11 +5960,9 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-fe.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_US_NRP_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_nrp.token
+  job_name: T3_US_NRP_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T3_US_NRP
@@ -6661,15 +5986,11 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-fe.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T3_US_NRP_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t3_us_nrp
   relabel_configs:
   - replacement: T3_US_NRP
     source_labels:
@@ -6902,168 +6223,9 @@ scrape_configs:
   static_configs:
   - targets:
     - thanos-federate-proxy-service:9099
-- job_name: T3_US_NRP_STRATIX_STATE
-  metrics_path: /api/T3_US_NRP_STRATIX/monitoring/prometheus/metrics
-  relabel_configs:
-  - replacement: T3_US_NRP_STRATIX
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sense-t3-us-nrp-stratix.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_US_NRP_STRATIX_STATEHTTP
-  metrics_path: /siterm-http-status
-  relabel_configs:
-  - replacement: T3_US_NRP_STRATIX
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-HTTP
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  scheme: https
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sense-t3-us-nrp-stratix.nrp-nautilus.io:443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_US_NRP_STRATIX_MODEL_V4
-  metrics_path: /probe
-  params:
-    module:
-    - https_v4_siterm_2xx
-  relabel_configs:
-  - replacement: T3_US_NRP_STRATIX
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - https://sense-t3-us-nrp-stratix.nrp-nautilus.io:443/api/T3_US_NRP_STRATIX/models?current=true&summary=false&encode=false
-- job_name: T3_US_NRP_STRATIX_ICMP_V4
-  metrics_path: /probe
-  params:
-    module:
-    - icmp_v4
-  relabel_configs:
-  - replacement: T3_US_NRP_STRATIX
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: 32.882648
-    source_labels:
-    - __address__
-    target_label: latitude
-  - replacement: -117.234579
-    source_labels:
-    - __address__
-    target_label: longitude
-  - replacement: v4
-    source_labels:
-    - __address__
-    target_label: ipversion
-  - source_labels:
-    - __address__
-    target_label: __param_target
-  - source_labels:
-    - __param_target
-    target_label: instance
-  - replacement: prometheus-blackbox-exporter-service:9115
-    target_label: __address__
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - sense-t3-us-nrp-stratix.nrp-nautilus.io
-- honor_labels: true
-  job_name: T3_US_NRP_STRATIX_PROMFED
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-stratix-10-01.sdsc.optiputer.net", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T3_US_NRP_STRATIX
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: k8s-stratix-10-01.sdsc.optiputer.net
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- job_name: T3_US_Starlight_STATE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_starlight.token
+  job_name: T3_US_Starlight_STATE
   metrics_path: /api/T3_US_Starlight/monitoring/prometheus/metrics
   relabel_configs:
   - replacement: T3_US_Starlight
@@ -7087,11 +6249,9 @@ scrape_configs:
   static_configs:
   - targets:
     - r740xd4.it.northwestern.edu:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T3_US_Starlight_STATEHTTP
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_starlight.token
+  job_name: T3_US_Starlight_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
   - replacement: T3_US_Starlight
@@ -7115,15 +6275,11 @@ scrape_configs:
   static_configs:
   - targets:
     - r740xd4.it.northwestern.edu:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: T3_US_Starlight_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - https_v4_siterm_2xx
+    - v4_t3_us_starlight
   relabel_configs:
   - replacement: T3_US_Starlight
     source_labels:
@@ -7218,3 +6374,1677 @@ scrape_configs:
   static_configs:
   - targets:
     - r740xd4.it.northwestern.edu:9100
+- job_name: NSI_ESNet_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://oscars-web.es.net/api/nsa/discovery
+- job_name: NSI_ESNet_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - oscars-web.es.net
+- job_name: NSI_ESNet_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi-aggr-west.es.net/discovery
+- job_name: NSI_ESNet_ICMP_0
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi-aggr-west.es.net
+- job_name: NSI_UHnet_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_UHnet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '21.3069'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-157.8583'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.uhnet.net:9443/NSI/discovery.xml
+- job_name: NSI_UHnet_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_UHnet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '21.3069'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-157.8583'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi0.uhnet.net
+- job_name: NSI_UHnet_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_UHnet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '21.3069'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-157.8583'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.uhnet.net:9443/NSI/uhnet.net:2021:hawaii-scidmz.nml.xml
+- job_name: NSI_UHnet_HTTPS_1
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_UHnet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '21.3069'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-157.8583'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.uhnet.net:9443/NSI/uhnet.net:2021:guam-gorex.nml.xml
+- job_name: NSI_SinetNSA_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_SinetNSA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://aggr.nsi.nii.ac.jp:28443/NSI/sinet.ac.jp:2013:nsa.xml
+- job_name: NSI_SinetNSA_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_SinetNSA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - aggr.nsi.nii.ac.jp
+- job_name: NSI_SinetNSA_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_SinetNSA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://aggr.nsi.nii.ac.jp:28443/NSI/sinet-nsi-aggr_2013-nsa.xml
+- job_name: NSI_SinetNSA_ICMP_0
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_SinetNSA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - aggr.nsi.nii.ac.jp
+- job_name: NSI_PacificWave_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '37.3734'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-121.99'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi1.snvaca.pacificwave.net:9443/NSI/discovery.xml
+- job_name: NSI_PacificWave_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '37.3734'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-121.99'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi1.snvaca.pacificwave.net
+- job_name: NSI_ESNet_HTTPS_1
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://oscars-testbed.es.net/api/nsa/discovery
+- job_name: NSI_ESNet_ICMP_1
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - oscars-testbed.es.net
+- job_name: NSI_Nautilus_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Nautilus
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://opennsa.nsi.nrp-nautilus.io/NSI/discovery.xml
+- job_name: NSI_Nautilus_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_Nautilus
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - opennsa.nsi.nrp-nautilus.io
+- job_name: NSI_Kreonet_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Kreonet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '36.3635'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '127.349'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://daej-nsi.kreonet.net:9443/NSI/discovery.xml
+- job_name: NSI_Kreonet_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_Kreonet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '36.3635'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '127.349'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - daej-nsi.kreonet.net
+- job_name: NSI_iCAIR_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_iCAIR
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '41.8952'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-87.6168'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://opennsa.northwestern.edu:9443/NSI/discovery.xml
+- job_name: NSI_iCAIR_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_iCAIR
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '41.8952'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-87.6168'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - opennsa.northwestern.edu
+- job_name: NSI_PacificWave_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '35.672855'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.817413'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/discovery.xml
+- job_name: NSI_PacificWave_ICMP_0
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '35.672855'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.817413'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi0.tokyjp.pacificwave.net
+- job_name: NSI_PacificWave_HTTPS_1
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '35.672855'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '139.817413'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.tokyjp.pacificwave.net:9443/NSI/tokyjp.pacificwave.net:2018:icas-tkjp2-1.nml.xml
+- job_name: NSI_Canarie_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Canarie
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '45.5026'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-73.5694'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://opennsa.canarie.ca:9443/NSI/discovery.xml
+- job_name: NSI_Canarie_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_Canarie
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '45.5026'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-73.5694'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - opennsa.canarie.ca
+- job_name: NSI_Netherlight_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Netherlight
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://agg.netherlight.net/nsa-discovery
+- job_name: NSI_Netherlight_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Netherlight
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://dds.netherlight.net/dds
+- job_name: NSI_Ampath_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Ampath
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '25.7581'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-80.3762'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi.ampath.net:9443/NSI/discovery.xml
+- job_name: NSI_Ampath_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_Ampath
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '25.7581'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-80.3762'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi.ampath.net
+- job_name: NSI_Ampath_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Ampath
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '25.7581'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-80.3762'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi.ampath.net:9443/NSI/ampath.net:2013:topology.nml.xml
+- job_name: NSI_RNP-Brazil_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_RNP-Brazil
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - http://idc.cipo.rnp.br/rnp-nsa.xml
+- job_name: NSI_RNP-Brazil_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_RNP-Brazil
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - idc.cipo.rnp.br
+- job_name: NSI_Surf_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_Surf
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '52.3567'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '4.95459'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://supa.netherlight.net:443/topology
+- job_name: NSI_PacificWave_HTTPS_2
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '47.6137'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.34'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.sttlwa.pacificwave.net:9443/NSI/discovery.xml
+- job_name: NSI_PacificWave_ICMP_1
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '47.6137'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.34'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi0.sttlwa.pacificwave.net
+- job_name: NSI_PacificWave_HTTPS_3
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '47.6137'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.34'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.sttlwa.pacificwave.net:9443/NSI/sttlwa.pacificwave.net:2016:pw-sttl1-1.nml.xml
+- job_name: NSI_PacificWave_HTTPS_4
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '47.6137'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-122.34'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi0.sttlwa.pacificwave.net:9443/NSI/sttlwa.pacificwave.net:2016:pw-sttl1-3.nml.xml
+- job_name: NSI_PacificWave_HTTPS_5
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '34.0488'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-118.262'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://nsi1.lsanca.pacificwave.net:9443/NSI/discovery.xml
+- job_name: NSI_PacificWave_ICMP_2
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_PacificWave
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '34.0488'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-118.262'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - nsi1.lsanca.pacificwave.net
+- job_name: NSI_ESNet_HTTPS_2
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://sense-rm.es.net:8000/dds
+- job_name: NSI_ESNet_ICMP_2
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_ESNet
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-rm.es.net
+- job_name: NSI_GEANT_HTTPS
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:8401/dds
+- job_name: NSI_GEANT_ICMP
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '0.00'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - prod-nsi.geant.org
+- job_name: NSI_GEANT_HTTPS_0
+  metrics_path: /probe
+  params:
+    module:
+    - https_v4_network_2xx
+  relabel_configs:
+  - replacement: NSI_GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://prod-nsi.geant.org:8401/dds
+- job_name: NSI_GEANT_ICMP_0
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NSI_GEANT
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: NetworkRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: '51.5099'
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: '-0.118092'
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - prod-nsi.geant.org
