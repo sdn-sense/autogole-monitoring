@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 5287,
+    "id": null,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -91,7 +91,7 @@
           "x": 0,
           "y": 1
         },
-        "id": 147,
+        "id": 129,
         "links": [],
         "maxDataPoints": 100,
         "options": {
@@ -116,7 +116,7 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "apache_uptime_seconds_total{sitename=\"T3_US_Internet2\"}",
+            "expr": "apache_uptime_seconds_total{sitename=\"T3_US_FAB_Bluefield3\"}",
             "format": "time_series",
             "intervalFactor": 1,
             "range": true,
@@ -155,11 +155,11 @@
         },
         "gridPos": {
           "h": 3,
-          "w": 5,
+          "w": 6,
           "x": 5,
           "y": 1
         },
-        "id": 126,
+        "id": 130,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -183,7 +183,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"T3_US_Internet2\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_US_Internet2\"}), \"sitename\", \"T3_US_Internet2\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"T3_US_FAB_Bluefield3\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_US_FAB_Bluefield3\"}), \"sitename\", \"T3_US_FAB_Bluefield3\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -222,11 +222,11 @@
         },
         "gridPos": {
           "h": 3,
-          "w": 5,
-          "x": 10,
+          "w": 7,
+          "x": 11,
           "y": 1
         },
-        "id": 148,
+        "id": 131,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -250,7 +250,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"T3_US_Internet2\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_US_Internet2\"}), \"sitename\", \"T3_US_Internet2\", \"\", \"\")",
+            "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"T3_US_FAB_Bluefield3\"}) or label_replace(0 * absent(ALERTS{sitename=\"T3_US_FAB_Bluefield3\"}), \"sitename\", \"T3_US_FAB_Bluefield3\", \"\", \"\")",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -285,11 +285,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 15,
+          "w": 2,
+          "x": 18,
           "y": 1
         },
-        "id": 149,
+        "id": 134,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -313,7 +313,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T3_US_Internet2\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T3_US_FAB_Bluefield3\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -348,11 +348,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 18,
+          "w": 2,
+          "x": 20,
           "y": 1
         },
-        "id": 185,
+        "id": 135,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -376,7 +376,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T3_US_Internet2\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T3_US_FAB_Bluefield3\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -415,11 +415,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 21,
+          "w": 2,
+          "x": 22,
           "y": 1
         },
-        "id": 186,
+        "id": 136,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -443,7 +443,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -479,7 +479,7 @@
                   "value": null
                 },
                 {
-                  "color": "#EAB839",
+                  "color": "yellow",
                   "value": 0
                 },
                 {
@@ -493,13 +493,13 @@
         },
         "gridPos": {
           "h": 13,
-          "w": 15,
+          "w": 18,
           "x": 0,
           "y": 4
         },
-        "id": 8,
+        "id": 127,
         "options": {
-          "alignValue": "right",
+          "alignValue": "left",
           "legend": {
             "displayMode": "list",
             "placement": "bottom",
@@ -522,7 +522,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "probe_success{sitename=~\"T3_US_Internet2\"}",
+            "expr": "probe_success{sitename=~\"T3_US_FAB_Bluefield3\"}",
             "interval": "",
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
@@ -534,7 +534,7 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T3_US_Internet2\", realhostname=\"\"}",
+            "expr": "up{sitename=~\"T3_US_FAB_Bluefield3\", realhostname=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
@@ -546,7 +546,7 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T3_US_Internet2\", realhostname!=\"\"}",
+            "expr": "up{sitename=~\"T3_US_FAB_Bluefield3\", realhostname!=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{realhostname}}",
             "range": true,
@@ -580,11 +580,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 15,
+          "w": 2,
+          "x": 18,
           "y": 5
         },
-        "id": 187,
+        "id": 137,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -608,7 +608,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T3_US_Internet2\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T3_US_FAB_Bluefield3\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -643,11 +643,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 18,
+          "w": 2,
+          "x": 20,
           "y": 5
         },
-        "id": 188,
+        "id": 138,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -671,7 +671,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T3_US_Internet2\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T3_US_FAB_Bluefield3\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -710,11 +710,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 21,
+          "w": 2,
+          "x": 22,
           "y": 5
         },
-        "id": 189,
+        "id": 139,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -738,7 +738,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"rst\", sitename=\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"rst\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -773,11 +773,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 15,
+          "w": 2,
+          "x": 18,
           "y": 9
         },
-        "id": 190,
+        "id": 140,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -801,7 +801,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T3_US_Internet2\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T3_US_FAB_Bluefield3\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -836,11 +836,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 18,
+          "w": 2,
+          "x": 20,
           "y": 9
         },
-        "id": 191,
+        "id": 141,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -864,7 +864,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T3_US_Internet2\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T3_US_FAB_Bluefield3\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -903,11 +903,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 21,
+          "w": 2,
+          "x": 22,
           "y": 9
         },
-        "id": 192,
+        "id": 142,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -931,7 +931,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -966,11 +966,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 15,
+          "w": 2,
+          "x": 18,
           "y": 13
         },
-        "id": 227,
+        "id": 143,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -994,7 +994,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T3_US_Internet2\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T3_US_FAB_Bluefield3\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1029,11 +1029,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 18,
+          "w": 2,
+          "x": 20,
           "y": 13
         },
-        "id": 228,
+        "id": 144,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -1057,7 +1057,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T3_US_Internet2\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T3_US_FAB_Bluefield3\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1096,11 +1096,11 @@
         },
         "gridPos": {
           "h": 4,
-          "w": 3,
-          "x": 21,
+          "w": 2,
+          "x": 22,
           "y": 13
         },
-        "id": 229,
+        "id": 145,
         "options": {
           "colorMode": "background",
           "graphMode": "none",
@@ -1124,7 +1124,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T3_US_Internet2\"}),\n  \"sitename\", \n  \"T3_US_Internet2\", \n  \"\", \n  \"\"\n)\n",
+            "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"T3_US_FAB_Bluefield3\"}),\n  \"sitename\", \n  \"T3_US_FAB_Bluefield3\", \n  \"\", \n  \"\"\n)\n",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -1176,7 +1176,7 @@
           "x": 0,
           "y": 17
         },
-        "id": 144,
+        "id": 128,
         "options": {
           "cellHeight": "sm",
           "footer": {
@@ -1207,7 +1207,7 @@
             },
             "editorMode": "code",
             "exemplar": false,
-            "expr": "ALERTS{alertstate=\"firing\", sitename=\"T3_US_Internet2\"}[5m]",
+            "expr": "ALERTS{alertstate=\"firing\", sitename=\"T3_US_FAB_Bluefield3\"}[5m]",
             "format": "table",
             "instant": true,
             "legendFormat": "__auto",
@@ -1368,7 +1368,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_Internet2\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_FAB_Bluefield3\", ipversion=\"v4\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -1464,7 +1464,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_Internet2\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
+            "expr": "sum(probe_icmp_duration_seconds{sitename=~\"T3_US_FAB_Bluefield3\", ipversion=\"v6\"}) by (Sitename, phase) > 0",
             "interval": "",
             "legendFormat": "{{phase}}",
             "refId": "A"
@@ -1520,7 +1520,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "red"
+                  "color": "red",
+                  "value": null
                 },
                 {
                   "color": "transparent",
@@ -1557,14 +1558,14 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_US_Internet2\"} - time()",
+            "expr": "probe_ssl_earliest_cert_expiry{sitename=~\"T3_US_FAB_Bluefield3\"} - time()",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
           },
           {
             "exemplar": true,
-            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T3_US_Internet2\"} - time()",
+            "expr": "agent_cert{Key=~\"notAfter\", sitename=~\"T3_US_FAB_Bluefield3\"} - time()",
             "hide": false,
             "interval": "",
             "legendFormat": "{{hostname}}",
@@ -1620,7 +1621,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1657,7 +1659,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_duration_seconds{sitename=~\"T3_US_Internet2\"}",
+            "expr": "probe_http_duration_seconds{sitename=~\"T3_US_FAB_Bluefield3\"}",
             "interval": "",
             "legendFormat": "{{job}} {{ phase }}",
             "refId": "A"
@@ -1712,7 +1714,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "transparent"
+                  "color": "transparent",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1747,7 +1750,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "probe_http_status_code{sitename=~\"T3_US_Internet2\"}",
+            "expr": "probe_http_status_code{sitename=~\"T3_US_FAB_Bluefield3\"}",
             "interval": "",
             "legendFormat": "{{instance}}",
             "refId": "A"
@@ -1778,7 +1781,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1816,7 +1820,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_US_Internet2\"}) ",
+            "expr": " sum by (servicename,service_state) (service_state{service_state=\"OK\",sitename=\"T3_US_FAB_Bluefield3\"}) ",
             "interval": "",
             "legendFormat": "{{servicename}} {{service_state}}",
             "refId": "A"
@@ -1871,7 +1875,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1909,7 +1914,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "service_runtime{sitename=\"T3_US_Internet2\"}",
+            "expr": "service_runtime{sitename=\"T3_US_FAB_Bluefield3\"}",
             "interval": "",
             "legendFormat": "{{hostname}} {{servicename}}",
             "refId": "A"
@@ -1964,7 +1969,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1999,7 +2005,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T3_US_Internet2\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{service_state=\"OK\", sitename=\"T3_US_FAB_Bluefield3\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} - {{hostname}}",
             "refId": "A"
@@ -2054,7 +2060,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2089,7 +2096,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T3_US_Internet2\", service_state!=\"OK\"}) > 0",
+            "expr": " sum by (service_state,servicename,hostname) (service_state{sitename=\"T3_US_FAB_Bluefield3\", service_state!=\"OK\"}) > 0",
             "interval": "",
             "legendFormat": "{{servicename}} - {{service_state}} {{hostname}}",
             "refId": "A"
@@ -2144,7 +2151,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2181,7 +2189,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T3_US_Internet2\", key=\"vms\"}",
+            "expr": "memory_usage{sitename=\"T3_US_FAB_Bluefield3\", key=\"vms\"}",
             "hide": false,
             "interval": "",
             "legendFormat": "VMS {{servicename}} {{hostname}}",
@@ -2237,7 +2245,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2274,211 +2283,13 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "memory_usage{sitename=\"T3_US_Internet2\", key=~\"rss\"}",
+            "expr": "memory_usage{sitename=\"T3_US_FAB_Bluefield3\", key=~\"rss\"}",
             "interval": "",
             "legendFormat": "RSS {{servicename}} {{hostname}}",
             "refId": "A"
           }
         ],
         "title": "SiteRM FE Thread Memory Monitoring (RSS)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 0,
-          "y": 72
-        },
-        "id": 145,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "disk_usage{sitename=\"T3_US_Internet2\", key=\"UsePercentage\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{filesystem}} {{hostname}}",
-            "range": true,
-            "refId": "B"
-          }
-        ],
-        "title": "SiteRM FE Disk Usage ",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 12,
-          "y": 72
-        },
-        "id": 146,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "table",
-            "placement": "right",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "disk_usage{sitename=\"T3_US_Internet2\", key=\"IUsePercentage\"}",
-            "hide": false,
-            "interval": "",
-            "legendFormat": "{{filesystem}} {{hostname}}",
-            "range": true,
-            "refId": "B"
-          }
-        ],
-        "title": "SiteRM FE Disk Inodes Usage ",
         "type": "timeseries"
       },
       {
@@ -2504,7 +2315,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2516,10 +2328,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
+          "h": 9,
           "w": 20,
           "x": 0,
-          "y": 79
+          "y": 72
         },
         "id": 49,
         "options": {
@@ -2538,7 +2350,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T3_US_Internet2\"}) ",
+            "expr": " sum by (servicename,hostname,version) (running_version_info{sitename=\"T3_US_FAB_Bluefield3\"}) ",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2572,10 +2384,10 @@
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
+          "h": 9,
           "w": 4,
           "x": 20,
-          "y": 79
+          "y": 72
         },
         "id": 48,
         "options": {
@@ -2604,7 +2416,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": " sum by (version) (running_version_info{sitename=\"T3_US_Internet2\"}) ",
+            "expr": " sum by (version) (running_version_info{sitename=\"T3_US_FAB_Bluefield3\"}) ",
             "format": "time_series",
             "instant": true,
             "interval": "",
@@ -2616,106 +2428,6 @@
         "type": "piechart"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "Checks if Prometheus is able to receive monitoring data for this specific Site DTNs. 1 means OK, 0 means failure.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "line+area"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red"
-                },
-                {
-                  "color": "transparent",
-                  "value": 0.7
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 24,
-          "x": 0,
-          "y": 86
-        },
-        "id": 125,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true,
-            "sortBy": "Last *",
-            "sortDesc": false
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "up{sitename=\"T3_US_Internet2\", software=\"SiteRM-Agent\"}",
-            "interval": "",
-            "legendFormat": "{{instance}} JOBID {{job}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "Able to receive monitoring data from DTNs",
-        "type": "timeseries"
-      },
-      {
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
@@ -2725,7 +2437,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 93
+          "y": 81
         },
         "id": 102,
         "panels": [],
@@ -2777,7 +2489,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2793,9 +2506,9 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 94
+          "y": 82
         },
-        "id": 104,
+        "id": 146,
         "options": {
           "legend": {
             "calcs": [],
@@ -2817,14 +2530,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_Internet2\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (ALL for T3_US_Internet2)",
+        "title": "Network Status VSW (ALL for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -2872,7 +2585,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2888,9 +2602,9 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 94
+          "y": 82
         },
-        "id": 106,
+        "id": 147,
         "options": {
           "legend": {
             "calcs": [],
@@ -2912,14 +2626,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"vsw\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status VSW (Not activated for T3_US_Internet2)",
+        "title": "Network Status VSW (Not activated for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -2967,7 +2681,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -2983,9 +2698,9 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 102
+          "y": 90
         },
-        "id": 230,
+        "id": 148,
         "options": {
           "legend": {
             "calcs": [],
@@ -3007,14 +2722,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_Internet2\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (ALL for T3_US_Internet2)",
+        "title": "Network Status RST (ALL for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -3062,7 +2777,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3078,9 +2794,9 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 102
+          "y": 90
         },
-        "id": 231,
+        "id": 149,
         "options": {
           "legend": {
             "calcs": [],
@@ -3102,14 +2818,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"rst\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status RST (Not activated for T3_US_Internet2)",
+        "title": "Network Status RST (Not activated for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -3157,7 +2873,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3173,9 +2890,9 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 110
+          "y": 98
         },
-        "id": 232,
+        "id": 150,
         "options": {
           "legend": {
             "calcs": [],
@@ -3197,14 +2914,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"kube\", sitename=~\"T3_US_Internet2\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"kube\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status Kube (ALL for T3_US_Internet2)",
+        "title": "Network Status Kube (ALL for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -3252,7 +2969,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3268,9 +2986,9 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 110
+          "y": 98
         },
-        "id": 233,
+        "id": 151,
         "options": {
           "legend": {
             "calcs": [],
@@ -3292,14 +3010,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"kube\", sitename=~\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"kube\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status Kube (Not activated for T3_US_Internet2)",
+        "title": "Network Status Kube (Not activated for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -3347,7 +3065,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3363,9 +3082,9 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 118
+          "y": 106
         },
-        "id": 234,
+        "id": 152,
         "options": {
           "legend": {
             "calcs": [],
@@ -3387,14 +3106,14 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"singleport\", sitename=~\"T3_US_Internet2\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"singleport\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status SinglePort (ALL for T3_US_Internet2)",
+        "title": "Network Status SinglePort (ALL for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
@@ -3442,7 +3161,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3458,9 +3178,9 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 118
+          "y": 106
         },
-        "id": 235,
+        "id": 153,
         "options": {
           "legend": {
             "calcs": [],
@@ -3482,32 +3202,27 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "network_status{action=\"singleport\", sitename=~\"T3_US_Internet2\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
+            "expr": "network_status{action=\"singleport\", sitename=~\"T3_US_FAB_Bluefield3\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"} > 0",
             "interval": "",
             "legendFormat": "{{ key0}} {{key1}} {{key2}} {{network_status}}",
             "range": true,
             "refId": "A"
           }
         ],
-        "title": "Network Status SinglePort (Not activated for T3_US_Internet2)",
+        "title": "Network Status SinglePort (Not activated for T3_US_FAB_Bluefield3)",
         "type": "timeseries"
       },
       {
         "collapsed": false,
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
         "gridPos": {
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 126
+          "y": 114
         },
-        "id": 33,
+        "id": 108,
         "panels": [],
-        "repeat": "switch",
-        "title": "$switch",
+        "title": "Software Router Monitoring (VPP)",
         "type": "row"
       },
       {
@@ -3518,88 +3233,66 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "mode": "thresholds"
             },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
+                  "color": "green",
+                  "value": null
                 }
               ]
             },
-            "unit": "short"
+            "unit": "dtdurations"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 8,
+          "h": 3,
+          "w": 2,
           "x": 0,
-          "y": 127
+          "y": 115
         },
-        "id": 25,
+        "id": 109,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
+          "text": {
+            "valueSize": 30
+          },
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifMtu\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sys_uptime{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{instance}}",
+            "range": true,
             "refId": "A"
           }
         ],
-        "title": "Interface MTU",
-        "type": "timeseries"
+        "title": "VPP Uptime",
+        "type": "stat"
       },
       {
         "datasource": {
@@ -3609,88 +3302,116 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "mode": "thresholds"
             },
             "mappings": [],
+            "min": -4,
+            "noValue": "0",
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
+                  "color": "green",
+                  "value": null
                 }
               ]
             },
-            "unit": "short"
+            "unit": "none"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 8,
-          "y": 127
+          "h": 6,
+          "w": 2,
+          "x": 2,
+          "y": 115
         },
-        "id": 35,
+        "id": 111,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "value_and_name",
+          "wideLayout": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifAdminStatus\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "count(count by (interface) (interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\",interface!~\".*\\\\..*\",software=\"VPP\"}))",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "interfaces",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\",interface=~\".*\\\\..*\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "sub-ifaces",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"tap[0-9]+\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "tap",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"vxlan_.*\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "vxlan",
+            "range": true,
+            "refId": "D"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "count(count by (interface) (interfaces_rx_packets{instance=\"$instance\",interface=~\"geneve_.*\",software=\"VPP\"}))",
+            "hide": false,
+            "legendFormat": "geneve",
+            "range": true,
+            "refId": "E"
           }
         ],
-        "title": "Interface ADMIN Status",
-        "type": "timeseries"
+        "title": "Total (sub-)interfaces",
+        "type": "stat"
       },
       {
         "datasource": {
@@ -3700,94 +3421,563 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "mode": "thresholds"
             },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
+                  "color": "green",
+                  "value": null
                 }
               ]
             },
-            "unit": "short"
+            "unit": "bps"
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 16,
-          "y": 127
+          "h": 3,
+          "w": 2,
+          "x": 4,
+          "y": 115
         },
-        "id": 36,
+        "id": 112,
         "options": {
-          "legend": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [
               "lastNotNull"
             ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
+            "fields": "",
+            "values": false
           },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
         },
-        "pluginVersion": "8.5.27",
+        "pluginVersion": "9.5.19",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "interface_statistics{Key=\"ifOperStatus\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (instance) (rate(interfaces_tx_bytes{interface!~\".*\\\\..*\",sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[5m])*8)",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "TX",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum by (instance) (rate(interfaces_rx_bytes{interface!~\".*\\\\..*\",sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[5m])*8)",
+            "hide": false,
+            "legendFormat": "RX",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface Operation Status",
-        "type": "timeseries"
+        "title": "Total traffic (bits/sec)",
+        "type": "stat"
       },
       {
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 6,
+          "y": 115
+        },
+        "id": 114,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(irate(err{node=~\"(arp|bond|dpdk|virtio|ethernet|l2)-input$\", sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index, error)\n",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{node}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Input L2 packets/sec",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 10,
+          "y": 115
+        },
+        "id": 115,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum(irate(err{node=~\"(ip4|ip6|mpls|vxlan4|vxlan6)-input(-.*)?$\", sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index, error)",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "{{node}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Input L3 packets/sec",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 0.4
+                },
+                {
+                  "color": "orange",
+                  "value": 0.6
+                },
+                {
+                  "color": "red",
+                  "value": 0.8
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 14,
+          "y": 115
+        },
+        "id": 116,
+        "options": {
+          "displayMode": "lcd",
+          "minVizHeight": 7,
+          "minVizWidth": 0,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "text": {
+            "valueSize": 8
+          },
+          "valueMode": "color"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (index) (sys_vector_rate_per_worker{software=\"VPP\",thread=\"0\",sitename=\"T3_US_FAB_Bluefield3\"})/256 ",
+            "legendFormat": "Thread {{index}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Worker CPU Utilization",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 1,
+            "mappings": [],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "yellow",
+                  "value": 0.6
+                },
+                {
+                  "color": "orange",
+                  "value": 0.8
+                },
+                {
+                  "color": "red",
+                  "value": 0.9
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 19,
+          "y": 115
+        },
+        "id": 117,
+        "options": {
+          "displayMode": "lcd",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true,
+          "text": {
+            "valueSize": 16
+          },
+          "valueMode": "color"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "mem_used{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"} / mem_total{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"} ",
+            "legendFormat": "{{heap}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "buffer_pools_used{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"} / (buffer_pools_used{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"} + buffer_pools_available{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"})",
+            "hide": false,
+            "legendFormat": "buffers {{pool}}",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Memory Utilization",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 0,
+          "y": 118
+        },
+        "id": 110,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (job) (rate(interfaces_rx_miss{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[2m])) / sum by (job) (rate(interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[2m]))",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "RX Loss",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum by (job) (rate(interfaces_tx_error{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[60s])) / sum by (job) (rate(interfaces_tx_packets{sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[60s]))",
+            "hide": false,
+            "legendFormat": "TX Loss",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Total Packetloss",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 4,
+          "y": 118
+        },
+        "id": 113,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "valueSize": 20
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "sum by (job) (rate(interfaces_tx_packets{interface!~\".*\\\\..*\",sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[5m]))",
+            "format": "time_series",
+            "instant": false,
+            "legendFormat": "TX",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum by (job) (rate(interfaces_rx_packets{interface!~\".*\\\\..*\",sitename=\"T3_US_FAB_Bluefield3\",software=\"VPP\"}[5m]))",
+            "hide": false,
+            "legendFormat": "RX",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Total traffic (packets/sec)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -3800,8 +3990,8 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 30,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -3813,11 +4003,11 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
-                "mode": "none"
+                "mode": "normal"
               },
               "thresholdsStyle": {
                 "mode": "off"
@@ -3828,7 +4018,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3838,42 +4029,126 @@
             },
             "unit": "bps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "D"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                },
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "C"
+              },
+              "properties": [
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
-          "w": 24,
+          "h": 9,
+          "w": 12,
           "x": 0,
-          "y": 135
+          "y": 121
         },
-        "id": 124,
+        "id": 118,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
               "lastNotNull",
               "max"
             ],
             "displayMode": "table",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "qos_status{key1=\"$switch\",valuetype=\"reservableCapacity\", sitename=\"T3_US_Internet2\"}",
-            "interval": "",
-            "legendFormat": "{{vlan}} {{key1}} {{key2}}",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_bytes{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[5m])) without (thread, index) * 8 ",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_bytes{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[5m])) without (thread, index) * 8",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_bytes{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface) * 8",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total RX",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_bytes{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface) * 8\n",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Total TX",
+            "range": true,
+            "refId": "D"
           }
         ],
-        "title": "QoS Requests from SENSE",
+        "title": "Interface L2 Bits/Sec",
         "type": "timeseries"
       },
       {
@@ -3881,6 +4156,7 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -3893,8 +4169,8 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 30,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -3906,7 +4182,188 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "pps"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "D"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                },
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "C"
+              },
+              "properties": [
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 121
+        },
+        "id": 119,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[5m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_tx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[5m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_rx_packets{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface)\n",
+            "hide": false,
+            "legendFormat": "Total RX",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_tx_packets{instance=\"$instance\", interface=~\"$interface\", software=\"VPP\"}[5m])) without (thread, index, interface)\n",
+            "hide": false,
+            "legendFormat": "Total TX",
+            "range": true,
+            "refId": "D"
+          }
+        ],
+        "title": "Interface Packets/Sec",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -3921,7 +4378,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -3931,42 +4389,72 @@
             },
             "unit": "bps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
           "w": 12,
           "x": 0,
-          "y": 143
+          "y": 130
         },
-        "id": 37,
+        "id": 120,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
               "lastNotNull",
               "max"
             ],
             "displayMode": "table",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_bytes{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index) * 8\n",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_bytes{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index) * 8\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface Status (Octets In)",
+        "title": "Sub-iface L2 Bits/Sec",
         "type": "timeseries"
       },
       {
@@ -3974,6 +4462,7 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -3986,8 +4475,8 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -3999,7 +4488,7 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -4014,100 +4503,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "bps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 143
-        },
-        "id": 27,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutOctets\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Octets Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -4117,42 +4514,211 @@
             },
             "unit": "pps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 130
+        },
+        "id": 121,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} RX",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "sum(irate(interfaces_tx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Sub-iface Packets/Sec",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "RX Loss %",
+              "axisPlacement": "left",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "linearThreshold": 1000,
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "area"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 0.5,
+            "noValue": "0",
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 50
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.axisPlacement",
+                  "value": "right"
+                },
+                {
+                  "id": "custom.axisLabel",
+                  "value": "TX Loss %"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
           "w": 12,
           "x": 0,
-          "y": 151
+          "y": 139
         },
-        "id": 29,
+        "id": 122,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
+              "min",
+              "max",
+              "lastNotNull"
             ],
             "displayMode": "table",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInDiscards\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_rx_miss{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index) * 100 / sum(irate(interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m]) > 0) without (thread, index)\n",
             "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "legendFormat": "{{interface}} RX Loss",
+            "range": true,
             "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "sum(irate(interfaces_tx_error{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (thread, index) / sum(irate(interfaces_tx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m]) > 0) without (thread, index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} TX Loss",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface Status (Discards In)",
+        "title": "Interface RX Miss / TX Error",
         "type": "timeseries"
       },
       {
@@ -4160,6 +4726,7 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -4172,8 +4739,8 @@
               "axisPlacement": "auto",
               "barAlignment": 0,
               "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
+              "fillOpacity": 0,
+              "gradientMode": "opacity",
               "hideFrom": {
                 "legend": false,
                 "tooltip": false,
@@ -4185,7 +4752,7 @@
               "scaleDistribution": {
                 "type": "linear"
               },
-              "showPoints": "never",
+              "showPoints": "auto",
               "spanNulls": false,
               "stacking": {
                 "group": "A",
@@ -4200,7 +4767,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -4210,786 +4778,74 @@
             },
             "unit": "pps"
           },
-          "overrides": []
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "B"
+              },
+              "properties": [
+                {
+                  "id": "custom.transform",
+                  "value": "negative-Y"
+                }
+              ]
+            }
+          ]
         },
         "gridPos": {
-          "h": 8,
+          "h": 9,
           "w": 12,
           "x": 12,
-          "y": 151
+          "y": 139
         },
-        "id": 28,
+        "id": 123,
         "options": {
           "legend": {
             "calcs": [
-              "mean",
               "lastNotNull",
               "max"
             ],
             "displayMode": "table",
             "placement": "bottom",
-            "showLegend": true
+            "showLegend": true,
+            "sortBy": "Last *",
+            "sortDesc": true
           },
           "tooltip": {
             "mode": "multi",
-            "sort": "none"
+            "sort": "desc"
           }
         },
-        "pluginVersion": "8.5.27",
         "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutDiscards\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
+            "expr": "sum(irate(interfaces_rx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} Thread {{thread}} RX",
+            "range": true,
             "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Discards Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
           },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 159
-        },
-        "id": 30,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
           {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifInErrors\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
+            "expr": "sum(irate(interfaces_tx_packets{sitename=\"T3_US_FAB_Bluefield3\", software=\"VPP\"}[2m])) without (index)\n",
+            "hide": false,
+            "legendFormat": "{{interface}} Thread {{thread}} TX",
+            "range": true,
+            "refId": "B"
           }
         ],
-        "title": "Interface Status (Errors In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 159
-        },
-        "id": 31,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifOutErrors\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Errors Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 167
-        },
-        "id": 38,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInUcastPkts\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Unicast In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 167
-        },
-        "id": 39,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutUcastPkts\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Unicast Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 175
-        },
-        "id": 40,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInMulticastPkts\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Multicast In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 175
-        },
-        "id": 41,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutMulticastPkts\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Multicast Out)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 183
-        },
-        "id": 42,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCInBroadcastPkts\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Broadcast In)",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "pps"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 183
-        },
-        "id": 43,
-        "options": {
-          "legend": {
-            "calcs": [
-              "mean",
-              "lastNotNull",
-              "max"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "exemplar": true,
-            "expr": "deriv(interface_statistics{Key=\"ifHCOutBroadcastPkts\", sitename=\"T3_US_Internet2\", hostname=\"$switch\"}[5m])*8",
-            "interval": "",
-            "legendFormat": "{{ifDescr}} ({{ifAlias}})",
-            "refId": "A"
-          }
-        ],
-        "title": "Interface Status (Broadcast Out)",
+        "title": "Interface Packets/Sec (thread)",
         "type": "timeseries"
       }
     ],
@@ -4997,7 +4853,7 @@
     "schemaVersion": 38,
     "style": "dark",
     "tags": [
-      "T3_US_Internet2",
+      "T3_US_FAB_Bluefield3",
       "SiteRM"
     ],
     "templating": {
@@ -5016,7 +4872,7 @@
             "type": "prometheus",
             "uid": "qjScxmmVz"
           },
-          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Internet2\"}, hostname)",
+          "definition": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_FAB_Bluefield3\"}, hostname)",
           "description": "interface_statistics{Key=\"ifHCInOctets\",hostname=\"$switch\"",
           "hide": 2,
           "includeAll": true,
@@ -5025,7 +4881,7 @@
           "name": "switch",
           "options": [],
           "query": {
-            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_Internet2\"}, hostname)",
+            "query": "label_values(interface_statistics{Key=\"ifHCInOctets\", sitename=\"T3_US_FAB_Bluefield3\"}, hostname)",
             "refId": "StandardVariableQuery"
           },
           "refresh": 1,
@@ -5040,14 +4896,14 @@
       ]
     },
     "time": {
-      "from": "now-1h",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "",
-    "title": "T3_US_Internet2",
-    "uid": "d63c33fb-9045-43f7-a960-7d30c5f75cbe",
-    "version": 1,
+    "title": "T3_US_FAB_Bluefield3",
+    "uid": null,
+    "version": 27,
     "weekStart": ""
   },
   "folderId": 5181,

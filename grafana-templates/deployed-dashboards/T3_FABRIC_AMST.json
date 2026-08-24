@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 5278,
+    "id": null,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -534,11 +534,23 @@
               "uid": "qjScxmmVz"
             },
             "editorMode": "code",
-            "expr": "up{sitename=~\"T3_FABRIC_AMST\"}",
+            "expr": "up{sitename=~\"T3_FABRIC_AMST\", realhostname=\"\"}",
             "hide": false,
             "legendFormat": "{{job}} {{instance}}",
             "range": true,
             "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "expr": "up{sitename=~\"T3_FABRIC_AMST\", realhostname!=\"\"}",
+            "hide": false,
+            "legendFormat": "{{job}} {{realhostname}}",
+            "range": true,
+            "refId": "C"
           }
         ],
         "title": "Status of all endpoints",
@@ -2180,7 +2192,7 @@
             "expr": "memory_usage{sitename=\"T3_FABRIC_AMST\", key=\"vms\"}",
             "hide": false,
             "interval": "",
-            "legendFormat": "VMS {{servicename}}",
+            "legendFormat": "VMS {{servicename}} {{hostname}}",
             "refId": "B"
           }
         ],
@@ -2273,7 +2285,7 @@
             "exemplar": true,
             "expr": "memory_usage{sitename=\"T3_FABRIC_AMST\", key=~\"rss\"}",
             "interval": "",
-            "legendFormat": "RSS {{servicename}}",
+            "legendFormat": "RSS {{servicename}} {{hostname}}",
             "refId": "A"
           }
         ],
@@ -4890,11 +4902,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T3_FABRIC_AMST",
-    "uid": "dd83f35d-e149-44ae-b9c5-c2b84f5082df",
-    "version": 1,
+    "uid": null,
+    "version": 27,
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2025-09-30. See git for changes",
+  "message": "Script changes made on 2026-08-10. See git for changes",
   "overwrite": true
 }
