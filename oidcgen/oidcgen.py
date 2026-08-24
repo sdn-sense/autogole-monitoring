@@ -13,6 +13,7 @@ from sense.client.siterm.frontend_api import FrontendApi
 
 
 os.environ["SITERM_TOKEN_EXPIRY_SKEW"] = "300" # 5 mins before
+os.environ.setdefault("SENSE_TIMEOUT", "15") # HTTP connect/read timeout for site alive checks
 
 def loadYamlFile(fname):
     """Load Yaml file"""

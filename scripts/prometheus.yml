@@ -7395,6 +7395,157 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_sl_400g.token
+  job_name: T3_US_SL_400G_STATE
+  metrics_path: /api/T3_US_SL_400G/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: T3_US_SL_400G
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.89533
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.61652
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - g5intel2.it.northwestern.edu:8443
+- authorization:
+    credentials_file: /etc/oidc/oidc-t3_us_sl_400g.token
+  job_name: T3_US_SL_400G_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: T3_US_SL_400G
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.89533
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.61652
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - g5intel2.it.northwestern.edu:8443
+- job_name: T3_US_SL_400G_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - v4_t3_us_sl_400g
+  relabel_configs:
+  - replacement: T3_US_SL_400G
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.89533
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.61652
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://g5intel2.it.northwestern.edu:8443/api/T3_US_SL_400G/models?current=true&summary=false&encode=false
+- job_name: T3_US_SL_400G_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: T3_US_SL_400G
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.89533
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.61652
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - g5intel2.it.northwestern.edu
+- job_name: T3_US_SL_400G_NODE
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  relabel_configs:
+  - replacement: T3_US_SL_400G
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: g5intel2.it.northwestern.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - g5intel2.it.northwestern.edu:9100
+- authorization:
     credentials_file: /etc/oidc/oidc-t3_us_starlight.token
   job_name: T3_US_Starlight_STATE
   metrics_path: /api/T3_US_Starlight/monitoring/prometheus/metrics
@@ -7407,11 +7558,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 34.1377
+  - replacement: 41.89533
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 118.1253
+  - replacement: -87.61652
     source_labels:
     - __address__
     target_label: longitude
@@ -7433,11 +7584,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 34.1377
+  - replacement: 41.89533
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 118.1253
+  - replacement: -87.61652
     source_labels:
     - __address__
     target_label: longitude
@@ -7460,11 +7611,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 34.1377
+  - replacement: 41.89533
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 118.1253
+  - replacement: -87.61652
     source_labels:
     - __address__
     target_label: longitude
@@ -7494,11 +7645,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 34.1377
+  - replacement: 41.89533
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: 118.1253
+  - replacement: -87.61652
     source_labels:
     - __address__
     target_label: longitude
