@@ -72,7 +72,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - dmm.nrp-nautilus.io:443
+    - dmm.nrp-nautilus.io:433
 - authorization:
     credentials_file: /etc/oidc/oidc-nrm_cenic.token
   job_name: NRM_CENIC_STATE
@@ -7407,11 +7407,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 41.89533
+  - replacement: 41.89523
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -87.61652
+  - replacement: -87.61673
     source_labels:
     - __address__
     target_label: longitude
@@ -7433,11 +7433,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 41.89533
+  - replacement: 41.89523
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -87.61652
+  - replacement: -87.61673
     source_labels:
     - __address__
     target_label: longitude
@@ -7460,11 +7460,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 41.89533
+  - replacement: 41.89523
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -87.61652
+  - replacement: -87.61673
     source_labels:
     - __address__
     target_label: longitude
@@ -7494,11 +7494,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: software
-  - replacement: 41.89533
+  - replacement: 41.89523
     source_labels:
     - __address__
     target_label: latitude
-  - replacement: -87.61652
+  - replacement: -87.61673
     source_labels:
     - __address__
     target_label: longitude
