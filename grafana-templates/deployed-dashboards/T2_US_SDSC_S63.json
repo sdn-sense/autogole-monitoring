@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": null,
+    "id": 5395,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -1282,6 +1282,294 @@
         "type": "table"
       },
       {
+        "collapsed": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 300,
+        "panels": [],
+        "title": "Error Codes (exccode)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of services currently reporting a non-zero exccode (see https://sdn-sense.github.io/operational/error-codes/)",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 0,
+          "y": 29
+        },
+        "id": 301,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "count(siterm_error_events{sitename=\"T2_US_SDSC_S63\"} != 0) or label_replace(0 * absent(siterm_error_events{sitename=\"T2_US_SDSC_S63\"}), \"sitename\", \"T2_US_SDSC_S63\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Active Error Codes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Services currently reporting a non-zero exccode. See https://sdn-sense.github.io/operational/error-codes/ for what each code means.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": true
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "exccode"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 18,
+          "x": 6,
+          "y": 29
+        },
+        "id": 302,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": [],
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "exccode"
+            }
+          ]
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "siterm_error_events{sitename=\"T2_US_SDSC_S63\"} != 0",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Active Error Codes by Service / Host",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Reported exccode over time per service/host. 0 = OK, negative = an active error/warning code -- see https://sdn-sense.github.io/operational/error-codes/",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 37
+        },
+        "id": 303,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "siterm_error_events{sitename=\"T2_US_SDSC_S63\"}",
+            "interval": "",
+            "legendFormat": "{{servicename}} - {{hostname}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Code History (exccode)",
+        "type": "timeseries"
+      },
+      {
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1344,7 +1632,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 28
+          "y": 45
         },
         "id": 2,
         "options": {
@@ -1440,7 +1728,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 28
+          "y": 45
         },
         "id": 45,
         "options": {
@@ -1536,7 +1824,7 @@
           "h": 7,
           "w": 8,
           "x": 0,
-          "y": 35
+          "y": 52
         },
         "id": 12,
         "options": {
@@ -1636,7 +1924,7 @@
           "h": 7,
           "w": 8,
           "x": 8,
-          "y": 35
+          "y": 52
         },
         "id": 14,
         "options": {
@@ -1728,7 +2016,7 @@
           "h": 7,
           "w": 8,
           "x": 16,
-          "y": 35
+          "y": 52
         },
         "id": 10,
         "options": {
@@ -1794,7 +2082,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 42
+          "y": 59
         },
         "id": 16,
         "options": {
@@ -1887,7 +2175,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 50
+          "y": 67
         },
         "id": 44,
         "options": {
@@ -1980,7 +2268,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 58
+          "y": 75
         },
         "id": 17,
         "options": {
@@ -2070,7 +2358,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 58
+          "y": 75
         },
         "id": 18,
         "options": {
@@ -2160,7 +2448,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 65
+          "y": 82
         },
         "id": 47,
         "options": {
@@ -2253,7 +2541,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 65
+          "y": 82
         },
         "id": 66,
         "options": {
@@ -2345,7 +2633,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 72
+          "y": 89
         },
         "id": 145,
         "options": {
@@ -2444,7 +2732,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 72
+          "y": 89
         },
         "id": 146,
         "options": {
@@ -2519,7 +2807,7 @@
           "h": 7,
           "w": 20,
           "x": 0,
-          "y": 79
+          "y": 96
         },
         "id": 49,
         "options": {
@@ -2575,7 +2863,7 @@
           "h": 7,
           "w": 4,
           "x": 20,
-          "y": 79
+          "y": 96
         },
         "id": 48,
         "options": {
@@ -2677,7 +2965,7 @@
           "h": 7,
           "w": 24,
           "x": 0,
-          "y": 86
+          "y": 103
         },
         "id": 125,
         "options": {
@@ -2725,7 +3013,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 93
+          "y": 110
         },
         "id": 102,
         "panels": [],
@@ -2793,7 +3081,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 94
+          "y": 111
         },
         "id": 104,
         "options": {
@@ -2888,7 +3176,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 94
+          "y": 111
         },
         "id": 106,
         "options": {
@@ -2983,7 +3271,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 102
+          "y": 119
         },
         "id": 230,
         "options": {
@@ -3078,7 +3366,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 102
+          "y": 119
         },
         "id": 231,
         "options": {
@@ -3173,7 +3461,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 110
+          "y": 127
         },
         "id": 232,
         "options": {
@@ -3268,7 +3556,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 110
+          "y": 127
         },
         "id": 233,
         "options": {
@@ -3363,7 +3651,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 118
+          "y": 135
         },
         "id": 234,
         "options": {
@@ -3458,7 +3746,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 118
+          "y": 135
         },
         "id": 235,
         "options": {
@@ -3502,7 +3790,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 126
+          "y": 143
         },
         "id": 33,
         "panels": [],
@@ -3571,7 +3859,7 @@
           "h": 8,
           "w": 8,
           "x": 0,
-          "y": 127
+          "y": 144
         },
         "id": 25,
         "options": {
@@ -3662,7 +3950,7 @@
           "h": 8,
           "w": 8,
           "x": 8,
-          "y": 127
+          "y": 144
         },
         "id": 35,
         "options": {
@@ -3753,7 +4041,7 @@
           "h": 8,
           "w": 8,
           "x": 16,
-          "y": 127
+          "y": 144
         },
         "id": 36,
         "options": {
@@ -3844,7 +4132,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 135
+          "y": 152
         },
         "id": 124,
         "options": {
@@ -3937,7 +4225,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 143
+          "y": 160
         },
         "id": 37,
         "options": {
@@ -4030,7 +4318,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 143
+          "y": 160
         },
         "id": 27,
         "options": {
@@ -4123,7 +4411,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 151
+          "y": 168
         },
         "id": 29,
         "options": {
@@ -4216,7 +4504,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 151
+          "y": 168
         },
         "id": 28,
         "options": {
@@ -4309,7 +4597,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 159
+          "y": 176
         },
         "id": 30,
         "options": {
@@ -4402,7 +4690,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 159
+          "y": 176
         },
         "id": 31,
         "options": {
@@ -4495,7 +4783,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 167
+          "y": 184
         },
         "id": 38,
         "options": {
@@ -4588,7 +4876,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 167
+          "y": 184
         },
         "id": 39,
         "options": {
@@ -4681,7 +4969,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 175
+          "y": 192
         },
         "id": 40,
         "options": {
@@ -4774,7 +5062,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 175
+          "y": 192
         },
         "id": 41,
         "options": {
@@ -4867,7 +5155,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 183
+          "y": 200
         },
         "id": 42,
         "options": {
@@ -4960,7 +5248,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 183
+          "y": 200
         },
         "id": 43,
         "options": {
@@ -5046,11 +5334,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T2_US_SDSC_S63",
-    "uid": null,
-    "version": 19,
+    "uid": "b8004ea7-de11-4f6d-b7a7-a50ee6ac38f1",
+    "version": 1,
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2026-08-10. See git for changes",
+  "message": "Script changes made on 2026-08-28. See git for changes",
   "overwrite": true
 }

@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": null,
+    "id": 5402,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -1282,6 +1282,294 @@
         "type": "table"
       },
       {
+        "collapsed": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 300,
+        "panels": [],
+        "title": "Error Codes (exccode)",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Count of services currently reporting a non-zero exccode (see https://sdn-sense.github.io/operational/error-codes/)",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 6,
+          "x": 0,
+          "y": 29
+        },
+        "id": 301,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "count(siterm_error_events{sitename=\"T3_FABRIC_CERN1\"} != 0) or label_replace(0 * absent(siterm_error_events{sitename=\"T3_FABRIC_CERN1\"}), \"sitename\", \"T3_FABRIC_CERN1\", \"\", \"\")",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "__auto",
+            "refId": "A"
+          }
+        ],
+        "title": "Active Error Codes",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Services currently reporting a non-zero exccode. See https://sdn-sense.github.io/operational/error-codes/ for what each code means.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "center",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": true
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Value"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "exccode"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 18,
+          "x": 6,
+          "y": 29
+        },
+        "id": 302,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": [],
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "exccode"
+            }
+          ]
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "siterm_error_events{sitename=\"T3_FABRIC_CERN1\"} != 0",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Active Error Codes by Service / Host",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Time": ""
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "Reported exccode over time per service/host. 0 = OK, negative = an active error/warning code -- see https://sdn-sense.github.io/operational/error-codes/",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 37
+        },
+        "id": 303,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "9.5.19",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "siterm_error_events{sitename=\"T3_FABRIC_CERN1\"}",
+            "interval": "",
+            "legendFormat": "{{servicename}} - {{hostname}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Error Code History (exccode)",
+        "type": "timeseries"
+      },
+      {
         "datasource": {
           "type": "prometheus",
           "uid": "qjScxmmVz"
@@ -1344,7 +1632,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 28
+          "y": 45
         },
         "id": 2,
         "options": {
@@ -1440,7 +1728,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 28
+          "y": 45
         },
         "id": 45,
         "options": {
@@ -1537,7 +1825,7 @@
           "h": 7,
           "w": 8,
           "x": 0,
-          "y": 35
+          "y": 52
         },
         "id": 12,
         "options": {
@@ -1638,7 +1926,7 @@
           "h": 7,
           "w": 8,
           "x": 8,
-          "y": 35
+          "y": 52
         },
         "id": 14,
         "options": {
@@ -1731,7 +2019,7 @@
           "h": 7,
           "w": 8,
           "x": 16,
-          "y": 35
+          "y": 52
         },
         "id": 10,
         "options": {
@@ -1798,7 +2086,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 42
+          "y": 59
         },
         "id": 16,
         "options": {
@@ -1892,7 +2180,7 @@
           "h": 8,
           "w": 24,
           "x": 0,
-          "y": 50
+          "y": 67
         },
         "id": 44,
         "options": {
@@ -1986,7 +2274,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 58
+          "y": 75
         },
         "id": 17,
         "options": {
@@ -2077,7 +2365,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 58
+          "y": 75
         },
         "id": 18,
         "options": {
@@ -2168,7 +2456,7 @@
           "h": 7,
           "w": 12,
           "x": 0,
-          "y": 65
+          "y": 82
         },
         "id": 47,
         "options": {
@@ -2262,7 +2550,7 @@
           "h": 7,
           "w": 12,
           "x": 12,
-          "y": 65
+          "y": 82
         },
         "id": 66,
         "options": {
@@ -2331,7 +2619,7 @@
           "h": 9,
           "w": 20,
           "x": 0,
-          "y": 72
+          "y": 89
         },
         "id": 49,
         "options": {
@@ -2387,7 +2675,7 @@
           "h": 9,
           "w": 4,
           "x": 20,
-          "y": 72
+          "y": 89
         },
         "id": 48,
         "options": {
@@ -2437,7 +2725,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 81
+          "y": 98
         },
         "id": 102,
         "panels": [],
@@ -2506,7 +2794,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 82
+          "y": 99
         },
         "id": 146,
         "options": {
@@ -2602,7 +2890,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 82
+          "y": 99
         },
         "id": 147,
         "options": {
@@ -2698,7 +2986,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 90
+          "y": 107
         },
         "id": 148,
         "options": {
@@ -2794,7 +3082,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 90
+          "y": 107
         },
         "id": 149,
         "options": {
@@ -2890,7 +3178,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 98
+          "y": 115
         },
         "id": 150,
         "options": {
@@ -2986,7 +3274,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 98
+          "y": 115
         },
         "id": 151,
         "options": {
@@ -3082,7 +3370,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 106
+          "y": 123
         },
         "id": 152,
         "options": {
@@ -3178,7 +3466,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 106
+          "y": 123
         },
         "id": 153,
         "options": {
@@ -3218,7 +3506,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 114
+          "y": 131
         },
         "id": 108,
         "panels": [],
@@ -3253,7 +3541,7 @@
           "h": 3,
           "w": 2,
           "x": 0,
-          "y": 115
+          "y": 132
         },
         "id": 109,
         "options": {
@@ -3324,7 +3612,7 @@
           "h": 6,
           "w": 2,
           "x": 2,
-          "y": 115
+          "y": 132
         },
         "id": 111,
         "options": {
@@ -3441,7 +3729,7 @@
           "h": 3,
           "w": 2,
           "x": 4,
-          "y": 115
+          "y": 132
         },
         "id": 112,
         "options": {
@@ -3522,7 +3810,7 @@
           "h": 6,
           "w": 4,
           "x": 6,
-          "y": 115
+          "y": 132
         },
         "id": 114,
         "options": {
@@ -3591,7 +3879,7 @@
           "h": 6,
           "w": 4,
           "x": 10,
-          "y": 115
+          "y": 132
         },
         "id": 115,
         "options": {
@@ -3675,7 +3963,7 @@
           "h": 6,
           "w": 5,
           "x": 14,
-          "y": 115
+          "y": 132
         },
         "id": 116,
         "options": {
@@ -3758,7 +4046,7 @@
           "h": 6,
           "w": 5,
           "x": 19,
-          "y": 115
+          "y": 132
         },
         "id": 117,
         "options": {
@@ -3838,7 +4126,7 @@
           "h": 3,
           "w": 2,
           "x": 0,
-          "y": 118
+          "y": 135
         },
         "id": 110,
         "options": {
@@ -3919,7 +4207,7 @@
           "h": 3,
           "w": 2,
           "x": 4,
-          "y": 118
+          "y": 135
         },
         "id": 113,
         "options": {
@@ -4076,7 +4364,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 121
+          "y": 138
         },
         "id": 118,
         "options": {
@@ -4255,7 +4543,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 121
+          "y": 138
         },
         "id": 119,
         "options": {
@@ -4408,7 +4696,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 130
+          "y": 147
         },
         "id": 120,
         "options": {
@@ -4533,7 +4821,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 130
+          "y": 147
         },
         "id": 121,
         "options": {
@@ -4671,7 +4959,7 @@
           "h": 9,
           "w": 12,
           "x": 0,
-          "y": 139
+          "y": 156
         },
         "id": 122,
         "options": {
@@ -4797,7 +5085,7 @@
           "h": 9,
           "w": 12,
           "x": 12,
-          "y": 139
+          "y": 156
         },
         "id": 123,
         "options": {
@@ -4902,11 +5190,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "T3_FABRIC_CERN1",
-    "uid": null,
-    "version": 27,
+    "uid": "d89bbc76-be77-4105-8065-3259a6feaca3",
+    "version": 1,
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2026-08-10. See git for changes",
+  "message": "Script changes made on 2026-08-28. See git for changes",
   "overwrite": true
 }
