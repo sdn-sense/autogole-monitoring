@@ -81,3 +81,129 @@ scrape_configs:
   static_configs:
   - targets:
     - dmm.nrp-nautilus.io:433
+
+
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenic.token
+  job_name: NRM_CENIC_STATE
+  metrics_path: /api/NRM_CENIC/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: NRM_CENIC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - siterm.apps.cenic.org:443 
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenic.token
+  job_name: NRM_CENIC_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: NRM_CENIC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - siterm.apps.cenic.org:443 
+- job_name: NRM_CENIC_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - v4_nrm_cenic
+  relabel_configs:
+  - replacement: NRM_CENIC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://siterm.apps.cenic.org:443/api/NRM_CENIC/models?current=true&summary=false&encode=false
+- job_name: NRM_CENIC_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NRM_CENIC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - siterm.apps.cenic.org 
