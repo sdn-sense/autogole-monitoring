@@ -655,7 +655,9 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov
-- job_name: T1_US_FNAL_NODE
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_NODE
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -684,11 +686,9 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_US_FNAL_NODE_0
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_NODE_0
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -717,11 +717,9 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_US_FNAL_NODE_1
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_NODE_1
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -750,11 +748,9 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_US_FNAL_NODE_2
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_NODE_2
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -783,11 +779,9 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
-- job_name: T1_US_FNAL_NODE_3
+- authorization:
+    credentials_file: /etc/oidc/oidc-t1_us_fnal.token
+  job_name: T1_US_FNAL_NODE_3
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -816,10 +810,6 @@ scrape_configs:
   static_configs:
   - targets:
     - cmssense1.fnal.gov:8443
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - authorization:
     credentials_file: /etc/oidc/oidc-t2_us_caltech.token
   job_name: T2_US_Caltech_STATE
