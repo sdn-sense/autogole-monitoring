@@ -17,6 +17,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: nsisitename
+  - replacement: NSI_PACWAVE
+    source_labels:
+    - __address__
+    target_label: sitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -33,11 +37,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-cenic.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
+    - nsi-snmpmon-cenic.opennsa.svc.cluster.local:8443
 - job_name: Internet2_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -45,6 +45,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: nsisitename
+  - replacement: Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -61,11 +65,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-internet2.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/tls/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
+    - nsi-snmpmon-internet2.opennsa.svc.cluster.local:8443
 - job_name: DMMMON
   metrics_path: metrics
   scheme: https
@@ -2396,7 +2396,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-prpdev.nrp-nautilus.io
+    - nsi-snmpmon.opennsa.svc.cluster.local:8443
 - authorization:
     credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
   job_name: T2_US_SDSC_NSISNMPMon_0
@@ -2422,7 +2422,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-prpdev.nrp-nautilus.io
+    - nsi-snmpmon.opennsa.svc.cluster.local:8443
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED
   metric_relabel_configs:
@@ -3001,7 +3001,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-prpdev.nrp-nautilus.io
+    - nsi-snmpmon.opennsa.svc.cluster.local:8443
 - authorization:
     credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
   job_name: T2_US_SDSC_DEV_NSISNMPMon_0
@@ -3027,7 +3027,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-prpdev.nrp-nautilus.io
+    - nsi-snmpmon.opennsa.svc.cluster.local:8443
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED
   metric_relabel_configs:
