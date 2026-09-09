@@ -80,4 +80,4 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - dmm.nrp-nautilus.io:433
+    - dmm.nrp-nautilus.io:443
