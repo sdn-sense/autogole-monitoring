@@ -98,7 +98,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-ladowntown.nrp-nautilus.io:443
+    - siterm.apps.cenic.org:443
 - authorization:
     credentials_file: /etc/oidc/oidc-nrm_cenic.token
   job_name: NRM_CENIC_STATEHTTP
@@ -124,7 +124,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-ladowntown.nrp-nautilus.io:443
+    - siterm.apps.cenic.org:443
 - job_name: NRM_CENIC_MODEL_V4
   metrics_path: /probe
   params:
@@ -158,7 +158,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-ladowntown.nrp-nautilus.io:443/api/NRM_CENIC/models?current=true&summary=false&encode=false
+    - https://siterm.apps.cenic.org:443/api/NRM_CENIC/models?current=true&summary=false&encode=false
 - job_name: NRM_CENIC_ICMP_V4
   metrics_path: /probe
   params:
@@ -196,7 +196,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - sense-ladowntown.nrp-nautilus.io
+    - siterm.apps.cenic.org
 - authorization:
     credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
   job_name: NRM_CENICDEV_STATE
@@ -321,6 +321,130 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-ladowntown.nrp-nautilus.io
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenic_la.token
+  job_name: NRM_CENIC_LA_STATE
+  metrics_path: /api/NRM_CENIC_LA/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: NRM_CENIC_LA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-ladowntown.nrp-nautilus.io:443
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_cenic_la.token
+  job_name: NRM_CENIC_LA_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: NRM_CENIC_LA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-ladowntown.nrp-nautilus.io:443
+- job_name: NRM_CENIC_LA_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - v4_nrm_cenic_la
+  relabel_configs:
+  - replacement: NRM_CENIC_LA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://sense-ladowntown.nrp-nautilus.io:443/api/NRM_CENIC_LA/models?current=true&summary=false&encode=false
+- job_name: NRM_CENIC_LA_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NRM_CENIC_LA
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 33.9416
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -118.4085
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-ladowntown.nrp-nautilus.io
 - authorization:
     credentials_file: /etc/oidc/oidc-nrm_gpn.token
   job_name: NRM_GPN_STATE
