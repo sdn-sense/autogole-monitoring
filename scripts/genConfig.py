@@ -19,9 +19,6 @@ STATE_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
                 'static_configs': [{'targets': []}],
                 'scheme': 'https',
                 'metrics_path': 'WILLBEREPLACEDBYCODE',
-                'tls_config': {'cert_file': '/etc/tls/tls.crt',
-                               'key_file': '/etc/tls/tls.key',
-                               'insecure_skip_verify': True},
                 'relabel_configs': [{'source_labels': ['__address__'],
                                      'target_label': 'sitename',
                                      'replacement': 'WILLBEREPLACEDBYCODE'},
@@ -115,15 +112,12 @@ NODE_EXPORTER_SCRAPE = {'job_name': 'WILLBEREPLACEDBYCODE',
 # general:
 #   node_exporter: <URL>
 #   node_exporter_passthrough: true
-# That needs to go via Frontend and requires ssl
+# That needs to go via Frontend and requires the SiteRM API token (added per-site by setTokenAuth)
 NODE_EXPORTER_SCRAPE_SSL = {'job_name': 'WILLBEREPLACEDBYCODE',
                             'scrape_interval': '30s',
                             'static_configs': [{'targets': []}],
                             'scheme': 'https',
                             'metrics_path': 'WILLBEREPLACEDBYCODE',
-                            'tls_config': {'cert_file': '/etc/tls/tls.crt',
-                                        'key_file': '/etc/tls/tls.key',
-                                        'insecure_skip_verify': True},
                             'relabel_configs': [{'source_labels': ['__address__'],
                                                 'target_label': 'sitename',
                                                 'replacement': 'WILLBEREPLACEDBYCODE'},
@@ -281,11 +275,10 @@ def getSitesFromConfig(conf):
         return []
     return sites
 
-def oidcOrTls(oidc, conf, site):
-    """Identify OIDC or TLS configuration"""
-    if oidc:
-        conf.pop('tls_config', None)
-        conf['authorization'] = {'credentials_file': f'/etc/oidc/oidc-{site.lower()}.token'}
+def setTokenAuth(conf, site):
+    """Attach the site's SiteRM API bearer token to a scrape config."""
+    conf.pop('tls_config', None)
+    conf['authorization'] = {'credentials_file': f'/etc/oidc/oidc-{site.lower()}.token'}
     return conf
 
 class PromModel():
@@ -341,8 +334,6 @@ class PromModel():
         origwebdomain = webdomain.strip('/')
         probes = conf.get('general', {}).get('probes', ['https_v4_siterm_2xx', 'https_v6_siterm_2xx',
                                                         'icmp_v4', 'icmp_v6'])
-        # Get auth method (by default remains x509), unless oidc flag is set
-        oidc = conf.get('general', {}).get('oidc', False)
         if webdomain.startswith('https://'):
             webdomain = webdomain[8:]
         if not webdomain:
@@ -358,7 +349,7 @@ class PromModel():
             lat, lng = conf.get(site, {}).get('latitude', '0.00'), conf.get(site, {}).get('longitude', '0.00')
             # 1. Query for State of all Services registered to FE
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
-            tmpEntry = oidcOrTls(oidc, tmpEntry, site)
+            tmpEntry = setTokenAuth(tmpEntry, site)
             tmpEntry['job_name'] = self._genName(f'{site}_STATE')
             tmpEntry['static_configs'][0]['targets'].append(webdomain)
             tmpEntry['metrics_path'] = f"/api/{site}/monitoring/prometheus/metrics"
@@ -369,7 +360,7 @@ class PromModel():
             self.default['scrape_configs'].append(tmpEntry)
             # 2. Scrape apache HTTP Status information from SiteRM Endpoints
             tmpEntry = copy.deepcopy(STATE_SCRAPE)
-            tmpEntry = oidcOrTls(oidc, tmpEntry, site)
+            tmpEntry = setTokenAuth(tmpEntry, site)
             tmpEntry['job_name'] = self._genName(f'{site}_STATEHTTP')
             tmpEntry['static_configs'][0]['targets'].append(webdomain)
             tmpEntry['metrics_path'] = "/siterm-http-status"
@@ -388,9 +379,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
-                tmpEntry['params']['module'][0] = 'https_v4_siterm_2xx'
-                if oidc:
-                    tmpEntry['params']['module'][0] = f"v4_{site.lower()}"
+                tmpEntry['params']['module'][0] = f"v4_{site.lower()}"
                 self.default['scrape_configs'].append(tmpEntry)
             if 'https_v6_siterm_2xx' in probes and ipv6_addr:
                 # Check that it has IPv6
@@ -402,9 +391,7 @@ class PromModel():
                 tmpEntry['relabel_configs'][1]['replacement'] = 'SiteRM'
                 tmpEntry['relabel_configs'][2]['replacement'] = lat
                 tmpEntry['relabel_configs'][3]['replacement'] = lng
-                tmpEntry['params']['module'][0] = 'https_v6_siterm_2xx'
-                if oidc:
-                    tmpEntry['params']['module'][0] = f"v6_{site.lower()}"
+                tmpEntry['params']['module'][0] = f"v6_{site.lower()}"
                 self.default['scrape_configs'].append(tmpEntry)
             # 4. Add ICMP Check for FE
             if 'icmp_v4' in probes and ipv4_addr:
@@ -437,7 +424,7 @@ class PromModel():
                 if not externalsnmp:
                     continue
                 tmpEntry = copy.deepcopy(STATE_SCRAPE)
-                tmpEntry = oidcOrTls(oidc, tmpEntry, site)
+                tmpEntry = setTokenAuth(tmpEntry, site)
                 parsedUrl = urlparse(externalsnmp)
                 tmpEntry['job_name'] = self._genName(f'{site}_NSISNMPMon')
                 tmpEntry['static_configs'][0]['targets'].append(parsedUrl.netloc)
@@ -474,6 +461,7 @@ class PromModel():
                 tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE)
                 if conf.get('general', {}).get('node_exporter_passthrough', False):
                     tmpEntry = copy.deepcopy(NODE_EXPORTER_SCRAPE_SSL)
+                    tmpEntry = setTokenAuth(tmpEntry, sitename)
                     # Get hostname from nodeExporter URL
                     host = nodeExporter.split(':')[0]
                     # "/{sitename}/monitoring/prometheus/passthrough/{hostname}",

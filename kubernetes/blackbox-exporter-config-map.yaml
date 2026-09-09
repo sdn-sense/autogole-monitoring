@@ -8,61 +8,6 @@ data:
   blackbox.yaml: |
     modules:
 
-      https_v4_siterm_2xx:
-        prober: http
-        http:
-          fail_if_ssl: false
-          fail_if_not_ssl: true
-          preferred_ip_protocol: "ip4"
-          tls_config:
-            insecure_skip_verify: true
-            cert_file: /etc/tls/tls.crt
-            key_file: /etc/tls/tls.key
-      https_v6_siterm_2xx:
-        prober: http
-        http:
-          fail_if_ssl: false
-          fail_if_not_ssl: true
-          preferred_ip_protocol: "ip6"
-          tls_config:
-            insecure_skip_verify: true
-            cert_file: /etc/tls/tls.crt
-            key_file: /etc/tls/tls.key
-
-      v4_.git:
-        prober: http
-        http:
-          fail_if_ssl: false
-          fail_if_not_ssl: true
-          preferred_ip_protocol: "ip4"
-          authorization:
-            credentials_file: /etc/oidc/oidc-.git.token
-      v6_.git:
-        prober: http
-        http:
-          fail_if_ssl: false
-          fail_if_not_ssl: true
-          preferred_ip_protocol: "ip6"
-          authorization:
-            credentials_file: /etc/oidc/oidc-.git.token
-
-      v4_.github:
-        prober: http
-        http:
-          fail_if_ssl: false
-          fail_if_not_ssl: true
-          preferred_ip_protocol: "ip4"
-          authorization:
-            credentials_file: /etc/oidc/oidc-.github.token
-      v6_.github:
-        prober: http
-        http:
-          fail_if_ssl: false
-          fail_if_not_ssl: true
-          preferred_ip_protocol: "ip6"
-          authorization:
-            credentials_file: /etc/oidc/oidc-.github.token
-
       v4_nrm_cenic:
         prober: http
         http:
@@ -96,6 +41,23 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-nrm_cenicdev.token
+
+      v4_nrm_cenic_la:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_cenic_la.token
+      v6_nrm_cenic_la:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_cenic_la.token
 
       v4_nrm_gpn:
         prober: http
@@ -335,6 +297,57 @@ data:
           authorization:
             credentials_file: /etc/oidc/oidc-t2_us_uchicago.token
 
+      v4_t2_us_uh_gorex:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_uh_gorex.token
+      v6_t2_us_uh_gorex:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_uh_gorex.token
+
+      v4_t2_us_wisconsin:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_wisconsin.token
+      v6_t2_us_wisconsin:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t2_us_wisconsin.token
+
+      v4_t3_fabric_amst:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_amst.token
+      v6_t3_fabric_amst:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_amst.token
+
       v4_t3_fabric_cern:
         prober: http
         http:
@@ -351,6 +364,91 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-t3_fabric_cern.token
+
+      v4_t3_fabric_cern1:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_cern1.token
+      v6_t3_fabric_cern1:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_cern1.token
+
+      v4_t3_fabric_star:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_star.token
+      v6_t3_fabric_star:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_fabric_star.token
+
+      v4_t3_us_fab_bluefield3:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_bluefield3.token
+      v6_t3_us_fab_bluefield3:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_bluefield3.token
+
+      v4_t3_us_fab_losa:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_losa.token
+      v6_t3_us_fab_losa:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_losa.token
+
+      v4_t3_us_fab_newy:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_newy.token
+      v6_t3_us_fab_newy:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_fab_newy.token
 
       v4_t3_us_fab_ucsd:
         prober: http
@@ -402,6 +500,23 @@ data:
           preferred_ip_protocol: "ip6"
           authorization:
             credentials_file: /etc/oidc/oidc-t3_us_nrp.token
+
+      v4_t3_us_sl_400g:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_sl_400g.token
+      v6_t3_us_sl_400g:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-t3_us_sl_400g.token
 
       v4_t3_us_starlight:
         prober: http

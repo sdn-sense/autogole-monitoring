@@ -85,13 +85,9 @@ def execute(dirpath):
                 confFile = os.path.join(tmpD, 'main.yaml')
                 if not os.path.isfile(confFile):
                     continue
-                conf = loadYamlFile(confFile)
-                oidc = conf.get('general', {}).get('oidc', False)
-                if oidc:
-                    print(f"Getting token for {dirName}")
-                    getToken(dirName)
-                else:
-                    print(f"OIDC not enabled for {dirName}")
+                # Every SiteRM Frontend uses token auth; mint a token for each one.
+                print(f"Getting token for {dirName}")
+                getToken(dirName)
 
 if __name__ == "__main__":
     tmpdir = tempfile.mkdtemp()
