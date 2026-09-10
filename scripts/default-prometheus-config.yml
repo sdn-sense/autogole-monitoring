@@ -45,11 +45,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-cenic.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/prometheus-client/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/prometheus-client/tls.key
+    - nsi-snmpmon-cenic.opennsa.svc.cluster.local:8443
 - job_name: Internet2_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -77,11 +73,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-internet2.nrp-nautilus.io
-  tls_config:
-    cert_file: /etc/prometheus-client/tls.crt
-    insecure_skip_verify: true
-    key_file: /etc/prometheus-client/tls.key
+    - nsi-snmpmon-internet2.opennsa.svc.cluster.local:8443
 - job_name: DMMMON
   metrics_path: metrics
   scheme: https
