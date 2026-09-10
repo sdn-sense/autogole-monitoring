@@ -46,6 +46,8 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-snmpmon-cenic.opennsa.svc.cluster.local:8443
+  tls_config:
+    insecure_skip_verify: true
 - job_name: Internet2_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -74,6 +76,8 @@ scrape_configs:
   static_configs:
   - targets:
     - nsi-snmpmon-internet2.opennsa.svc.cluster.local:8443
+  tls_config:
+    insecure_skip_verify: true
 - job_name: DMMMON
   metrics_path: metrics
   scheme: https
