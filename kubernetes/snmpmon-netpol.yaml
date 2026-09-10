@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nsi-snmpmon-allow-internal
+  namespace: opennsa
+  labels:
+    app: nsi-snmpmon
+spec:
+  podSelector:
+    matchExpressions:
+    - key: k8s-app
+      operator: In
+      values:
+      - nsi-snmpmon
+      - nsi-snmpmon-cenic
+      - nsi-snmpmon-internet2
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: prometheus
+    - podSelector:
+        matchLabels:
+          run: run-rtmon
+    ports:
+    - port: 8443
+      protocol: TCP
