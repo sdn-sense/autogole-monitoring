@@ -76,7 +76,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - dmm.nrp-nautilus.io:433
+    - dmm.nrp-nautilus.io:443
 - authorization:
     credentials_file: /etc/oidc/oidc-nrm_cenic.token
   job_name: NRM_CENIC_STATE
@@ -2375,9 +2375,7 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-prpdev.nrp-nautilus.io
-- authorization:
-    credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
-  job_name: T2_US_SDSC_NSISNMPMon
+- job_name: T2_US_SDSC_NSISNMPMon
   metrics_path: /sn3700_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -2400,12 +2398,10 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon.opennsa.svc.cluster.local:8443
+    - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
   tls_config:
     insecure_skip_verify: true
-- authorization:
-    credentials_file: /etc/oidc/oidc-t2_us_sdsc.token
-  job_name: T2_US_SDSC_NSISNMPMon_0
+- job_name: T2_US_SDSC_NSISNMPMon_0
   metrics_path: /edgecore_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -2428,7 +2424,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon.opennsa.svc.cluster.local:8443
+    - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
   tls_config:
     insecure_skip_verify: true
 - honor_labels: true
@@ -2984,9 +2980,7 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-dev-sdsc.nrp-nautilus.io
-- authorization:
-    credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
-  job_name: T2_US_SDSC_DEV_NSISNMPMon
+- job_name: T2_US_SDSC_DEV_NSISNMPMon
   metrics_path: /sn3700_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
@@ -3009,12 +3003,10 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon.opennsa.svc.cluster.local:8443
+    - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
   tls_config:
     insecure_skip_verify: true
-- authorization:
-    credentials_file: /etc/oidc/oidc-t2_us_sdsc_dev.token
-  job_name: T2_US_SDSC_DEV_NSISNMPMon_0
+- job_name: T2_US_SDSC_DEV_NSISNMPMon_0
   metrics_path: /edgecore_s0/metrics
   relabel_configs:
   - replacement: T2_US_SDSC_DEV
@@ -3037,7 +3029,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon.opennsa.svc.cluster.local:8443
+    - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
   tls_config:
     insecure_skip_verify: true
 - honor_labels: true
