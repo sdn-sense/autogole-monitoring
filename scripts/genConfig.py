@@ -281,6 +281,16 @@ def setTokenAuth(conf, site):
     conf['authorization'] = {'credentials_file': f'/etc/oidc/oidc-{site.lower()}.token'}
     return conf
 
+def setInsecureTLS(conf):
+    """In-cluster: skip TLS verification, no bearer token."""
+    conf.pop('authorization', None)
+    conf['tls_config'] = {'insecure_skip_verify': True}
+    return conf
+
+def isClusterLocal(hostname):
+    """Return True if the hostname is a Kubernetes in-cluster service address."""
+    return bool(hostname) and hostname.endswith('svc.cluster.local')
+
 class PromModel():
     """Class for generating Prometheus config file"""
     def __init__(self,):
@@ -424,8 +434,11 @@ class PromModel():
                 if not externalsnmp:
                     continue
                 tmpEntry = copy.deepcopy(STATE_SCRAPE)
-                tmpEntry = setTokenAuth(tmpEntry, site)
                 parsedUrl = urlparse(externalsnmp)
+                if isClusterLocal(parsedUrl.hostname):
+                    tmpEntry = setInsecureTLS(tmpEntry)
+                else:
+                    tmpEntry = setTokenAuth(tmpEntry, site)
                 tmpEntry['job_name'] = self._genName(f'{site}_NSISNMPMon')
                 tmpEntry['static_configs'][0]['targets'].append(parsedUrl.netloc)
                 tmpEntry['metrics_path'] = parsedUrl.path
