@@ -3165,11 +3165,11 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - authorization:
-    credentials_file: /etc/oidc/oidc-t2_us_ucsd_oasis.token
-  job_name: T2_US_UCSD_OASIS_STATE
-  metrics_path: /api/T2_US_UCSD_OASIS/monitoring/prometheus/metrics
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasis.token
+  job_name: T2_US_SDSC_OASIS_STATE
+  metrics_path: /api/T2_US_SDSC_OASIS/monitoring/prometheus/metrics
   relabel_configs:
-  - replacement: T2_US_UCSD_OASIS
+  - replacement: T2_US_SDSC_OASIS
     source_labels:
     - __address__
     target_label: sitename
@@ -3191,11 +3191,11 @@ scrape_configs:
   - targets:
     - sense-oasis.nrp-nautilus.io:443
 - authorization:
-    credentials_file: /etc/oidc/oidc-t2_us_ucsd_oasis.token
-  job_name: T2_US_UCSD_OASIS_STATEHTTP
+    credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasis.token
+  job_name: T2_US_SDSC_OASIS_STATEHTTP
   metrics_path: /siterm-http-status
   relabel_configs:
-  - replacement: T2_US_UCSD_OASIS
+  - replacement: T2_US_SDSC_OASIS
     source_labels:
     - __address__
     target_label: sitename
@@ -3216,13 +3216,13 @@ scrape_configs:
   static_configs:
   - targets:
     - sense-oasis.nrp-nautilus.io:443
-- job_name: T2_US_UCSD_OASIS_MODEL_V4
+- job_name: T2_US_SDSC_OASIS_MODEL_V4
   metrics_path: /probe
   params:
     module:
-    - v4_t2_us_ucsd_oasis
+    - v4_t2_us_sdsc_oasis
   relabel_configs:
-  - replacement: T2_US_UCSD_OASIS
+  - replacement: T2_US_SDSC_OASIS
     source_labels:
     - __address__
     target_label: sitename
@@ -3249,7 +3249,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - https://sense-oasis.nrp-nautilus.io:443/api/T2_US_UCSD_OASIS/models?current=true&summary=false&encode=false
+    - https://sense-oasis.nrp-nautilus.io:443/api/T2_US_SDSC_OASIS/models?current=true&summary=false&encode=false
 - authorization:
     credentials_file: /etc/oidc/oidc-t2_us_sdsc_oasisdev.token
   job_name: T2_US_SDSC_OASISDEV_STATE
