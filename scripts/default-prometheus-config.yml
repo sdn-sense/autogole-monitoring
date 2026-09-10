@@ -25,6 +25,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: nsisitename
+  - replacement: NSI_PACWAVE
+    source_labels:
+    - __address__
+    target_label: sitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -41,11 +45,9 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-cenic.nrp-nautilus.io
+    - nsi-snmpmon-cenic.opennsa.svc.cluster.local:8443
   tls_config:
-    cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: Internet2_SNMPMon
   metrics_path: /metrics
   relabel_configs:
@@ -53,6 +55,10 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: nsisitename
+  - replacement: Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
   - replacement: NSI-SNMPMon
     source_labels:
     - __address__
@@ -69,11 +75,9 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - nsi-snmpmon-internet2.nrp-nautilus.io
+    - nsi-snmpmon-internet2.opennsa.svc.cluster.local:8443
   tls_config:
-    cert_file: /etc/tls/tls.crt
     insecure_skip_verify: true
-    key_file: /etc/tls/tls.key
 - job_name: DMMMON
   metrics_path: metrics
   scheme: https
