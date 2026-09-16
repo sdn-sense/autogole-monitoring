@@ -38,42 +38,66 @@ metadata:
   namespace: opennsa
 
 ---
-# ClusterRole granting exactly the permissions the sync script needs:
-#   1. Read (get) the source proxy Secret in ucsd-rucio
-#   2. Create/patch the destination proxy Secret in opennsa
-#
-# A ClusterRole is required (not a namespaced Role) because it grants access
-# to a Secret in a *different* namespace (ucsd-rucio). The permissions are
-# tightly scoped to the specific Secret names.
+# Role in ucsd-rucio: allows proxy-sync to READ the source proxy Secret.
+# A namespace-scoped Role is used instead of a ClusterRole because NRP
+# Nautilus does not grant users cluster-scoped RBAC permissions. Cross-
+# namespace access is achieved by binding this Role to a ServiceAccount
+# from a different namespace (opennsa) via the RoleBinding below.
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
-  name: proxy-sync-role
+  name: proxy-sync-reader
+  namespace: ucsd-rucio
 rules:
-  # Read the Rucio-managed CMS VOMS proxy from ucsd-rucio
   - apiGroups: [""]
     resources: ["secrets"]
     resourceNames: ["rucio-server-rucio-x509up"]
     verbs: ["get"]
-  # Write the synced proxy into xcache-proxy in opennsa
+
+---
+# RoleBinding in ucsd-rucio: binds the reader Role to the proxy-sync
+# ServiceAccount that lives in the opennsa namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: proxy-sync-reader-binding
+  namespace: ucsd-rucio
+subjects:
+  - kind: ServiceAccount
+    name: proxy-sync
+    namespace: opennsa
+roleRef:
+  kind: Role
+  name: proxy-sync-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Role in opennsa: allows proxy-sync to WRITE (create/patch) xcache-proxy.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: proxy-sync-writer
+  namespace: opennsa
+rules:
   - apiGroups: [""]
     resources: ["secrets"]
     resourceNames: ["xcache-proxy"]
     verbs: ["get", "create", "patch"]
 
 ---
-# Bind the ClusterRole to the proxy-sync ServiceAccount in opennsa.
+# RoleBinding in opennsa: binds the writer Role to the proxy-sync ServiceAccount.
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
-  name: proxy-sync-rolebinding
+  name: proxy-sync-writer-binding
+  namespace: opennsa
 subjects:
   - kind: ServiceAccount
     name: proxy-sync
     namespace: opennsa
 roleRef:
-  kind: ClusterRole
-  name: proxy-sync-role
+  kind: Role
+  name: proxy-sync-writer
   apiGroup: rbac.authorization.k8s.io
 
 ---
@@ -115,6 +139,13 @@ spec:
             # No privileged access, no extra packages.
             image: bitnami/kubectl:latest
             imagePullPolicy: IfNotPresent
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 120m
+                memory: 150Mi
             command:
               - /bin/sh
               - -c
