@@ -1,0 +1,147 @@
+---
+# =============================================================================
+# proxy-sync.yaml
+#
+# Copies the CMS VOMS proxy from the ucsd-rucio namespace into the opennsa
+# namespace every 20 minutes so that xrootd-mon can authenticate to XRootD.
+#
+# Background
+# ----------
+# The rucio-server-renew-fts-proxy CronJob in ucsd-rucio renews a CMS VOMS
+# proxy every 30 minutes and stores it in the Secret
+# "rucio-server-rucio-x509up" (key: x509up). Kubernetes prevents pods in one
+# namespace from mounting Secrets from another, so we sync a copy here.
+#
+# Resources created
+# -----------------
+#   ServiceAccount      proxy-sync           (namespace: opennsa)
+#   ClusterRole         proxy-sync-role      (cluster-scoped)
+#   ClusterRoleBinding  proxy-sync-rolebinding
+#   CronJob             proxy-sync           (namespace: opennsa)
+#
+# Apply order
+# -----------
+#   kubectl apply -f kubernetes/xrootd/proxy-sync.yaml
+#
+# Bootstrap (populate xcache-proxy before the first scheduled run)
+# -------
+#   kubectl create job proxy-sync-manual --from=cronjob/proxy-sync -n opennsa
+#   kubectl logs -n opennsa -l job-name=proxy-sync-manual
+# =============================================================================
+
+---
+# ServiceAccount that the proxy-sync CronJob pod runs as.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: proxy-sync
+  namespace: opennsa
+
+---
+# ClusterRole granting exactly the permissions the sync script needs:
+#   1. Read (get) the source proxy Secret in ucsd-rucio
+#   2. Create/patch the destination proxy Secret in opennsa
+#
+# A ClusterRole is required (not a namespaced Role) because it grants access
+# to a Secret in a *different* namespace (ucsd-rucio). The permissions are
+# tightly scoped to the specific Secret names.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: proxy-sync-role
+rules:
+  # Read the Rucio-managed CMS VOMS proxy from ucsd-rucio
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["rucio-server-rucio-x509up"]
+    verbs: ["get"]
+  # Write the synced proxy into xcache-proxy in opennsa
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["xcache-proxy"]
+    verbs: ["get", "create", "patch"]
+
+---
+# Bind the ClusterRole to the proxy-sync ServiceAccount in opennsa.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: proxy-sync-rolebinding
+subjects:
+  - kind: ServiceAccount
+    name: proxy-sync
+    namespace: opennsa
+roleRef:
+  kind: ClusterRole
+  name: proxy-sync-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# CronJob: fires at :10, :30, and :50 past every hour (every 20 minutes).
+#
+# Schedule rationale
+# ------------------
+# The source renewer (rucio-server-renew-fts-proxy) runs at :00 and :30.
+# Running at :10, :30, and :50 means we always copy a proxy that was renewed
+# at most 10 minutes ago — well within the 96-hour proxy lifetime.
+#
+# The xrootd-mon pod tests every 5 minutes. Even if a single sync run fails,
+# the proxy in xcache-proxy will be at most 20 minutes old before the next
+# attempt, keeping credential freshness well within acceptable bounds.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: proxy-sync
+  namespace: opennsa
+  labels:
+    app: proxy-sync
+spec:
+  schedule: "10,30,50 * * * *"
+  concurrencyPolicy: Forbid        # skip if a previous run is still active
+  successfulJobsHistoryLimit: 3    # keep the last 3 successful job records
+  failedJobsHistoryLimit: 1        # keep the last failed job record for debugging
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: proxy-sync
+        spec:
+          serviceAccountName: proxy-sync
+          restartPolicy: OnFailure
+          containers:
+          - name: proxy-sync
+            # bitnami/kubectl: minimal image with kubectl + sh only.
+            # No privileged access, no extra packages.
+            image: bitnami/kubectl:latest
+            imagePullPolicy: IfNotPresent
+            command:
+              - /bin/sh
+              - -c
+              - |
+                set -e
+
+                echo "=== proxy-sync starting ==="
+
+                # Step 1: Fetch the base64-encoded proxy from the source Secret.
+                # The key is "x509up" — as written by rucio/fts-cron.
+                echo "Fetching proxy from ucsd-rucio/rucio-server-rucio-x509up..."
+                PROXY_B64=$(kubectl get secret rucio-server-rucio-x509up \
+                              -n ucsd-rucio \
+                              -o jsonpath='{.data.x509up}')
+
+                if [ -z "$PROXY_B64" ]; then
+                  echo "ERROR: proxy data is empty — rucio-server-rucio-x509up may be missing or the x509up key is absent."
+                  exit 1
+                fi
+
+                # Step 2: Decode and write into xcache-proxy in opennsa.
+                # The key name in the destination is "x509-proxy" (with a dash)
+                # — this matches the subPath mount in xrootd-mon.yaml.
+                echo "Writing proxy into opennsa/xcache-proxy (key: x509-proxy)..."
+                kubectl create secret generic xcache-proxy \
+                  -n opennsa \
+                  --from-literal=x509-proxy="$(echo "$PROXY_B64" | base64 -d)" \
+                  --dry-run=client -o yaml | kubectl apply -f -
+
+                echo "=== Done. Proxy synced successfully. ==="

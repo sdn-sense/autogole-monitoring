@@ -1,0 +1,105 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xrootd-mon
+  namespace: opennsa
+  labels:
+    app: xrootd-mon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xrootd-mon
+  template:
+    metadata:
+      labels:
+        app: xrootd-mon
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - k8s-igrok-01.calit2.optiputer.net
+                - k8s-igrok-02.calit2.optiputer.net
+                - k8s-igrok-03.calit2.optiputer.net
+                - k8s-igrok-04.calit2.optiputer.net
+                - k8s-igrok-05.calit2.optiputer.net
+                - k8s-igrok-06.calit2.optiputer.net
+      containers:
+      - name: xrootd-mon
+        image: sdnsense/xrootd-mon:latest
+        imagePullPolicy: Always
+        ports:
+        - name: metrics
+          containerPort: 8000
+          protocol: TCP
+        env:
+        - name: X509_USER_PROXY
+          value: /tmp/x509up_u0
+        - name: XRD_ENDPOINT
+          value: "redir-12.t2-sense.ultralight.org:1094"
+        - name: XRD_PROTOCOLS
+          value: "root,davs,https"
+        - name: XRD_MODES
+          value: "read,write"
+        - name: XRD_WORKDIR
+          value: /srv/
+        - name: XRD_PATH
+          value: /store/group/tests-sense
+        - name: XRD_UNIQ_NAME
+          value: "redir-12.t2-sense.ultralight.org"
+        # XRD_UNIQ_WRITE is intentionally omitted.
+        # Setting it to "False" does NOT disable it — Python's bool("False") is True.
+        # Omitting the variable entirely is the only way to keep it off.
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - name: xcache-proxy
+          mountPath: /tmp/x509up_u0
+          subPath: x509-proxy
+          readOnly: true
+        - name: workdir
+          mountPath: /srv/
+      volumes:
+      - name: xcache-proxy
+        secret:
+          secretName: xcache-proxy
+          # 0400 (owner read-only) is required by XRootD.
+          # With looser permissions (e.g. 0644) XRootD refuses to load the proxy
+          # and prints: "TLS: Unable to use cert+key file; has excessive access rights"
+          defaultMode: 0400
+      - name: workdir
+        # Scratch space shared between xroot-mon.py (writer) and gunicorn (reader).
+        # xroot-mon.py writes /srv/xrootd-metrics every 5 minutes;
+        # gunicorn serves that file at GET /metrics on port 8000.
+        emptyDir: {}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: xrootd-mon-service
+  namespace: opennsa
+  labels:
+    app: xrootd-mon
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 8000
+    targetPort: metrics
+    protocol: TCP
+  selector:
+    app: xrootd-mon
