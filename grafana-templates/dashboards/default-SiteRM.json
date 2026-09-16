@@ -4329,7 +4329,7 @@
           "exemplar": true,
           "expr": "bgp_session_state{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\", bgp_session_state!=\"unknown\"} > 0",
           "interval": "",
-          "legendFormat": "{{peer}} {{iptype}} {{bgp_session_state}}",
+          "legendFormat": "{{peer}} {{iptype}} {{bgp_session_state}} SENSE:{{sense}}",
           "range": true,
           "refId": "A"
         }
@@ -4426,7 +4426,7 @@
           "exemplar": true,
           "expr": "bgp_prefixes_received{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\"}",
           "interval": "",
-          "legendFormat": "{{peer}} {{iptype}}",
+          "legendFormat": "{{peer}} {{iptype}} SENSE:{{sense}}",
           "range": true,
           "refId": "A"
         }
@@ -4524,7 +4524,7 @@
           "exemplar": true,
           "expr": "bgp_prefixes_advertised{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\"}",
           "interval": "",
-          "legendFormat": "{{peer}} {{iptype}}",
+          "legendFormat": "{{peer}} {{iptype}} SENSE:{{sense}}",
           "range": true,
           "refId": "A"
         }
