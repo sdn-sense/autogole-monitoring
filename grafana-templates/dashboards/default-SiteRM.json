@@ -3802,6 +3802,105 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
+      "description": "Seconds since the last SNMP scan was recorded for this switch. Rising steadily (rather than resetting on each poll interval) means SNMP polling has stalled for this device.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 300
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 144
+      },
+      "id": 410,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "time() - snmp_last_scan_timestamp{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{hostname}} scan age",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "SNMP Last Scan Age",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -3858,7 +3957,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 144
+        "y": 150
       },
       "id": 25,
       "options": {
@@ -3949,7 +4048,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 144
+        "y": 150
       },
       "id": 35,
       "options": {
@@ -4040,7 +4139,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 144
+        "y": 150
       },
       "id": 36,
       "options": {
@@ -4131,7 +4230,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 152
+        "y": 158
       },
       "id": 124,
       "options": {
@@ -4162,6 +4261,275 @@
       ],
       "title": "QoS Requests from SENSE",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "description": "BGP peer session state for this switch (from the periodic BGP summary check).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 166
+      },
+      "id": 400,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "bgp_session_state{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\", bgp_session_state!=\"unknown\"} > 0",
+          "interval": "",
+          "legendFormat": "{{peer}} {{iptype}} {{bgp_session_state}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "BGP Session State",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 172
+      },
+      "id": 401,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "bgp_prefixes_received{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{peer}} {{iptype}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "BGP Prefixes Received",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.27",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 172
+      },
+      "id": 402,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "bgp_prefixes_advertised{hostname=\"$switch\", sitename=\"REPLACEME_SITENAME\"}",
+          "interval": "",
+          "legendFormat": "{{peer}} {{iptype}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "BGP Prefixes Advertised"
     },
     {
       "datasource": {
@@ -4224,7 +4592,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 160
+        "y": 180
       },
       "id": 37,
       "options": {
@@ -4317,7 +4685,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 160
+        "y": 180
       },
       "id": 27,
       "options": {
@@ -4410,7 +4778,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 168
+        "y": 188
       },
       "id": 29,
       "options": {
@@ -4503,7 +4871,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 168
+        "y": 188
       },
       "id": 28,
       "options": {
@@ -4596,7 +4964,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 176
+        "y": 196
       },
       "id": 30,
       "options": {
@@ -4689,7 +5057,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 176
+        "y": 196
       },
       "id": 31,
       "options": {
@@ -4782,7 +5150,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 184
+        "y": 204
       },
       "id": 38,
       "options": {
@@ -4875,7 +5243,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 184
+        "y": 204
       },
       "id": 39,
       "options": {
@@ -4968,7 +5336,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 192
+        "y": 212
       },
       "id": 40,
       "options": {
@@ -5061,7 +5429,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 192
+        "y": 212
       },
       "id": 41,
       "options": {
@@ -5154,7 +5522,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 200
+        "y": 220
       },
       "id": 42,
       "options": {
@@ -5247,7 +5615,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 200
+        "y": 220
       },
       "id": 43,
       "options": {
