@@ -4268,6 +4268,70 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
+        "description": "When BGPMonitoring last checked this switch.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            },
+            "unit": "dateTimeAsLocal"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 166
+        },
+        "id": 411,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "bgp_last_scan_timestamp{hostname=\"$switch\", sitename=\"T2_US_UCSD\"} * 1000",
+            "interval": "",
+            "legendFormat": "",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "BGP Last Updated",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
         "description": "BGP peer session state for this switch (from the periodic BGP summary check).",
         "fieldConfig": {
           "defaults": {
@@ -4299,8 +4363,8 @@
         },
         "gridPos": {
           "h": 6,
-          "w": 24,
-          "x": 0,
+          "w": 20,
+          "x": 4,
           "y": 166
         },
         "id": 400,
