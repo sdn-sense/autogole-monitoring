@@ -85,3 +85,9 @@ scrape_configs:
   static_configs:
   - targets:
     - dmm.nrp-nautilus.io:443
+- job_name: T2_US_Caltech_XRootD_1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-service.opennsa.svc.cluster.local:8000
