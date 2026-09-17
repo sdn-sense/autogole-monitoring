@@ -37,6 +37,29 @@ spec:
     spec:
       affinity:
         nodeAffinity:
+          {{- if eq ($site.affinityType | default "preferred") "required" }}
+          # Hard requirement: pod MUST land on an approved node.
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              {{- if $site.nodes }}
+              # Pin to specific hostnames (e.g. igrok nodes that can reach UCSD T2).
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                {{- range $site.nodes }}
+                - {{ . }}
+                {{- end }}
+              {{- else }}
+              # Pin to a set of topology zones (e.g. ucsd-* zones for Caltech).
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                {{- range $site.zones }}
+                - {{ . }}
+                {{- end }}
+              {{- end }}
+          {{- else }}
           # Soft preference: scheduler tries to place the pod in the same NRP
           # region as the XRootD site being monitored (minimises test latency).
           # If no nodes are available in that region the pod still schedules
@@ -49,6 +72,7 @@ spec:
                 operator: In
                 values:
                 - {{ $site.region | default $.Values.defaults.region }}
+          {{- end }}
       containers:
       - name: xrootd-mon
         image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}

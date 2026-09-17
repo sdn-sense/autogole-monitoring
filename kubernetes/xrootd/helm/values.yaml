@@ -54,6 +54,18 @@ sites:
   # -------------------------------------------------------------------------
   - name: T2_US_Caltech
     region: us-west
+    # required: pod MUST land on a UCSD/CENIC-network node to reach port 1094.
+    # k8s-igrok-0[1-6].calit2.optiputer.net are zone=ucsd and confirmed working.
+    affinityType: required
+    zones:
+      - ucsd
+      - ucsd-sdsc
+      - ucsd-sdsc-expanse
+      - ucsd-nrp
+      - ucsd-t2
+      - ucsd-suncave
+      - ucsd-sdsc-400g
+      - ucsd-sdsc-yu
     path: /store/group/tests-sense
     endpoints:
       - host: redir-01.t2-sense.ultralight.org
@@ -92,6 +104,9 @@ sites:
   # -------------------------------------------------------------------------
   - name: T1_US_FNAL
     region: us-central
+    # preferred: network already reaches FNAL from us-central (mizzou confirmed).
+    # Soft preference keeps pods schedulable even if us-central nodes are full.
+    affinityType: preferred
     path: /dcache/dteam/sense/
     endpoints:
       - host: cmssense6-origin-2841-1.fnal.gov
@@ -104,6 +119,19 @@ sites:
   # -------------------------------------------------------------------------
   - name: T2_US_UCSD
     region: us-west
+    # required: pod MUST land on k8s-igrok-0[1-6].calit2.optiputer.net.
+    # Those nodes are on CENIC and confirmed to reach UCSD T2 origin data nodes.
+    # Other zone=ucsd nodes (k8s-4090-01, k8s-chase-ci-04, k8s-gpu-01, etc.)
+    # can reach port 1094 on the redirector but timeout on gfal data transfers
+    # because UCSD T2 origin firewall only allows known UCSD/CENIC IP ranges.
+    affinityType: required
+    nodes:
+      - k8s-igrok-01.calit2.optiputer.net
+      - k8s-igrok-02.calit2.optiputer.net
+      - k8s-igrok-03.calit2.optiputer.net
+      - k8s-igrok-04.calit2.optiputer.net
+      - k8s-igrok-05.calit2.optiputer.net
+      - k8s-igrok-06.calit2.optiputer.net
     path: /store/group/tests-sense
     endpoints:
       - host: redir-f011.t2.ucsd.edu
