@@ -22,14 +22,8 @@ resources:
     cpu: 480m
     memory: 307Mi
 
-# Nodes the pods are allowed to schedule on.
-nodeAffinity:
-  - k8s-igrok-01.calit2.optiputer.net
-  - k8s-igrok-02.calit2.optiputer.net
-  - k8s-igrok-03.calit2.optiputer.net
-  - k8s-igrok-04.calit2.optiputer.net
-  - k8s-igrok-05.calit2.optiputer.net
-  - k8s-igrok-06.calit2.optiputer.net
+# (nodeAffinity hostname list removed — affinity is now per-site region-based;
+#  see defaults.region and sites[*].region below)
 
 proxy:
   secretName: xcache-proxy
@@ -45,6 +39,9 @@ defaults:
   # Set to true for sites where each origin has its own local storage.
   uniqWrite: false
   path: /store/group/tests-sense
+  # Fallback NRP region if a site entry omits the region key.
+  # Valid values: us-west, us-central, us-east, us-mountain, eu, pacific, latin-america
+  region: us-west
 
 # ---------------------------------------------------------------------------
 # Sites and their redirector endpoints.
@@ -56,6 +53,7 @@ sites:
 
   # -------------------------------------------------------------------------
   - name: T2_US_Caltech
+    region: us-west
     path: /store/group/tests-sense
     endpoints:
       - host: redir-01.t2-sense.ultralight.org
@@ -93,6 +91,7 @@ sites:
 
   # -------------------------------------------------------------------------
   - name: T1_US_FNAL
+    region: us-central
     path: /dcache/dteam/sense/
     endpoints:
       - host: cmssense6-origin-2841-1.fnal.gov
@@ -104,6 +103,7 @@ sites:
 
   # -------------------------------------------------------------------------
   - name: T2_US_UCSD
+    region: us-west
     path: /store/group/tests-sense
     endpoints:
       - host: redir-f011.t2.ucsd.edu

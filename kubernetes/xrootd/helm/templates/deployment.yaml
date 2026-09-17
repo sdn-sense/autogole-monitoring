@@ -37,15 +37,18 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/hostname
+          # Soft preference: scheduler tries to place the pod in the same NRP
+          # region as the XRootD site being monitored (minimises test latency).
+          # If no nodes are available in that region the pod still schedules
+          # elsewhere — no Pending. weight=100 makes this the top preference.
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+              - key: topology.kubernetes.io/region
                 operator: In
                 values:
-                {{- range $.Values.nodeAffinity }}
-                - {{ . }}
-                {{- end }}
+                - {{ $site.region | default $.Values.defaults.region }}
       containers:
       - name: xrootd-mon
         image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}
