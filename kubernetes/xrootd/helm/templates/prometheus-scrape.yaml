@@ -1,0 +1,36 @@
+{{/*
+  This ConfigMap renders the Prometheus scrape job blocks for all xrootd-mon
+  endpoints. It is NOT consumed by Prometheus directly — it is a reference
+  artifact. The operator copies the content of the "scrape-jobs" key and
+  appends it to scripts/default-prometheus-config.yml, then reloads Prometheus.
+
+  To view the rendered output:
+    helm template xrootd-mon kubernetes/xrootd/helm/ | \
+      kubectl apply --dry-run=client -f - 2>/dev/null || \
+    helm template xrootd-mon kubernetes/xrootd/helm/ | \
+      grep -A999 'scrape-jobs'
+*/}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xrootd-mon-prometheus-scrape-jobs
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: xrootd-mon
+data:
+  scrape-jobs: |
+    {{- range .Values.sites }}
+    {{- $site := . }}
+    {{- range .endpoints }}
+    {{- $ep := . }}
+    {{- $epCtx := dict "host" $ep.host "port" $ep.port "siteName" $site.name }}
+    {{- $svcName := include "xrootd-mon.serviceName" $epCtx }}
+    - job_name: {{ include "xrootd-mon.jobName" $epCtx }}
+      metrics_path: /metrics
+      scrape_interval: 30s
+      static_configs:
+      - targets:
+        - {{ $svcName }}.{{ $.Values.namespace }}.svc.cluster.local:8000
+    {{- end }}
+    {{- end }}

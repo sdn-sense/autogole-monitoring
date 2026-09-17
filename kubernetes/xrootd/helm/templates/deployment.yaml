@@ -1,0 +1,107 @@
+{{- range .Values.sites }}
+{{- $site := . }}
+{{- range .endpoints }}
+{{- $ep := . }}
+{{- $epCtx := dict "host" $ep.host "port" $ep.port }}
+{{- $name := include "xrootd-mon.fullname" $epCtx }}
+{{- $endpoint := printf "%s:%s" $ep.host ($ep.port | toString) }}
+{{- $path := $ep.path | default $site.path | default $.Values.defaults.path }}
+{{- $protocols := $ep.protocols | default $site.protocols | default $.Values.defaults.protocols }}
+{{- $modes := $ep.modes | default $site.modes | default $.Values.defaults.modes }}
+{{- $uniqWrite := $ep.uniqWrite | default $site.uniqWrite | default $.Values.defaults.uniqWrite }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    app: xrootd-mon
+    endpoint: {{ include "xrootd-mon.endpointName" $epCtx }}
+    site: {{ $site.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xrootd-mon
+      endpoint: {{ include "xrootd-mon.endpointName" $epCtx }}
+  template:
+    metadata:
+      labels:
+        app: xrootd-mon
+        endpoint: {{ include "xrootd-mon.endpointName" $epCtx }}
+        site: {{ $site.name }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                {{- range $.Values.nodeAffinity }}
+                - {{ . }}
+                {{- end }}
+      containers:
+      - name: xrootd-mon
+        image: {{ $.Values.image.repository }}:{{ $.Values.image.tag }}
+        imagePullPolicy: {{ $.Values.image.pullPolicy }}
+        ports:
+        - name: metrics
+          containerPort: 8000
+          protocol: TCP
+        env:
+        - name: X509_USER_PROXY
+          value: /tmp/x509up_u0
+        - name: XRD_ENDPOINT
+          value: {{ $endpoint | quote }}
+        - name: XRD_PROTOCOLS
+          value: {{ $protocols | quote }}
+        - name: XRD_MODES
+          value: {{ $modes | quote }}
+        - name: XRD_WORKDIR
+          value: /srv/
+        - name: XRD_PATH
+          value: {{ $path | quote }}
+        - name: XRD_UNIQ_NAME
+          value: {{ $ep.host | quote }}
+        {{- if $uniqWrite }}
+        - name: XRD_UNIQ_WRITE
+          value: "True"
+        {{- end }}
+        # XRD_UNIQ_WRITE is intentionally omitted when false.
+        # Setting it to "False" does NOT disable it — Python's bool("False") is True.
+        # Omitting the variable entirely is the only way to keep it off.
+        resources:
+          requests:
+            cpu: {{ $.Values.resources.requests.cpu }}
+            memory: {{ $.Values.resources.requests.memory }}
+          limits:
+            cpu: {{ $.Values.resources.limits.cpu }}
+            memory: {{ $.Values.resources.limits.memory }}
+        volumeMounts:
+        - name: xcache-proxy
+          mountPath: /tmp/x509up_u0
+          subPath: {{ $.Values.proxy.secretKey }}
+          readOnly: true
+        - name: workdir
+          mountPath: /srv/
+      volumes:
+      - name: xcache-proxy
+        secret:
+          secretName: {{ $.Values.proxy.secretName }}
+          # 0400 (owner read-only) is required by XRootD.
+          # With looser permissions (e.g. 0644) XRootD refuses to load the proxy
+          # and prints: "TLS: Unable to use cert+key file; has excessive access rights"
+          defaultMode: 0400
+      - name: workdir
+        # Scratch space shared between xroot-mon.py (writer) and gunicorn (reader).
+        # xroot-mon.py writes /srv/xrootd-metrics every 5 minutes;
+        # gunicorn serves that file at GET /metrics on port 8000.
+        emptyDir: {}
+{{- end }}
+{{- end }}
