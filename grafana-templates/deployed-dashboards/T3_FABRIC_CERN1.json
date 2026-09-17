@@ -5146,7 +5146,7 @@
         },
         "id": 500,
         "panels": [],
-        "title": "BGP",
+        "title": "BGP Status",
         "type": "row"
       },
       {
@@ -5541,6 +5541,6 @@
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2026-09-16. See git for changes",
+  "message": "Script changes made on 2026-09-17. See git for changes",
   "overwrite": true
 }

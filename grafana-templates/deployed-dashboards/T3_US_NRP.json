@@ -4268,339 +4268,6 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "When BGPMonitoring last checked this switch.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                }
-              ]
-            },
-            "unit": "dateTimeAsLocal"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 4,
-          "x": 0,
-          "y": 166
-        },
-        "id": 411,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "auto",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "bgp_last_scan_timestamp{hostname=\"$switch\", sitename=\"T3_US_NRP\"} * 1000",
-            "interval": "",
-            "legendFormat": "",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "BGP Last Updated",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "description": "BGP peer session state for this switch (from the periodic BGP summary check).",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "fillOpacity": 70,
-              "lineWidth": 0,
-              "spanNulls": false
-            },
-            "decimals": 2,
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 6,
-          "w": 20,
-          "x": 4,
-          "y": 166
-        },
-        "id": 400,
-        "options": {
-          "alignValue": "left",
-          "legend": {
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "mergeValues": true,
-          "rowHeight": 0.9,
-          "showValue": "auto",
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "bgp_session_state{hostname=\"$switch\", sitename=\"T3_US_NRP\", bgp_session_state!=\"unknown\"} > 0",
-            "interval": "",
-            "legendFormat": "{{peer}} {{iptype}} {{bgp_session_state}} SENSE:{{sense}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "BGP Session State",
-        "type": "state-timeline"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 172
-        },
-        "id": 401,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "bgp_prefixes_received{hostname=\"$switch\", sitename=\"T3_US_NRP\"}",
-            "interval": "",
-            "legendFormat": "{{peer}} {{iptype}} SENSE:{{sense}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "BGP Prefixes Received",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 10,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "never",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "short"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 172
-        },
-        "id": 402,
-        "options": {
-          "legend": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "displayMode": "table",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "multi",
-            "sort": "none"
-          }
-        },
-        "pluginVersion": "8.5.27",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "qjScxmmVz"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "bgp_prefixes_advertised{hostname=\"$switch\", sitename=\"T3_US_NRP\"}",
-            "interval": "",
-            "legendFormat": "{{peer}} {{iptype}} SENSE:{{sense}}",
-            "range": true,
-            "refId": "A"
-          }
-        ],
-        "title": "BGP Prefixes Advertised",
-        "type": "timeseries"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "qjScxmmVz"
-        },
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -4657,7 +4324,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 180
+          "y": 166
         },
         "id": 37,
         "options": {
@@ -4750,7 +4417,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 180
+          "y": 166
         },
         "id": 27,
         "options": {
@@ -4843,7 +4510,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 188
+          "y": 174
         },
         "id": 29,
         "options": {
@@ -4936,7 +4603,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 188
+          "y": 174
         },
         "id": 28,
         "options": {
@@ -5029,7 +4696,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 196
+          "y": 182
         },
         "id": 30,
         "options": {
@@ -5122,7 +4789,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 196
+          "y": 182
         },
         "id": 31,
         "options": {
@@ -5215,7 +4882,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 204
+          "y": 190
         },
         "id": 38,
         "options": {
@@ -5308,7 +4975,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 204
+          "y": 190
         },
         "id": 39,
         "options": {
@@ -5401,7 +5068,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 212
+          "y": 198
         },
         "id": 40,
         "options": {
@@ -5494,7 +5161,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 212
+          "y": 198
         },
         "id": 41,
         "options": {
@@ -5587,7 +5254,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 220
+          "y": 206
         },
         "id": 42,
         "options": {
@@ -5680,7 +5347,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 220
+          "y": 206
         },
         "id": 43,
         "options": {
@@ -5710,6 +5377,356 @@
           }
         ],
         "title": "Interface Status (Broadcast Out)",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 214
+        },
+        "id": 411,
+        "panels": [],
+        "title": "BGP Status",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "When BGPMonitoring last checked this switch.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            },
+            "unit": "dateTimeAsLocal"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 215
+        },
+        "id": 411,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "bgp_last_scan_timestamp{sitename=\"T3_US_NRP\"} * 1000",
+            "interval": "",
+            "legendFormat": "{{hostname}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "BGP Last Updated",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "description": "BGP peer session state for this switch (from the periodic BGP summary check).",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0,
+              "spanNulls": false
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 20,
+          "x": 4,
+          "y": 215
+        },
+        "id": 400,
+        "options": {
+          "alignValue": "left",
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "mergeValues": true,
+          "rowHeight": 0.9,
+          "showValue": "auto",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "bgp_session_state{sitename=\"T3_US_NRP\", bgp_session_state!=\"unknown\"} > 0",
+            "interval": "",
+            "legendFormat": "{{hostname}} {{peer}} {{iptype}} {{bgp_session_state}} SENSE:{{sense}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "BGP Session State",
+        "type": "state-timeline"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 221
+        },
+        "id": 401,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "bgp_prefixes_received{sitename=\"T3_US_NRP\"}",
+            "interval": "",
+            "legendFormat": "{{hostname}} {{peer}} {{iptype}} SENSE:{{sense}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "BGP Prefixes Received",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 221
+        },
+        "id": 402,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.27",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "qjScxmmVz"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "bgp_prefixes_advertised{sitename=\"T3_US_NRP\"}",
+            "interval": "",
+            "legendFormat": "{{hostname}} {{peer}} {{iptype}} SENSE:{{sense}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "BGP Prefixes Advertised",
         "type": "timeseries"
       }
     ],
@@ -5771,6 +5788,6 @@
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2026-09-16. See git for changes",
+  "message": "Script changes made on 2026-09-17. See git for changes",
   "overwrite": true
 }

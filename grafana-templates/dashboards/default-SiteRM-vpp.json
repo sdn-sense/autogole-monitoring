@@ -5145,7 +5145,7 @@
       },
       "id": 500,
       "panels": [],
-      "title": "BGP",
+      "title": "BGP Status",
       "type": "row"
     },
     {
