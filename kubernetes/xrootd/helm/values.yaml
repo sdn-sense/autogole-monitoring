@@ -1,0 +1,164 @@
+# ---------------------------------------------------------------------------
+# xrootd-mon Helm chart values
+# ---------------------------------------------------------------------------
+# To add a new site: append a new entry under `sites` and run:
+#   helm upgrade --install xrootd-mon kubernetes/xrootd/helm/ -n opennsa
+# To add a new endpoint to an existing site: append under that site's
+# `endpoints` list and run the same upgrade command.
+# ---------------------------------------------------------------------------
+
+image:
+  repository: kvasu20/xrootd-mon
+  tag: "20260917-1837"
+  pullPolicy: Always
+
+namespace: opennsa
+
+resources:
+  requests:
+    cpu: 400m
+    memory: 256Mi
+  limits:
+    cpu: 480m
+    memory: 384Mi
+
+# (nodeAffinity hostname list removed — affinity is now per-site region-based;
+#  see defaults.region and sites[*].region below)
+
+proxy:
+  secretName: xcache-proxy
+  # Key inside the Secret that holds the x509 proxy file.
+  secretKey: x509-proxy
+
+# Defaults applied to every endpoint unless overridden at site or endpoint level.
+# Resolution order (most specific wins): endpoint > site > defaults
+defaults:
+  protocols: "root,davs,https"
+  modes: "read,write,delete"
+  # uniqWrite: false means XRD_UNIQ_WRITE is omitted entirely (shared/NFS storage).
+  # Set to true for sites where each origin has its own local storage.
+  uniqWrite: false
+  path: /store/group/tests-sense
+  # Fallback NRP region if a site entry omits the region key.
+  # Valid values: us-west, us-central, us-east, us-mountain, eu, pacific, latin-america
+  region: us-west
+
+# ---------------------------------------------------------------------------
+# Sites and their redirector endpoints.
+# Each endpoint inherits `protocols`, `modes`, `uniqWrite`, and `path` from
+# its site block, which in turn inherits from `defaults` above.
+# Any of those keys can be overridden at the site or individual endpoint level.
+# ---------------------------------------------------------------------------
+sites:
+
+  # -------------------------------------------------------------------------
+  - name: T2_US_Caltech
+    region: us-west
+    # required: pod MUST land on a UCSD/CENIC-network node to reach port 1094.
+    # k8s-igrok-0[1-6].calit2.optiputer.net are zone=ucsd and confirmed working.
+    affinityType: required
+    zones:
+      - ucsd
+      - ucsd-sdsc
+      - ucsd-sdsc-expanse
+      - ucsd-nrp
+      - ucsd-t2
+      - ucsd-suncave
+      - ucsd-sdsc-400g
+      - ucsd-sdsc-yu
+    path: /store/group/tests-sense
+    endpoints:
+      - host: redir-01.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-02.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-03.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-04.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-05.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-06.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-07.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-08.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-09.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-10.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-11.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-12.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-13.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-14.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-15.t2-sense.ultralight.org
+        port: 1094
+      - host: redir-16.t2-sense.ultralight.org
+        port: 1094
+
+  # -------------------------------------------------------------------------
+  - name: T1_US_FNAL
+    region: us-central
+    # preferred: network already reaches FNAL from us-central (mizzou confirmed).
+    # Soft preference keeps pods schedulable even if us-central nodes are full.
+    affinityType: preferred
+    path: /dcache/dteam/sense/
+    endpoints:
+      - host: cmssense6-origin-2841-1.fnal.gov
+        port: 2880
+      - host: cmssense6-origin-2842-1.fnal.gov
+        port: 2880
+      - host: cmssense6-origin-2843-1.fnal.gov
+        port: 2880
+
+  # -------------------------------------------------------------------------
+  - name: T2_US_UCSD
+    region: us-west
+    # required: pod MUST land on k8s-igrok-0[1-6].calit2.optiputer.net.
+    # Those nodes are on CENIC and confirmed to reach UCSD T2 origin data nodes.
+    # Other zone=ucsd nodes (k8s-4090-01, k8s-chase-ci-04, k8s-gpu-01, etc.)
+    # can reach port 1094 on the redirector but timeout on gfal data transfers
+    # because UCSD T2 origin firewall only allows known UCSD/CENIC IP ranges.
+    affinityType: required
+    nodes:
+      - k8s-igrok-01.calit2.optiputer.net
+      - k8s-igrok-02.calit2.optiputer.net
+      - k8s-igrok-03.calit2.optiputer.net
+      - k8s-igrok-04.calit2.optiputer.net
+      - k8s-igrok-05.calit2.optiputer.net
+      - k8s-igrok-06.calit2.optiputer.net
+    path: /store/group/tests-sense
+    endpoints:
+      - host: redir-f011.t2.ucsd.edu
+        port: 1094
+      - host: redir-f012.t2.ucsd.edu
+        port: 1094
+      - host: redir-f013.t2.ucsd.edu
+        port: 1094
+      - host: redir-f014.t2.ucsd.edu
+        port: 1094
+      - host: redir-f015.t2.ucsd.edu
+        port: 1094
+      - host: redir-f016.t2.ucsd.edu
+        port: 1094
+      - host: redir-f017.t2.ucsd.edu
+        port: 1094
+      - host: redir-f018.t2.ucsd.edu
+        port: 1094
+      - host: redir-f01a.t2.ucsd.edu
+        port: 1094
+      - host: redir-f01b.t2.ucsd.edu
+        port: 1094
+      - host: redir-f01c.t2.ucsd.edu
+        port: 1094
+      - host: redir-f01d.t2.ucsd.edu
+        port: 1094
+      - host: redir-f01e.t2.ucsd.edu
+        port: 1094
+      - host: redir-f01f.t2.ucsd.edu
+        port: 1094

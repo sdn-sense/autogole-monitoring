@@ -85,9 +85,205 @@ scrape_configs:
   static_configs:
   - targets:
     - dmm.nrp-nautilus.io:443
-- job_name: T2_US_Caltech_XRootD_1
+# --- T2_US_Caltech (16 redirectors) ---
+- job_name: T2_US_Caltech_XRootD_redir-01
   metrics_path: /metrics
   scrape_interval: 30s
   static_configs:
   - targets:
-    - xrootd-mon-service.opennsa.svc.cluster.local:8000
+    - xrootd-mon-svc-redir-01-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-02
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-02-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-03
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-03-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-04
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-04-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-05
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-05-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-06
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-06-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-07
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-07-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-08
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-08-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-09
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-09-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-10
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-10-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-11
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-11-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-12
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-12-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-13
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-13-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-14
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-14-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-15
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-15-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-16
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-16-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+# --- T1_US_FNAL (3 origins) ---
+- job_name: T1_US_FNAL_XRootD_cmssense6-origin-2841-1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-cmssense6-origin-2841-1-fnal-gov-2880.opennsa.svc.cluster.local:8000
+- job_name: T1_US_FNAL_XRootD_cmssense6-origin-2842-1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-cmssense6-origin-2842-1-fnal-gov-2880.opennsa.svc.cluster.local:8000
+- job_name: T1_US_FNAL_XRootD_cmssense6-origin-2843-1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-cmssense6-origin-2843-1-fnal-gov-2880.opennsa.svc.cluster.local:8000
+# --- T2_US_UCSD (14 redirectors) ---
+- job_name: T2_US_UCSD_XRootD_redir-f011
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f011-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f012
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f012-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f013
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f013-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f014
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f014-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f015
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f015-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f016
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f016-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f017
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f017-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f018
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f018-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01a
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01a-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01b
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01b-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01c
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01c-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01d
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01d-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01e
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01e-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01f
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01f-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+

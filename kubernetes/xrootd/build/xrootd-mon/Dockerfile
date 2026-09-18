@@ -11,6 +11,6 @@ ADD config/default/etc/supervisord.d/10-xrootd.conf /etc/supervisord.d/10-xrootd
 ADD config/default/opt/xroot-mon.py /opt/xroot-mon.py
 ADD config/default/opt/http-server.py /opt/http-server.py
 
-# Get latest CA's
-RUN fetch-crl || echo "Supress warnings."
+# Get latest CA's — timeout per-CA to avoid hanging on unreachable CRL endpoints
+RUN fetch-crl --define parallelism=10 --define httptimeout=10 --no-errors-out || echo "Supress warnings."
 

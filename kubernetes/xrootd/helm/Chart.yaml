@@ -1,0 +1,9 @@
+apiVersion: v2
+name: xrootd-mon
+description: >
+  Deploys one xrootd-mon Deployment + ClusterIP Service per XRootD redirector
+  endpoint. Each pod runs xroot-mon.py every 5 minutes, performing synthetic
+  read/write/delete tests and exposing results as Prometheus metrics on port 8000.
+type: application
+version: 0.1.0
+appVersion: "20260917-1837"

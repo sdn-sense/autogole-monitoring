@@ -166,6 +166,11 @@ class XRootDCache:
             return
         mngrOK = 100
         self.logger.info(f"Returned out from Redirector: {retOutput}")
+
+        # Shared-FS: accumulate per-server LFNs written during the loop so they
+        # can all be deleted via the redirector after every server has been tested.
+        sharedFsWrittenLFNs = []
+
         for line in retOutput.decode("utf-8").split('\n'):
             if not line:
                 break
@@ -177,6 +182,7 @@ class XRootDCache:
                 continue
             mngrOK = 0
             uniqname = host.replace('.', '-').replace(':', '_')
+
             # These are nodes who have separated storage; (no shared FS)
             if self.params['XRD_UNIQ_WRITE']:
                 if 'write' in self.params['XRD_MODES']:
@@ -194,6 +200,42 @@ class XRootDCache:
                         _, exitCode, runtime = self._executeCmd(cmd)
                         self.gauge.labels(**self._getLabels(host, "delete", protocol)).set(exitCode)
                         self.runtimeGauge.labels(**self._getLabels(host, "delete", protocol)).set(runtime)
+            else:
+                # Shared FS (NFS/network mount): preparefiles() already wrote one file per
+                # protocol via the redirector, visible to all servers on the shared filesystem.
+                # Step 1 — read the redirector-written file directly from this origin server.
+                #           This tests whether this specific server can serve shared-FS data.
+                redirector_uniqname = self.params['XRD_ENDPOINT'].replace('.', '-').replace(':', '_')
+                if 'read' in self.params['XRD_MODES']:
+                    for protocol in self.params['XRD_PROTOCOLS']:
+                        lfn = f"{self.lfn}-{redirector_uniqname}-{protocol}"
+                        cmd = f"timeout 30 gfal-copy -f {protocol}://{host}/{lfn} /dev/null"
+                        _, exitCode, runtime = self._executeCmd(cmd)
+                        self.gauge.labels(**self._getLabels(host, "read", protocol)).set(exitCode)
+                        self.runtimeGauge.labels(**self._getLabels(host, "read", protocol)).set(runtime)
+                # Step 2 — write a unique file directly to this origin server.
+                #           Records the LFN for post-loop cleanup via the redirector.
+                if 'write' in self.params['XRD_MODES']:
+                    for protocol in self.params['XRD_PROTOCOLS']:
+                        self._writeFile(protocol, host)
+                        sharedFsWrittenLFNs.append(f"{self.lfn}-{uniqname}-{protocol}")
+
+        # Step 3 (shared FS only) — after ALL servers have been tested, delete every written
+        # file via the redirector: the 3 redirector-written files from preparefiles() plus all
+        # per-server-written files accumulated in sharedFsWrittenLFNs.
+        # Uses root:// for all deletes — one protocol is sufficient since the files are plain
+        # bytes on shared storage (the protocol suffix is just part of the filename).
+        if not self.params['XRD_UNIQ_WRITE'] and 'delete' in self.params['XRD_MODES']:
+            redirector_uniqname = self.params['XRD_ENDPOINT'].replace('.', '-').replace(':', '_')
+            redir_lfns = [f"{self.lfn}-{redirector_uniqname}-{protocol}"
+                          for protocol in self.params['XRD_PROTOCOLS']]
+            all_lfns = redir_lfns + sharedFsWrittenLFNs
+            self.logger.info(f"Shared FS cleanup: deleting {len(all_lfns)} file(s) via redirector")
+            for lfn in all_lfns:
+                cmd = f"timeout 30 gfal-rm root://{self.params['XRD_ENDPOINT']}/{lfn}"
+                _, exitCode, runtime = self._executeCmd(cmd)
+                self.gauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "delete", "root")).set(exitCode)
+                self.runtimeGauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "delete", "root")).set(runtime)
 
         self.gauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "xrdmapc", "xrootd")).set(mngrOK)
         self.runtimeGauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "xrdmapc", "xrootd")).set(mngrruntime)

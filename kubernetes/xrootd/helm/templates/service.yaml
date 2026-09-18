@@ -1,0 +1,27 @@
+{{- range .Values.sites }}
+{{- $site := . }}
+{{- range .endpoints }}
+{{- $ep := . }}
+{{- $epCtx := dict "host" $ep.host "port" $ep.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "xrootd-mon.serviceName" $epCtx }}
+  namespace: {{ $.Values.namespace }}
+  labels:
+    app: xrootd-mon
+    endpoint: {{ include "xrootd-mon.endpointName" $epCtx }}
+    site: {{ $site.name }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 8000
+    targetPort: metrics
+    protocol: TCP
+  selector:
+    app: xrootd-mon
+    endpoint: {{ include "xrootd-mon.endpointName" $epCtx }}
+{{- end }}
+{{- end }}
