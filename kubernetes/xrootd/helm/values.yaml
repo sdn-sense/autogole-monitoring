@@ -9,7 +9,7 @@
 
 image:
   repository: kvasu20/xrootd-mon
-  tag: "20260917-1837"
+  tag: "20260918-1837"
   pullPolicy: Always
 
 namespace: opennsa
@@ -30,10 +30,27 @@ proxy:
   # Key inside the Secret that holds the x509 proxy file.
   secretKey: x509-proxy
 
+# Optional SciToken secret for gfal2 bearer-token auth.
+# When secretName is non-empty, BEARER_TOKEN is injected into every pod from
+# this Secret, allowing gfal2 to authenticate on connections that the XRootD
+# redirector redirects to a backend origin server (x509 is not forwarded on
+# the redirect leg; a bearer token is).
+# Leave secretName empty (the default) to disable — the pod falls back to the
+# x509 proxy mounted at /tmp/x509up_u0, exactly as before.
+bearerToken:
+  secretName: ""
+  secretKey: token
+
 # Defaults applied to every endpoint unless overridden at site or endpoint level.
 # Resolution order (most specific wins): endpoint > site > defaults
 defaults:
-  protocols: "root,davs,https"
+  # root:// removed — the monitoring pod's IP is not allowlisted in the XRootD
+  # door ACL, so gfal-copy/gfal-rm via root:// always times out.
+  # https:// removed — davs:// (WebDAV over HTTPS) is identical in practice;
+  # running both as separate protocols is redundant.
+  # root:// is still used implicitly by xrdmapc (hardcoded in the script) which
+  # does not read XRD_PROTOCOLS.
+  protocols: "davs"
   modes: "read,write,delete"
   # uniqWrite: false means XRD_UNIQ_WRITE is omitted entirely (shared/NFS storage).
   # Set to true for sites where each origin has its own local storage.

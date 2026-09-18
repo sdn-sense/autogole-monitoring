@@ -98,9 +98,20 @@ class XRootDCache:
         """Execute Command"""
         stTime = int(time.time())
         out = None
+        # Build the subprocess environment from the current pod environment, then
+        # explicitly overlay BEARER_TOKEN / BEARER_TOKEN_FILE when present.
+        # This ensures gfal2 can authenticate on the redirected leg of a transfer:
+        # the XRootD redirector does not forward x509 credentials to the backend
+        # origin server, but gfal2 re-sends the bearer token automatically on
+        # every connection it opens, including redirected ones.
+        subenv = os.environ.copy()
+        for _var in ('BEARER_TOKEN', 'BEARER_TOKEN_FILE'):
+            _val = os.environ.get(_var)
+            if _val:
+                subenv[_var] = _val
         try:
             self.logger.info(f"Call command {cmd}")
-            out = check_output(cmd, shell=True)
+            out = check_output(cmd, shell=True, env=subenv)
             exCode = 0
             self.logger.debug(f'Got Exit: {exCode}, Cmd: {cmd}')
         except CalledProcessError as ex:
@@ -113,6 +124,8 @@ class XRootDCache:
     def _writeFile(self, protocol, hostname):
         """Write File to XRootD"""
         uniqname = hostname.replace('.', '-').replace(':', '_')
+        # -p: create parent directories if they don't exist.
+        # -f: force overwrite if the file already exists from a previous cycle.
         cmd = f"timeout 30 gfal-copy -p -f {self.workdir}/xrd-cache-test {protocol}://{hostname}/{self.lfn}-{uniqname}-{protocol}"
         _, exitCode, runtime = self._executeCmd(cmd)
         self.gauge.labels(**self._getLabels(hostname, "write", protocol)).set(exitCode)
@@ -221,10 +234,11 @@ class XRootDCache:
                         sharedFsWrittenLFNs.append(f"{self.lfn}-{uniqname}-{protocol}")
 
         # Step 3 (shared FS only) — after ALL servers have been tested, delete every written
-        # file via the redirector: the 3 redirector-written files from preparefiles() plus all
+        # file via the redirector: the redirector-written files from preparefiles() plus all
         # per-server-written files accumulated in sharedFsWrittenLFNs.
-        # Uses root:// for all deletes — one protocol is sufficient since the files are plain
-        # bytes on shared storage (the protocol suffix is just part of the filename).
+        # Uses davs:// for all deletes — root:// is not allowlisted for gfal calls;
+        # one protocol is sufficient since the files are plain bytes on shared storage
+        # (the protocol suffix is just part of the filename).
         if not self.params['XRD_UNIQ_WRITE'] and 'delete' in self.params['XRD_MODES']:
             redirector_uniqname = self.params['XRD_ENDPOINT'].replace('.', '-').replace(':', '_')
             redir_lfns = [f"{self.lfn}-{redirector_uniqname}-{protocol}"
@@ -232,10 +246,10 @@ class XRootDCache:
             all_lfns = redir_lfns + sharedFsWrittenLFNs
             self.logger.info(f"Shared FS cleanup: deleting {len(all_lfns)} file(s) via redirector")
             for lfn in all_lfns:
-                cmd = f"timeout 30 gfal-rm root://{self.params['XRD_ENDPOINT']}/{lfn}"
+                cmd = f"timeout 30 gfal-rm davs://{self.params['XRD_ENDPOINT']}/{lfn}"
                 _, exitCode, runtime = self._executeCmd(cmd)
-                self.gauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "delete", "root")).set(exitCode)
-                self.runtimeGauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "delete", "root")).set(runtime)
+                self.gauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "delete", "davs")).set(exitCode)
+                self.runtimeGauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "delete", "davs")).set(runtime)
 
         self.gauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "xrdmapc", "xrootd")).set(mngrOK)
         self.runtimeGauge.labels(**self._getLabels(self.params['XRD_ENDPOINT'], "xrdmapc", "xrootd")).set(mngrruntime)

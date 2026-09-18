@@ -103,6 +103,15 @@ spec:
         # XRD_UNIQ_WRITE is intentionally omitted when false.
         # Setting it to "False" does NOT disable it — Python's bool("False") is True.
         # Omitting the variable entirely is the only way to keep it off.
+        {{- if $.Values.bearerToken.secretName }}
+        # SciToken for gfal2 bearer-token auth through the XRootD redirector.
+        # Injected only when bearerToken.secretName is set in values.yaml.
+        - name: BEARER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ $.Values.bearerToken.secretName }}
+              key: {{ $.Values.bearerToken.secretKey }}
+        {{- end }}
         resources:
           requests:
             cpu: {{ $.Values.resources.requests.cpu }}
