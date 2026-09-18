@@ -23,7 +23,7 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": 27,
   "links": [],
   "liveNow": false,
@@ -78,7 +78,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 1
               }
             ]
           }
@@ -100,7 +100,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -119,7 +119,8 @@
         }
       ],
       "title": "XRootD MapC Lookup",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Exit code of xrdmapc run against each redirector. Value 0 = redirector responded with at least one origin server. Non-zero = redirector unreachable or returned no servers (e.g. 100 = no nodes registered)."
     },
     {
       "datasource": {
@@ -171,7 +172,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 1
               }
             ]
           }
@@ -193,7 +194,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -212,7 +213,8 @@
         }
       ],
       "title": "XRootD Write",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Exit code of gfal-copy writing a test file to each redirector via davs://. Value 0 = file written successfully. Non-zero = write failed (e.g. 1 = generic error, 112 = EHOSTDOWN/site unreachable)."
     },
     {
       "datasource": {
@@ -264,7 +266,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 1
               }
             ]
           }
@@ -286,7 +288,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -305,7 +307,8 @@
         }
       ],
       "title": "XRootD Read Davs",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Exit code of gfal-copy reading the previously written test file back via davs://. Value 0 = read succeeded. Non-zero = read failed (e.g. 21 = WebDAV path error, 112 = EHOSTDOWN)."
     },
     {
       "datasource": {
@@ -357,7 +360,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 1
               }
             ]
           }
@@ -379,7 +382,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -398,7 +401,8 @@
         }
       ],
       "title": "XRootD Read https",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Exit code of gfal-copy reading a test file via https://. No site currently configures https as an active protocol \u2014 this panel will show No Data until an https endpoint is added."
     },
     {
       "datasource": {
@@ -450,7 +454,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 1
               }
             ]
           }
@@ -472,7 +476,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -491,7 +495,8 @@
         }
       ],
       "title": "XRootD Read root",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Exit code of gfal-copy reading a test file via root://. No site currently configures root as a gfal protocol \u2014 this panel will show No Data until a root endpoint is added."
     },
     {
       "datasource": {
@@ -565,7 +570,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -584,7 +589,8 @@
         }
       ],
       "title": "XRootD Logins",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Count of XRootD logins grouped by username. Requires the server-side XRootD log collector to be deployed \u2014 intentionally blank in the current setup."
     },
     {
       "datasource": {
@@ -658,7 +664,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -677,7 +683,8 @@
         }
       ],
       "title": "XRootD Connections Local ASN",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Count of XRootD connections grouped by local (server-side) ASN. Requires the server-side XRootD log collector \u2014 intentionally blank in the current setup."
     },
     {
       "datasource": {
@@ -751,7 +758,7 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -770,24 +777,216 @@
         }
       ],
       "title": "XRootD Connections Remote ASN",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Count of XRootD connections grouped by remote (client-side) ASN. Requires the server-side XRootD log collector \u2014 intentionally blank in the current setup."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OqvQAZCVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OqvQAZCVk"
+          },
+          "editorMode": "builder",
+          "expr": "xrootd_exit{mode=\"delete\"}",
+          "interval": "",
+          "legendFormat": "{{name}} {{protocol}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "XRootD Delete",
+      "type": "timeseries",
+      "description": "Exit code of gfal-rm deleting the test file from each redirector via davs://. Value 0 = file deleted successfully. Non-zero = delete failed (e.g. 21 = WebDAV path error, 112 = EHOSTDOWN)."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "OqvQAZCVk"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "OqvQAZCVk"
+          },
+          "editorMode": "builder",
+          "expr": "xrootd_runtime{mode=~\"write|read|xrdmapc|main|delete\"}",
+          "interval": "",
+          "legendFormat": "{{name}} {{mode}} {{protocol}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "XRootD Runtime",
+      "type": "timeseries",
+      "description": "Wall-clock time (seconds) each test mode took to complete. Modes: write, read, delete, xrdmapc, and main (total cycle time for the whole 5-minute run). The series labelled hostname=MAIN_PROGRAM mode=main is a sentinel showing total cycle duration \u2014 it is not a real host."
     }
   ],
   "refresh": "",
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "xrootd"
+  ],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
-  "title": "XRootD Read/Write/Mapc",
+  "timezone": "utc",
+  "title": "XRootD Read/Write/Delete/Mapc/Runtime",
   "uid": "OBY_t1tSk",
   "version": 3,
   "weekStart": ""
