@@ -20,7 +20,7 @@ resources:
     memory: 256Mi
   limits:
     cpu: 480m
-    memory: 307Mi
+    memory: 384Mi
 
 # (nodeAffinity hostname list removed — affinity is now per-site region-based;
 #  see defaults.region and sites[*].region below)
