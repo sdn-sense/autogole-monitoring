@@ -31,7 +31,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -94,8 +94,10 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -108,10 +110,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_exit{mode=\"xrdmapc\"}",
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"xrdmapc\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{hostname}} xrdmapc",
           "range": true,
@@ -125,7 +127,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -188,8 +190,10 @@
       "id": 6,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -202,10 +206,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_exit{mode=\"write\"}",
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"write\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{hostname}} {{protocol}}",
           "range": true,
@@ -219,7 +223,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -282,8 +286,10 @@
       "id": 3,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -296,10 +302,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_exit{mode=\"read\", protocol=\"davs\"}",
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"read\", protocol=\"davs\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{hostname}}",
           "range": true,
@@ -313,7 +319,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -376,8 +382,10 @@
       "id": 4,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -390,24 +398,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_exit{mode=\"read\", protocol=\"https\"}",
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"read\", protocol=\"https\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{hostname}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "XRootD Read https",
+      "title": "XRootD Read HTTPS",
       "type": "timeseries",
       "description": "Exit code of gfal-copy reading a test file via https://. No site currently configures https as an active protocol \u2014 this panel will show No Data until an https endpoint is added."
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -470,8 +478,10 @@
       "id": 5,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -484,24 +494,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_exit{mode=\"read\", protocol=\"root\"}",
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"read\", protocol=\"root\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{hostname}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "XRootD Read root",
+      "title": "XRootD Read Root",
       "type": "timeseries",
       "description": "Exit code of gfal-copy reading a test file via root://. No site currently configures root as a gfal protocol \u2014 this panel will show No Data until a root endpoint is added."
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -559,13 +569,15 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 19
+        "y": 37
       },
       "id": 7,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -578,7 +590,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
           "editorMode": "builder",
           "expr": "sum by(username) (xrootd_logins)",
@@ -595,7 +607,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -653,13 +665,15 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 19
+        "y": 37
       },
       "id": 8,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -672,7 +686,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
           "editorMode": "builder",
           "expr": "sum by(laddr_asn) (xrootd_connections)",
@@ -689,7 +703,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -747,13 +761,15 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 19
+        "y": 37
       },
       "id": 9,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -766,7 +782,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
           "editorMode": "builder",
           "expr": "sum by(raddr_asn) (xrootd_connections)",
@@ -783,7 +799,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -841,13 +857,15 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 19
       },
       "id": 10,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -860,10 +878,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_exit{mode=\"delete\"}",
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"delete\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{name}} {{protocol}}",
           "range": true,
@@ -877,7 +895,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "OqvQAZCVk"
+        "uid": "qjScxmmVz"
       },
       "fieldConfig": {
         "defaults": {
@@ -936,13 +954,15 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 28
       },
       "id": 11,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -955,10 +975,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "OqvQAZCVk"
+            "uid": "qjScxmmVz"
           },
-          "editorMode": "builder",
-          "expr": "xrootd_runtime{mode=~\"write|read|xrdmapc|main|delete\"}",
+          "editorMode": "code",
+          "expr": "xrootd_runtime{mode=~\"write|read|xrdmapc|main|delete\", name=~\"$redirector\"}",
           "interval": "",
           "legendFormat": "{{name}} {{mode}} {{protocol}}",
           "range": true,
@@ -970,7 +990,7 @@
       "description": "Wall-clock time (seconds) each test mode took to complete. Modes: write, read, delete, xrdmapc, and main (total cycle time for the whole 5-minute run). The series labelled hostname=MAIN_PROGRAM mode=main is a sentinel showing total cycle duration \u2014 it is not a real host."
     }
   ],
-  "refresh": "",
+  "refresh": "30s",
   "revision": 1,
   "schemaVersion": 38,
   "style": "dark",
@@ -978,7 +998,72 @@
     "xrootd"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "type": "custom",
+        "name": "site",
+        "label": "Site",
+        "description": "Filter by CMS site. Each value is the regex matched against the 'name' label (the redirector FQDN).",
+        "query": "T2_US_Caltech : .*t2-sense.ultralight.org,T2_US_UCSD : .*t2.ucsd.edu,T1_US_FNAL : .*fnal.gov",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "T2_US_Caltech",
+            "value": ".*t2-sense.ultralight.org"
+          },
+          {
+            "selected": false,
+            "text": "T2_US_UCSD",
+            "value": ".*t2.ucsd.edu"
+          },
+          {
+            "selected": false,
+            "text": "T1_US_FNAL",
+            "value": ".*fnal.gov"
+          }
+        ],
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "includeAll": true,
+        "allValue": ".*",
+        "multi": false,
+        "hide": 0,
+        "skipUrlSync": false
+      },
+      {
+        "type": "query",
+        "name": "redirector",
+        "label": "Redirector",
+        "description": "Filter by redirector (the 'name' label). Selecting a redirector shows metrics for that redirector and all origin nodes behind it (visible via the 'hostname' label in each panel).",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "query": {
+          "query": "label_values(xrootd_exit{name=~\"$site\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "definition": "label_values(xrootd_exit{name=~\"$site\"}, name)",
+        "regex": "",
+        "sort": 1,
+        "refresh": 1,
+        "includeAll": true,
+        "allValue": "$site",
+        "multi": false,
+        "hide": 0,
+        "skipUrlSync": false,
+        "options": [],
+        "current": {}
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
