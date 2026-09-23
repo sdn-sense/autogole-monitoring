@@ -120,9 +120,9 @@
           "refId": "A"
         }
       ],
-      "title": "XRootD MapC Lookup",
+      "title": "XRootD Backend Discovery",
       "type": "timeseries",
-      "description": "Exit code of xrdmapc run against each redirector. Value 0 = redirector responded with at least one origin server. Non-zero = redirector unreachable or returned no servers (e.g. 100 = no nodes registered)."
+      "description": "Exit code of the backend-discovery probe run each cycle against each redirector. Value 0 = probe succeeded (backends reachable). Non-zero = probe failed.\n\nTwo probe methods are used depending on site config (XRD_PROBE_METHOD env var):\n\u2022 xrdmapc (default, e.g. T2_US_Caltech, T1_US_FNAL): native XRootD manager query returns all registered origin servers. Value 100 = xrdmapc exited 0 but returned no Srv lines (ACL-blocked or no servers registered).\n\u2022 curl (e.g. T2_US_UCSD): HTTP HEAD to the redirector parses the 307 Location header to discover one backend per cycle (whichever the load-balancer chose). Value 100 = curl returned no redirect target (redirector unreachable or mis-configured)."
     },
     {
       "datasource": {
@@ -218,7 +218,7 @@
       ],
       "title": "XRootD Write",
       "type": "timeseries",
-      "description": "Exit code of gfal-copy writing a test file to each redirector via davs://. Value 0 = file written successfully. Non-zero = write failed (e.g. 1 = generic error, 112 = EHOSTDOWN/site unreachable)."
+      "description": "Exit code of gfal-copy writing a test file to each host via davs://. Value 0 = file written successfully. Non-zero = write failed (e.g. 1 = generic error, 112 = EHOSTDOWN/site unreachable).\n\nhostname label is the actual target written to:\n\u2022 xrdmapc sites (e.g. Caltech): one series per origin server behind the redirector.\n\u2022 curl sites (e.g. UCSD T2): one series per DTN discovered by the curl probe each cycle (load-balancer rotates across DTNs over time)."
     },
     {
       "datasource": {
@@ -312,9 +312,9 @@
           "refId": "A"
         }
       ],
-      "title": "XRootD Read Davs",
+      "title": "XRootD Read",
       "type": "timeseries",
-      "description": "Exit code of gfal-copy reading the previously written test file back via davs://. Value 0 = read succeeded. Non-zero = read failed (e.g. 21 = WebDAV path error, 112 = EHOSTDOWN)."
+      "description": "Exit code of gfal-copy reading the test file back via davs://. Value 0 = read succeeded. Non-zero = read failed (e.g. 21 = WebDAV path error, 112 = EHOSTDOWN).\n\nhostname label is the actual host read from:\n\u2022 xrdmapc sites (e.g. Caltech): one series per origin server; also includes a series for the redirector itself (the shared-FS file written via redirector is read back directly from each origin).\n\u2022 curl sites (e.g. UCSD T2): one series for the redirector (preparefiles read-back) plus one series for the DTN discovered by the curl probe."
     },
     {
       "datasource": {
@@ -890,7 +890,7 @@
       ],
       "title": "XRootD Delete",
       "type": "timeseries",
-      "description": "Exit code of gfal-rm deleting the test file from each redirector via davs://. Value 0 = file deleted successfully. Non-zero = delete failed (e.g. 21 = WebDAV path error, 112 = EHOSTDOWN)."
+      "description": "Exit code of gfal-rm deleting test files via davs://. Value 0 = file deleted successfully. Non-zero = delete failed.\n\nAll deletes in the shared-FS cleanup phase are issued via the redirector (hostname = redirector FQDN), covering both the redirector-written file and all per-backend-written files. Pre-delete attempts before each write (expected to fail with exit 2 on first cycle of each hour) are intentionally not recorded as metrics \u2014 only the end-of-cycle cleanup deletes appear here."
     },
     {
       "datasource": {
@@ -987,7 +987,7 @@
       ],
       "title": "XRootD Runtime",
       "type": "timeseries",
-      "description": "Wall-clock time (seconds) each test mode took to complete. Modes: write, read, delete, xrdmapc, and main (total cycle time for the whole 5-minute run). The series labelled hostname=MAIN_PROGRAM mode=main is a sentinel showing total cycle duration \u2014 it is not a real host."
+      "description": "Wall-clock time (seconds) each operation took to complete.\n\nModes in the legend:\n\u2022 write \u2014 gfal-copy write to a target host\n\u2022 read \u2014 gfal-copy read from a target host\n\u2022 delete \u2014 gfal-rm cleanup via redirector\n\u2022 xrdmapc \u2014 backend discovery probe (xrdmapc query or curl HEAD depending on site)\n\u2022 main \u2014 total cycle duration (hostname=MAIN_PROGRAM; sentinel, not a real host)\n\nFor curl-probe sites (e.g. UCSD T2), the xrdmapc runtime reflects the curl HEAD latency (~200 ms), not an xrdmapc query."
     }
   ],
   "refresh": "30s",
@@ -1073,6 +1073,6 @@
   "timezone": "utc",
   "title": "XRootD Read/Write/Delete/Mapc/Runtime",
   "uid": "OBY_t1tSk",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

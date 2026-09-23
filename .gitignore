@@ -19,6 +19,9 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+# Re-include the xrootd-mon source tree which lives under a directory named build/
+!kubernetes/xrootd/build/
+!kubernetes/xrootd/build/**
 develop-eggs/
 dist/
 downloads/

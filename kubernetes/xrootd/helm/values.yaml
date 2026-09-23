@@ -9,7 +9,7 @@
 
 image:
   repository: kvasu20/xrootd-mon
-  tag: "20260918-1837"
+  tag: "20260922-2100"
   pullPolicy: Always
 
 namespace: opennsa
@@ -125,6 +125,7 @@ sites:
     # Soft preference keeps pods schedulable even if us-central nodes are full.
     affinityType: preferred
     path: /dcache/dteam/sense/
+    probeMethod: curl
     endpoints:
       - host: cmssense6-origin-2841-1.fnal.gov
         port: 2880
@@ -150,6 +151,16 @@ sites:
       - k8s-igrok-05.calit2.optiputer.net
       - k8s-igrok-06.calit2.optiputer.net
     path: /store/group/tests-sense
+    # probeMethod: curl — xrdmapc subscriber queries are ACL-blocked externally
+    # on UCSD T2 redirectors (exit 0 but returns no Srv lines). Instead, a single
+    # HTTP HEAD request (curl -skI) is issued per cycle to parse the HTTP 307
+    # Location: header, revealing whichever DTN the load-balancer chose. That DTN
+    # is then tested directly with gfal read/write/delete. Coverage of the full
+    # backend pool accumulates over multiple 5-minute cycles as the load-balancer
+    # rotates among DTNs. redir-f01a through redir-f01f are excluded for now —
+    # f01a showed a missing test directory (/store/group/tests-sense/ returns 404)
+    # and the others are untested.
+    probeMethod: curl
     endpoints:
       - host: redir-f011.t2.ucsd.edu
         port: 1094
@@ -166,16 +177,4 @@ sites:
       - host: redir-f017.t2.ucsd.edu
         port: 1094
       - host: redir-f018.t2.ucsd.edu
-        port: 1094
-      - host: redir-f01a.t2.ucsd.edu
-        port: 1094
-      - host: redir-f01b.t2.ucsd.edu
-        port: 1094
-      - host: redir-f01c.t2.ucsd.edu
-        port: 1094
-      - host: redir-f01d.t2.ucsd.edu
-        port: 1094
-      - host: redir-f01e.t2.ucsd.edu
-        port: 1094
-      - host: redir-f01f.t2.ucsd.edu
         port: 1094

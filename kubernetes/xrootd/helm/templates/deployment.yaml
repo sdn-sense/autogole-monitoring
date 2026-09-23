@@ -9,6 +9,7 @@
 {{- $protocols := $ep.protocols | default $site.protocols | default $.Values.defaults.protocols }}
 {{- $modes := $ep.modes | default $site.modes | default $.Values.defaults.modes }}
 {{- $uniqWrite := $ep.uniqWrite | default $site.uniqWrite | default $.Values.defaults.uniqWrite }}
+{{- $probeMethod := $ep.probeMethod | default $site.probeMethod | default "" }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -101,6 +102,15 @@ spec:
           value: "True"
         {{- end }}
         # XRD_UNIQ_WRITE is intentionally omitted when false.
+        {{- if $probeMethod }}
+        # XRD_PROBE_METHOD controls backend-server discovery.
+        # 'xrdmapc' (default, omitted): native XRootD manager query — use when the
+        #   redirector exposes its subscriber list externally (e.g. T2_US_Caltech).
+        # 'curl': HTTP HEAD → parse Location: header — use when xrdmapc is ACL-blocked
+        #   (e.g. T2_US_UCSD). Returns one backend per cycle; coverage accumulates.
+        - name: XRD_PROBE_METHOD
+          value: {{ $probeMethod | quote }}
+        {{- end }}
         # Setting it to "False" does NOT disable it — Python's bool("False") is True.
         # Omitting the variable entirely is the only way to keep it off.
         {{- if $.Values.bearerToken.secretName }}
