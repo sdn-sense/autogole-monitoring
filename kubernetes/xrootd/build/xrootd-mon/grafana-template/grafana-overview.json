@@ -1,0 +1,1520 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [
+    {
+      "icon": "external link",
+      "title": "Detailed Dashboard",
+      "tooltip": "Original per-metric time-series detail dashboard",
+      "type": "link",
+      "url": "/d/OBY_t1tSk/xrootd-read-write-delete-mapc-runtime",
+      "targetBlank": true
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "id": 100,
+      "type": "row",
+      "title": "Fleet at a Glance \u2014 Current Status per Redirector",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 101,
+      "type": "stat",
+      "title": "Write \u2014 Current Status",
+      "description": "One coloured tile per redirector. Colour = worst exit code across all backends behind that redirector right now (last sample within 10 min).\n\nGreen = OK (0)  |  Red = FAIL (1\u201399)  |  Orange = No backends found (100)\n\nQuery aggregates across all origins with max by(name), so a single failing backend turns the whole redirector's tile Red.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 1,
+        "w": 8,
+        "h": 6
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          },
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "max by(name) (last_over_time(xrootd_exit{mode=\"write\", name=~\"$redirector\"}[10m]))",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": false,
+          "instant": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "type": "stat",
+      "title": "Read \u2014 Current Status",
+      "description": "One coloured tile per redirector. Colour = worst read exit code across all backends behind that redirector right now (last sample within 10 min).\n\nGreen = OK (0)  |  Red = FAIL (1\u201399)  |  Orange = No backends found (100)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 1,
+        "w": 8,
+        "h": 6
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          },
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "max by(name) (last_over_time(xrootd_exit{mode=\"read\", name=~\"$redirector\"}[10m]))",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": false,
+          "instant": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "type": "stat",
+      "title": "Discovery \u2014 Current Status",
+      "description": "One coloured tile per redirector. Shows whether the backend discovery probe (xrdmapc or curl) succeeded in this redirector's last cycle (within 10 min).\n\nGreen = OK (0)  |  Orange = No backends / probe failed (100)\n\nMethod per site:\n\u2022 T2_US_Caltech, T1_US_FNAL: xrdmapc --list all\n\u2022 T2_US_UCSD: curl -skI HEAD \u2192 HTTP 307 Location header",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 1,
+        "w": 8,
+        "h": 6
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          },
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "value"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "max by(name) (last_over_time(xrootd_exit{mode=\"xrdmapc\", name=~\"$redirector\"}[10m]))",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": false,
+          "instant": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 200,
+      "type": "row",
+      "title": "Write Health Timeline \u2014 per Redirector",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 7,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 201,
+      "type": "state-timeline",
+      "title": "Write \u2014 Worst-case per Redirector over Time",
+      "description": "One row per redirector. Value = max exit code across ALL backends behind that redirector at each 5-minute cycle.\n\nGreen = all backends OK  |  Red = at least one backend failed  |  Orange = no backends discovered\n\nAggregated with max by(name) so the row count stays equal to the number of redirectors regardless of how many origins are behind each one. Zoom into a specific redirector using the Redirector variable to see individual backend rows (Row 5).",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 24,
+        "h": 14
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.85,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "max by(name) (xrootd_exit{mode=\"write\", name=~\"$redirector\"})",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 300,
+      "type": "row",
+      "title": "Read Health Timeline \u2014 per Redirector",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 22,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 301,
+      "type": "state-timeline",
+      "title": "Read \u2014 Worst-case per Redirector over Time",
+      "description": "One row per redirector. Value = max read exit code across ALL backends (and the redirector's own preparefiles read-back) at each 5-minute cycle.\n\nGreen = all reads OK  |  Red = at least one read failed\n\nFilters to davs:// only to avoid double-counting (root:// and davs:// test the same file on the same path; keeping only davs:// gives one canonical read result per host).",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 23,
+        "w": 24,
+        "h": 14
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.85,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "max by(name) (xrootd_exit{mode=\"read\", protocol=\"davs\", name=~\"$redirector\"})",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 400,
+      "type": "row",
+      "title": "Discovery & Delete Health Timeline",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 37,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 401,
+      "type": "state-timeline",
+      "title": "Backend Discovery over Time",
+      "description": "One row per redirector. Exit code of the backend-discovery probe each cycle.\n\n0 = probe succeeded and found \u22651 backend\n100 = probe returned no backends (xrdmapc: no Srv lines; curl: no 307 Location)\n\nMethod per site:\n\u2022 T2_US_Caltech, T1_US_FNAL: xrdmapc --list all\n\u2022 T2_US_UCSD: curl -skI HEAD \u2192 HTTP 307 Location",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 38,
+        "w": 12,
+        "h": 12
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.85,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"xrdmapc\", name=~\"$redirector\"}",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 402,
+      "type": "state-timeline",
+      "title": "Delete (Cleanup) over Time",
+      "description": "One row per redirector. Exit code of the end-of-cycle davs:// gfal-rm cleanup.\n\nEach cycle deletes the redirector-written file plus all per-backend-written files via the redirector. 0 = all deletes succeeded.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 38,
+        "w": 12,
+        "h": 12
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.85,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"delete\", name=~\"$redirector\"}",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 500,
+      "type": "row",
+      "title": "Failure Rate & Cycle Runtime",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 50,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 501,
+      "type": "timeseries",
+      "title": "Operation Failure Rate (%) \u2014 per Redirector",
+      "description": "Percentage of backend operations that returned a non-zero exit code per 5-minute cycle, grouped by redirector and operation mode.\n\nFormula: (backends_with_nonzero_exit / total_backends) \u00d7 100\n\nHealthy redirectors show a flat 0% line. A spike means:\n\u2022 12.5% on a Caltech redirector (8 origins) = exactly 1 origin failed that cycle\n\u2022 100% on a UCSD redirector (1 DTN/cycle via curl) = that DTN failed\n\nUses `> bool 0` in the numerator so redirectors with zero failures produce a 0 result (instead of disappearing from the panel when the count-of-failures query returns no data).\n\nThreshold lines: yellow = any failure (>0%), red = majority failing (\u226550%).",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 51,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "percent",
+          "decimals": 1,
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "(\n  sum by(name, mode)(xrootd_exit{mode=~\"write|read|delete\", name=~\"$redirector\"} > bool 0)\n  /\n  count by(name, mode)(xrootd_exit{mode=~\"write|read|delete\", name=~\"$redirector\"})\n) * 100",
+          "interval": "",
+          "legendFormat": "{{name}} {{mode}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 502,
+      "type": "timeseries",
+      "title": "Total Cycle Runtime \u2014 per Redirector",
+      "description": "Wall-clock time for the entire monitoring cycle (MAIN_PROGRAM sentinel), one line per redirector.\n\nThis is the total duration for write + xrdmapc/curl + all backend read/write/delete tests.\n\nTypical values:\n\u2022 UCSD T2 (curl probe, 1 DTN): ~13 s\n\u2022 Caltech T2 (xrdmapc, 8 origins): ~57 s\n\nThreshold lines: yellow = 15 s (slow), red = 28 s (near the 30 s per-op gfal timeout).\nFor per-operation runtimes, select a specific redirector and expand Row 6.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 59,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "s",
+          "decimals": 1,
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 28
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "xrootd_runtime{mode=\"main\", name=~\"$redirector\"}",
+          "interval": "",
+          "legendFormat": "{{name}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 600,
+      "type": "row",
+      "title": "Per-Backend Detail \u2014 select one Redirector above",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 67,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 601,
+      "type": "state-timeline",
+      "title": "Write \u2014 per Backend Host",
+      "description": "One row per individual backend host that received a write in the selected time window.\n\n\u26a0\ufe0f  Select a single Redirector from the dropdown above to use this panel. With Redirector=All, all ~130 backend rows are shown simultaneously and the panel becomes unreadable. Narrowing to one redirector shows 1\u20138 rows (Caltech/FNAL) or 1 row per DTN sampled so far (UCSD T2 curl probe).\n\nGreen = OK (0) \u00b7 Red = FAIL \u00b7 Orange = No backends discovered (100)\nmergeValues=true: consecutive same-state cycles collapse into one wide band.",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 68,
+        "w": 24,
+        "h": 16
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          },
+          "noValue": "\u2190 Select one Redirector above"
+        },
+        "overrides": []
+      },
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.85,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"write\", name=~\"$redirector\"}",
+          "interval": "",
+          "legendFormat": "{{hostname}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 602,
+      "type": "state-timeline",
+      "title": "Read \u2014 per Backend Host",
+      "description": "One row per individual backend host for read operations (davs:// only).\n\n\u26a0\ufe0f  Select a single Redirector from the dropdown above. Includes the redirector\u2019s own preparefiles read-back row plus one row per origin/DTN.\n\nGreen = OK (0) \u00b7 Red = FAIL",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 84,
+        "w": 24,
+        "h": 16
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "0": {
+                  "text": "OK",
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "range",
+              "options": {
+                "from": 1,
+                "to": 99,
+                "result": {
+                  "text": "FAIL",
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            },
+            {
+              "type": "value",
+              "options": {
+                "100": {
+                  "text": "NO BACKENDS",
+                  "color": "orange",
+                  "index": 2
+                }
+              }
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "orange",
+                "value": 100
+              }
+            ]
+          },
+          "noValue": "\u2190 Select one Redirector above"
+        },
+        "overrides": []
+      },
+      "options": {
+        "alignValue": "center",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.85,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "xrootd_exit{mode=\"read\", protocol=\"davs\", name=~\"$redirector\"}",
+          "interval": "",
+          "legendFormat": "{{hostname}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 603,
+      "type": "timeseries",
+      "title": "Per-Operation Runtime \u2014 per Backend Host",
+      "description": "Runtime (seconds) of each individual gfal command, broken down by mode and hostname.\n\nModes: write, read, delete, xrdmapc (discovery probe), main (total cycle).\n\n\u26a0\ufe0f  Only useful when a single Redirector is selected. With All selected, 140+ lines overlap and the panel is unreadable.\n\nThreshold lines: yellow = 15 s (slow), red = 28 s (near the 30 s gfal timeout).",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "qjScxmmVz"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 100,
+        "w": 24,
+        "h": 10
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "s",
+          "decimals": 1,
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 28
+              }
+            ]
+          },
+          "noValue": "\u2190 Select one Redirector above"
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "qjScxmmVz"
+          },
+          "editorMode": "code",
+          "expr": "xrootd_runtime{mode=~\"write|read|xrdmapc|main|delete\", name=~\"$redirector\"}",
+          "interval": "",
+          "legendFormat": "{{hostname}} {{mode}}",
+          "range": true,
+          "instant": false,
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "1m",
+  "revision": 1,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "xrootd",
+    "sense",
+    "overview"
+  ],
+  "templating": {
+    "list": [
+      {
+        "type": "custom",
+        "name": "site",
+        "label": "Site",
+        "description": "Filter by CMS site. Selecting a site pre-populates the Redirector dropdown.",
+        "query": "T2_US_Caltech : .*t2-sense.ultralight.org,T2_US_UCSD : .*t2.ucsd.edu,T1_US_FNAL : .*fnal.gov",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "T2_US_Caltech",
+            "value": ".*t2-sense.ultralight.org"
+          },
+          {
+            "selected": false,
+            "text": "T2_US_UCSD",
+            "value": ".*t2.ucsd.edu"
+          },
+          {
+            "selected": false,
+            "text": "T1_US_FNAL",
+            "value": ".*fnal.gov"
+          }
+        ],
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "includeAll": true,
+        "allValue": ".*",
+        "multi": false,
+        "hide": 0,
+        "skipUrlSync": false
+      },
+      {
+        "type": "query",
+        "name": "redirector",
+        "label": "Redirector",
+        "description": "Select a single redirector to drill into per-backend detail. Leave as All for fleet-wide view.",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "qjScxmmVz"
+        },
+        "query": {
+          "query": "label_values(xrootd_exit{name=~\"$site\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "definition": "label_values(xrootd_exit{name=~\"$site\"}, name)",
+        "regex": "",
+        "sort": 1,
+        "refresh": 1,
+        "includeAll": true,
+        "allValue": "$site",
+        "multi": false,
+        "hide": 0,
+        "skipUrlSync": false,
+        "options": [],
+        "current": {}
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "XRootD Storage \u2014 Fleet Overview",
+  "uid": "xrootd-fleet-overview",
+  "version": 2,
+  "weekStart": ""
+}
