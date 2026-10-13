@@ -435,10 +435,13 @@ class PromModel():
                     continue
                 tmpEntry = copy.deepcopy(STATE_SCRAPE)
                 parsedUrl = urlparse(externalsnmp)
-                if isClusterLocal(parsedUrl.hostname):
-                    tmpEntry = setInsecureTLS(tmpEntry)
-                else:
-                    tmpEntry = setTokenAuth(tmpEntry, site)
+                tmpEntry['scheme'] = parsedUrl.scheme
+                # TLS/token settings only apply to https; never send the token over plain http.
+                if parsedUrl.scheme == 'https':
+                    if isClusterLocal(parsedUrl.hostname):
+                        tmpEntry = setInsecureTLS(tmpEntry)
+                    else:
+                        tmpEntry = setTokenAuth(tmpEntry, site)
                 tmpEntry['job_name'] = self._genName(f'{site}_NSISNMPMon')
                 tmpEntry['static_configs'][0]['targets'].append(parsedUrl.netloc)
                 tmpEntry['metrics_path'] = parsedUrl.path
