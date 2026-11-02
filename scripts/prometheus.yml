@@ -77,12 +77,204 @@ scrape_configs:
   static_configs:
   - targets:
     - dmm.nrp-nautilus.io:443
-- job_name: T2_US_Caltech_XRootD_1
+- job_name: T2_US_Caltech_XRootD_redir-01
   metrics_path: /metrics
   scrape_interval: 30s
   static_configs:
   - targets:
-    - xrootd-mon-service.opennsa.svc.cluster.local:8000
+    - xrootd-mon-svc-redir-01-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-02
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-02-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-03
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-03-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-04
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-04-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-05
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-05-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-06
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-06-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-07
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-07-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-08
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-08-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-09
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-09-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-10
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-10-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-11
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-11-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-12
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-12-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-13
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-13-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-14
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-14-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-15
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-15-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_Caltech_XRootD_redir-16
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-16-t2-sense-ultralight-org-1094.opennsa.svc.cluster.local:8000
+- job_name: T1_US_FNAL_XRootD_cmssense6-origin-2841-1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-cmssense6-origin-2841-1-fnal-gov-2880.opennsa.svc.cluster.local:8000
+- job_name: T1_US_FNAL_XRootD_cmssense6-origin-2842-1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-cmssense6-origin-2842-1-fnal-gov-2880.opennsa.svc.cluster.local:8000
+- job_name: T1_US_FNAL_XRootD_cmssense6-origin-2843-1
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-cmssense6-origin-2843-1-fnal-gov-2880.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f011
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f011-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f012
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f012-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f013
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f013-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f014
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f014-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f015
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f015-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f016
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f016-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f017
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f017-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f018
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f018-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01a
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01a-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01b
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01b-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01c
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01c-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01d
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01d-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01e
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01e-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
+- job_name: T2_US_UCSD_XRootD_redir-f01f
+  metrics_path: /metrics
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - xrootd-mon-svc-redir-f01f-t2-ucsd-edu-1094.opennsa.svc.cluster.local:8000
 - authorization:
     credentials_file: /etc/oidc/oidc-nrm_cenic.token
   job_name: NRM_CENIC_STATE
@@ -2400,13 +2592,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: longitude
-  scheme: https
+  scheme: http
   scrape_interval: 30s
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
-  tls_config:
-    insecure_skip_verify: true
 - job_name: T2_US_SDSC_NSISNMPMon_0
   metrics_path: /edgecore_s0/metrics
   relabel_configs:
@@ -2426,13 +2616,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: longitude
-  scheme: https
+  scheme: http
   scrape_interval: 30s
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
-  tls_config:
-    insecure_skip_verify: true
 - honor_labels: true
   job_name: T2_US_SDSC_PROMFED
   metric_relabel_configs:
@@ -2764,6 +2952,105 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
+  job_name: T2_US_SDSC_PROMFED_9
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-2.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: node-2-2.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_PROMFED_10
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-3.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: node-2-3.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_PROMFED_11
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-4.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: node-2-4.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
   job_name: T3_US_NRP_PROMFED
   metric_relabel_configs:
   - action: drop
@@ -3005,13 +3292,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: longitude
-  scheme: https
+  scheme: http
   scrape_interval: 30s
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
-  tls_config:
-    insecure_skip_verify: true
 - job_name: T2_US_SDSC_DEV_NSISNMPMon_0
   metrics_path: /edgecore_s0/metrics
   relabel_configs:
@@ -3031,13 +3316,11 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: longitude
-  scheme: https
+  scheme: http
   scrape_interval: 30s
   static_configs:
   - targets:
     - nsi-snmpmon-prpdev.opennsa.svc.cluster.local:8443
-  tls_config:
-    insecure_skip_verify: true
 - honor_labels: true
   job_name: T2_US_SDSC_DEV_PROMFED
   metric_relabel_configs:
@@ -4673,7 +4956,7 @@ scrape_configs:
     source_labels:
     - __address__
     target_label: sitename
-  - replacement: '[2602:fcfb:1d:fff0::2]:80'
+  - replacement: '[2602:fcfb:1d:fff0::2]:1234'
     source_labels:
     - __address__
     target_label: endpoint
@@ -4684,7 +4967,7 @@ scrape_configs:
   scrape_interval: 30s
   static_configs:
   - targets:
-    - '[2602:fcfb:1d:fff0::2]:80'
+    - '[2602:fcfb:1d:fff0::2]:1234'
 - authorization:
     credentials_file: /etc/oidc/oidc-t3_fabric_cern1.token
   job_name: T3_FABRIC_CERN1_STATE
@@ -7150,6 +7433,39 @@ scrape_configs:
     - __address__
     target_label: software
   - replacement: pas.wash.net.internet2.edu
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T3_US_Internet2_PROMFED_42
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="pas.macc.net.internet2.edu", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T3_US_Internet2
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: pas.macc.net.internet2.edu
     source_labels:
     - __address__
     target_label: realhostname

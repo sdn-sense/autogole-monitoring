@@ -6,7 +6,10 @@ from datetime import date
 from yaml import safe_load as yload
 from git import Repo
 from grafana_client import GrafanaApi
+from grafana_client.client import GrafanaClientError
 from slack_sdk import WebClient
+
+TOPOLOGY_DATASOURCE_UID = 'siterm-topology'
 
 def getSiteRMRepo():
     """Get SiteRM Config Repo"""
@@ -253,6 +256,28 @@ def insertDashboardParams(sitename, software, dashbJson, worker):
     return dashbJson
 
 
+def ensureTopologyDatasource(worker):
+    """Create/update the data source the SiteRM dashboards use to embed each site's topology page"""
+    password = worker.config.get('siterm_topology_password', '')
+    if not password:
+        print('siterm_topology_password is not set in config.yaml. Topology panels will not load.')
+        return
+    # Only used as Grafana's login-checked proxy to the siterm-topology sidecar (never queried);
+    # the Prometheus type forwards GET requests to any path.
+    datasource = {'uid': TOPOLOGY_DATASOURCE_UID, 'name': 'SiteRM Topology', 'type': 'prometheus', 'access': 'proxy',
+                  'url': worker.config.get('siterm_topology_url', 'http://siterm-topology-service:9098'),
+                  'basicAuth': True, 'basicAuthUser': 'grafana',
+                  'secureJsonData': {'basicAuthPassword': password}}
+    try:
+        worker.grafanaapi.datasource.get_datasource_by_uid(TOPOLOGY_DATASOURCE_UID)
+    except GrafanaClientError as ex:
+        if ex.status_code != 404:
+            raise
+        worker.grafanaapi.datasource.create_datasource(datasource)
+        return
+    worker.grafanaapi.datasource.update_datasource_by_uid(TOPOLOGY_DATASOURCE_UID, datasource)
+
+
 def addDefaultDashboards(worker):
     """Add Default dashboards"""
     orgConfig = worker.getOrganizationConfig()
@@ -356,6 +381,7 @@ def run():
     worker.createAlerts()
     worker.getDashboards()
     worker.createFolder('SiteRM')
+    ensureTopologyDatasource(worker)
     updateCreateChannels('All SiteRM Endpoints', '', {'url': config['api_url']}, worker)
     worker.createFolder('NSI')
     updateCreateChannels('All NSI Endpoints', '', {'url': config['api_url']}, worker)

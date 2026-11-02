@@ -8,7 +8,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 800Gi
+      storage: 2Ti
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -150,12 +150,53 @@ spec:
         volumeMounts:
         - name: prometheus-config-volume
           mountPath: /etc/prometheus
+      # Serves each site's SiteRM Archify topology page to Grafana (via its data source proxy). It reads the
+      # rm-configs checkout oidcgen keeps in siterm-repo and uses the token oidcgen mints for that site directory.
+      - name: siterm-topology
+        image: sdnsense/siterm-topology:latest
+        imagePullPolicy: Always
+        env:
+          - name: TOPO_REPO_DIR
+            value: /siterm-repo/rm-configs
+          - name: TOPO_TOKEN_DIR
+            value: /etc/oidc
+          - name: TOPO_USER
+            value: grafana
+          - name: TOPO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: autogole-monitoring
+                key: siterm-topology-password
+        ports:
+          - name: siterm-topo
+            containerPort: 9098
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: siterm-topo
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        volumeMounts:
+          - name: oidc-token-dir
+            mountPath: /etc/oidc
+            readOnly: true
+          - name: siterm-repo
+            mountPath: /siterm-repo
+            readOnly: true
       - name: oidcgen
         image: sdnsense/oidcgen:latest
         imagePullPolicy: Always
         env:
           - name: SITERM_TOKEN_DIR
             value: /tokens
+          # Shared with siterm-topology; a subdirectory because oidcgen re-clones it when broken.
+          - name: SITERM_REPO_DIR
+            value: /siterm-repo/rm-configs
         resources:
           limits:
             cpu: 500m
@@ -166,6 +207,8 @@ spec:
         volumeMounts:
           - name: oidc-token-dir
             mountPath: /tokens
+          - name: siterm-repo
+            mountPath: /siterm-repo
           - name: sense-o-auth
             mountPath: /root/.sense-o-auth.yaml
             subPath: .sense-o-auth.yaml
@@ -187,6 +230,8 @@ spec:
       - name: oidc-token-dir
         emptyDir:
           medium: Memory
+      - name: siterm-repo
+        emptyDir: {}
       - name: sense-o-auth
         configMap:
           name: sense-o-auth
@@ -226,6 +271,20 @@ spec:
     - port: 9090
       protocol: TCP
       targetPort: http-prometheus
+  selector:
+    app: prometheus
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: siterm-topology-service
+spec:
+  ports:
+    - port: 9098
+      targetPort: siterm-topo
+      protocol: TCP
   selector:
     app: prometheus
   sessionAffinity: None

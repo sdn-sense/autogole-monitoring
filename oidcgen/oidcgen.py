@@ -28,6 +28,8 @@ def getSiteRMRepo(dirpath):
     try:
         repo = Repo(dirpath)
         repo.git.fetch("--all")
+        # fetch alone never updates the checkout; follow the remote so new sites get tokens without a restart
+        repo.git.reset("--hard", "origin/HEAD")
 
     except (InvalidGitRepositoryError, NoSuchPathError):
         if os.path.exists(dirpath):
@@ -90,8 +92,10 @@ def execute(dirpath):
                 getToken(dirName)
 
 if __name__ == "__main__":
-    tmpdir = tempfile.mkdtemp()
+    # SITERM_REPO_DIR shares the checkout with sidecars (siterm-topology). It is removed and re-cloned
+    # if broken, so it must be a directory inside a volume, not the volume mount point itself.
+    repodir = os.environ.get("SITERM_REPO_DIR") or tempfile.mkdtemp()
     while True:
-        execute(tmpdir)
+        execute(repodir)
         print("Run finished. Sleeping for 60 seconds.")
         time.sleep(30)

@@ -47,6 +47,7 @@ kubectl create secret generic autogole-monitoring \
         --from-file=networkrm-key=secrets/networkrm-privkey.pem \
         --from-file=bundle-ca=secrets/bundle-ca.pem \
         --from-file=prometheus-web-yml=secrets/web.yml \
+        --from-file=siterm-topology-password=secrets/siterm-topology-password \
         --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
 ```
 
@@ -91,4 +92,34 @@ sed -i '' 's/dellos9_s0/$switch/' new-default-SiteRM.json
 sed -i '' 's/dellos9_s1/$switch/' new-default-SiteRM.json
 ```
 
+# SiteRM topology panels
 
+Each SiteRM dashboard starts with a collapsed "Topology" row that embeds the site's Archify topology
+(link speeds, port-channels, device health) from `GET /api/<SITENAME>/topo/archify?view=graph` on the site Frontend.
+The legend, health and link cards are left out here; they stay on the SiteRM web UI.
+
+How it works:
+- `siterm-topology` (sidecar in the Prometheus pod, `siterm-topology/topoproxy.py`) reads the rm-configs checkout that
+  oidcgen keeps in the shared `siterm-repo` volume: each enabled site directory names its Frontends (`mapping.yaml` ->
+  `main.yaml` webdomain and sites) and oidcgen saves that directory's token as `oidc-<dir>.token`. It fetches the page
+  with that token and caches it for 5 minutes. Sites oidcgen has no token for show "no token for this site yet".
+- Grafana reaches it only through the "SiteRM Topology" data source proxy
+  (`/api/datasources/proxy/uid/siterm-topology/topology/<SITENAME>`), so only logged-in Grafana users see it.
+  Grafana serves proxied pages with `Content-Security-Policy: sandbox`: the diagram is static (no zoom/export),
+  but it cannot run scripts or touch the Grafana session. The interactive view stays on the SiteRM Frontend.
+- Sites running a SiteRM version without `/topo/archify` show a short "not available" message in the panel.
+
+Setup:
+```
+# 1. Shared password between Grafana's data source and the sidecar
+python3 -c "import secrets; print(secrets.token_urlsafe(24), end='')" > kubernetes/secrets/siterm-topology-password
+# add it to the autogole-monitoring secret (see "Create new secrets" above) and to scripts/config.yaml:
+#   siterm_topology_password: <same value>
+# 2. Build and publish the sidecar image, and oidcgen (it shares its rm-configs checkout via SITERM_REPO_DIR)
+cd siterm-topology; ./build.sh; ./docker-hub-upload.sh
+cd ../oidcgen; ./build.sh; ./docker-hub-upload.sh
+# 3. Deploy the sidecar and its service
+kubectl apply -f kubernetes/prometheus.yaml --kubeconfig $KUBE_CONF -n $KUBE_NAMESPACE
+# 4. Create/update the data source and redeploy dashboards
+cd scripts; python3 update-grafana-slack.py
+```
