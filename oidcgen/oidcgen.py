@@ -15,6 +15,10 @@ from sense.client.siterm.frontend_api import FrontendApi
 os.environ["SITERM_TOKEN_EXPIRY_SKEW"] = "300" # 5 mins before
 os.environ.setdefault("SENSE_TIMEOUT", "15") # HTTP connect/read timeout for site alive checks
 
+# 401s in a row (one check per loop) before a site's cached token is replaced
+UNAUTHORIZED_LIMIT = 3
+UNAUTHORIZED = {}
+
 def loadYamlFile(fname):
     """Load Yaml file"""
     with open(fname, 'r', encoding='utf-8') as fd:
@@ -58,11 +62,27 @@ def saveToken(sitename, token):
     with open(tokenfile, 'w', encoding='utf-8') as f:
         f.write(token)
 
+def checkToken(api, sitename):
+    """Call an endpoint that needs the token; return the HTTP status code"""
+    return api.client.makeRequest(sitename=sitename, url="/api/auth/whoami", verb="GET", data={})[2].status_code
+
+
 def getToken(sitename):
-    """Get token for a given site"""
+    """Get token for a given site; replace it after UNAUTHORIZED_LIMIT 401s in a row"""
     try:
         api = FrontendApi()
-        api.get_alive(sitename=sitename)
+        if checkToken(api, sitename) == 401:
+            UNAUTHORIZED[sitename] = UNAUTHORIZED.get(sitename, 0) + 1
+            print(f"{sitename} rejected the token (HTTP 401, {UNAUTHORIZED[sitename]}/{UNAUTHORIZED_LIMIT} in a row)")
+            if UNAUTHORIZED[sitename] >= UNAUTHORIZED_LIMIT:
+                # The client reuses a cached token until it expires, even when the Frontend no longer
+                # accepts it (e.g. it got new signing keys). Drop it so the next request gets a new one.
+                print(f"Requesting a new token for {sitename}")
+                api.client._popToken(sitename)
+                checkToken(api, sitename)
+                UNAUTHORIZED.pop(sitename)
+        else:
+            UNAUTHORIZED.pop(sitename, None)
         token = api.client._token_cache.get(sitename, {}).get("access_token")
         saveToken(sitename, token)
     except Exception as ex:
