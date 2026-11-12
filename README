@@ -105,8 +105,10 @@ How it works:
   with that token and caches it for 5 minutes. Sites oidcgen has no token for show "no token for this site yet".
 - Grafana reaches it only through the "SiteRM Topology" data source proxy
   (`/api/datasources/proxy/uid/siterm-topology/topology/<SITENAME>`), so only logged-in Grafana users see it.
-  Grafana serves proxied pages with `Content-Security-Policy: sandbox`: the diagram is static (no zoom/export),
-  but it cannot run scripts or touch the Grafana session. The interactive view stays on the SiteRM Frontend.
+  Grafana serves proxied pages with `Content-Security-Policy: sandbox`: the page cannot run scripts or touch the
+  Grafana session, so Archify's viewer (zoom, export, its click panel) does not work there. Instead the sidecar adds a
+  static details panel per device and link that CSS shows on click (device type and status, upstream/downstream reach,
+  neighbours, and each physical link and port-channel). Zoom and the active path filter stay on the SiteRM Frontend.
 - Sites running a SiteRM version without `/topo/archify` show a short "not available" message in the panel.
 
 Setup:

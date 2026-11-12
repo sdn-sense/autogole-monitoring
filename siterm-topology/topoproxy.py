@@ -17,6 +17,8 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from collections import deque
+from html.parser import HTMLParser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from yaml import YAMLError, safe_load
@@ -44,6 +46,37 @@ RESPONSE_HEADERS = {
 }
 # Scripts never run behind Grafana's proxy, so hide the viewer controls that would do nothing.
 STATIC_STYLE = "<style>.toolbar, .diagram-nav { display: none !important; }</style>"
+# Archify's click-to-inspect panel is built by its viewer script, which cannot run here. addDetails() adds a static
+# panel per device and link instead; clicking focuses the element (devices already have tabindex) and CSS shows it.
+SAFE_ID = re.compile(r"^[A-Za-z0-9_-]{1,128}$")
+LINK_GROUP = re.compile(r'<g data-siterm-link="(e\d+)">(.*?)</g>', re.DOTALL)
+# Archify's own edge drawing, kept when SiteRM did not redraw a device pair.
+PLAIN_EDGE = re.compile(r'<path (data-edge-from="[^"]*" data-edge-to="[^"]*"[^>]*?\sdata-edge-id="(e\d+)"[^>]*)/>')
+DETAILS_STYLE = """
+svg [data-node-id], svg [data-siterm-link], svg path[data-edge-id][tabindex] { cursor: pointer; }
+svg [data-node-id]:focus, svg [data-siterm-link]:focus, svg path[data-edge-id]:focus {
+  outline: none; filter: drop-shadow(0 0 6px var(--frontend-stroke));
+}
+svg .st-hit { fill: none; stroke: transparent; stroke-width: 12; pointer-events: stroke; }
+.st-detail {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 50; box-sizing: border-box;
+  width: min(340px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow: auto; padding: 12px 14px;
+  background: var(--toolbar-menu-bg, var(--bg)); border: 1px solid var(--panel-border); border-radius: 10px; color: var(--text);
+  font-size: 12px; line-height: 1.4; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); outline: none;
+}
+.st-detail:hover, .st-detail:focus { display: block; }
+.st-detail .st-kind { color: var(--frontend-stroke); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.st-detail h4 { margin: 2px 0; font-size: 15px; overflow-wrap: anywhere; }
+.st-detail h5 { margin: 12px 0 4px; color: var(--text-muted); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.st-detail p { margin: 0; color: var(--text-muted); overflow-wrap: anywhere; }
+.st-detail ul { margin: 0; padding: 0; list-style: none; }
+.st-detail li { padding: 4px 0; border-top: 1px solid var(--panel-border); overflow-wrap: anywhere; }
+.st-detail li small { display: block; color: var(--text-muted); }
+.st-detail .st-reach { display: flex; gap: 8px; margin-top: 10px; }
+.st-detail .st-reach span { flex: 1; padding: 4px 8px; border: 1px solid var(--panel-border); border-radius: 6px; }
+.st-detail .st-reach b { float: right; }
+.st-detail .st-hint { margin-top: 10px; color: var(--text-dim); font-size: 11px; }
+"""
 
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -133,6 +166,167 @@ class SiteMap:
             return self.sites.get(site)
 
 
+class DiagramParser(HTMLParser):
+    """Collect the devices, links (with their SiteRM tooltips) and legend labels of an Archify diagram's SVG."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.nodes = {}
+        self.edges = {}
+        self.kinds = {}
+        self._edge = None
+        self._title = None
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        nodeId, edgeId = attrs.get("data-node-id") or "", attrs.get("data-edge-id") or ""
+        if tag == "g" and SAFE_ID.match(nodeId):
+            node = {"label": attrs.get("data-node-label") or nodeId, "sublabel": attrs.get("data-node-sublabel") or "", "kind": attrs.get("data-node-kind") or ""}
+            self.nodes.setdefault(nodeId, node)
+        elif attrs.get("data-legend-kind") and attrs.get("data-legend-label"):
+            self.kinds.setdefault(attrs["data-legend-kind"], attrs["data-legend-label"])
+        elif SAFE_ID.match(edgeId) and attrs.get("data-edge-from") and attrs.get("data-edge-to"):
+            edge = self.edges.setdefault(edgeId, {"from": attrs["data-edge-from"], "to": attrs["data-edge-to"], "lines": [], "bundles": []})
+            # SiteRM draws one path per physical link and port-channel rings as ellipses, each with a <title>.
+            self._edge = (tag, edge["bundles"] if tag == "ellipse" else edge["lines"])
+        elif tag == "title" and self._edge:
+            self._title = []
+
+    def handle_data(self, data):
+        if self._title is not None:
+            self._title.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "title" and self._title is not None:
+            text = " ".join("".join(self._title).split())
+            if text and text not in self._edge[1]:
+                self._edge[1].append(text)
+            self._title = None
+        elif self._edge and tag == self._edge[0]:
+            self._edge = None
+
+
+def _plural(count, noun):
+    """Return '1 link' or '3 links'."""
+    return f"{count} {noun}{'' if count == 1 else 's'}"
+
+
+def _reach(start, adjacency):
+    """Return how many devices are reachable from start along the diagram's edge direction."""
+    seen, queue = {start}, deque([start])
+    while queue:
+        for nxt in adjacency.get(queue.popleft(), ()):
+            if nxt not in seen:
+                seen.add(nxt)
+                queue.append(nxt)
+    return len(seen) - 1
+
+
+def _items(rows):
+    """Return a <ul> of (bold title, [detail lines]) rows; all text is escaped."""
+    lis = []
+    for title, details in rows:
+        head = f"<b>{html.escape(title)}</b>" if title else ""
+        lis.append("<li>" + head + "".join(f"<small>{html.escape(line)}</small>" for line in details) + "</li>")
+    return "<ul>" + "".join(lis) + "</ul>"
+
+
+def _panel(panelId, kind, title, subtitle, body):
+    """Return one hidden details panel; tabindex keeps it open while it is clicked (see DETAILS_STYLE)."""
+    return (
+        f'<div class="st-detail" id="{panelId}" tabindex="-1" role="region" aria-label="{html.escape(title)} details">'
+        f'<div class="st-kind">{html.escape(kind)}</div><h4>{html.escape(title)}</h4><p>{html.escape(subtitle)}</p>{body}'
+        '<p class="st-hint">Click outside this panel to close it.</p></div>'
+    )
+
+
+def _focusRules(focused, panelId, keep):
+    """Return the CSS that shows a panel while its element has focus and dims the devices and links not in keep."""
+    selectors = [f'[data-node-id="{nodeId}"]' for nodeId in keep["nodes"]] + [f'[data-siterm-link="{e}"], [data-edge-id="{e}"]' for e in keep["edges"]]
+    when = f"body:has({focused}:focus)"
+    dimmed = "svg :is([data-node-id], [data-siterm-link], path[data-edge-id][tabindex])"
+    return f"{when} #{panelId} {{ display: block; }}\n{when} {dimmed}:not({', '.join(selectors)}) {{ opacity: 0.25; }}"
+
+
+def _nodeDetails(nodeId, diagram, adjacency):
+    """Return the panel and CSS for one device: like Archify's own panel, with the SiteRM link details of each neighbour."""
+    nodes, edges = diagram["nodes"], diagram["edges"]
+    node = nodes[nodeId]
+    panelId = f"st-d-n-{nodeId}"
+    body = (
+        f'<div class="st-reach"><span>Upstream <b>{_reach(nodeId, adjacency["up"])}</b></span>'
+        f"<span>Downstream <b>{_reach(nodeId, adjacency['down'])}</b></span></div>"
+    )
+    keep = {"nodes": [nodeId], "edges": []}
+    for heading, own, other in (("Outgoing", "from", "to"), ("Incoming", "to", "from")):
+        rows = [(edgeId, edge) for edgeId, edge in edges.items() if edge[own] == nodeId]
+        if rows:
+            body += f"<h5>{heading} &middot; {len(rows)}</h5>" + _items((nodes[edge[other]]["label"], edge["lines"] + edge["bundles"]) for _, edge in rows)
+        keep["nodes"] += [edge[other] for _, edge in rows]
+        keep["edges"] += [edgeId for edgeId, _ in rows]
+    kind = diagram["kinds"].get(node["kind"], node["kind"] or "Device")
+    return _panel(panelId, kind, node["label"], node["sublabel"], body), _focusRules(f'svg [data-node-id="{nodeId}"]', panelId, keep)
+
+
+def _edgeDetails(edgeId, diagram):
+    """Return the panel and CSS for one device pair: its endpoints, physical links and port-channels."""
+    nodes, edge = diagram["nodes"], diagram["edges"][edgeId]
+    ends = (nodes[edge["from"]], nodes[edge["to"]])
+    panelId = f"st-d-e-{edgeId}"
+    subtitle = ", ".join([_plural(len(edge["lines"]), "link")] + ([_plural(len(edge["bundles"]), "port-channel")] if edge["bundles"] else []))
+    body = "<h5>Endpoints</h5>" + _items((end["label"], [end["sublabel"]] if end["sublabel"] else []) for end in ends)
+    if edge["lines"]:
+        body += f"<h5>Links &middot; {len(edge['lines'])}</h5>" + _items(("", [line]) for line in edge["lines"])
+    if edge["bundles"]:
+        body += f"<h5>Port-channels &middot; {len(edge['bundles'])}</h5>" + _items(("", [bundle]) for bundle in edge["bundles"])
+    keep = {"nodes": [edge["from"], edge["to"]], "edges": [edgeId]}
+    focused = f':is([data-siterm-link="{edgeId}"], path[data-edge-id="{edgeId}"][tabindex])'
+    return _panel(panelId, "Link", f"{ends[0]['label']} ↔ {ends[1]['label']}", subtitle, body), _focusRules(focused, panelId, keep)
+
+
+def _focusableLink(match, diagram):
+    """Make one SiteRM link group focusable, with a wider invisible stroke under its thin lines so it is easy to click."""
+    edgeId, inner = match.group(1), match.group(2)
+    edge = diagram["edges"].get(edgeId)
+    if edge is None:
+        return match.group(0)
+    hits = "".join(f'<path class="st-hit" d="{d}"/>' for d in re.findall(r'<path [^>]*?\sd="([^"]*)"', inner))
+    label = f"Details of the links between {diagram['nodes'][edge['from']]['label']} and {diagram['nodes'][edge['to']]['label']}"
+    return f'<g data-siterm-link="{edgeId}" tabindex="0" role="button" aria-label="{html.escape(label)}">{hits}{inner}</g>'
+
+
+def addDetails(page):
+    """Add a static details panel for every device and link of an Archify page, shown on click without any script.
+
+    Returns the page unchanged if it has no diagram this understands (for example an older SiteRM version).
+    """
+    svgStart = page.find("<svg viewBox")
+    svgEnd = page.find("</svg>", svgStart) if svgStart >= 0 else -1
+    if svgEnd < 0:
+        return page
+    parser = DiagramParser()
+    parser.feed(page[svgStart:svgEnd])
+    parser.close()
+    nodes = parser.nodes
+    edges = {edgeId: edge for edgeId, edge in parser.edges.items() if edge["from"] in nodes and edge["to"] in nodes}
+    if not nodes:
+        return page
+    diagram = {"nodes": nodes, "edges": edges, "kinds": parser.kinds}
+    adjacency = {"up": {}, "down": {}}
+    for edge in edges.values():
+        adjacency["down"].setdefault(edge["from"], []).append(edge["to"])
+        adjacency["up"].setdefault(edge["to"], []).append(edge["from"])
+    details = [_nodeDetails(nodeId, diagram, adjacency) for nodeId in nodes] + [_edgeDetails(edgeId, diagram) for edgeId in edges]
+    svg = LINK_GROUP.sub(lambda match: _focusableLink(match, diagram), page[svgStart:svgEnd])
+    svg = PLAIN_EDGE.sub(lambda match: f'<path {match.group(1)} tabindex="0"/>' if match.group(2) in edges else match.group(0), svg)
+    style = '<style id="siterm-details">' + DETAILS_STYLE + "\n".join(rule for _, rule in details) + "\n</style>"
+    panels = '<div id="siterm-details-panels">' + "".join(panel for panel, _ in details) + "</div>"
+    page = page[:svgStart] + svg + page[svgEnd:]
+    bodyEnd = page.rfind("</body>")
+    page = page[:bodyEnd] + panels + page[bodyEnd:] if bodyEnd >= 0 else page + panels
+    return page.replace("</head>", style + "</head>", 1)
+
+
 def fetchTopology(base, site, tokenFile, pathId):
     """Fetch the Archify topology page of one site from its Frontend."""
     with open(tokenFile, "r", encoding="utf-8") as fd:
@@ -145,7 +339,7 @@ def fetchTopology(base, site, tokenFile, pathId):
         body = resp.read(MAX_BYTES + 1)
     if len(body) > MAX_BYTES:
         raise ValueError("topology page is larger than 16MB")
-    return body.decode("utf-8", errors="replace").replace("</head>", STATIC_STYLE + "</head>", 1).encode()
+    return addDetails(body.decode("utf-8", errors="replace")).replace("</head>", STATIC_STYLE + "</head>", 1).encode()
 
 
 def errorPage(site, message):
