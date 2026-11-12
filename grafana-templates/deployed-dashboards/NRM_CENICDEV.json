@@ -43,7 +43,7 @@
         "type": "row"
       },
       {
-        "description": "SiteRM topology from the site Frontend (link speeds, port-channels, device health). Refreshed every 5 minutes. Static view: hover a link or node for details; open the SiteRM Frontend for zoom and the active path filter.",
+        "description": "SiteRM topology from the site Frontend (link speeds, port-channels, device health). Refreshed every 5 minutes. Click a device or link for details (no zoom or export here); open the SiteRM Frontend for zoom and the active path filter.",
         "gridPos": {
           "h": 24,
           "w": 24,
