@@ -734,6 +734,130 @@ scrape_configs:
   - targets:
     - https://sense-gpn.nrp-nautilus.io:443/api/NRM_GPN/models?current=true&summary=false&encode=false
 - authorization:
+    credentials_file: /etc/oidc/oidc-nrm_sc26.token
+  job_name: NRM_SC26_STATE
+  metrics_path: /api/NRM_SC26/monitoring/prometheus/metrics
+  relabel_configs:
+  - replacement: NRM_SC26
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.8527
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.6158
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-scinet.nrp-nautilus.io:443
+- authorization:
+    credentials_file: /etc/oidc/oidc-nrm_sc26.token
+  job_name: NRM_SC26_STATEHTTP
+  metrics_path: /siterm-http-status
+  relabel_configs:
+  - replacement: NRM_SC26
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-HTTP
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.8527
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.6158
+    source_labels:
+    - __address__
+    target_label: longitude
+  scheme: https
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-scinet.nrp-nautilus.io:443
+- job_name: NRM_SC26_MODEL_V4
+  metrics_path: /probe
+  params:
+    module:
+    - v4_nrm_sc26
+  relabel_configs:
+  - replacement: NRM_SC26
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.8527
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.6158
+    source_labels:
+    - __address__
+    target_label: longitude
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - https://sense-scinet.nrp-nautilus.io:443/api/NRM_SC26/models?current=true&summary=false&encode=false
+- job_name: NRM_SC26_ICMP_V4
+  metrics_path: /probe
+  params:
+    module:
+    - icmp_v4
+  relabel_configs:
+  - replacement: NRM_SC26
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: 41.8527
+    source_labels:
+    - __address__
+    target_label: latitude
+  - replacement: -87.6158
+    source_labels:
+    - __address__
+    target_label: longitude
+  - replacement: v4
+    source_labels:
+    - __address__
+    target_label: ipversion
+  - source_labels:
+    - __address__
+    target_label: __param_target
+  - source_labels:
+    - __param_target
+    target_label: instance
+  - replacement: prometheus-blackbox-exporter-service:9115
+    target_label: __address__
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - sense-scinet.nrp-nautilus.io
+- authorization:
     credentials_file: /etc/oidc/oidc-t1_us_fnal.token
   job_name: T1_US_FNAL_STATE
   metrics_path: /api/T1_US_FNAL/monitoring/prometheus/metrics
@@ -2701,72 +2825,6 @@ scrape_configs:
   metrics_path: /federate
   params:
     match[]:
-    - '{instance="k8s-gen4-01.sdsc.optiputer.net:9100", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: k8s-gen4-01.sdsc.optiputer.net
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_2
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  metrics_path: /federate
-  params:
-    match[]:
-    - '{instance="k8s-gen4-02.sdsc.optiputer.net:9100", service="node-exporter"}'
-  relabel_configs:
-  - replacement: T2_US_SDSC
-    source_labels:
-    - __address__
-    target_label: sitename
-  - replacement: SiteRM-NodeExporter
-    source_labels:
-    - __address__
-    target_label: software
-  - replacement: k8s-gen4-02.sdsc.optiputer.net
-    source_labels:
-    - __address__
-    target_label: realhostname
-  scheme: http
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - thanos-federate-proxy-service:9099
-- honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_3
-  metric_relabel_configs:
-  - action: drop
-    regex: ALERTS
-    source_labels:
-    - __name__
-  - action: drop
-    regex: ALERTS_FOR_STATE
-    source_labels:
-    - __name__
-  metrics_path: /federate
-  params:
-    match[]:
     - '{instance="node-2-6.sdsc.optiputer.net", service="node-exporter"}'
   relabel_configs:
   - replacement: T2_US_SDSC
@@ -2787,7 +2845,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_4
+  job_name: T2_US_SDSC_PROMFED_2
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2820,7 +2878,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_5
+  job_name: T2_US_SDSC_PROMFED_3
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2853,7 +2911,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_6
+  job_name: T2_US_SDSC_PROMFED_4
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2886,7 +2944,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_7
+  job_name: T2_US_SDSC_PROMFED_5
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2919,7 +2977,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_8
+  job_name: T2_US_SDSC_PROMFED_6
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2952,7 +3010,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_9
+  job_name: T2_US_SDSC_PROMFED_7
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -2985,7 +3043,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_10
+  job_name: T2_US_SDSC_PROMFED_8
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -3018,7 +3076,7 @@ scrape_configs:
   - targets:
     - thanos-federate-proxy-service:9099
 - honor_labels: true
-  job_name: T2_US_SDSC_PROMFED_11
+  job_name: T2_US_SDSC_PROMFED_9
   metric_relabel_configs:
   - action: drop
     regex: ALERTS
@@ -3042,6 +3100,39 @@ scrape_configs:
     - __address__
     target_label: software
   - replacement: node-2-4.sdsc.optiputer.net
+    source_labels:
+    - __address__
+    target_label: realhostname
+  scheme: http
+  scrape_interval: 30s
+  static_configs:
+  - targets:
+    - thanos-federate-proxy-service:9099
+- honor_labels: true
+  job_name: T2_US_SDSC_PROMFED_10
+  metric_relabel_configs:
+  - action: drop
+    regex: ALERTS
+    source_labels:
+    - __name__
+  - action: drop
+    regex: ALERTS_FOR_STATE
+    source_labels:
+    - __name__
+  metrics_path: /federate
+  params:
+    match[]:
+    - '{instance="node-2-1.sdsc.optiputer.net", service="node-exporter"}'
+  relabel_configs:
+  - replacement: T2_US_SDSC
+    source_labels:
+    - __address__
+    target_label: sitename
+  - replacement: SiteRM-NodeExporter
+    source_labels:
+    - __address__
+    target_label: software
+  - replacement: node-2-1.sdsc.optiputer.net
     source_labels:
     - __address__
     target_label: realhostname

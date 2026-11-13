@@ -76,6 +76,23 @@ data:
           authorization:
             credentials_file: /etc/oidc/oidc-nrm_gpn.token
 
+      v4_nrm_sc26:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip4"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_sc26.token
+      v6_nrm_sc26:
+        prober: http
+        http:
+          fail_if_ssl: false
+          fail_if_not_ssl: true
+          preferred_ip_protocol: "ip6"
+          authorization:
+            credentials_file: /etc/oidc/oidc-nrm_sc26.token
+
       v4_t1_us_fnal:
         prober: http
         http:
