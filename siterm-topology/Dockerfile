@@ -9,7 +9,9 @@ RUN git init -q /tmp/siterm && \
     git -C /tmp/siterm checkout -q FETCH_HEAD && \
     mkdir -p /opt/lib/SiteRMLibs && touch /opt/lib/SiteRMLibs/__init__.py && \
     cp /tmp/siterm/src/python/SiteRMLibs/ArchifyTopology.py /tmp/siterm/src/python/SiteRMLibs/ArchifyLayout.py \
-       /tmp/siterm/src/python/SiteRMLibs/DefaultParams.py /opt/lib/SiteRMLibs/
+       /tmp/siterm/src/python/SiteRMLibs/DefaultParams.py /opt/lib/SiteRMLibs/ && \
+    { grep -q '"site": "frontend"' /opt/lib/SiteRMLibs/ArchifyTopology.py || \
+      { echo "SITERM_REF $SITERM_REF has no site node type (needed for collapsed sites)" >&2; exit 1; }; }
 RUN git init -q /tmp/archify && \
     git -C /tmp/archify fetch -q --depth 1 https://github.com/tt-a1i/archify "$ARCHIFY_REF" && \
     git -C /tmp/archify checkout -q FETCH_HEAD && \

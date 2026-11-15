@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": null,
+    "id": 5588,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -5819,11 +5819,11 @@
     "timepicker": {},
     "timezone": "",
     "title": "NRM_SC26",
-    "uid": null,
-    "version": 19,
+    "uid": "d3ddd6e6-0053-4062-a35f-c63d8b10367e",
+    "version": 1,
     "weekStart": ""
   },
   "folderId": 5181,
-  "message": "Script changes made on 2026-11-13. See git for changes",
+  "message": "Script changes made on 2026-11-15. See git for changes",
   "overwrite": true
 }

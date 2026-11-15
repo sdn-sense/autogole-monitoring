@@ -45,9 +45,9 @@ CA_FILE = os.environ.get("TOPO_CA_FILE") or None
 REQUEST_PATH = re.compile(r"^/topology/([A-Za-z0-9_.-]{1,128})$")
 GLOBAL_PATH = "/global-topology"
 GLOBAL_NAME = "All SiteRM sites"
-# network: switches, WAN clouds and the links between sites; full: also servers and LAN nodes, as on each site's page.
-GLOBAL_VIEWS = {"network": ("switch", "cloud"), "full": ("switch", "server", "lan", "cloud")}
-GLOBAL_DEFAULT_VIEW = "network"
+# Expanded site lists longer than this are cut (each name is at most 128 characters, see REQUEST_PATH).
+MAX_EXPANDED = 64
+GLOBAL_PAGE_CACHE = 64
 GLOBAL_WORKERS = int(os.environ.get("TOPO_GLOBAL_WORKERS", "8"))
 GLOBAL_RENDER_TIMEOUT = int(os.environ.get("TOPO_GLOBAL_RENDER_TIMEOUT", "300"))
 # isAlias URNs: urn:ogf:network:<domain>[:<year>]:<device>:<port>
@@ -56,11 +56,20 @@ NOTE_STYLE = (
     "position:fixed;top:8px;right:8px;z-index:40;max-width:min(560px,calc(100vw - 16px));padding:6px 10px;"
     "border:1px solid var(--panel-border);border-radius:8px;background:var(--toolbar-menu-bg, var(--bg));color:var(--text-muted);font-size:11px"
 )
+# Collapsed sites are links (a sandboxed page cannot run scripts, but it may navigate itself): a transparent box over the node.
+EXPAND_STYLE = """
+svg a.st-expand rect { fill: transparent; stroke: transparent; stroke-width: 2.5; cursor: pointer; }
+svg a.st-expand:hover rect, svg a.st-expand:focus rect { stroke: var(--frontend-stroke); outline: none; }
+.st-note a { color: var(--frontend-stroke); }
+"""
 RESPONSE_HEADERS = {
     "Content-Security-Policy": "sandbox",
     "X-Content-Type-Options": "nosniff",
     "Cache-Control": "private, max-age=60",
 }
+# The combined page's site nodes are links that reload the frame; a sandbox with an opaque origin blocked that in Chromium.
+# allow-same-origin without allow-scripts still runs no script, so the page can do no more than follow its own links.
+GLOBAL_CSP = "sandbox allow-same-origin"
 # Scripts never run behind Grafana's proxy, so hide the viewer controls that would do nothing.
 STATIC_STYLE = "<style>.toolbar, .diagram-nav { display: none !important; }</style>"
 # Archify's click-to-inspect panel is built by its viewer script, which cannot run here. addDetails() adds a static
@@ -446,6 +455,93 @@ def _addToCloud(merged, parts, port, link):
     cloud["topo"][key] = link
 
 
+def _siteOf(name, entry):
+    """Return the site of a merged device (<site>:<device>), or None for a cloud."""
+    return None if entry["DeviceInfo"]["type"] == "cloud" else name.split(":", 1)[0]
+
+
+def _prefixed(value, prefix):
+    """Return "<prefix>:<value>", or value when it is empty."""
+    return f"{prefix}:{value}" if value else value
+
+
+def _collapseLink(link, siteNodes):
+    """Point a link at its peer's site node when that site is collapsed, keeping the peer device name in the peer's port names."""
+    device = link["device"]
+    if device not in siteNodes:
+        return link
+    short = device.split(":", 1)[1]
+    link = {**link, "device": siteNodes[device]}
+    if isinstance(link.get("port"), dict):
+        # WAN entry shape: the peer's ports are localport and the port-channel members.
+        link["localport"] = _prefixed(str(link.get("localport") or ""), short)
+        if isinstance(link.get("members"), dict):
+            link["members"] = {f"{short}:{member}": speed for member, speed in link["members"].items()}
+        if isinstance(link.get("membersdown"), list):
+            link["membersdown"] = [f"{short}:{member}" for member in link["membersdown"]]
+    else:
+        link["port"] = _prefixed(str(link.get("port") or ""), short)
+        link["remoteportchannel"] = _prefixed(str(link.get("remoteportchannel") or ""), short)
+    return link
+
+
+def collapseSites(merged, sites, expanded):
+    """Return the merged topology with every site not in expanded drawn as one site node.
+
+    Links between devices of one collapsed site become self links, which buildDiagram drops; port names keep the device name.
+    """
+    siteNodes = {name: _siteOf(name, entry) for name, entry in merged.items() if _siteOf(name, entry) not in (None, *expanded)}
+    out = {site: {"DeviceInfo": {"type": "site", "name": site}, "topo": {}} for site in sites if site not in expanded}
+    for name, entry in merged.items():
+        links = {port: _collapseLink(link, siteNodes) for port, link in entry["topo"].items()}
+        if name not in siteNodes:
+            out[name] = {**entry, "topo": links}
+            continue
+        short = name.split(":", 1)[1]
+        for port, link in links.items():
+            if not isinstance(link.get("port"), dict) and link.get("portchannel"):
+                link = {**link, "portchannel": _prefixed(str(link["portchannel"]), short)}
+            out[siteNodes[name]]["topo"][f"{short}:{port}"] = link
+    return out
+
+
+def _expandQuery(sites):
+    """Return the relative URL of the combined page with these sites expanded (all collapsed when empty)."""
+    return "?" + urllib.parse.urlencode({"expand": ",".join(sorted(sites))}) if sites else "?"
+
+
+def _expandLinks(page, diagram, expanded):
+    """Make every collapsed site node a link that expands it, keeping the sites already expanded."""
+    boxes = []
+    for comp in diagram["ir"]["components"]:
+        if comp["type"] != "frontend":
+            continue
+        (posX, posY), (width, height) = comp["pos"], comp["size"]
+        href = html.escape(_expandQuery(set(expanded) | {comp["label"]}))
+        label = html.escape(f"Expand {comp['label']}")
+        boxes.append(f'<a class="st-expand" href="{href}" aria-label="{label}"><title>{label}</title><rect x="{posX:g}" y="{posY:g}" width="{width:g}" height="{height:g}" rx="8"/></a>')
+    svgEnd = page.find("</svg>", page.find("<svg viewBox"))
+    if not boxes or svgEnd < 0:
+        return page
+    return page[:svgEnd] + "".join(boxes) + page[svgEnd:]
+
+
+def _note(expanded, full, failures, total):
+    """Return the top-right note: how to expand, links to collapse expanded sites, and the sites that could not be fetched."""
+    parts = []
+    if full:
+        parts.append("All sites expanded.")
+    elif expanded:
+        links = [f'{html.escape(site)} (<a href="{html.escape(_expandQuery(set(expanded) - {site}))}">collapse</a>)' for site in sorted(expanded)]
+        parts.append(f'Expanded: {", ".join(links)}. <a href="?">Collapse all</a>')
+    else:
+        parts.append("Click a site to expand it.")
+    if failures:
+        missing = "; ".join(f"{site}: {reason}" for site, reason in sorted(failures.items()))
+        parts.append(f"{total - len(failures)} of {total} sites shown. Missing: {html.escape(missing)}")
+    return f'<div class="st-note" style="{NOTE_STYLE}">{"<br>".join(parts)}</div>'
+
+
 def errorPage(site, message):
     """Return a small page that tells the dashboard viewer why there is no diagram."""
     text = html.escape(f"Topology for {site} is not available: {message}")
@@ -507,43 +603,53 @@ def _siteError(ex):
 
 
 class GlobalTopology:
-    """Combined pages of all sites, rebuilt in the background so a request never waits longer than Grafana's proxy timeout."""
+    """Combined page of all sites: topologies are fetched in the background, each view (expanded sites) is rendered on request and cached."""
 
     def __init__(self, sites):
         self.sites = sites
-        self.entry = None  # (expiry, {view: (HTTP status, page)})
+        self.data = None  # {"expires", "merged", "sites", "failures", "total"} or {"expires", "error"}
+        self.pages = {}
         self.building = False
         self.lock = threading.Lock()
 
-    def get(self, view):
-        """Return (HTTP status, page) of one view: the last built page (refreshing it when stale), or 503 while the first build runs."""
+    def get(self, expand, full):
+        """Return (HTTP status, page) with the given sites expanded (all of them when full), or 503 while the first fetch runs."""
         with self.lock:
-            if (self.entry is None or self.entry[0] <= time.time()) and not self.building:
+            if (self.data is None or self.data["expires"] <= time.time()) and not self.building:
                 self.building = True
                 threading.Thread(target=self._refresh, daemon=True).start()
-            if self.entry is not None:
-                return self.entry[1][view]
-        return 503, errorPage(GLOBAL_NAME, "the combined topology is being built, reload in a minute")
+            data = self.data
+            if data is None:
+                return 503, errorPage(GLOBAL_NAME, "the combined topology is being built, reload in a minute")
+            if "error" in data:
+                return 502, errorPage(GLOBAL_NAME, data["error"])
+            expanded = tuple(sorted(set(expand) & set(data["sites"])))
+            key = (expanded, full)
+            if key in self.pages:
+                return self.pages[key]
+        result = self._render(data, expanded, full)
+        with self.lock:
+            if self.data is data:
+                if len(self.pages) >= GLOBAL_PAGE_CACHE:
+                    self.pages.clear()
+                self.pages[key] = result
+        return result
 
     def _refresh(self):
-        """Build the pages and store them; a failed build is kept only for ERROR_TTL."""
+        """Fetch and merge all sites; a failed fetch keeps the previous topology and retries after ERROR_TTL."""
         try:
-            ttl, pages = self.build()
+            data = self.build()
         except Exception as ex:  # pylint: disable=broad-except
             # A daemon thread must never die silently with building stuck at True.
             print(f"Combined topology build failed: {type(ex).__name__}: {ex}", flush=True)
-            ttl, pages = ERROR_TTL, self._failed("the combined topology could not be built")
+            data = {"expires": time.time() + ERROR_TTL, "error": "the combined topology could not be built"}
         with self.lock:
-            # Keep showing the last good pages when a later build fails (and retry after ttl).
-            if pages[GLOBAL_DEFAULT_VIEW][0] != 200 and self.entry is not None and self.entry[1][GLOBAL_DEFAULT_VIEW][0] == 200:
-                pages = self.entry[1]
-            self.entry = (time.time() + ttl, pages)
+            if "error" in data and self.data is not None and "error" not in self.data:
+                data = {**self.data, "expires": data["expires"]}
+            else:
+                self.pages = {}
+            self.data = data
             self.building = False
-
-    @staticmethod
-    def _failed(message):
-        """Return the same error page for every view."""
-        return {view: (502, errorPage(GLOBAL_NAME, message)) for view in GLOBAL_VIEWS}
 
     @staticmethod
     def _fetchAll(targets):
@@ -564,27 +670,28 @@ class GlobalTopology:
         return topologies, failures
 
     def build(self):
-        """Fetch every site's topology.json once, merge it and render each view; returns (cache seconds, {view: (HTTP status, page)})."""
+        """Fetch every site's topology.json and merge them; returns the data get() renders views from."""
         targets = self.sites.all()
         topologies, failures = self._fetchAll(targets)
         if not topologies:
-            return ERROR_TTL, self._failed("no site Frontend returned its topology")
+            return {"expires": time.time() + ERROR_TTL, "error": "no site Frontend returned its topology"}
         merged = mergeTopologies(topologies, {site: target[2] for site, target in targets.items()})
-        note = ""
-        if failures:
-            missing = "; ".join(f"{site}: {reason}" for site, reason in sorted(failures.items()))
-            note = f'<div style="{NOTE_STYLE}">{len(topologies)} of {len(targets)} sites shown. Missing: {html.escape(missing)}</div>'
-        pages = {}
-        for view, types in GLOBAL_VIEWS.items():
-            diagram = buildDiagram({name: entry for name, entry in merged.items() if entry["DeviceInfo"]["type"] in types}, GLOBAL_NAME, cards=False)
-            try:
-                page = _staticPage(renderDiagramHTML(diagram, timeout=GLOBAL_RENDER_TIMEOUT))
-            except (ArchifyUnavailable, ArchifyRenderError) as ex:
-                print(f"Combined topology render failed: {ex}", flush=True)
-                return ERROR_TTL, self._failed(f"the diagram could not be rendered ({type(ex).__name__})")
-            bodyEnd = page.rfind("</body>")
-            pages[view] = (200, (page[:bodyEnd] + note + page[bodyEnd:] if bodyEnd >= 0 else page + note).encode())
-        return CACHE_TTL, pages
+        return {"expires": time.time() + CACHE_TTL, "merged": merged, "sites": sorted(topologies), "failures": failures, "total": len(targets)}
+
+    @staticmethod
+    def _render(data, expanded, full):
+        """Render one view: collapsed sites (except expanded) as clickable site nodes, or every device when full."""
+        topology = data["merged"] if full else collapseSites(data["merged"], data["sites"], expanded)
+        diagram = buildDiagram(topology, GLOBAL_NAME, cards=False)
+        try:
+            page = _staticPage(renderDiagramHTML(diagram, timeout=GLOBAL_RENDER_TIMEOUT))
+        except (ArchifyUnavailable, ArchifyRenderError) as ex:
+            print(f"Combined topology render failed: {ex}", flush=True)
+            return 502, errorPage(GLOBAL_NAME, f"the diagram could not be rendered ({type(ex).__name__})")
+        page = _expandLinks(page, diagram, expanded).replace("</head>", f"<style>{EXPAND_STYLE}</style></head>", 1)
+        note = _note(expanded, full, data["failures"], data["total"])
+        bodyEnd = page.rfind("</body>")
+        return 200, (page[:bodyEnd] + note + page[bodyEnd:] if bodyEnd >= 0 else page + note).encode()
 
 
 def authorized(header):
@@ -596,15 +703,15 @@ def authorized(header):
 
 
 class Handler(BaseHTTPRequestHandler):
-    """GET /topology/<site>[?path=<active connection id>], /global-topology[?view=network|full] and /healthz."""
+    """GET /topology/<site>[?path=<active connection id>], /global-topology[?expand=<site>,...|view=full] and /healthz."""
 
     cache = None
     globalTopology = None
 
-    def _send(self, status, body, contentType="text/html; charset=utf-8"):
+    def _send(self, status, body, contentType="text/html; charset=utf-8", csp=None):
         self.send_response(status)
         self.send_header("Content-Type", contentType)
-        for key, val in RESPONSE_HEADERS.items():
+        for key, val in {**RESPONSE_HEADERS, **({"Content-Security-Policy": csp} if csp else {})}.items():
             self.send_header(key, val)
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
@@ -620,8 +727,9 @@ class Handler(BaseHTTPRequestHandler):
             self._send(401, b"unauthorized", "text/plain")
             return
         if url.path == GLOBAL_PATH:
-            view = urllib.parse.parse_qs(url.query).get("view", [GLOBAL_DEFAULT_VIEW])[0]
-            self._send(*self.globalTopology.get(view if view in GLOBAL_VIEWS else GLOBAL_DEFAULT_VIEW))
+            query = urllib.parse.parse_qs(url.query)
+            expand = [site for site in query.get("expand", [""])[0].split(",") if site][:MAX_EXPANDED]
+            self._send(*self.globalTopology.get(expand, query.get("view", [""])[0] == "full"), csp=GLOBAL_CSP)
             return
         match = REQUEST_PATH.match(url.path)
         pathId = urllib.parse.parse_qs(url.query).get("path", [""])[0]
