@@ -320,6 +320,42 @@
         "x": 0,
         "y": 14
       },
+      "id": 508,
+      "panels": [],
+      "title": "SiteRM topology (all sites)",
+      "type": "row"
+    },
+    {
+      "description": "Every monitored SiteRM site in one diagram (full view: switches, servers, LAN ports and WAN clouds), rebuilt from each site Frontend's topology every 5 minutes. Devices are named <site>:<device>; WAN ports pointing to another SiteRM site are drawn as direct links, any other WAN peer is grouped into one cloud per remote domain. Click a device or link for details. The \"SiteRM Topology (All Sites)\" dashboard also has a network-only view.",
+      "gridPos": {
+        "h": 30,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 509,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<iframe src=\"/api/datasources/proxy/uid/siterm-topology/global-topology?view=full\" title=\"All SiteRM sites topology\" loading=\"lazy\" style=\"display:block;width:100%;height:100%;border:0\"></iframe>",
+        "mode": "html"
+      },
+      "pluginVersion": "9.5.19",
+      "title": "All SiteRM sites topology",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
       "id": 11,
       "panels": [],
       "repeat": "sitename",
@@ -370,7 +406,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 15
+        "y": 46
       },
       "id": 12,
       "links": [],
@@ -436,9 +472,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2,
+        "w": 3,
         "x": 4,
-        "y": 15
+        "y": 46
       },
       "id": 13,
       "options": {
@@ -464,7 +500,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"$sitename\"}) or label_replace(0 * absent(ALERTS{sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"critical\", sitename=\"$sitename\"}) or vector(0)",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -503,9 +539,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2,
-        "x": 6,
-        "y": 15
+        "w": 3,
+        "x": 7,
+        "y": 46
       },
       "id": 14,
       "options": {
@@ -531,7 +567,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"$sitename\"}) or label_replace(0 * absent(ALERTS{sitename=\"$sitename\"}), \"sitename\", \"$sitename\", \"\", \"\")",
+          "expr": "count(ALERTS{alertstate=\"firing\", severity=\"warning\", sitename=\"$sitename\"}) or vector(0)",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -574,8 +610,8 @@
       "gridPos": {
         "h": 3,
         "w": 4,
-        "x": 8,
-        "y": 15
+        "x": 10,
+        "y": 46
       },
       "id": 15,
       "options": {
@@ -601,7 +637,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"vsw\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "expr": "sum(max by (key0) (\n  network_status{action=~\"vsw|kube|singleport\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"vsw|kube|singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -639,7 +675,7 @@
           "refId": "C"
         }
       ],
-      "title": "VSW",
+      "title": "Virtual Switching Requests",
       "type": "stat"
     },
     {
@@ -674,8 +710,8 @@
       "gridPos": {
         "h": 3,
         "w": 4,
-        "x": 12,
-        "y": 15
+        "x": 14,
+        "y": 46
       },
       "id": 185,
       "options": {
@@ -739,7 +775,7 @@
           "refId": "C"
         }
       ],
-      "title": "RST",
+      "title": "Routing Service Requests",
       "type": "stat"
     },
     {
@@ -747,23 +783,20 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Count of all Total Kube Port Requests",
+      "description": "Count of Total Servers",
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "purple",
                 "value": null
               },
               {
-                "color": "green",
-                "value": 0
+                "color": "purple",
+                "value": 1
               }
             ]
           },
@@ -773,11 +806,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
-        "x": 16,
-        "y": 15
+        "w": 2,
+        "x": 18,
+        "y": 46
       },
-      "id": 186,
+      "id": 324,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
@@ -801,45 +834,15 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "expr": " count(sum by (servicename,hostname) (running_version_info{sitename=\"$sitename\", servicename=\"Agent\"})) or vector(0)",
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "Total",
+          "legendFormat": "__auto",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "qjScxmmVz"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"$sitename\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Active",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "qjScxmmVz"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"kube\", sitename=\"$sitename\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"kube\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Not Active",
-          "refId": "C"
         }
       ],
-      "title": "Kube",
+      "title": "Total Servers",
       "type": "stat"
     },
     {
@@ -847,27 +850,20 @@
         "type": "prometheus",
         "uid": "qjScxmmVz"
       },
-      "description": "Count of all SinglePort Requests",
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 0
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
           },
-          "unit": "short"
+          "mappings": []
         },
         "overrides": []
       },
@@ -875,14 +871,20 @@
         "h": 3,
         "w": 4,
         "x": 20,
-        "y": 15
+        "y": 46
       },
-      "id": 187,
+      "id": 507,
       "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -890,9 +892,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "text": {},
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "9.5.19",
+      "pluginVersion": "7.5.16",
       "targets": [
         {
           "datasource": {
@@ -901,46 +907,15 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"$sitename\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
+          "expr": "sum by (version) (\n  running_version_info{sitename=\"$sitename\"}\n    and (timestamp(running_version_info) > time() - 300)\n)",
           "format": "time_series",
           "instant": true,
           "interval": "",
-          "legendFormat": "Total",
+          "legendFormat": "{{version}}",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "qjScxmmVz"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"$sitename\", network_status=\"activated\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Active",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "qjScxmmVz"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum(max by (key0) (\n  network_status{action=\"singleport\", sitename=\"$sitename\", network_status!=\"activated\", network_status!=\"unknown\", network_status!=\"unset\"}\n))\nor\nlabel_replace(\n  0 * absent(network_status{action=\"singleport\", sitename=\"$sitename\"}),\n  \"sitename\", \n  \"$sitename\", \n  \"\", \n  \"\"\n)\n",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "interval": "",
-          "legendFormat": "Not Active",
-          "refId": "C"
         }
       ],
-      "title": "SinglePort",
-      "type": "stat"
+      "type": "piechart"
     }
   ],
   "refresh": "",
@@ -959,18 +934,18 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "definition": "label_values(up,sitename)",
+        "definition": "query_result(count by (sitename) (up{software!~\"NetworkRM.*\"}))",
         "hide": 2,
         "includeAll": true,
         "multi": false,
         "name": "sitename",
         "options": [],
         "query": {
-          "query": "label_values(up,sitename)",
+          "query": "query_result(count by (sitename) (up{software!~\"NetworkRM.*\"}))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
+        "regex": "/sitename=\"([^\"]+)\"/",
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
@@ -1011,6 +986,6 @@
   "timezone": "browser",
   "title": "Home",
   "uid": "000000005",
-  "version": 95,
+  "version": 103,
   "weekStart": ""
 }

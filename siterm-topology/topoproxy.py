@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Serve SiteRM Archify topology pages to Grafana, fetched with the oidcgen token of each site."""
+"""Serve SiteRM Archify topology pages to Grafana, fetched with the oidcgen token of each site, plus one combined page of all sites."""
 
 # Runs as a sidecar of the Prometheus pod and reads the rm-configs checkout oidcgen keeps in a shared volume:
 # each site directory names its Frontends, and oidcgen writes that directory's token to oidc-<dir>.token.
@@ -9,6 +9,7 @@
 import base64
 import hmac
 import html
+import json
 import os
 import re
 import ssl
@@ -18,9 +19,12 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from collections import deque
+from concurrent.futures import ThreadPoolExecutor
 from html.parser import HTMLParser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+# SiteRM's own diagram builder and Archify renderer, copied into the image at a pinned siterm commit (see Dockerfile).
+from SiteRMLibs.ArchifyTopology import ArchifyRenderError, ArchifyUnavailable, buildDiagram, portKey, renderDiagramHTML
 from yaml import YAMLError, safe_load
 
 REPO_DIR = os.environ.get("TOPO_REPO_DIR", "/siterm-repo/rm-configs")
@@ -39,6 +43,19 @@ AUTH_PASSWORD = os.environ.get("TOPO_PASSWORD", "").strip()
 CA_FILE = os.environ.get("TOPO_CA_FILE") or None
 
 REQUEST_PATH = re.compile(r"^/topology/([A-Za-z0-9_.-]{1,128})$")
+GLOBAL_PATH = "/global-topology"
+GLOBAL_NAME = "All SiteRM sites"
+# network: switches, WAN clouds and the links between sites; full: also servers and LAN nodes, as on each site's page.
+GLOBAL_VIEWS = {"network": ("switch", "cloud"), "full": ("switch", "server", "lan", "cloud")}
+GLOBAL_DEFAULT_VIEW = "network"
+GLOBAL_WORKERS = int(os.environ.get("TOPO_GLOBAL_WORKERS", "8"))
+GLOBAL_RENDER_TIMEOUT = int(os.environ.get("TOPO_GLOBAL_RENDER_TIMEOUT", "300"))
+# isAlias URNs: urn:ogf:network:<domain>[:<year>]:<device>:<port>
+URN_PREFIX = "urn:ogf:network"
+NOTE_STYLE = (
+    "position:fixed;top:8px;right:8px;z-index:40;max-width:min(560px,calc(100vw - 16px));padding:6px 10px;"
+    "border:1px solid var(--panel-border);border-radius:8px;background:var(--toolbar-menu-bg, var(--bg));color:var(--text-muted);font-size:11px"
+)
 RESPONSE_HEADERS = {
     "Content-Security-Policy": "sandbox",
     "X-Content-Type-Options": "nosniff",
@@ -119,7 +136,7 @@ def _frontendUrl(webdomain):
 
 
 def loadSites(repoDir, tokenDir):
-    """Return {site: (Frontend base URL, token file)} for every enabled Frontend in an rm-configs checkout.
+    """Return {site: (Frontend base URL, token file, model domain)} for every enabled Frontend in an rm-configs checkout.
 
     Matches oidcgen: it mints one token per site directory that has a Frontend and saves it as oidc-<dir>.token.
     """
@@ -137,7 +154,8 @@ def loadSites(repoDir, tokenDir):
             conf = _loadYaml(os.path.join(siteDir, str(entry["config"]), "main.yaml"))
             base = _frontendUrl((conf.get("general") or {}).get("webdomain")) if isinstance(conf, dict) else None
             for site in _siteNames(conf) if base else []:
-                sites.setdefault(site, (base, tokenFile))
+                domain = conf[site].get("domain") if isinstance(conf.get(site), dict) else ""
+                sites.setdefault(site, (base, tokenFile, domain if isinstance(domain, str) else ""))
     return sites
 
 
@@ -153,8 +171,8 @@ class SiteMap:
         self.sites = {}
         self.lock = threading.Lock()
 
-    def get(self, site):
-        """Return (Frontend base URL, token file) for a site, or None."""
+    def all(self):
+        """Return {site: (Frontend base URL, token file, model domain)} for every monitored site."""
         with self.lock:
             if time.time() >= self.nextScan:
                 try:
@@ -163,7 +181,11 @@ class SiteMap:
                     print(f"Keeping previous site list, cannot read {self.repoDir}: {ex}", flush=True)
                 # Until oidcgen has cloned the repo, look again soon.
                 self.nextScan = time.time() + (RESCAN if self.sites else 10)
-            return self.sites.get(site)
+            return dict(self.sites)
+
+    def get(self, site):
+        """Return (Frontend base URL, token file, model domain) for a site, or None."""
+        return self.all().get(site)
 
 
 class DiagramParser(HTMLParser):
@@ -327,19 +349,101 @@ def addDetails(page):
     return page.replace("</head>", style + "</head>", 1)
 
 
-def fetchTopology(base, site, tokenFile, pathId):
-    """Fetch the Archify topology page of one site from its Frontend."""
+def _fetch(base, site, tokenFile, resource, accept):
+    """GET /api/<site>/<resource> from a site's Frontend with its oidcgen token and return the body (at most MAX_BYTES)."""
     with open(tokenFile, "r", encoding="utf-8") as fd:
         token = fd.read().strip()
-    # Graph only: the legend, health and link cards stay on the SiteRM web UI.
-    query = {"view": "graph", **({"path": pathId} if pathId else {})}
-    url = f"{base}/api/{urllib.parse.quote(site)}/topo/archify?{urllib.parse.urlencode(query)}"
-    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "Accept": "text/html"})
+    url = f"{base}/api/{urllib.parse.quote(site)}/{resource}"
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "Accept": accept})
     with OPENER.open(req, timeout=TIMEOUT) as resp:
         body = resp.read(MAX_BYTES + 1)
     if len(body) > MAX_BYTES:
-        raise ValueError("topology page is larger than 16MB")
-    return addDetails(body.decode("utf-8", errors="replace")).replace("</head>", STATIC_STYLE + "</head>", 1).encode()
+        raise ValueError(f"{resource} response is larger than 16MB")
+    return body
+
+
+def _staticPage(page):
+    """Add the details panels and hide the controls that need scripts."""
+    return addDetails(page).replace("</head>", STATIC_STYLE + "</head>", 1)
+
+
+def fetchTopology(base, site, tokenFile, pathId):
+    """Fetch the Archify topology page of one site from its Frontend."""
+    # Graph only: the legend, health and link cards stay on the SiteRM web UI.
+    query = {"view": "graph", **({"path": pathId} if pathId else {})}
+    body = _fetch(base, site, tokenFile, f"topo/archify?{urllib.parse.urlencode(query)}", "text/html")
+    return _staticPage(body.decode("utf-8", errors="replace")).encode()
+
+
+def fetchTopologyJson(base, site, tokenFile):
+    """Fetch the topology.json content of one site from its Frontend."""
+    topology = json.loads(_fetch(base, site, tokenFile, "topo/gettopology", "application/json"))
+    if not isinstance(topology, dict):
+        raise ValueError("topology is not a JSON object")
+    return topology
+
+
+def _aliasParts(alias):
+    """Return (domain, device, port) of an isAlias URN, or None if it is not one."""
+    parts = str(alias).split(":")
+    if len(parts) < 6 or ":".join(parts[:3]) != URN_PREFIX or not all(parts[i] for i in (3, -2, -1)):
+        return None
+    return parts[3], parts[-2], parts[-1]
+
+
+def _siteDevices(site, topology, devices):
+    """Add one site's devices to devices as <site>:<device> and return its cloud entries [(alias, links)]; malformed entries are dropped."""
+    clouds = []
+    for name, entry in topology.items():
+        info = entry.get("DeviceInfo") if isinstance(entry, dict) else None
+        topo = entry.get("topo") if isinstance(entry, dict) else None
+        if not isinstance(info, dict) or not isinstance(topo, dict):
+            continue
+        links = {str(port): {**link, "device": f"{site}:{link['device']}"} for port, link in topo.items() if isinstance(link, dict) and isinstance(link.get("device"), str)}
+        if info.get("type") == "cloud":
+            clouds.append((str(info.get("name", "")), links))
+        elif info.get("type") in ("switch", "server", "lan"):
+            devices[f"{site}:{name}"] = {"DeviceInfo": {**info, "name": f"{site}:{name}"}, "topo": links}
+    return clouds
+
+
+def mergeTopologies(topologies, domains):
+    """Merge per-site topology.json content into one topology for buildDiagram.
+
+    Devices become <site>:<device>. A WAN alias to a device of another fetched site becomes a direct link (one per pair even when
+    both sites report it); any other alias joins one cloud per remote domain, or "unknown" when it is not an isAlias URN.
+    """
+    merged, clouds = {}, []
+    for site in sorted(topologies):
+        clouds.extend(_siteDevices(site, topologies[site], merged))
+    siteByDomain = {domain: site for site, domain in sorted(domains.items()) if domain and site in topologies}
+    seen = set()
+    # When both sites report one link, keep the report that lists port-channel members.
+    reports = sorted(((alias, port, link) for alias, links in clouds for port, link in links.items()), key=lambda report: not report[2].get("members"))
+    for alias, remotePort, link in reports:
+        parts = _aliasParts(alias)
+        peer = f"{siteByDomain[parts[0]]}:{parts[1]}" if parts and parts[0] in siteByDomain else None
+        if peer in merged:
+            pair = frozenset(((peer, portKey(remotePort)), (link["device"], portKey(link.get("localport") or ""))))
+            if pair in seen:
+                continue
+            if remotePort not in merged[peer]["topo"]:
+                seen.add(pair)
+                # WAN entry shape (dict port, localport, members) on the remote device, so port-channel members still expand.
+                merged[peer]["topo"][remotePort] = link
+                continue
+        _addToCloud(merged, parts, f"{parts[1]}:{remotePort}" if parts else alias or "unknown", link)
+    return merged
+
+
+def _addToCloud(merged, parts, port, link):
+    """Add one WAN link to the cloud of its remote domain ("unknown" without a parsed alias); port names the remote end."""
+    cloud = merged.setdefault(parts[0] if parts else "unknown", {"DeviceInfo": {"type": "cloud", "name": ""}, "topo": {}})
+    key, count = port, 1
+    while key in cloud["topo"]:
+        count += 1
+        key = f"{port} #{count}"
+    cloud["topo"][key] = link
 
 
 def errorPage(site, message):
@@ -395,6 +499,94 @@ class TopologyCache:
         return status, page
 
 
+def _siteError(ex):
+    """Describe why one site's topology.json could not be fetched."""
+    if isinstance(ex, urllib.error.HTTPError):
+        return _frontendError(ex)
+    return f"could not reach the Frontend ({type(ex).__name__})"
+
+
+class GlobalTopology:
+    """Combined pages of all sites, rebuilt in the background so a request never waits longer than Grafana's proxy timeout."""
+
+    def __init__(self, sites):
+        self.sites = sites
+        self.entry = None  # (expiry, {view: (HTTP status, page)})
+        self.building = False
+        self.lock = threading.Lock()
+
+    def get(self, view):
+        """Return (HTTP status, page) of one view: the last built page (refreshing it when stale), or 503 while the first build runs."""
+        with self.lock:
+            if (self.entry is None or self.entry[0] <= time.time()) and not self.building:
+                self.building = True
+                threading.Thread(target=self._refresh, daemon=True).start()
+            if self.entry is not None:
+                return self.entry[1][view]
+        return 503, errorPage(GLOBAL_NAME, "the combined topology is being built, reload in a minute")
+
+    def _refresh(self):
+        """Build the pages and store them; a failed build is kept only for ERROR_TTL."""
+        try:
+            ttl, pages = self.build()
+        except Exception as ex:  # pylint: disable=broad-except
+            # A daemon thread must never die silently with building stuck at True.
+            print(f"Combined topology build failed: {type(ex).__name__}: {ex}", flush=True)
+            ttl, pages = ERROR_TTL, self._failed("the combined topology could not be built")
+        with self.lock:
+            # Keep showing the last good pages when a later build fails (and retry after ttl).
+            if pages[GLOBAL_DEFAULT_VIEW][0] != 200 and self.entry is not None and self.entry[1][GLOBAL_DEFAULT_VIEW][0] == 200:
+                pages = self.entry[1]
+            self.entry = (time.time() + ttl, pages)
+            self.building = False
+
+    @staticmethod
+    def _failed(message):
+        """Return the same error page for every view."""
+        return {view: (502, errorPage(GLOBAL_NAME, message)) for view in GLOBAL_VIEWS}
+
+    @staticmethod
+    def _fetchAll(targets):
+        """Fetch topology.json of every site in parallel; returns ({site: topology}, {site: why it is missing})."""
+        topologies, failures = {}, {}
+        with ThreadPoolExecutor(max_workers=GLOBAL_WORKERS) as pool:
+            futures = {}
+            for site, (base, tokenFile, _) in sorted(targets.items()):
+                if os.path.isfile(tokenFile):
+                    futures[site] = pool.submit(fetchTopologyJson, base, site, tokenFile)
+                else:
+                    failures[site] = "oidcgen has no token for this site yet"
+            for site, future in futures.items():
+                try:
+                    topologies[site] = future.result()
+                except (OSError, ValueError) as ex:
+                    failures[site] = _siteError(ex)
+        return topologies, failures
+
+    def build(self):
+        """Fetch every site's topology.json once, merge it and render each view; returns (cache seconds, {view: (HTTP status, page)})."""
+        targets = self.sites.all()
+        topologies, failures = self._fetchAll(targets)
+        if not topologies:
+            return ERROR_TTL, self._failed("no site Frontend returned its topology")
+        merged = mergeTopologies(topologies, {site: target[2] for site, target in targets.items()})
+        note = ""
+        if failures:
+            missing = "; ".join(f"{site}: {reason}" for site, reason in sorted(failures.items()))
+            note = f'<div style="{NOTE_STYLE}">{len(topologies)} of {len(targets)} sites shown. Missing: {html.escape(missing)}</div>'
+        pages = {}
+        for view, types in GLOBAL_VIEWS.items():
+            diagram = buildDiagram({name: entry for name, entry in merged.items() if entry["DeviceInfo"]["type"] in types}, GLOBAL_NAME, cards=False)
+            try:
+                page = _staticPage(renderDiagramHTML(diagram, timeout=GLOBAL_RENDER_TIMEOUT))
+            except (ArchifyUnavailable, ArchifyRenderError) as ex:
+                print(f"Combined topology render failed: {ex}", flush=True)
+                return ERROR_TTL, self._failed(f"the diagram could not be rendered ({type(ex).__name__})")
+            bodyEnd = page.rfind("</body>")
+            pages[view] = (200, (page[:bodyEnd] + note + page[bodyEnd:] if bodyEnd >= 0 else page + note).encode())
+        return CACHE_TTL, pages
+
+
 def authorized(header):
     """Return True if the Authorization header has the configured basic auth credentials (or none are set)."""
     if not AUTH_PASSWORD:
@@ -404,9 +596,10 @@ def authorized(header):
 
 
 class Handler(BaseHTTPRequestHandler):
-    """GET /topology/<site>[?path=<active connection id>] and /healthz."""
+    """GET /topology/<site>[?path=<active connection id>], /global-topology[?view=network|full] and /healthz."""
 
     cache = None
+    globalTopology = None
 
     def _send(self, status, body, contentType="text/html; charset=utf-8"):
         self.send_response(status)
@@ -426,6 +619,10 @@ class Handler(BaseHTTPRequestHandler):
         if not authorized(self.headers.get("Authorization")):
             self._send(401, b"unauthorized", "text/plain")
             return
+        if url.path == GLOBAL_PATH:
+            view = urllib.parse.parse_qs(url.query).get("view", [GLOBAL_DEFAULT_VIEW])[0]
+            self._send(*self.globalTopology.get(view if view in GLOBAL_VIEWS else GLOBAL_DEFAULT_VIEW))
+            return
         match = REQUEST_PATH.match(url.path)
         pathId = urllib.parse.parse_qs(url.query).get("path", [""])[0]
         if not match or len(pathId) > MAX_PATH_ID:
@@ -438,7 +635,9 @@ def main():
     """Start the server."""
     if not AUTH_PASSWORD:
         print("WARNING: TOPO_PASSWORD is not set; the topology service accepts unauthenticated requests.", flush=True)
-    Handler.cache = TopologyCache(SiteMap(REPO_DIR, TOKEN_DIR))
+    sites = SiteMap(REPO_DIR, TOKEN_DIR)
+    Handler.cache = TopologyCache(sites)
+    Handler.globalTopology = GlobalTopology(sites)
     ThreadingHTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
 
 

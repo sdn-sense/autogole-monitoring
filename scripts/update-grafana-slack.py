@@ -283,6 +283,7 @@ def addDefaultDashboards(worker):
     orgConfig = worker.getOrganizationConfig()
     for dashbFile, dashName in {'general-all-status.json': 'All Status (Variable)',
                                'general-full-dtn-monitoring.json': 'Full DTN Monitoring (Variable)',
+                               'general-siterm-topology.json': 'SiteRM Topology (All Sites)',
                                'general-home.json': 'Home'}.items():
         dashbJson = readFile(f'../grafana-templates/dashboards/{dashbFile}')
         dashbJson = dashbJson.replace('REPLACEME_FOLDERID_SiteRM', str(worker.getFolderID('SiteRM')))

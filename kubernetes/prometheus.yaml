@@ -152,6 +152,7 @@ spec:
           mountPath: /etc/prometheus
       # Serves each site's SiteRM Archify topology page to Grafana (via its data source proxy). It reads the
       # rm-configs checkout oidcgen keeps in siterm-repo and uses the token oidcgen mints for that site directory.
+      # It also renders the combined all-sites page itself (Node.js + Archify), hence the larger limits.
       - name: siterm-topology
         image: sdnsense/siterm-topology:latest
         imagePullPolicy: Always
@@ -176,8 +177,8 @@ spec:
             port: siterm-topo
         resources:
           limits:
-            cpu: 500m
-            memory: 512Mi
+            cpu: "1"
+            memory: 1Gi
           requests:
             cpu: 50m
             memory: 128Mi
