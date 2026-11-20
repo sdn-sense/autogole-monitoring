@@ -1303,7 +1303,7 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Count of services currently reporting a non-zero exccode (see https://sdn-sense.github.io/operational/error-codes/)",
+        "description": "Count of services currently reporting a non-zero exccode (see https://sdn-sense.dev/operational/error-codes/)",
         "fieldConfig": {
           "defaults": {
             "mappings": [],
@@ -1370,7 +1370,7 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Services currently reporting a non-zero exccode. See https://sdn-sense.github.io/operational/error-codes/ for what each code means.",
+        "description": "Services currently reporting a non-zero exccode. See https://sdn-sense.dev/operational/error-codes/ for what each code means.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1479,7 +1479,7 @@
           "type": "prometheus",
           "uid": "qjScxmmVz"
         },
-        "description": "Reported exccode over time per service/host. 0 = OK, negative = an active error/warning code -- see https://sdn-sense.github.io/operational/error-codes/",
+        "description": "Reported exccode over time per service/host. 0 = OK, negative = an active error/warning code -- see https://sdn-sense.dev/operational/error-codes/",
         "fieldConfig": {
           "defaults": {
             "color": {
