@@ -1,7 +1,7 @@
 FROM python:3.11-slim AS sources
 
 # The combined all-sites page reuses SiteRM's diagram builder and the Archify renderer the SiteRM Frontend image pins.
-ARG SITERM_REF=976541be3f7e3d09d932e9d9f76a569f3ac14912
+ARG SITERM_REF=a0bbd50ae51d63d4a44dd530a0b3d34199f2b514
 ARG ARCHIFY_REF=f325d86230553e1dd15d3464324f1fcd01f02352
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*
 RUN git init -q /tmp/siterm && \
@@ -26,9 +26,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends nodejs && rm -r
 COPY --from=sources /opt/lib /opt/lib
 COPY --from=sources /opt/archify /opt/archify
 COPY topoproxy.py /opt/topoproxy.py
+COPY world-map.svg /opt/world-map.svg
 
 ENV PYTHONPATH=/opt/lib \
-    SITERM_ARCHIFY_CLI=/opt/archify/archify/bin/archify.mjs
+    SITERM_ARCHIFY_CLI=/opt/archify/archify/bin/archify.mjs \
+    WORLD_MAP_SVG=/opt/world-map.svg
 
 # Reads the token files and prometheus.yml (both mode 0644) as an unprivileged user.
 USER 65534

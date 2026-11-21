@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Serve SiteRM Archify topology pages to Grafana, fetched with the oidcgen token of each site, plus one combined page of all sites."""
+"""Serve SiteRM topology and geographic network pages to Grafana."""
 
 # Runs as a sidecar of the Prometheus pod and reads the rm-configs checkout oidcgen keeps in a shared volume:
 # each site directory names its Frontends, and oidcgen writes that directory's token to oidc-<dir>.token.
@@ -10,6 +10,7 @@ import base64
 import hmac
 import html
 import json
+import math
 import os
 import re
 import ssl
@@ -22,6 +23,7 @@ from collections import deque
 from concurrent.futures import ThreadPoolExecutor
 from html.parser import HTMLParser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from typing import NamedTuple
 
 # SiteRM's own diagram builder and Archify renderer, copied into the image at a pinned siterm commit (see Dockerfile).
 from SiteRMLibs.ArchifyTopology import ArchifyRenderError, ArchifyUnavailable, buildDiagram, portKey, renderDiagramHTML
@@ -44,12 +46,21 @@ CA_FILE = os.environ.get("TOPO_CA_FILE") or None
 
 REQUEST_PATH = re.compile(r"^/topology/([A-Za-z0-9_.-]{1,128})$")
 GLOBAL_PATH = "/global-topology"
+WORLD_PATH = "/world-map"
 GLOBAL_NAME = "All SiteRM sites"
+WORLD_NAME = "SiteRM world map"
 # Expanded site lists longer than this are cut (each name is at most 128 characters, see REQUEST_PATH).
 MAX_EXPANDED = 64
 GLOBAL_PAGE_CACHE = 64
 GLOBAL_WORKERS = int(os.environ.get("TOPO_GLOBAL_WORKERS", "8"))
 GLOBAL_RENDER_TIMEOUT = int(os.environ.get("TOPO_GLOBAL_RENDER_TIMEOUT", "300"))
+WORLD_MAP_FILE = os.environ.get("WORLD_MAP_SVG", os.path.join(os.path.dirname(__file__), "world-map.svg"))
+WORLD_WIDTH = 1200
+WORLD_HEIGHT = 600
+WORLD_REFRESH = 300
+WORLD_STALE_REFRESH = 60
+WORLD_LOADING_REFRESH = 5
+US_SITE = re.compile(r"(?:^|_)US(?:_|$)", re.IGNORECASE)
 # isAlias URNs: urn:ogf:network:<domain>[:<year>]:<device>:<port>
 URN_PREFIX = "urn:ogf:network"
 NOTE_STYLE = (
@@ -116,6 +127,16 @@ SSL_CONTEXT = ssl.create_default_context(cafile=CA_FILE)
 OPENER = urllib.request.build_opener(_NoRedirect, urllib.request.HTTPSHandler(context=SSL_CONTEXT))
 
 
+class SiteTarget(NamedTuple):
+    """One monitored Frontend and the geographic metadata published in its config."""
+
+    base: str
+    tokenFile: str
+    domain: str
+    latitude: float | None
+    longitude: float | None
+
+
 def _loadYaml(fname):
     """Load a YAML file, or return None if it is missing or invalid (one bad site config must not hide the others)."""
     try:
@@ -144,8 +165,30 @@ def _frontendUrl(webdomain):
     return None if not host or host.startswith("127.") else webdomain
 
 
+def _number(value, minimum, maximum):
+    """Return a finite float in the inclusive range, or None for invalid configuration."""
+    try:
+        value = float(value)
+    except (TypeError, ValueError):
+        return None
+    return value if math.isfinite(value) and minimum <= value <= maximum else None
+
+
+def _siteCoordinates(site, config):
+    """Return a validated (latitude, longitude), correcting legacy unsigned US longitudes."""
+    latitude = _number(config.get("latitude"), -90, 90)
+    longitude = _number(config.get("longitude"), -180, 180)
+    if latitude is None or longitude is None:
+        return None, None
+    # Several long-lived US configs published west longitude as a positive number. Their SENSE model
+    # contains the same value, so fix it at the display boundary while leaving the source untouched.
+    if longitude > 0 and US_SITE.search(site):
+        longitude = -longitude
+    return latitude, longitude
+
+
 def loadSites(repoDir, tokenDir):
-    """Return {site: (Frontend base URL, token file, model domain)} for every enabled Frontend in an rm-configs checkout.
+    """Return a SiteTarget for every enabled Frontend in an rm-configs checkout.
 
     Matches oidcgen: it mints one token per site directory that has a Frontend and saves it as oidc-<dir>.token.
     """
@@ -163,8 +206,10 @@ def loadSites(repoDir, tokenDir):
             conf = _loadYaml(os.path.join(siteDir, str(entry["config"]), "main.yaml"))
             base = _frontendUrl((conf.get("general") or {}).get("webdomain")) if isinstance(conf, dict) else None
             for site in _siteNames(conf) if base else []:
-                domain = conf[site].get("domain") if isinstance(conf.get(site), dict) else ""
-                sites.setdefault(site, (base, tokenFile, domain if isinstance(domain, str) else ""))
+                siteConfig = conf.get(site) if isinstance(conf.get(site), dict) else {}
+                domain = siteConfig.get("domain")
+                latitude, longitude = _siteCoordinates(site, siteConfig)
+                sites.setdefault(site, SiteTarget(base, tokenFile, domain if isinstance(domain, str) else "", latitude, longitude))
     return sites
 
 
@@ -181,7 +226,7 @@ class SiteMap:
         self.lock = threading.Lock()
 
     def all(self):
-        """Return {site: (Frontend base URL, token file, model domain)} for every monitored site."""
+        """Return {site: SiteTarget} for every monitored site."""
         with self.lock:
             if time.time() >= self.nextScan:
                 try:
@@ -193,7 +238,7 @@ class SiteMap:
             return dict(self.sites)
 
     def get(self, site):
-        """Return (Frontend base URL, token file, model domain) for a site, or None."""
+        """Return the SiteTarget for a site, or None."""
         return self.all().get(site)
 
 
@@ -542,11 +587,255 @@ def _note(expanded, full, failures, total):
     return f'<div class="st-note" style="{NOTE_STYLE}">{"<br>".join(parts)}</div>'
 
 
-def errorPage(site, message):
+def _portName(value):
+    """Return a stable text representation of a topology port for edge deduplication."""
+    try:
+        value = portKey(value)
+    except (KeyError, TypeError, ValueError):
+        pass
+    if isinstance(value, (dict, list, tuple)):
+        return json.dumps(value, sort_keys=True, separators=(",", ":"))
+    return str(value or "")
+
+
+def _edgeEndpoint(site, device, port, cloud=False):
+    """Return a canonical physical endpoint, matching a cloud alias to its eventual merged device name."""
+    endpoint = f"{site}:{_portName(port)}" if cloud else f"{device}:{_portName(port)}"
+    # _addToCloud adds this suffix when duplicate one-sided reports share a remote port. They describe
+    # the same physical endpoint and must not inflate the connection count.
+    return re.sub(r" #\d+$", "", endpoint) if cloud else endpoint
+
+
+def siteConnections(merged, siteByDomain=None):
+    """Return deduplicated direct cross-site connections from a merged topology.
+
+    A cloud whose name is a configured site domain represents that site when its own topology fetch failed.
+    External clouds are excluded. Symmetric and duplicate one-sided reports share a canonical endpoint key.
+    """
+    siteByDomain = siteByDomain or {}
+    connections = {}
+    for device, entry in sorted(merged.items()):
+        sourceSite = _siteOf(device, entry)
+        sourceIsCloud = sourceSite is None
+        if sourceIsCloud:
+            sourceSite = siteByDomain.get(device)
+        if not sourceSite:
+            continue
+        for ownPort, link in sorted(entry.get("topo", {}).items(), key=lambda item: str(item[0])):
+            if not isinstance(link, dict) or not isinstance(link.get("device"), str):
+                continue
+            peer = link["device"]
+            peerEntry = merged.get(peer)
+            if not isinstance(peerEntry, dict):
+                continue
+            peerSite = _siteOf(peer, peerEntry)
+            if peerSite is None or peerSite == sourceSite:
+                continue
+            pair = tuple(sorted((sourceSite, peerSite)))
+            remotePort = link.get("localport") or link.get("port") or link.get("remoteportchannel") or ""
+            endpoints = tuple(sorted((_edgeEndpoint(sourceSite, device, ownPort, sourceIsCloud), _edgeEndpoint(peerSite, peer, remotePort))))
+            connections.setdefault(pair, set()).add(endpoints)
+    return [
+        {"source": source, "target": target, "links": len(connections[(source, target)])}
+        for source, target in sorted(connections)
+    ]
+
+
+def _project(latitude, longitude):
+    """Project WGS84 coordinates onto the map's equirectangular viewBox."""
+    return (longitude + 180) * WORLD_WIDTH / 360, (90 - latitude) * WORLD_HEIGHT / 180
+
+
+def mapPositions(locations):
+    """Project sites and deterministically spread markers that share coordinates."""
+    groups = {}
+    for site, (latitude, longitude) in sorted(locations.items()):
+        groups.setdefault((round(latitude, 7), round(longitude, 7)), []).append(site)
+    positions = {}
+    for (latitude, longitude), sites in sorted(groups.items()):
+        centerX, centerY = _project(latitude, longitude)
+        radius = min(24, 7 + len(sites) * 1.5) if len(sites) > 1 else 0
+        for index, site in enumerate(sorted(sites)):
+            angle = -math.pi / 2 + index * 2 * math.pi / len(sites)
+            posX = centerX + radius * math.cos(angle)
+            posY = centerY + radius * math.sin(angle)
+            positions[site] = (min(WORLD_WIDTH - 8, max(8, posX)), min(WORLD_HEIGHT - 8, max(8, posY)))
+    return positions
+
+
+def _arcPaths(start, end):
+    """Return curved SVG paths between two points, wrapping cleanly across the antimeridian."""
+    startX, startY = start
+    endX, endY = end
+    if abs(endX - startX) > WORLD_WIDTH / 2:
+        endX += -WORLD_WIDTH if endX > startX else WORLD_WIDTH
+    deltaX, deltaY = endX - startX, endY - startY
+    distance = max(1, math.hypot(deltaX, deltaY))
+    bend = min(58, max(16, distance * 0.13))
+    controlX = (startX + endX) / 2 - deltaY * bend / distance
+    controlY = (startY + endY) / 2 + deltaX * bend / distance
+    paths = []
+    for shift in (-WORLD_WIDTH, 0, WORLD_WIDTH):
+        shifted = (startX + shift, controlX + shift, endX + shift)
+        if max(shifted) >= 0 and min(shifted) <= WORLD_WIDTH:
+            paths.append(f"M{shifted[0]:.2f},{startY:.2f} Q{shifted[1]:.2f},{controlY:.2f} {shifted[2]:.2f},{endY:.2f}")
+    return paths
+
+
+def _worldGeometry():
+    """Return the trusted bundled map geometry, or a small built-in fallback when the asset is unavailable."""
+    try:
+        with open(WORLD_MAP_FILE, "r", encoding="utf-8") as fd:
+            source = fd.read()
+        start, end = source.find("<svg"), source.rfind("</svg>")
+        body = source[source.find(">", start) + 1 : end] if start >= 0 and end >= 0 else ""
+        if not body or "<script" in body.lower():
+            raise ValueError("invalid world map SVG")
+        return re.sub(r"<title>.*?</title>", "", body, count=1, flags=re.DOTALL)
+    except (OSError, ValueError) as ex:
+        print(f"World map asset unavailable: {type(ex).__name__}: {ex}", flush=True)
+        meridians = "".join(f'<path d="M{x},0V{WORLD_HEIGHT}"/>' for x in range(0, WORLD_WIDTH + 1, 200))
+        parallels = "".join(f'<path d="M0,{y}H{WORLD_WIDTH}"/>' for y in range(0, WORLD_HEIGHT + 1, 100))
+        return f'<rect x="0" y="0" width="{WORLD_WIDTH}" height="{WORLD_HEIGHT}" rx="18"/>{meridians}{parallels}'
+
+
+WORLD_STYLE = """
+:root { color-scheme: dark; --bg:#070b13; --panel:#101826e8; --border:#263751; --text:#eef5ff;
+  --muted:#93a5bc; --land:#17263a; --coast:#526b89; --live:#49d7a1; --down:#f4a261; --link:#55b7ff; }
+* { box-sizing:border-box; }
+html, body { width:100%; min-height:100%; margin:0; background:radial-gradient(circle at 50% 0,#12243c 0,#070b13 58%); color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+body { min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden; }
+.topbar { display:flex; align-items:center; gap:20px; padding:16px 22px 13px; border-bottom:1px solid #263751aa;
+  background:linear-gradient(180deg,#101a2aee,#0a111ddd); backdrop-filter:blur(12px); }
+.brand { min-width:220px; }
+.eyebrow { color:#6cbfff; font-size:10px; font-weight:750; letter-spacing:.18em; text-transform:uppercase; }
+h1 { margin:3px 0 0; font-size:20px; line-height:1.1; letter-spacing:-.02em; }
+.stats { display:flex; flex:1; flex-wrap:wrap; gap:8px; }
+.stat { min-width:88px; padding:6px 11px; border:1px solid var(--border); border-radius:9px; background:#0d1725aa; }
+.stat b { display:block; color:var(--text); font-size:15px; line-height:1.1; }
+.stat span { color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
+.graph-link { flex:none; padding:8px 12px; border:1px solid #438bc0; border-radius:8px; color:#a9ddff; text-decoration:none; font-size:12px; font-weight:650; }
+.graph-link:hover, .graph-link:focus-visible { color:white; background:#173552; outline:2px solid #67c3ff; outline-offset:2px; }
+main { flex:1; display:flex; min-height:0; padding:14px; }
+.map-shell { position:relative; flex:1; min-height:420px; overflow:hidden; border:1px solid var(--border); border-radius:14px;
+  background:linear-gradient(180deg,#091425,#070d17); box-shadow:0 18px 50px #0008,inset 0 1px #ffffff0b; }
+.world { display:block; width:100%; height:100%; min-height:420px; }
+.ocean-grid path { fill:none; stroke:#6a86a9; stroke-width:.45; opacity:.16; vector-effect:non-scaling-stroke; }
+.land { color:var(--coast); fill:var(--land); }
+.land path { fill:var(--land); stroke:var(--coast); }
+.connection { fill:none; stroke:var(--link); stroke-linecap:round; opacity:.62; vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 3px #2aa7ff80); transition:opacity .15s,stroke-width .15s; }
+.edge:hover .connection, .edge:focus .connection { opacity:1; stroke:#a8dcff; stroke-width:3.2 !important; }
+.edge:focus { outline:none; }
+.site { color:var(--live); text-decoration:none; }
+.site.offline { color:var(--down); }
+.site .halo { fill:currentColor; opacity:.18; }
+.site .dot { fill:#09111d; stroke:currentColor; stroke-width:3; vector-effect:non-scaling-stroke; filter:drop-shadow(0 0 5px currentColor); }
+.site text { fill:#e8f2ff; font-size:11px; font-weight:700; text-anchor:middle; paint-order:stroke; stroke:#07101c; stroke-width:3px;
+  stroke-linejoin:round; pointer-events:none; transition:opacity .15s; }
+.site.clustered text { opacity:0; }
+.site.clustered:hover text, .site.clustered:focus text { opacity:1; }
+.site:hover .halo, .site:focus .halo { opacity:.42; }
+.site:hover .dot, .site:focus .dot { fill:currentColor; stroke:white; }
+.site:focus { outline:none; }
+.legend, .status { position:absolute; z-index:3; bottom:14px; padding:8px 11px; border:1px solid var(--border); border-radius:9px;
+  background:var(--panel); color:var(--muted); font-size:11px; box-shadow:0 8px 24px #0007; backdrop-filter:blur(8px); }
+.legend { left:14px; display:flex; gap:14px; }
+.legend span { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.swatch { display:inline-block; flex:none; width:9px; height:9px; border-radius:50%; background:var(--live); box-shadow:0 0 5px var(--live); }
+.swatch.down { background:var(--down); box-shadow:0 0 5px var(--down); }
+.swatch.link { width:18px; height:2px; border-radius:2px; background:var(--link); box-shadow:none; }
+.status { right:14px; max-width:min(420px,calc(100% - 28px)); text-align:right; }
+.status strong { color:#cfe8ff; }
+@media (max-width:760px) { .topbar { align-items:flex-start; flex-wrap:wrap; gap:10px; padding:12px 14px; } .brand { min-width:0; flex:1; }
+  h1 { font-size:17px; } .stats { order:3; flex-basis:100%; } .stat { min-width:72px; flex:1; } main { padding:8px; }
+  .map-shell,.world { min-height:360px; } .status { top:10px; right:10px; bottom:auto; } .legend { left:10px; bottom:10px; } }
+"""
+
+
+def renderWorldMap(data):
+    """Render a responsive, script-free SVG world map from cached GlobalTopology data."""
+    locations = {}
+    for site, location in data.get("locations", {}).items():
+        if not isinstance(site, str) or not isinstance(location, (list, tuple)) or len(location) != 2:
+            continue
+        latitude, longitude = _number(location[0], -90, 90), _number(location[1], -180, 180)
+        if latitude is not None and longitude is not None:
+            locations[site] = (latitude, longitude)
+    positions = mapPositions(locations)
+    locationCounts = {}
+    for latitude, longitude in locations.values():
+        key = (round(latitude, 7), round(longitude, 7))
+        locationCounts[key] = locationCounts.get(key, 0) + 1
+    online = set(data.get("sites", ()))
+    failures = data.get("failures", {})
+    connections = [
+        edge
+        for edge in siteConnections(data.get("merged", {}), data.get("siteByDomain", {}))
+        if edge["source"] in positions and edge["target"] in positions
+    ]
+
+    edgeMarkup = []
+    for index, edge in enumerate(connections):
+        source, target, count = edge["source"], edge["target"], edge["links"]
+        title = html.escape(f"{source} ↔ {target} · {_plural(count, 'WAN link')}")
+        width = min(3, 1.25 + math.log2(count + 1) * 0.55)
+        paths = "".join(f'<path class="connection" style="stroke-width:{width:.2f}" d="{path}"/>' for path in _arcPaths(positions[source], positions[target]))
+        edgeMarkup.append(f'<g class="edge" tabindex="0" role="img" aria-label="{title}" data-edge="{index}"><title>{title}</title>{paths}</g>')
+
+    siteMarkup = []
+    for index, site in enumerate(sorted(positions)):
+        latitude, longitude = locations[site]
+        isOnline = site in online
+        state = "Topology live" if isOnline else failures.get(site, "Topology unavailable")
+        title = html.escape(f"{site} · {latitude:.4f}, {longitude:.4f} · {state}")
+        label = html.escape(site)
+        href = "topology/" + urllib.parse.quote(site, safe="")
+        posX, posY = positions[site]
+        clustered = locationCounts[(round(latitude, 7), round(longitude, 7))] > 1
+        css = ("site" if isOnline else "site offline") + (" clustered" if clustered else "")
+        siteMarkup.append(
+            f'<a class="{css}" href="{href}" aria-label="{title}" data-site="{index}"><title>{title}</title>'
+            f'<circle class="halo" cx="{posX:.2f}" cy="{posY:.2f}" r="11"/><circle class="dot" cx="{posX:.2f}" cy="{posY:.2f}" r="5"/>'
+            f'<text x="{posX:.2f}" y="{posY - 12:.2f}">{label}</text></a>'
+        )
+
+    total = max(len(locations), int(data.get("total", len(locations))))
+    onlineCount = len(online)
+    missing = max(0, total - len(locations))
+    wanLinks = sum(edge["links"] for edge in connections)
+    updated = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(data.get("updated", time.time())))
+    locationNote = f" · {missing} without coordinates" if missing else ""
+    grid = "".join(f'<path d="M{x},0V{WORLD_HEIGHT}"/>' for x in range(0, WORLD_WIDTH + 1, 200))
+    grid += "".join(f'<path d="M0,{y}H{WORLD_WIDTH}"/>' for y in range(0, WORLD_HEIGHT + 1, 100))
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="{WORLD_REFRESH}"><title>{WORLD_NAME}</title><style>{WORLD_STYLE}</style></head><body>
+<header class="topbar"><div class="brand"><div class="eyebrow">SENSE / SiteRM</div><h1>Global network topology</h1></div>
+<div class="stats"><div class="stat"><b>{total}</b><span>Monitored sites</span></div><div class="stat"><b>{onlineCount}</b><span>Topologies live</span></div>
+<div class="stat"><b>{len(connections)}</b><span>Site connections</span></div><div class="stat"><b>{wanLinks}</b><span>Direct WAN links</span></div></div>
+<a class="graph-link" href="global-topology">Topology graph&nbsp; →</a></header>
+<main><section class="map-shell" aria-label="SiteRM world map"><svg class="world" viewBox="0 0 {WORLD_WIDTH} {WORLD_HEIGHT}" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="world-title world-desc">
+<title id="world-title">SiteRM sites and direct WAN connections</title><desc id="world-desc">Select a site marker to open its topology.</desc>
+<g class="ocean-grid">{grid}</g><g class="land">{_worldGeometry()}</g><g class="connections">{"".join(edgeMarkup)}</g><g class="sites">{"".join(siteMarkup)}</g></svg>
+<div class="legend" aria-label="Map legend"><span><i class="swatch"></i>Live</span><span><i class="swatch down"></i>Unavailable</span><span><i class="swatch link"></i>Direct WAN</span></div>
+<div class="status"><strong>Live configuration</strong> · updated {updated}{locationNote}</div></section></main></body></html>'''.encode()
+
+
+def errorPage(site, message, refresh=None):
     """Return a small page that tells the dashboard viewer why there is no diagram."""
     text = html.escape(f"Topology for {site} is not available: {message}")
     style = "margin:16px;font-family:sans-serif;color:#9aa3b2;background:#181b1f"
-    return f'<!doctype html><html><body style="{style}"><p>{text}</p></body></html>'.encode()
+    meta = f'<meta http-equiv="refresh" content="{int(refresh)}">' if refresh else ""
+    return f'<!doctype html><html><head>{meta}</head><body style="{style}"><p>{text}</p></body></html>'.encode()
+
+
+def _staleWorldPage(result):
+    """Shorten a cached map's reload interval while its replacement is being fetched."""
+    status, page = result
+    normal = f'<meta http-equiv="refresh" content="{WORLD_REFRESH}">'.encode()
+    stale = f'<meta http-equiv="refresh" content="{WORLD_STALE_REFRESH}">'.encode()
+    return status, page.replace(normal, stale, 1)
 
 
 def _frontendError(ex):
@@ -581,10 +870,10 @@ class TopologyCache:
         if target is None:
             return 404, errorPage(site, "it is not a monitored SiteRM site")
         status, ttl = 200, CACHE_TTL
-        if not os.path.isfile(target[1]):
+        if not os.path.isfile(target.tokenFile):
             return 503, errorPage(site, "oidcgen has no token for this site yet (is its Frontend reachable?)")
         try:
-            page = fetchTopology(target[0], site, target[1], pathId)
+            page = fetchTopology(target.base, site, target.tokenFile, pathId)
         except urllib.error.HTTPError as ex:
             status, ttl, page = 502, ERROR_TTL, errorPage(site, _frontendError(ex))
         except (OSError, ValueError) as ex:
@@ -603,26 +892,38 @@ def _siteError(ex):
 
 
 class GlobalTopology:
-    """Combined page of all sites: topologies are fetched in the background, each view (expanded sites) is rendered on request and cached."""
+    """Cached live data shared by the combined graph and geographic world map."""
 
     def __init__(self, sites):
         self.sites = sites
         self.data = None  # {"expires", "merged", "sites", "failures", "total"} or {"expires", "error"}
         self.pages = {}
+        self.worldPage = None
         self.building = False
         self.lock = threading.Lock()
+
+    def _startRefresh(self):
+        """Start at most one background refresh. Caller must hold self.lock."""
+        if (self.data is None or self.data["expires"] <= time.time()) and not self.building:
+            self.building = True
+            threading.Thread(target=self._refresh, daemon=True).start()
+
+    def prewarm(self):
+        """Begin the initial refresh without blocking service startup."""
+        with self.lock:
+            self._startRefresh()
 
     def get(self, expand, full):
         """Return (HTTP status, page) with the given sites expanded (all of them when full), or 503 while the first fetch runs."""
         with self.lock:
-            if (self.data is None or self.data["expires"] <= time.time()) and not self.building:
-                self.building = True
-                threading.Thread(target=self._refresh, daemon=True).start()
+            self._startRefresh()
             data = self.data
             if data is None:
                 return 503, errorPage(GLOBAL_NAME, "the combined topology is being built, reload in a minute")
             if "error" in data:
                 return 502, errorPage(GLOBAL_NAME, data["error"])
+            if not data["sites"]:
+                return 502, errorPage(GLOBAL_NAME, "no site Frontend returned its topology")
             expanded = tuple(sorted(set(expand) & set(data["sites"])))
             key = (expanded, full)
             if key in self.pages:
@@ -634,6 +935,25 @@ class GlobalTopology:
                     self.pages.clear()
                 self.pages[key] = result
         return result
+
+    def getWorld(self):
+        """Return the world map, using the same refresh and merged topology as the combined graph."""
+        with self.lock:
+            expired = self.data is not None and self.data["expires"] <= time.time()
+            self._startRefresh()
+            data = self.data
+            if data is None:
+                return 503, errorPage(WORLD_NAME, "the site data is being built, reload in a moment", refresh=WORLD_LOADING_REFRESH)
+            if "error" in data:
+                return 502, errorPage(WORLD_NAME, data["error"])
+            stale = expired and self.building
+            if self.worldPage is not None:
+                return _staleWorldPage(self.worldPage) if stale else self.worldPage
+        result = 200, renderWorldMap(data)
+        with self.lock:
+            if self.data is data:
+                self.worldPage = result
+        return _staleWorldPage(result) if stale else result
 
     def _refresh(self):
         """Fetch and merge all sites; a failed fetch keeps the previous topology and retries after ERROR_TTL."""
@@ -648,6 +968,7 @@ class GlobalTopology:
                 data = {**self.data, "expires": data["expires"]}
             else:
                 self.pages = {}
+                self.worldPage = None
             self.data = data
             self.building = False
 
@@ -657,9 +978,9 @@ class GlobalTopology:
         topologies, failures = {}, {}
         with ThreadPoolExecutor(max_workers=GLOBAL_WORKERS) as pool:
             futures = {}
-            for site, (base, tokenFile, _) in sorted(targets.items()):
-                if os.path.isfile(tokenFile):
-                    futures[site] = pool.submit(fetchTopologyJson, base, site, tokenFile)
+            for site, target in sorted(targets.items()):
+                if os.path.isfile(target.tokenFile):
+                    futures[site] = pool.submit(fetchTopologyJson, target.base, site, target.tokenFile)
                 else:
                     failures[site] = "oidcgen has no token for this site yet"
             for site, future in futures.items():
@@ -673,10 +994,26 @@ class GlobalTopology:
         """Fetch every site's topology.json and merge them; returns the data get() renders views from."""
         targets = self.sites.all()
         topologies, failures = self._fetchAll(targets)
-        if not topologies:
-            return {"expires": time.time() + ERROR_TTL, "error": "no site Frontend returned its topology"}
-        merged = mergeTopologies(topologies, {site: target[2] for site, target in targets.items()})
-        return {"expires": time.time() + CACHE_TTL, "merged": merged, "sites": sorted(topologies), "failures": failures, "total": len(targets)}
+        merged = mergeTopologies(topologies, {site: target.domain for site, target in targets.items()}) if topologies else {}
+        siteByDomain = {}
+        for site, target in sorted(targets.items()):
+            if target.domain:
+                siteByDomain.setdefault(target.domain, site)
+        locations = {
+            site: (target.latitude, target.longitude)
+            for site, target in targets.items()
+            if target.latitude is not None and target.longitude is not None
+        }
+        return {
+            "expires": time.time() + (CACHE_TTL if topologies else ERROR_TTL),
+            "updated": time.time(),
+            "merged": merged,
+            "siteByDomain": siteByDomain,
+            "sites": sorted(topologies),
+            "locations": locations,
+            "failures": failures,
+            "total": len(targets),
+        }
 
     @staticmethod
     def _render(data, expanded, full):
@@ -703,7 +1040,7 @@ def authorized(header):
 
 
 class Handler(BaseHTTPRequestHandler):
-    """GET /topology/<site>[?path=<active connection id>], /global-topology[?expand=<site>,...|view=full] and /healthz."""
+    """Serve per-site topology, the combined graph, the world map and health checks."""
 
     cache = None
     globalTopology = None
@@ -731,6 +1068,9 @@ class Handler(BaseHTTPRequestHandler):
             expand = [site for site in query.get("expand", [""])[0].split(",") if site][:MAX_EXPANDED]
             self._send(*self.globalTopology.get(expand, query.get("view", [""])[0] == "full"), csp=GLOBAL_CSP)
             return
+        if url.path == WORLD_PATH:
+            self._send(*self.globalTopology.getWorld(), csp=GLOBAL_CSP)
+            return
         match = REQUEST_PATH.match(url.path)
         pathId = urllib.parse.parse_qs(url.query).get("path", [""])[0]
         if not match or len(pathId) > MAX_PATH_ID:
@@ -746,6 +1086,7 @@ def main():
     sites = SiteMap(REPO_DIR, TOKEN_DIR)
     Handler.cache = TopologyCache(sites)
     Handler.globalTopology = GlobalTopology(sites)
+    Handler.globalTopology.prewarm()
     ThreadingHTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
 
 

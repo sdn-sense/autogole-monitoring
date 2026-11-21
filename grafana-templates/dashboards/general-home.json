@@ -322,11 +322,11 @@
       },
       "id": 508,
       "panels": [],
-      "title": "SiteRM topology (all sites)",
+      "title": "SiteRM network map",
       "type": "row"
     },
     {
-      "description": "Every monitored SiteRM site, rebuilt from each site Frontend's topology every 5 minutes. Each site starts collapsed into one node; click a site to expand it (switches, servers and LAN ports) and use the links at the top right to collapse it again. WAN ports pointing to another SiteRM site are drawn as direct links, any other WAN peer (ESnet, Internet2, unknown) is grouped into one cloud per remote domain. Click a device or link for details. The \"SiteRM Topology (All Sites)\" dashboard can also show every site expanded.",
+      "description": "Geographic view of every monitored SiteRM site with a valid configured location, refreshed from the SiteRM Frontends every 5 minutes. Curved lines are direct WAN connections between monitored SiteRM domains. Click a site marker to open its device topology, or use the map's Network graph link for the detailed all-sites view.",
       "gridPos": {
         "h": 30,
         "w": 24,
@@ -340,11 +340,11 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<iframe src=\"/api/datasources/proxy/uid/siterm-topology/global-topology\" title=\"All SiteRM sites topology\" loading=\"lazy\" style=\"display:block;width:100%;height:100%;border:0\"></iframe>",
+        "content": "<iframe src=\"/api/datasources/proxy/uid/siterm-topology/world-map\" title=\"SiteRM global network map\" loading=\"lazy\" style=\"display:block;width:100%;height:100%;border:0\"></iframe>",
         "mode": "html"
       },
       "pluginVersion": "9.5.19",
-      "title": "All SiteRM sites topology",
+      "title": "SiteRM global network map",
       "transparent": true,
       "type": "text"
     },
